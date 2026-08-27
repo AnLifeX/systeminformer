@@ -160,6 +160,42 @@ def parse_translation(raw: object, index: int) -> Translation:
     return entry
 
 
+def parse_group(raw: object, index: int) -> list[Translation]:
+    if not isinstance(raw, dict):
+        raise LocalizationError(f"groups[{index}] must be an object")
+
+    required = ("id", "path", "context", "items")
+    missing = [key for key in required if key not in raw]
+    if missing:
+        raise LocalizationError(f"groups[{index}] is missing: {', '.join(missing)}")
+
+    for key in ("id", "path", "context"):
+        if not isinstance(raw[key], str) or not raw[key]:
+            raise LocalizationError(f"groups[{index}].{key} must be a non-empty string")
+
+    if not isinstance(raw["items"], list) or not raw["items"]:
+        raise LocalizationError(f"groups[{index}].items must be a non-empty array")
+
+    entries = []
+    for item_index, item in enumerate(raw["items"]):
+        if not isinstance(item, dict):
+            raise LocalizationError(f"groups[{index}].items[{item_index}] must be an object")
+
+        entry_raw = dict(item)
+        item_id = entry_raw.get("id")
+        if not isinstance(item_id, str) or not item_id:
+            raise LocalizationError(
+                f"groups[{index}].items[{item_index}].id must be a non-empty string"
+            )
+
+        entry_raw["id"] = f"{raw['id']}.{item_id}"
+        entry_raw["path"] = raw["path"]
+        entry_raw["context"] = raw["context"]
+        entries.append(parse_translation(entry_raw, item_index))
+
+    return entries
+
+
 def load_catalog(path: Path) -> list[Translation]:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -174,12 +210,21 @@ def load_catalog(path: Path) -> list[Translation]:
         raise LocalizationError("Catalog locale must be zh-CN")
 
     raw_translations = data.get("translations")
-    if not isinstance(raw_translations, list) or not raw_translations:
-        raise LocalizationError("Catalog translations must be a non-empty array")
+    if not isinstance(raw_translations, list):
+        raise LocalizationError("Catalog translations must be an array")
+
+    raw_groups = data.get("groups", [])
+    if not isinstance(raw_groups, list):
+        raise LocalizationError("Catalog groups must be an array")
+    if not raw_translations and not raw_groups:
+        raise LocalizationError("Catalog must contain translations or groups")
 
     translations = [
         parse_translation(raw, index) for index, raw in enumerate(raw_translations)
     ]
+
+    for index, raw_group in enumerate(raw_groups):
+        translations.extend(parse_group(raw_group, index))
 
     identifiers = [entry.identifier for entry in translations]
     duplicate_ids = sorted(
@@ -194,6 +239,13 @@ def load_catalog(path: Path) -> list[Translation]:
     ]
     if duplicate_snippets:
         raise LocalizationError("Duplicate source snippets found in the catalog")
+
+    translated_snippets = [(entry.path, entry.translated_snippet) for entry in translations]
+    duplicate_translated_snippets = [
+        path for path, count in Counter(translated_snippets).items() if count > 1
+    ]
+    if duplicate_translated_snippets:
+        raise LocalizationError("Duplicate translated snippets found in the catalog")
 
     return translations
 

@@ -105,6 +105,47 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn("source drift detected", result.stderr)
 
+    def test_grouped_translations_use_shared_path_and_context(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        source_dir = root / "src"
+        source_dir.mkdir()
+        source_file = source_dir / "demo.rc"
+        source_file.write_text(
+            'CAPTION "General"\nPUSHBUTTON "Close",IDOK\n', encoding="utf-8"
+        )
+        catalog = root / "catalog.json"
+        catalog.write_text(
+            json.dumps(
+                {
+                    "schema": 1,
+                    "locale": "zh-CN",
+                    "translations": [],
+                    "groups": [
+                        {
+                            "id": "dialog",
+                            "path": "src/demo.rc",
+                            "context": '"{text}"',
+                            "items": [
+                                {"id": "general", "source": "General", "translation": "常规"},
+                                {"id": "close", "source": "Close", "translation": "关闭"},
+                            ],
+                        }
+                    ],
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+        result = self.run_cli(root, catalog, "apply")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(
+            source_file.read_text(encoding="utf-8"),
+            'CAPTION "常规"\nPUSHBUTTON "关闭",IDOK\n',
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
