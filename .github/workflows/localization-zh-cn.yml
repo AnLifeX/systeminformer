@@ -85,7 +85,7 @@ jobs:
       run: build\build_release.cmd
 
     - name: Upload localized x64 build
-      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # 7.0.1
       with:
         name: systeminformer-zh-CN-x64-${{ github.sha }}
         path: bin/Release64/**
