@@ -1,0 +1,93 @@
+name: 'zh-CN localization'
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ['zh-CN']
+  pull_request:
+    branches: ['zh-CN']
+
+concurrency:
+  group: zh-cn-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    runs-on: windows-2025-vs2026
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
+
+    - name: Verify Python
+      shell: pwsh
+      run: python --version
+
+    - name: Test localization tool
+      shell: pwsh
+      run: python -m unittest discover -s tools/localization/tests -v
+
+    - name: Check upstream source contexts
+      shell: pwsh
+      run: python tools/localization/localize.py check --state source
+
+    - name: Apply Simplified Chinese localization
+      shell: pwsh
+      run: python tools/localization/localize.py apply
+
+    - name: Verify translated source and whitespace
+      shell: pwsh
+      run: |
+        python tools/localization/localize.py check --state translated
+        git diff --check
+
+    - name: NuGet cache
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # 5.0.5
+      with:
+        path: |
+          packages
+          ~\.nuget\packages
+        key: nuget-${{ runner.os }}-${{ hashFiles('**/packages.config', '**/*.csproj', '**/Directory.Packages.props', '**/packages.lock.json', '**/NuGet.Config', '**/global.json') }}
+        restore-keys: nuget-${{ runner.os }}-
+
+    - name: Restore NuGet packages
+      shell: cmd
+      working-directory: ${{ github.workspace }}
+      run: nuget restore .\packages.config -PackagesDirectory .\packages\
+
+    - name: Build tools cache
+      id: custombuildtool-cache
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # 5.0.5
+      with:
+        path: tools/CustomBuildTool/bin/Release/**
+        key: custombuildtool-${{ runner.os }}-${{ hashFiles('tools/CustomBuildTool/**', '!tools/CustomBuildTool/bin/**') }}
+        restore-keys: custombuildtool-${{ runner.os }}-
+
+    - name: Third-party cache
+      id: thirdparty-cache
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # 5.0.5
+      with:
+        path: tools/thirdparty/**
+        key: thirdparty-${{ runner.os }}-${{ hashFiles('tools/thirdparty/**', '!tools/thirdparty/bin/**') }}
+        restore-keys: thirdparty-${{ runner.os }}-
+
+    - name: Initialize build environment
+      if: steps.custombuildtool-cache.outputs.cache-hit != 'true' || steps.thirdparty-cache.outputs.cache-hit != 'true'
+      shell: cmd
+      working-directory: ${{ github.workspace }}
+      run: build\build_init.cmd
+
+    - name: Build localized release
+      shell: cmd
+      working-directory: ${{ github.workspace }}
+      run: build\build_release.cmd
+
+    - name: Upload localized x64 build
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # 4.6.2
+      with:
+        name: systeminformer-zh-CN-x64-${{ github.sha }}
+        path: bin/Release64/**
+        if-no-files-found: error
+        retention-days: 14

@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "locale": "zh-CN",
+  "translations": [
+    {
+      "id": "process.idle-name",
+      "path": "phlib/include/phnative.h",
+      "context": "#define SYSTEM_IDLE_PROCESS_NAME ((UNICODE_STRING)RTL_CONSTANT_STRING(L\"{text}\"))",
+      "source": "System Idle Process",
+      "translation": "CPU 空闲时间"
+    },
+    {
+      "id": "main-tab.processes",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "PhMwpCreateInternalPage(L\"{text}\", 0, PhMwpProcessesPageCallback);",
+      "source": "Processes",
+      "translation": "进程"
+    },
+    {
+      "id": "main-tab.services",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "PhMwpCreateInternalPage(L\"{text}\", 0, PhMwpServicesPageCallback);",
+      "source": "Services",
+      "translation": "服务"
+    },
+    {
+      "id": "main-tab.network",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "PhMwpCreateInternalPage(L\"{text}\", 0, PhMwpNetworkPageCallback);",
+      "source": "Network",
+      "translation": "网络"
+    },
+    {
+      "id": "process-menu.title",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "PhInsertEMenuItem(menu, PhCreateEMenuItem(0, ID_PROCESSES_DUMMY, L\"{text}\", NULL, NULL), ULONG_MAX);",
+      "source": "&Processes",
+      "translation": "进程(&P)"
+    },
+    {
+      "id": "process-column.name",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumn(hwnd, PHPRTLC_NAME, TRUE, L\"{text}\", 200, PH_ALIGN_LEFT, (PhGetIntegerSetting(SETTING_PROCESS_TREE_LIST_NAME_DEFAULT) ? TN_COLUMN_FIXED : 0), 0);",
+      "source": "Name",
+      "translation": "名称"
+    },
+    {
+      "id": "process-column.io-total-rate",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_IOTOTALRATE, TRUE, L\"{text}\", 70, PH_ALIGN_RIGHT, 2, DT_RIGHT, TRUE);",
+      "source": "I/O total rate",
+      "translation": "I/O 总速率"
+    },
+    {
+      "id": "process-column.private-bytes",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_PRIVATEBYTES, TRUE, L\"{text}\", 70, PH_ALIGN_RIGHT, 3, DT_RIGHT, TRUE);",
+      "source": "Private bytes",
+      "translation": "专用字节"
+    },
+    {
+      "id": "process-column.user-name",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumn(hwnd, PHPRTLC_USERNAME, TRUE, L\"{text}\", 140, PH_ALIGN_LEFT, 4, DT_PATH_ELLIPSIS);",
+      "source": "User name",
+      "translation": "用户名"
+    },
+    {
+      "id": "process-column.description",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumn(hwnd, PHPRTLC_DESCRIPTION, TRUE, L\"{text}\", 180, PH_ALIGN_LEFT, 5, 0);",
+      "source": "Description",
+      "translation": "描述"
+    },
+    {
+      "id": "process-column.company-name",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumn(hwnd, PHPRTLC_COMPANYNAME, FALSE, L\"{text}\", 180, PH_ALIGN_LEFT, ULONG_MAX, 0);",
+      "source": "Company name",
+      "translation": "公司名称"
+    },
+    {
+      "id": "process-column.file-name",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumn(hwnd, PHPRTLC_FILENAME, FALSE, L\"{text}\", 180, PH_ALIGN_LEFT, ULONG_MAX, DT_PATH_ELLIPSIS);",
+      "source": "File name",
+      "translation": "文件名"
+    },
+    {
+      "id": "process-column.command-line",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumn(hwnd, PHPRTLC_COMMANDLINE, FALSE, L\"{text}\", 180, PH_ALIGN_LEFT, ULONG_MAX, 0);",
+      "source": "Command line",
+      "translation": "命令行"
+    },
+    {
+      "id": "process-column.working-set",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_WORKINGSET, FALSE, L\"{text}\", 70, PH_ALIGN_RIGHT, ULONG_MAX, DT_RIGHT, TRUE);",
+      "source": "Working set",
+      "translation": "工作集"
+    },
+    {
+      "id": "process-column.peak-working-set",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_PEAKWORKINGSET, FALSE, L\"{text}\", 70, PH_ALIGN_RIGHT, ULONG_MAX, DT_RIGHT, TRUE);",
+      "source": "Peak working set",
+      "translation": "峰值工作集"
+    },
+    {
+      "id": "process-column.private-working-set",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_PRIVATEWS, FALSE, L\"{text}\", 70, PH_ALIGN_RIGHT, ULONG_MAX, DT_RIGHT, TRUE);",
+      "source": "Private WS",
+      "translation": "专用工作集"
+    },
+    {
+      "id": "process-column.shared-working-set",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_SHAREDWS, FALSE, L\"{text}\", 70, PH_ALIGN_RIGHT, ULONG_MAX, DT_RIGHT, TRUE);",
+      "source": "Shared WS",
+      "translation": "共享工作集"
+    },
+    {
+      "id": "process-column.shareable-working-set",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_SHAREABLEWS, FALSE, L\"{text}\", 70, PH_ALIGN_RIGHT, ULONG_MAX, DT_RIGHT, TRUE);",
+      "source": "Shareable WS",
+      "translation": "可共享工作集"
+    },
+    {
+      "id": "process-column.virtual-size",
+      "path": "SystemInformer/proctree.c",
+      "context": "PhAddTreeNewColumnEx(hwnd, PHPRTLC_VIRTUALSIZE, FALSE, L\"{text}\", 70, PH_ALIGN_RIGHT, ULONG_MAX, DT_RIGHT, TRUE);",
+      "source": "Virtual size",
+      "translation": "虚拟大小"
+    }
+  ]
+}
