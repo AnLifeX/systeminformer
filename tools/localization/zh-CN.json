@@ -398,7 +398,10 @@
         { "id": "virtualization", "source": "Virtuali&zation", "translation": "虚拟化(&Z)" },
         { "id": "search-online", "source": "Search &online\\bCtrl+M", "translation": "在线搜索(&O)\\bCtrl+M" },
         { "id": "open-location", "source": "Open &file location\\bCtrl+Enter", "translation": "打开文件位置(&F)\\bCtrl+Enter" },
-        { "id": "security", "source": "Security", "translation": "安全" }
+        { "id": "security", "source": "Security", "translation": "安全" },
+        { "id": "options", "source": "Options", "translation": "选项" },
+        { "id": "close", "source": "Close", "translation": "关闭" },
+        { "id": "protection", "source": "Protection", "translation": "保护级别", "expected": 2 }
       ]
     },
     {
@@ -488,9 +491,13 @@
         { "id": "command-line", "source": "Command line:", "translation": "命令行：", "expected": 2 },
         { "id": "current-directory", "source": "Current directory:", "translation": "当前目录：" },
         { "id": "started", "source": "Started:", "translation": "启动时间：", "expected": 2 },
+        { "id": "image-file-win32", "source": "Image file name (Win32):", "translation": "映像文件名（Win32）：" },
+        { "id": "parent-console", "source": "Parent console:", "translation": "父控制台：" },
         { "id": "parent-process", "source": "Parent process:", "translation": "父进程：" },
+        { "id": "mitigation-policies", "source": "Mitigation policies:", "translation": "缓解策略：" },
         { "id": "details", "source": "Details", "translation": "详细信息" },
         { "id": "protection", "source": "Protection:", "translation": "保护级别：" },
+        { "id": "image-type", "source": "Image type:", "translation": "映像类型：" },
         { "id": "modules", "source": "Modules", "translation": "模块" },
         { "id": "threads", "source": "Threads", "translation": "线程", "expected": 2 },
         { "id": "handles", "source": "Handles", "translation": "句柄", "expected": 2 },
@@ -926,6 +933,8 @@
         { "id": "worker-start", "source": "Worker thread start: Unknown", "translation": "工作线程起始地址：未知" },
         { "id": "worker-context", "source": "Worker thread context: Unknown", "translation": "工作线程上下文：未知" },
         { "id": "services", "source": "Services", "translation": "服务" },
+        { "id": "disk", "source": "Disk", "translation": "磁盘", "expected": 3 },
+        { "id": "network", "source": "Network", "translation": "网络", "expected": 3 },
         { "id": "read", "source": "Read", "translation": "读取" },
         { "id": "write", "source": "Write", "translation": "写入", "expected": 3 },
         { "id": "reads-delta", "source": "Reads delta", "translation": "读取次数增量" },
@@ -1708,6 +1717,665 @@
       "items": [
         { "id": "root", "source": "Network", "translation": "网络" },
         { "id": "hide-waiting", "source": "&Hide waiting connections", "translation": "隐藏等待中的连接(&H)" }
+      ]
+    },
+    {
+      "id": "extended-process-columns",
+      "path": "plugins/ExtendedTools/treeext.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "disk-reads", "source": "Disk reads", "translation": "磁盘读取次数" },
+        { "id": "disk-writes", "source": "Disk writes", "translation": "磁盘写入次数" },
+        { "id": "disk-read-bytes", "source": "Disk read bytes", "translation": "磁盘读取字节数" },
+        { "id": "disk-write-bytes", "source": "Disk write bytes", "translation": "磁盘写入字节数" },
+        { "id": "disk-total-bytes", "source": "Disk total bytes", "translation": "磁盘总字节数" },
+        { "id": "disk-reads-delta", "source": "Disk reads delta", "translation": "磁盘读取次数增量" },
+        { "id": "disk-writes-delta", "source": "Disk writes delta", "translation": "磁盘写入次数增量" },
+        { "id": "disk-read-bytes-delta", "source": "Disk read bytes delta", "translation": "磁盘读取字节增量" },
+        { "id": "disk-write-bytes-delta", "source": "Disk write bytes delta", "translation": "磁盘写入字节增量" },
+        { "id": "disk-total-bytes-delta", "source": "Disk total bytes delta", "translation": "磁盘总字节增量" },
+        { "id": "network-receives", "source": "Network receives", "translation": "网络接收次数" },
+        { "id": "network-sends", "source": "Network sends", "translation": "网络发送次数" },
+        { "id": "network-receive-bytes", "source": "Network receive bytes", "translation": "网络接收字节数" },
+        { "id": "network-send-bytes", "source": "Network send bytes", "translation": "网络发送字节数" },
+        { "id": "network-total-bytes", "source": "Network total bytes", "translation": "网络总字节数" },
+        { "id": "network-receives-delta", "source": "Network receives delta", "translation": "网络接收次数增量" },
+        { "id": "network-sends-delta", "source": "Network sends delta", "translation": "网络发送次数增量" },
+        { "id": "network-receive-bytes-delta", "source": "Network receive bytes delta", "translation": "网络接收字节增量" },
+        { "id": "network-send-bytes-delta", "source": "Network send bytes delta", "translation": "网络发送字节增量" },
+        { "id": "network-total-bytes-delta", "source": "Network total bytes delta", "translation": "网络总字节增量" },
+        { "id": "hard-faults", "source": "Hard faults", "translation": "硬缺页次数" },
+        { "id": "hard-faults-delta", "source": "Hard faults delta", "translation": "硬缺页次数增量" },
+        { "id": "peak-threads", "source": "Peak threads", "translation": "峰值线程数" },
+        { "id": "gpu-dedicated-resident", "source": "GPU dedicated bytes (resident)", "translation": "GPU 专用显存（驻留）" },
+        { "id": "gpu-shared-resident", "source": "GPU shared bytes (resident)", "translation": "GPU 共享显存（驻留）" },
+        { "id": "disk-read-rate", "source": "Disk read rate", "translation": "磁盘读取速率" },
+        { "id": "disk-write-rate", "source": "Disk write rate", "translation": "磁盘写入速率" },
+        { "id": "disk-total-rate", "source": "Disk total rate", "translation": "磁盘总速率" },
+        { "id": "network-receive-rate", "source": "Network receive rate", "translation": "网络接收速率" },
+        { "id": "network-send-rate", "source": "Network send rate", "translation": "网络发送速率" },
+        { "id": "network-total-rate", "source": "Network total rate", "translation": "网络总速率" },
+        { "id": "fps", "source": "FPS", "translation": "帧率（FPS）" },
+        { "id": "npu-dedicated-resident", "source": "NPU dedicated bytes (resident)", "translation": "NPU 专用内存（驻留）" },
+        { "id": "npu-shared-resident", "source": "NPU shared bytes (resident)", "translation": "NPU 共享内存（驻留）" },
+        { "id": "gpu-dedicated-committed", "source": "GPU dedicated bytes (committed)", "translation": "GPU 专用显存（已提交）" },
+        { "id": "gpu-shared-committed", "source": "GPU shared bytes (committed)", "translation": "GPU 共享显存（已提交）" },
+        { "id": "npu-dedicated-committed", "source": "NPU dedicated bytes (committed)", "translation": "NPU 专用内存（已提交）" },
+        { "id": "npu-shared-committed", "source": "NPU shared bytes (committed)", "translation": "NPU 共享内存（已提交）" },
+        { "id": "firewall-allows", "source": "Firewall allows", "translation": "防火墙允许次数" },
+        { "id": "firewall-blocks", "source": "Firewall blocks", "translation": "防火墙阻止次数" },
+        { "id": "firewall-allows-delta", "source": "Firewall allows delta", "translation": "防火墙允许次数增量" },
+        { "id": "firewall-blocks-delta", "source": "Firewall blocks delta", "translation": "防火墙阻止次数增量" }
+      ]
+    },
+    {
+      "id": "remaining-core-columns",
+      "path": "SystemInformer/proctree.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "timeline", "source": "Timeline", "translation": "时间线" }
+      ]
+    },
+    {
+      "id": "remaining-service-columns",
+      "path": "SystemInformer/srvlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "timeline", "source": "Timeline", "translation": "时间线" }
+      ]
+    },
+    {
+      "id": "remaining-network-columns",
+      "path": "SystemInformer/netlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "timeline", "source": "Timeline", "translation": "时间线" }
+      ]
+    },
+    {
+      "id": "usernotes-columns-runtime",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "comment", "source": "Comment", "translation": "备注", "expected": 3 }
+      ]
+    },
+    {
+      "id": "onlinechecks-columns-runtime",
+      "path": "plugins/OnlineChecks/main.c",
+      "context": "column.Text = L\"{text}\";",
+      "items": [
+        { "id": "virustotal", "source": "VirusTotal", "translation": "VirusTotal 检测", "expected": 3 },
+        { "id": "hybrid-analysis", "source": "Hybrid-Analysis", "translation": "Hybrid-Analysis 检测", "expected": 3 }
+      ]
+    },
+    {
+      "id": "tree-column-menu-runtime",
+      "path": "SystemInformer/appsup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "size-column", "source": "Size column to fit", "translation": "调整此列宽度以适应内容" },
+        { "id": "size-all", "source": "Size all columns to fit", "translation": "调整所有列宽度以适应内容" },
+        { "id": "hide", "source": "Hide column", "translation": "隐藏此列" },
+        { "id": "choose", "source": "Choose columns...", "translation": "选择列..." },
+        { "id": "reset-sort", "source": "Reset sort", "translation": "重置排序" },
+        { "id": "copy-column", "source": "Copy \\\"", "translation": "复制 \\\"", "expected": 2 }
+      ]
+    },
+    {
+      "id": "listview-column-menu-runtime",
+      "path": "phlib/extlv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "size-column", "source": "Size column to fit", "translation": "调整此列宽度以适应内容" },
+        { "id": "size-all", "source": "Size all columns to fit", "translation": "调整所有列宽度以适应内容" }
+      ]
+    },
+    {
+      "id": "main-process-context-menu",
+      "path": "SystemInformer/mwpgproc.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "terminate", "source": "T&erminate\\bDel", "translation": "终止(&E)\\bDel" },
+        { "id": "terminate-tree", "source": "Terminate tree\\bShift+Del", "translation": "终止进程树\\bShift+Del" },
+        { "id": "suspend", "source": "&Suspend", "translation": "挂起(&S)" },
+        { "id": "suspend-tree", "source": "Suspend tree", "translation": "挂起进程树" },
+        { "id": "resume", "source": "Res&ume", "translation": "恢复(&U)" },
+        { "id": "resume-tree", "source": "Resume tree", "translation": "恢复进程树" },
+        { "id": "freeze", "source": "Freeze", "translation": "冻结" },
+        { "id": "thaw", "source": "Thaw", "translation": "解冻" },
+        { "id": "restart", "source": "Res&tart", "translation": "重新启动(&T)" },
+        { "id": "create-kernel-dump", "source": "Create live kernel dump fi&le", "translation": "创建实时内核转储文件(&L)" },
+        { "id": "create-dump", "source": "Create dump fi&le", "translation": "创建转储文件(&L)" },
+        { "id": "minimal", "source": "&Minimal...", "translation": "最小(&M)...", "expected": 2 },
+        { "id": "limited", "source": "&Limited...", "translation": "受限(&L)..." },
+        { "id": "normal-dump", "source": "&Normal...", "translation": "正常(&N)...", "expected": 2 },
+        { "id": "full", "source": "&Full...", "translation": "完整(&F)...", "expected": 2 },
+        { "id": "custom", "source": "&Custom...", "translation": "自定义(&C)...", "expected": 2 },
+        { "id": "debug", "source": "De&bug", "translation": "调试(&B)" },
+        { "id": "affinity", "source": "&Affinity", "translation": "处理器相关性(&A)" },
+        { "id": "priority", "source": "&Priority", "translation": "优先级(&P)" },
+        { "id": "real-time", "source": "&Real time", "translation": "实时(&R)" },
+        { "id": "high", "source": "&High", "translation": "高(&H)", "expected": 2 },
+        { "id": "above-normal", "source": "&Above normal", "translation": "高于正常(&A)" },
+        { "id": "normal-priority", "source": "&Normal", "translation": "正常(&N)", "expected": 3 },
+        { "id": "below-normal", "source": "&Below normal", "translation": "低于正常(&B)", "expected": 2 },
+        { "id": "idle", "source": "&Idle", "translation": "空闲(&I)" },
+        { "id": "io-priority", "source": "&I/O priority", "translation": "I/O 优先级(&I)" },
+        { "id": "low", "source": "&Low", "translation": "低(&L)", "expected": 2 },
+        { "id": "very-low", "source": "&Very low", "translation": "很低(&V)", "expected": 2 },
+        { "id": "page-priority", "source": "Pa&ge priority", "translation": "页面优先级(&G)" },
+        { "id": "medium", "source": "&Medium", "translation": "中等(&M)" },
+        { "id": "miscellaneous", "source": "&Miscellaneous", "translation": "其他(&M)" },
+        { "id": "activity", "source": "Activity moderation", "translation": "活动调节" },
+        { "id": "critical", "source": "&Critical", "translation": "关键进程(&C)" },
+        { "id": "detach-debugger", "source": "&Detach from debugger", "translation": "与调试器分离(&D)" },
+        { "id": "efficiency", "source": "Efficiency mode", "translation": "效率模式" },
+        { "id": "execution-required", "source": "Execution required", "translation": "要求持续运行" },
+        { "id": "gdi-handles", "source": "GDI &handles...", "translation": "GDI 句柄(&H)..." },
+        { "id": "heaps", "source": "Heaps...", "translation": "堆..." },
+        { "id": "locks", "source": "Locks...", "translation": "锁..." },
+        { "id": "flush-heaps", "source": "Flush heaps", "translation": "刷新堆" },
+        { "id": "modified-pages", "source": "Modified pages...", "translation": "已修改页面..." },
+        { "id": "reduce-working-set", "source": "Reduce working &set", "translation": "减少内存工作集(&S)" },
+        { "id": "run-as", "source": "&Run as...", "translation": "以其他用户身份运行(&R)..." },
+        { "id": "run-as-user", "source": "Run &as this user...", "translation": "以此用户身份运行(&A)..." },
+        { "id": "virtualization", "source": "Virtuali&zation", "translation": "虚拟化(&Z)" },
+        { "id": "window", "source": "&Window", "translation": "窗口(&W)" },
+        { "id": "bring-front", "source": "Bring to &front", "translation": "置于最前(&F)" },
+        { "id": "restore", "source": "&Restore", "translation": "还原(&R)" },
+        { "id": "minimize", "source": "M&inimize", "translation": "最小化(&I)" },
+        { "id": "maximize", "source": "M&aximize", "translation": "最大化(&A)" },
+        { "id": "close", "source": "&Close", "translation": "关闭(&C)" },
+        { "id": "search-online", "source": "Search &online\\bCtrl+M", "translation": "在线搜索(&O)\\bCtrl+M" },
+        { "id": "open-location", "source": "Open &file location\\bCtrl+Enter", "translation": "打开文件位置(&F)\\bCtrl+Enter" },
+        { "id": "properties", "source": "P&roperties\\bEnter", "translation": "属性(&R)\\bEnter" },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C" }
+      ]
+    },
+    {
+      "id": "main-service-context-menu",
+      "path": "SystemInformer/mwpgsrv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "start", "source": "&Start", "translation": "启动(&S)", "expected": 2 },
+        { "id": "continue", "source": "C&ontinue", "translation": "继续(&O)", "expected": 2 },
+        { "id": "pause", "source": "&Pause", "translation": "暂停(&P)", "expected": 2 },
+        { "id": "stop", "source": "S&top", "translation": "停止(&T)", "expected": 2 },
+        { "id": "delete", "source": "&Delete\\bDel", "translation": "删除(&D)\\bDel", "expected": 2 },
+        { "id": "go-process", "source": "&Go to process", "translation": "转到进程(&G)", "expected": 2 },
+        { "id": "open-key", "source": "Open &key", "translation": "打开注册表项(&K)", "expected": 2 },
+        { "id": "open-location", "source": "Open &file location\\bCtrl+Enter", "translation": "打开文件位置(&F)\\bCtrl+Enter", "expected": 2 },
+        { "id": "properties", "source": "P&roperties\\bEnter", "translation": "属性(&R)\\bEnter", "expected": 2 },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C", "expected": 2 }
+      ]
+    },
+    {
+      "id": "main-network-context-menu",
+      "path": "SystemInformer/mwpgnet.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "go-process", "source": "&Go to process\\bEnter", "translation": "转到进程(&G)\\bEnter" },
+        { "id": "go-service", "source": "Go to service", "translation": "转到服务" },
+        { "id": "close", "source": "C&lose", "translation": "关闭(&L)" },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C" }
+      ]
+    },
+    {
+      "id": "usernotes-process-menu",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "boost", "source": "&Boost", "translation": "优先级提升(&B)" },
+        { "id": "efficiency", "source": "&Efficiency", "translation": "效率模式(&E)" }
+      ]
+    },
+    {
+      "id": "onlinechecks-context-menu",
+      "path": "plugins/OnlineChecks/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "send-to", "source": "Sen&d to", "translation": "发送到(&D)", "expected": 4 },
+        { "id": "scan-with", "source": "Scan with", "translation": "使用以下服务扫描", "expected": 3 }
+      ]
+    },
+    {
+      "id": "networktools-context-menu",
+      "path": "plugins/NetworkTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "ping", "source": "&Ping", "translation": "Ping(&P)" },
+        { "id": "traceroute", "source": "&Traceroute", "translation": "路由跟踪(&T)" },
+        { "id": "whois", "source": "&Whois", "translation": "Whois 查询(&W)" }
+      ]
+    },
+    {
+      "id": "usernotes-process-properties",
+      "path": "plugins/UserNotes/UserNotes.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "comment", "source": "Comment", "translation": "备注", "expected": 2 },
+        { "id": "revert", "source": "Revert", "translation": "还原" },
+        { "id": "same-command-line", "source": "Only for processes with the same command line", "translation": "仅应用于命令行相同的进程" }
+      ]
+    },
+    {
+      "id": "windowexplorer-process-properties",
+      "path": "plugins/WindowExplorer/WindowExplorer.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "windows", "source": "Windows", "translation": "窗口", "expected": 2 },
+        { "id": "options", "source": "Options", "translation": "选项" },
+        { "id": "find-window", "source": "Find window", "translation": "查找窗口" },
+        { "id": "pause", "source": "Pause", "translation": "暂停" }
+      ]
+    },
+    {
+      "id": "generic-confirmation-dialog",
+      "path": "phlib/util.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "question-prefix", "source": "Do you want to ", "translation": "是否要" },
+        { "id": "continue-suffix", "source": " Are you sure you want to continue?", "translation": " 确定要继续吗？" },
+        { "id": "cancel", "source": "Cancel", "translation": "取消" },
+        { "id": "fallback", "source": "Are you sure you want to %s?", "translation": "确定要%s吗？" }
+      ]
+    },
+    {
+      "id": "service-confirmation-dialog",
+      "path": "SystemInformer/actions.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "question-prefix", "source": "Do you want to ", "translation": "是否要" },
+        { "id": "continue-suffix", "source": " Are you sure you want to continue?", "translation": " 确定要继续吗？" },
+        { "id": "cancel", "source": "Cancel", "translation": "取消", "expected": 3 },
+        { "id": "stop", "source": "stop", "translation": "停止", "expected": 7 },
+        { "id": "selected-service", "source": "the selected service", "translation": "所选服务", "expected": 2 },
+        { "id": "selected-services", "source": "the selected services", "translation": "所选的多个服务", "expected": 2 },
+        { "id": "stop-warning", "source": "Stopping a service might prevent the system from functioning properly.", "translation": "停止服务可能导致系统无法正常工作。", "expected": 2 }
+      ]
+    },
+    {
+      "id": "extendedtools-main-menu",
+      "path": "plugins/ExtendedTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "system", "source": "&System", "translation": "系统(&S)" },
+        { "id": "pool-table", "source": "Poo&l Table", "translation": "内核池表(&L)" },
+        { "id": "smbios", "source": "SM&BIOS", "translation": "SMBIOS(&B)" },
+        { "id": "acpi", "source": "&ACPI Tables", "translation": "ACPI 表(&A)" },
+        { "id": "firmware", "source": "Firm&ware Table", "translation": "固件表(&W)" },
+        { "id": "tpm", "source": "&Trusted Platform Module", "translation": "可信平台模块(&T)" },
+        { "id": "boot-log", "source": "Boot Configuration &Log", "translation": "启动配置日志(&L)" },
+        { "id": "power-forecast", "source": "Power &Forecast", "translation": "电力预测(&F)" },
+        { "id": "cache-latency", "source": "Cache &Latency", "translation": "缓存延迟(&L)" },
+        { "id": "named-pipes", "source": "&Named Pipes", "translation": "命名管道(&N)" },
+        { "id": "reparse-points", "source": "NTFS Reparse Points", "translation": "NTFS 重解析点" },
+        { "id": "object-identifiers", "source": "NTFS Object Identifiers", "translation": "NTFS 对象标识符" },
+        { "id": "security-descriptors", "source": "NTFS Security Descriptors", "translation": "NTFS 安全描述符" }
+      ]
+    },
+    {
+      "id": "networktools-main-menu",
+      "path": "plugins/NetworkTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "root", "source": "&Network Tools", "translation": "网络工具(&N)" },
+        { "id": "geoip", "source": "&GeoLite database update...", "translation": "更新 GeoLite 数据库(&G)..." },
+        { "id": "ping-address", "source": "&Ping address...", "translation": "Ping 地址(&P)..." },
+        { "id": "traceroute-address", "source": "&Traceroute address...", "translation": "路由跟踪地址(&T)..." },
+        { "id": "whois-address", "source": "&Whois address...", "translation": "查询地址 Whois(&W)..." }
+      ]
+    },
+    {
+      "id": "onlinechecks-main-menu",
+      "path": "plugins/OnlineChecks/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "root", "source": "&Online Checks", "translation": "在线检查(&O)" },
+        { "id": "filescan", "source": "Upload file to &Filescan...", "translation": "上传文件到 Filescan(&F)..." },
+        { "id": "hybrid", "source": "Upload file to &Hybrid-Analysis...", "translation": "上传文件到 Hybrid-Analysis(&H)..." },
+        { "id": "virustotal", "source": "Upload file to &VirusTotal...", "translation": "上传文件到 VirusTotal(&V)..." },
+        { "id": "jotti", "source": "Upload file to &Jotti...", "translation": "上传文件到 Jotti(&J)..." }
+      ]
+    },
+    {
+      "id": "usernotes-main-menu",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "root", "source": "&User Notes", "translation": "用户备注(&U)" },
+        { "id": "priority", "source": "Configure priority for executable...", "translation": "配置可执行文件的优先级..." },
+        { "id": "io-priority", "source": "Configure IO priority for executable...", "translation": "配置可执行文件的 I/O 优先级..." },
+        { "id": "page-priority", "source": "Configure page priority for executable...", "translation": "配置可执行文件的页面优先级..." }
+      ]
+    },
+    {
+      "id": "tray-icons-core-menu",
+      "path": "SystemInformer/notifico.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "cpu-usage", "source": "CPU &usage", "translation": "CPU 使用率(&U)" },
+        { "id": "cpu-history", "source": "CPU &history", "translation": "CPU 使用率历史(&H)" },
+        { "id": "io-history", "source": "&I/O history", "translation": "I/O 历史(&I)" },
+        { "id": "commit-history", "source": "&Commit charge history", "translation": "提交量历史(&C)" },
+        { "id": "physical-history", "source": "&Physical memory history", "translation": "物理内存历史(&P)" },
+        { "id": "cpu-text", "source": "CPU usage (text)", "translation": "CPU 使用率（文本）" },
+        { "id": "io-text", "source": "IO usage (text)", "translation": "I/O 使用率（文本）" },
+        { "id": "commit-text", "source": "Commit usage (text)", "translation": "提交量（文本）" },
+        { "id": "physical-text", "source": "Physical usage (text)", "translation": "物理内存使用率（文本）" },
+        { "id": "static-icon", "source": "System Informer icon (static)", "translation": "System Informer 图标（静态）" }
+      ]
+    },
+    {
+      "id": "tray-icons-extended-menu",
+      "path": "plugins/ExtendedTools/iconext.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "gpu-history", "source": "&GPU history", "translation": "GPU 使用率历史(&G)" },
+        { "id": "npu-history", "source": "&NPU history", "translation": "NPU 使用率历史(&N)" },
+        { "id": "disk-history", "source": "&Disk history", "translation": "磁盘活动历史(&D)" },
+        { "id": "network-history", "source": "&Network history", "translation": "网络活动历史(&N)" },
+        { "id": "gpu-text", "source": "&GPU usage (text)", "translation": "GPU 使用率（文本）(&G)" },
+        { "id": "disk-text", "source": "&Disk usage (text)", "translation": "磁盘使用率（文本）(&D)" },
+        { "id": "network-text", "source": "&Network usage (text)", "translation": "网络使用率（文本）(&N)" },
+        { "id": "gpu-memory-history", "source": "&GPU memory history", "translation": "GPU 显存历史(&M)" },
+        { "id": "gpu-memory-text", "source": "&GPU memory usage (text)", "translation": "GPU 显存使用量（文本）(&M)" },
+        { "id": "gpu-temperature-history", "source": "&GPU temperature history", "translation": "GPU 温度历史(&T)" },
+        { "id": "gpu-temperature-text", "source": "&GPU temperature (text)", "translation": "GPU 温度（文本）(&T)" }
+      ]
+    },
+    {
+      "id": "tray-notification-runtime-menu",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "notifications", "source": "N&otifications", "translation": "通知(&O)" },
+        { "id": "enable-all", "source": "&Enable all", "translation": "全部启用(&E)" },
+        { "id": "disable-all", "source": "&Disable all", "translation": "全部禁用(&D)" },
+        { "id": "new-processes", "source": "New &processes", "translation": "新建进程(&P)" },
+        { "id": "terminated-processes", "source": "T&erminated processes", "translation": "已终止进程(&E)" },
+        { "id": "new-services", "source": "New &services", "translation": "新建服务(&S)" },
+        { "id": "started-services", "source": "St&arted services", "translation": "已启动服务(&A)" },
+        { "id": "stopped-services", "source": "St&opped services", "translation": "已停止服务(&O)" },
+        { "id": "deleted-services", "source": "&Deleted services", "translation": "已删除服务(&D)" },
+        { "id": "modified-services", "source": "&Modified services", "translation": "已修改服务(&M)" },
+        { "id": "arrived-devices", "source": "&Arrived devices", "translation": "已连接设备(&A)" },
+        { "id": "removed-devices", "source": "&Removed devices", "translation": "已移除设备(&R)" },
+        { "id": "settings", "source": "Settings", "translation": "设置" },
+        { "id": "init-delay", "source": "Enable initialization delay", "translation": "启用初始化延迟" },
+        { "id": "persistent-layout", "source": "Enable persistent layout", "translation": "启用持久化布局" },
+        { "id": "transparent-icons", "source": "Enable transparent icons", "translation": "启用透明图标" },
+        { "id": "single-click", "source": "Enable single click icons", "translation": "启用单击图标" },
+        { "id": "reset-layout", "source": "Reset persistent layout", "translation": "重置持久化布局" },
+        { "id": "unavailable", "source": " (Unavailable)", "translation": "（不可用）" }
+      ]
+    },
+    {
+      "id": "user-list-runtime",
+      "path": "SystemInformer/usrlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "count", "source": "Number of users: ", "translation": "用户数：" },
+        { "id": "user-name", "source": "User name", "translation": "用户名" },
+        { "id": "logon-domain", "source": "Logon domain", "translation": "登录域" },
+        { "id": "session-id", "source": "Session ID", "translation": "会话 ID" },
+        { "id": "logon-type", "source": "Logon type", "translation": "登录类型" },
+        { "id": "authentication", "source": "Authentication package", "translation": "身份验证包" },
+        { "id": "dns-domain", "source": "DNS domain name", "translation": "DNS 域名" },
+        { "id": "logon-time", "source": "Logon time", "translation": "登录时间" },
+        { "id": "password-last-set", "source": "Password last set", "translation": "上次设置密码时间" },
+        { "id": "logon-id", "source": "Logon ID", "translation": "登录 ID" },
+        { "id": "logon-server", "source": "Logon server", "translation": "登录服务器" },
+        { "id": "principal", "source": "User principal name", "translation": "用户主体名称" },
+        { "id": "flags", "source": "User flags", "translation": "用户标志" },
+        { "id": "failed-since", "source": "Failed logon attempts since", "translation": "此后的登录失败次数" },
+        { "id": "last-success", "source": "Last successful logon", "translation": "上次成功登录" },
+        { "id": "last-failed", "source": "Last failed logon", "translation": "上次登录失败" },
+        { "id": "logon-script", "source": "Longon script", "translation": "登录脚本" },
+        { "id": "profile", "source": "Profile path", "translation": "配置文件路径" },
+        { "id": "home-directory", "source": "Home directory", "translation": "主目录" },
+        { "id": "home-drive", "source": "Home directory drive", "translation": "主目录驱动器" },
+        { "id": "logoff-time", "source": "Logoff time", "translation": "注销时间" },
+        { "id": "kickoff-time", "source": "Kickoff time", "translation": "强制注销时间" },
+        { "id": "password-can-set", "source": "Password can set", "translation": "可更改密码时间" },
+        { "id": "password-must-set", "source": "Password must set", "translation": "必须更改密码时间" },
+        { "id": "undefined", "source": "Undefined", "translation": "未定义" },
+        { "id": "interactive", "source": "Interactive", "translation": "交互式" },
+        { "id": "network", "source": "Network", "translation": "网络" },
+        { "id": "batch", "source": "Batch", "translation": "批处理" },
+        { "id": "service", "source": "Service", "translation": "服务" },
+        { "id": "proxy", "source": "Proxy", "translation": "代理" },
+        { "id": "unlock", "source": "Unlock", "translation": "解锁" },
+        { "id": "network-cleartext", "source": "Network cleartext", "translation": "网络明文" },
+        { "id": "new-credentials", "source": "New credentials", "translation": "新凭据" },
+        { "id": "remote-interactive", "source": "Remote interactive", "translation": "远程交互式" },
+        { "id": "cached-interactive", "source": "Cached interactive", "translation": "缓存的交互式" },
+        { "id": "cached-remote", "source": "Cached remote interactive", "translation": "缓存的远程交互式" },
+        { "id": "cached-unlock", "source": "Cached unlock", "translation": "缓存的解锁" }
+      ]
+    },
+    {
+      "id": "updater-main-menu",
+      "path": "plugins/Updater/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "check", "source": "Check for &updates", "translation": "检查更新(&U)" },
+        { "id": "display-name", "source": "Update Checker", "translation": "更新检查器" }
+      ]
+    },
+    {
+      "id": "updater-options-dialog",
+      "path": "plugins/Updater/Updater.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "title", "source": "Updater Options", "translation": "更新器选项" },
+        { "id": "automatic", "source": "Check for updates automatically", "translation": "自动检查更新" },
+        { "id": "last-check", "source": "Last update check: N/A", "translation": "上次检查更新：无" },
+        { "id": "next-check", "source": "Next update check: N/A", "translation": "下次检查更新：无" },
+        { "id": "startup", "source": "Show update prompt before main window", "translation": "在主窗口显示前提示更新" },
+        { "id": "skip-welcome", "source": "Skip check for updates and search automatically", "translation": "跳过确认页并自动检查更新" },
+        { "id": "notifications", "source": "Show update notifications instead of update prompts", "translation": "使用通知而非更新提示框" },
+        { "id": "changelog", "source": "Changelog", "translation": "更新日志" }
+      ]
+    },
+    {
+      "id": "updater-welcome-page",
+      "path": "plugins/Updater/page1.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "check", "source": "Check", "translation": "检查" },
+        { "id": "stable", "source": "Stable\\n - Recommended", "translation": "稳定版\\n - 推荐", "expected": 2 },
+        { "id": "canary", "source": "Canary\\n - Preview", "translation": "Canary 版\\n - 预览", "expected": 2 },
+        { "id": "title", "source": "System Informer - Updater", "translation": "System Informer - 更新器" },
+        { "id": "question", "source": "Check for an updated System Informer release?", "translation": "检查 System Informer 是否有新版本？" },
+        { "id": "continue", "source": "Click Check to continue.", "translation": "单击“检查”继续。" }
+      ]
+    },
+    {
+      "id": "updater-checking-page",
+      "path": "plugins/Updater/page2.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "System Informer - Updater", "translation": "System Informer - 更新器" },
+        { "id": "release", "source": "Checking the release channel...", "translation": "正在检查稳定版通道..." },
+        { "id": "canary", "source": "Checking the canary channel...", "translation": "正在检查 Canary 通道..." },
+        { "id": "channel", "source": "Checking the channel...", "translation": "正在检查更新通道..." },
+        { "id": "updated-release", "source": "Checking for an updated release...", "translation": "正在检查新版本..." }
+      ]
+    },
+    {
+      "id": "updater-available-page",
+      "path": "plugins/Updater/page3.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "download", "source": "Download", "translation": "下载" },
+        { "id": "title", "source": "System Informer - Updater", "translation": "System Informer - 更新器" },
+        { "id": "release", "source": "Would you like to download the Release build?", "translation": "是否要下载稳定版？" },
+        { "id": "canary", "source": "Would you like to download the Canary build?", "translation": "是否要下载 Canary 版？" },
+        { "id": "update", "source": "Would you like to download the update?", "translation": "是否要下载此更新？" },
+        { "id": "newer", "source": "A newer build of System Informer is available.", "translation": "有较新的 System Informer 版本可用。" },
+        { "id": "details", "source": "Version: %s\\r\\nDownload size: %s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">View the changelog</A>", "translation": "版本：%s\\r\\n下载大小：%s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">查看更新日志</A>" }
+      ]
+    },
+    {
+      "id": "updater-download-page",
+      "path": "plugins/Updater/page4.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "System Informer - Updater", "translation": "System Informer - 更新器" },
+        { "id": "release", "source": " release", "translation": " 稳定版", "expected": 2 },
+        { "id": "canary", "source": " canary", "translation": " Canary" },
+        { "id": "channel", "source": "Downloading%s channel %s...", "translation": "正在下载%s通道版本 %s..." },
+        { "id": "update", "source": "Downloading update %s...", "translation": "正在下载更新 %s..." },
+        { "id": "progress", "source": "Downloaded: ~ of ~ (0%)\\r\\nSpeed: ~ KB/s", "translation": "已下载：~ / ~（0%）\\r\\n速度：~ KB/秒" }
+      ]
+    },
+    {
+      "id": "updater-final-pages",
+      "path": "plugins/Updater/page5.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "install", "source": "Install", "translation": "安装" },
+        { "id": "title", "source": "System Informer - Updater", "translation": "System Informer - 更新器", "expected": 4 },
+        { "id": "ready-release", "source": "Ready to switch to the release channel?", "translation": "准备切换到稳定版通道吗？" },
+        { "id": "ready-canary", "source": "Ready to switch to the canary channel?", "translation": "准备切换到 Canary 通道吗？" },
+        { "id": "ready-channel", "source": "Ready to switch the channel?", "translation": "准备切换更新通道吗？" },
+        { "id": "channel-verified", "source": "The channel has been successfully downloaded and verified.\\r\\n\\r\\nClick Install to continue.", "translation": "更新通道版本已成功下载并通过验证。\\r\\n\\r\\n单击“安装”继续。" },
+        { "id": "installed", "source": "Update installed.", "translation": "更新已安装。" },
+        { "id": "installed-content", "source": "The update has been downloaded and installed.\\r\\n\\r\\nRestart System Informer to apply the update.", "translation": "更新已下载并安装。\\r\\n\\r\\n请重启 System Informer 以应用更新。" },
+        { "id": "ready-install", "source": "Ready to install update?", "translation": "准备安装更新吗？" },
+        { "id": "verified", "source": "The update has been successfully downloaded and verified.\\r\\n\\r\\nClick Install to continue.", "translation": "更新已成功下载并通过验证。\\r\\n\\r\\n单击“安装”继续。" },
+        { "id": "view-changelog", "source": "%s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">View changelog</A>", "translation": "%s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">查看更新日志</A>", "expected": 2 },
+        { "id": "latest", "source": "You're running the latest version.", "translation": "当前已是最新版本。" },
+        { "id": "pre-release", "source": "You're running a pre-release build.", "translation": "当前正在运行预发布版本。" },
+        { "id": "error-channel", "source": "Error downloading the channel.", "translation": "下载更新通道版本时出错。" },
+        { "id": "error-update", "source": "Error downloading the update.", "translation": "下载更新时出错。" },
+        { "id": "signature-channel", "source": "Signature check failed. Click Retry to download the channel again.", "translation": "签名检查失败。请单击“重试”重新下载更新通道版本。" },
+        { "id": "signature-update", "source": "Signature check failed. Click Retry to download the update again.", "translation": "签名检查失败。请单击“重试”重新下载更新。" },
+        { "id": "hash-channel", "source": "Hash check failed. Click Retry to download the channel again.", "translation": "哈希检查失败。请单击“重试”重新下载更新通道版本。" },
+        { "id": "hash-update", "source": "Hash check failed. Click Retry to download the update again.", "translation": "哈希检查失败。请单击“重试”重新下载更新。" },
+        { "id": "retry-channel", "source": "Click Retry to download the channel again.", "translation": "请单击“重试”重新下载更新通道版本。", "expected": 2 },
+        { "id": "retry-update", "source": "Click Retry to download the update again.", "translation": "请单击“重试”重新下载更新。", "expected": 2 }
+      ]
+    },
+    {
+      "id": "about-runtime",
+      "path": "SystemInformer/about.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "thanks", "source": "Thanks to:\\n", "translation": "致谢：\\n" },
+        { "id": "contributors", "source": "    <a href=\\\"https://github.com/winsiderss/systeminformer/graphs/contributors\\\">Contributors</a> - thank you for your additions!\\n", "translation": "    <a href=\\\"https://github.com/winsiderss/systeminformer/graphs/contributors\\\">贡献者</a> - 感谢你们的贡献！\\n" },
+        { "id": "donors", "source": "    Donors - thank you for your support!\\n\\n", "translation": "    捐赠者 - 感谢你们的支持！\\n\\n" },
+        { "id": "components", "source": "System Informer uses the following components:\\n", "translation": "System Informer 使用以下组件：\\n" },
+        { "id": "presentmon", "source": "    <a href=\\\"https://github.com/GameTechDev/PresentMon\\\">PresentMon</a> by Intel Corporation\\n", "translation": "    <a href=\\\"https://github.com/GameTechDev/PresentMon\\\">PresentMon</a>，由 Intel Corporation 开发\\n" },
+        { "id": "minixml", "source": "    <a href=\\\"https://github.com/michaelrsweet/mxml\\\">Mini-XML</a> by Michael Sweet\\n", "translation": "    <a href=\\\"https://github.com/michaelrsweet/mxml\\\">Mini-XML</a>，由 Michael Sweet 开发\\n" },
+        { "id": "pcre2", "source": "    <a href=\\\"https://github.com/PCRE2Project/pcre2\\\">PCRE2</a> by Philip Hazel\\n", "translation": "    <a href=\\\"https://github.com/PCRE2Project/pcre2\\\">PCRE2</a>，由 Philip Hazel 开发\\n" },
+        { "id": "json-c", "source": "    <a href=\\\"https://github.com/json-c/json-c\\\">json-c</a> by Michael Clark\\n", "translation": "    <a href=\\\"https://github.com/json-c/json-c\\\">json-c</a>，由 Michael Clark 开发\\n" },
+        { "id": "md5", "source": "    MD5 code by Jouni Malinen\\n", "translation": "    MD5 代码由 Jouni Malinen 编写\\n" },
+        { "id": "sha1", "source": "    SHA1 code by Filip Navara, based on code by Steve Reid\\n", "translation": "    SHA1 代码由 Filip Navara 基于 Steve Reid 的代码编写\\n" }
+      ]
+    },
+    {
+      "id": "about-resource-extra",
+      "path": "SystemInformer/SystemInformer.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "copyright", "source": "Copyright (c) Winsider Seminars && Solutions, Inc.", "translation": "版权所有 (c) Winsider Seminars && Solutions, Inc." },
+        { "id": "sourceforge", "source": "<a href=\"\"https://systeminformer.sourceforge.io\"\">System Informer on SourceForge.net</a>", "translation": "<a href=\"\"https://systeminformer.sourceforge.io\"\">System Informer 的 SourceForge.net 页面</a>" }
+      ]
+    },
+    {
+      "id": "memory-command-progress",
+      "path": "SystemInformer/memlists.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "working-sets-done", "source": "Working sets emptied.", "translation": "内存工作集已清空。" },
+        { "id": "working-sets-error", "source": "Unable to empty working sets.", "translation": "无法清空内存工作集。" },
+        { "id": "modified-pages-done", "source": "Modified page lists emptied.", "translation": "已修改页面列表已清空。" },
+        { "id": "modified-pages-error", "source": "Unable to empty modified page lists.", "translation": "无法清空已修改页面列表。" },
+        { "id": "standby-done", "source": "Standby lists emptied.", "translation": "备用列表已清空。" },
+        { "id": "standby-error", "source": "Unable to empty standby lists.", "translation": "无法清空备用列表。" },
+        { "id": "priority-done", "source": "Priority 0 standby list emptied.", "translation": "优先级 0 备用列表已清空。" },
+        { "id": "priority-error", "source": "Unable to empty priority 0 standby list.", "translation": "无法清空优先级 0 备用列表。" },
+        { "id": "combined", "source": "Memory pages combined: ", "translation": "已合并内存页：" },
+        { "id": "open-pages", "source": " (", "translation": "（", "expected": 2 },
+        { "id": "pages", "source": " pages)", "translation": " 页）", "expected": 2 },
+        { "id": "combine-error", "source": "Unable to combine memory pages.", "translation": "无法合并内存页。" },
+        { "id": "compression-driver", "source": "Emptying the compression store requires a connection to the kernel driver.", "translation": "清空压缩存储需要连接内核驱动程序。" },
+        { "id": "compression-done", "source": "Compression stores emptied.", "translation": "压缩存储已清空。" },
+        { "id": "compression-error", "source": "Unable to empty compression stores.", "translation": "无法清空压缩存储。" },
+        { "id": "registry-done", "source": "Registry cache emptied.", "translation": "注册表缓存已清空。" },
+        { "id": "registry-error", "source": "Unable to empty registry cache.", "translation": "无法清空注册表缓存。" },
+        { "id": "file-cache-done", "source": "System file cache emptied: ", "translation": "系统文件缓存已清空：" },
+        { "id": "file-cache-error", "source": "Unable to empty system file cache.", "translation": "无法清空系统文件缓存。" },
+        { "id": "volume-cache-done", "source": "Volume file cache flushed to disk.", "translation": "卷文件缓存已写入磁盘。" },
+        { "id": "volume-cache-error", "source": "Unable to flush volume file cache.", "translation": "无法将卷文件缓存写入磁盘。" },
+        { "id": "combining", "source": "Combining memory pages...", "translation": "正在合并内存页..." },
+        { "id": "empty-compression", "source": "Emptying compression store...", "translation": "正在清空压缩存储..." },
+        { "id": "empty-file-cache", "source": "Emptying system file cache ...", "translation": "正在清空系统文件缓存..." },
+        { "id": "empty-registry", "source": "Emptying registry cache...", "translation": "正在清空注册表缓存..." },
+        { "id": "empty-working-sets", "source": "Emptying working sets...", "translation": "正在清空内存工作集..." },
+        { "id": "empty-modified-pages", "source": "Emptying modified page list...", "translation": "正在清空已修改页面列表..." },
+        { "id": "empty-modified-files", "source": "Emptying modified file cache...", "translation": "正在清空已修改文件缓存..." },
+        { "id": "empty-standby", "source": "Emptying standby list...", "translation": "正在清空备用列表..." },
+        { "id": "empty-priority", "source": "Emptying priority 0 standby list...", "translation": "正在清空优先级 0 备用列表..." },
+        { "id": "executing", "source": "Executing memory commands...", "translation": "正在执行内存命令..." }
+      ]
+    },
+    {
+      "id": "kernel-driver-not-connected",
+      "path": "SystemInformer/include/ksisup.h",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "Kernel driver not connected", "translation": "未连接内核驱动程序", "expected": 2 },
+        { "id": "details-1", "source": "System Informer is not connected to the kernel driver or lacks the required state ", "translation": "System Informer 未连接内核驱动程序，或缺少此功能所需的状态。" , "expected": 2 },
+        { "id": "details-2", "source": "necessary for this feature. Make sure that the \\\"Enable kernel-mode driver\\\" option is ", "translation": "请确保已启用\\\"启用内核模式驱动程序\\\"选项，并且 ", "expected": 2 },
+        { "id": "details-3", "source": "enabled and that System Informer is running with administrator privileges.", "translation": "System Informer 正以管理员权限运行。", "expected": 2 }
+      ]
+    },
+    {
+      "id": "sysinfo-core-section-names",
+      "path": "SystemInformer/sysinfo.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "memory", "source": "Memory", "translation": "内存" }
+      ]
+    },
+    {
+      "id": "sysinfo-memory-panel-title",
+      "path": "SystemInformer/sysscmem.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "memory", "source": "Memory", "translation": "内存" }
+      ]
+    },
+    {
+      "id": "sysinfo-memory-navigation-target",
+      "path": "SystemInformer/miniinfo.c",
+      "context": "PhShowSystemInformationDialog(L\"{text}\");",
+      "items": [
+        { "id": "memory", "source": "Memory", "translation": "内存" }
+      ]
+    },
+    {
+      "id": "sysinfo-plugin-navigation-targets",
+      "path": "plugins/ExtendedTools/iconext.c",
+      "context": "PhShowSystemInformationDialog(L\"{text}\");",
+      "items": [
+        { "id": "disk", "source": "Disk", "translation": "磁盘" },
+        { "id": "network", "source": "Network", "translation": "网络" }
+      ]
+    },
+    {
+      "id": "release-channel-names",
+      "path": "SystemInformer/appsup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "release", "source": "Release", "translation": "正式版" },
+        { "id": "preview", "source": "Preview", "translation": "预览版" },
+        { "id": "canary", "source": "Canary", "translation": "Canary 版" },
+        { "id": "developer", "source": "Developer", "translation": "开发版" }
       ]
     },
     {
