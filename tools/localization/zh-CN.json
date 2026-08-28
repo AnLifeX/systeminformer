@@ -1721,6 +1721,15 @@
         { "id": "lock", "source": "Lock the toolbar", "translation": "锁定工具栏", "expected": 2 },
         { "id": "customize", "source": "Customize...", "translation": "自定义...", "expected": 2 }
       ]
+    },
+    {
+      "id": "window-view-menu",
+      "path": "plugins/WindowExplorer/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "windows", "source": "&Windows", "translation": "窗口(&W)", "expected": 2 },
+        { "id": "desktop-windows", "source": "Deskto&p Windows...", "translation": "桌面窗口(&P)..." }
+      ]
     }
   ]
 }
