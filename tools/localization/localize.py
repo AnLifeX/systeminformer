@@ -99,6 +99,24 @@ def token_counter(pattern: re.Pattern[str], value: str) -> Counter[str]:
     return Counter(pattern.findall(value))
 
 
+def contains_unescaped_quote(value: str) -> bool:
+    """Return whether a C string payload contains an unescaped double quote."""
+    for index, character in enumerate(value):
+        if character != '"':
+            continue
+
+        backslashes = 0
+        cursor = index - 1
+        while cursor >= 0 and value[cursor] == "\\":
+            backslashes += 1
+            cursor -= 1
+
+        if backslashes % 2 == 0:
+            return True
+
+    return False
+
+
 def validate_tokens(entry: Translation) -> None:
     checks = (
         ("printf placeholders", token_counter(PRINTF_PATTERN, entry.source), token_counter(PRINTF_PATTERN, entry.translation)),
@@ -116,6 +134,14 @@ def validate_tokens(entry: Translation) -> None:
     if count_accelerators(entry.source) != count_accelerators(entry.translation):
         raise LocalizationError(
             f"{entry.identifier}: Win32 accelerator marker count changed"
+        )
+
+    if (
+        Path(entry.path).suffix.lower() in {".c", ".cc", ".cpp", ".cxx", ".h", ".hpp"}
+        and contains_unescaped_quote(entry.translation)
+    ):
+        raise LocalizationError(
+            f"{entry.identifier}: translation contains an unescaped C string quote"
         )
 
 

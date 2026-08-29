@@ -105,6 +105,17 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn("source drift detected", result.stderr)
 
+    def test_rejects_unescaped_quote_in_c_string_translation(self):
+        temporary, root, _source_file, catalog = self.make_repository(
+            "Enable the 'start as admin' option",
+            '启用"以管理员身份启动"选项',
+        )
+        self.addCleanup(temporary.cleanup)
+
+        result = self.run_cli(root, catalog, "check")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("unescaped C string quote", result.stderr)
+
     def test_grouped_translations_use_shared_path_and_context(self):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)

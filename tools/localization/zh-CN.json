@@ -5168,7 +5168,7 @@
         { "id": "configure-error", "source": "Unable to configure this option.", "translation": "无法配置此选项。" },
         { "id": "tray-required", "source": "You need to enable at minimum one tray icon (View menu > Tray Icons) before enabling the hide option.", "translation": "启用隐藏选项前，至少需要启用一个托盘图标（查看菜单 > 托盘图标）。" },
         { "id": "admin-required", "source": "You need to enable this option with administrative privileges.", "translation": "需要使用管理员权限启用此选项。" },
-        { "id": "start-admin-title", "source": "Enabling the 'start as admin' option", "translation": "启用\"以管理员身份启动\"选项" },
+        { "id": "start-admin-title", "source": "Enabling the 'start as admin' option", "translation": "启用‘以管理员身份启动’选项" },
         { "id": "start-admin-error", "source": "Unable to enable start as admin.", "translation": "无法启用以管理员身份启动。" },
         { "id": "setting-editor", "source": "Setting Editor", "translation": "设置编辑器" },
         { "id": "no-schema", "source": "No schema description available.", "translation": "没有可用的架构说明。" },
