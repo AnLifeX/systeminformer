@@ -181,9 +181,9 @@
         { "id": "io-read-bytes", "source": "I/O read bytes", "translation": "I/O 读取字节" },
         { "id": "io-write-bytes", "source": "I/O write bytes", "translation": "I/O 写入字节" },
         { "id": "io-other-bytes", "source": "I/O other bytes", "translation": "I/O 其他字节" },
-        { "id": "io-reads-delta", "source": "I/O reads delta", "translation": "I/O 读取增量" },
-        { "id": "io-writes-delta", "source": "I/O writes delta", "translation": "I/O 写入增量" },
-        { "id": "io-other-delta", "source": "I/O other delta", "translation": "I/O 其他增量" },
+        { "id": "io-reads-delta", "source": "I/O reads delta", "translation": "I/O 读取频率" },
+        { "id": "io-writes-delta", "source": "I/O writes delta", "translation": "I/O 写入频率" },
+        { "id": "io-other-delta", "source": "I/O other delta", "translation": "I/O 其他操作频率" },
         { "id": "os-context", "source": "OS context", "translation": "操作系统上下文" },
         { "id": "paged-pool", "source": "Paged pool", "translation": "分页池" },
         { "id": "peak-paged-pool", "source": "Peak paged pool", "translation": "峰值分页池" },
@@ -856,7 +856,7 @@
         { "id": "bytes-sent", "source": "Bytes sent", "translation": "发送字节数" },
         { "id": "bytes-received", "source": "Bytes received", "translation": "接收字节数" },
         { "id": "bytes-total", "source": "Bytes total", "translation": "总字节数", "expected": 2 },
-        { "id": "bytes-delta", "source": "Bytes delta", "translation": "字节数增量", "expected": 2 },
+        { "id": "bytes-delta", "source": "Bytes delta", "translation": "传输速率", "expected": 2 },
         { "id": "link-state", "source": "Link state", "translation": "连接状态" },
         { "id": "link-speed", "source": "Link speed", "translation": "连接速度" },
         { "id": "adapter", "source": "Adapter", "translation": "适配器" },
@@ -941,11 +941,11 @@
         { "id": "network", "source": "Network", "translation": "网络", "expected": 3 },
         { "id": "read", "source": "Read", "translation": "读取" },
         { "id": "write", "source": "Write", "translation": "写入", "expected": 3 },
-        { "id": "reads-delta", "source": "Reads delta", "translation": "读取次数增量" },
-        { "id": "writes-delta", "source": "Writes delta", "translation": "写入次数增量" },
+        { "id": "reads-delta", "source": "Reads delta", "translation": "读取频率" },
+        { "id": "writes-delta", "source": "Writes delta", "translation": "写入频率" },
         { "id": "disk-io", "source": "Disk I/O", "translation": "磁盘 I/O", "expected": 2 },
-        { "id": "read-bytes-delta", "source": "Read bytes delta", "translation": "读取字节增量", "expected": 2 },
-        { "id": "write-bytes-delta", "source": "Write bytes delta", "translation": "写入字节增量", "expected": 2 },
+        { "id": "read-bytes-delta", "source": "Read bytes delta", "translation": "读取速率", "expected": 2 },
+        { "id": "write-bytes-delta", "source": "Write bytes delta", "translation": "写入速率", "expected": 2 },
         { "id": "options", "source": "Options", "translation": "选项" },
         { "id": "restart-note", "source": "Changes to settings will require a restart of System Informer.", "translation": "设置更改需要重启 System Informer 后才能生效。" },
         { "id": "enable-disk-network", "source": "Enable Disk and Network monitoring", "translation": "启用磁盘和网络监控" },
@@ -964,11 +964,11 @@
         { "id": "npu-name", "source": "NPU name", "translation": "NPU 名称" },
         { "id": "read-bytes-label", "source": "Read bytes:", "translation": "读取字节数：" },
         { "id": "write-bytes-label", "source": "Write bytes:", "translation": "写入字节数：" },
-        { "id": "receives-delta", "source": "Receives delta", "translation": "接收次数增量" },
-        { "id": "sends-delta", "source": "Sends delta", "translation": "发送次数增量" },
+        { "id": "receives-delta", "source": "Receives delta", "translation": "接收频率" },
+        { "id": "sends-delta", "source": "Sends delta", "translation": "发送频率" },
         { "id": "network-io", "source": "Network I/O", "translation": "网络 I/O", "expected": 2 },
-        { "id": "receive-bytes-delta", "source": "Receive bytes delta", "translation": "接收字节增量", "expected": 2 },
-        { "id": "send-bytes-delta", "source": "Send bytes delta", "translation": "发送字节增量", "expected": 2 },
+        { "id": "receive-bytes-delta", "source": "Receive bytes delta", "translation": "接收速率", "expected": 2 },
+        { "id": "send-bytes-delta", "source": "Send bytes delta", "translation": "发送速率", "expected": 2 },
         { "id": "receive-bytes-label", "source": "Receive bytes:", "translation": "接收字节数：" },
         { "id": "send-bytes-label", "source": "Send bytes:", "translation": "发送字节数：" },
         { "id": "gpu-nodes", "source": "GPU Nodes", "translation": "GPU 节点" },
@@ -1118,11 +1118,11 @@
         { "id": "receive-bytes", "source": "Receive bytes", "translation": "接收字节数" },
         { "id": "send-bytes", "source": "Send bytes", "translation": "发送字节数" },
         { "id": "total-bytes", "source": "Total bytes", "translation": "总字节数" },
-        { "id": "receives-delta", "source": "Receives delta", "translation": "接收次数增量" },
-        { "id": "sends-delta", "source": "Sends delta", "translation": "发送次数增量" },
-        { "id": "receive-bytes-delta", "source": "Receive bytes delta", "translation": "接收字节增量" },
-        { "id": "send-bytes-delta", "source": "Send bytes delta", "translation": "发送字节增量" },
-        { "id": "total-bytes-delta", "source": "Total bytes delta", "translation": "总字节增量" },
+        { "id": "receives-delta", "source": "Receives delta", "translation": "本周期接收次数" },
+        { "id": "sends-delta", "source": "Sends delta", "translation": "本周期发送次数" },
+        { "id": "receive-bytes-delta", "source": "Receive bytes delta", "translation": "本周期接收量" },
+        { "id": "send-bytes-delta", "source": "Send bytes delta", "translation": "本周期发送量" },
+        { "id": "total-bytes-delta", "source": "Total bytes delta", "translation": "本周期传输量" },
         { "id": "firewall-status", "source": "Firewall status", "translation": "防火墙状态" },
         { "id": "receive-rate", "source": "Receive rate", "translation": "接收速率" },
         { "id": "send-rate", "source": "Send rate", "translation": "发送速率" },
@@ -1574,12 +1574,12 @@
         { "id": "write-bytes-label", "source": "Write bytes:", "translation": "写入字节数：" },
         { "id": "other-bytes-label", "source": "Other bytes:", "translation": "其他字节数：" },
         { "id": "io-deltas", "source": "I/O deltas", "translation": "I/O 增量" },
-        { "id": "reads-delta", "source": "Reads delta", "translation": "读取次数增量" },
-        { "id": "read-bytes-delta", "source": "Read bytes delta", "translation": "读取字节增量" },
-        { "id": "writes-delta", "source": "Writes delta", "translation": "写入次数增量" },
-        { "id": "write-bytes-delta", "source": "Write bytes delta", "translation": "写入字节增量" },
-        { "id": "other-delta", "source": "Other delta", "translation": "其他次数增量" },
-        { "id": "other-bytes-delta", "source": "Other bytes delta", "translation": "其他字节增量" },
+        { "id": "reads-delta", "source": "Reads delta", "translation": "读取频率" },
+        { "id": "read-bytes-delta", "source": "Read bytes delta", "translation": "读取速率" },
+        { "id": "writes-delta", "source": "Writes delta", "translation": "写入频率" },
+        { "id": "write-bytes-delta", "source": "Write bytes delta", "translation": "写入速率" },
+        { "id": "other-delta", "source": "Other delta", "translation": "其他操作频率" },
+        { "id": "other-bytes-delta", "source": "Other bytes delta", "translation": "其他传输速率" },
         { "id": "io-totals", "source": "I/O totals", "translation": "I/O 总计" },
         { "id": "memory-lists-title", "source": "Memory Lists", "translation": "内存页面列表" },
         { "id": "bad", "source": "Bad", "translation": "损坏" },
@@ -1688,21 +1688,21 @@
         { "id": "disk-read-bytes", "source": "Disk read bytes", "translation": "磁盘读取字节数" },
         { "id": "disk-write-bytes", "source": "Disk write bytes", "translation": "磁盘写入字节数" },
         { "id": "disk-total-bytes", "source": "Disk total bytes", "translation": "磁盘总字节数" },
-        { "id": "disk-reads-delta", "source": "Disk reads delta", "translation": "磁盘读取次数增量" },
-        { "id": "disk-writes-delta", "source": "Disk writes delta", "translation": "磁盘写入次数增量" },
-        { "id": "disk-read-bytes-delta", "source": "Disk read bytes delta", "translation": "磁盘读取字节增量" },
-        { "id": "disk-write-bytes-delta", "source": "Disk write bytes delta", "translation": "磁盘写入字节增量" },
-        { "id": "disk-total-bytes-delta", "source": "Disk total bytes delta", "translation": "磁盘总字节增量" },
+        { "id": "disk-reads-delta", "source": "Disk reads delta", "translation": "磁盘本周期读取次数" },
+        { "id": "disk-writes-delta", "source": "Disk writes delta", "translation": "磁盘本周期写入次数" },
+        { "id": "disk-read-bytes-delta", "source": "Disk read bytes delta", "translation": "磁盘本周期读取量" },
+        { "id": "disk-write-bytes-delta", "source": "Disk write bytes delta", "translation": "磁盘本周期写入量" },
+        { "id": "disk-total-bytes-delta", "source": "Disk total bytes delta", "translation": "磁盘本周期传输量" },
         { "id": "network-receives", "source": "Network receives", "translation": "网络接收次数" },
         { "id": "network-sends", "source": "Network sends", "translation": "网络发送次数" },
         { "id": "network-receive-bytes", "source": "Network receive bytes", "translation": "网络接收字节数" },
         { "id": "network-send-bytes", "source": "Network send bytes", "translation": "网络发送字节数" },
         { "id": "network-total-bytes", "source": "Network total bytes", "translation": "网络总字节数" },
-        { "id": "network-receives-delta", "source": "Network receives delta", "translation": "网络接收次数增量" },
-        { "id": "network-sends-delta", "source": "Network sends delta", "translation": "网络发送次数增量" },
-        { "id": "network-receive-bytes-delta", "source": "Network receive bytes delta", "translation": "网络接收字节增量" },
-        { "id": "network-send-bytes-delta", "source": "Network send bytes delta", "translation": "网络发送字节增量" },
-        { "id": "network-total-bytes-delta", "source": "Network total bytes delta", "translation": "网络总字节增量" },
+        { "id": "network-receives-delta", "source": "Network receives delta", "translation": "网络本周期接收次数" },
+        { "id": "network-sends-delta", "source": "Network sends delta", "translation": "网络本周期发送次数" },
+        { "id": "network-receive-bytes-delta", "source": "Network receive bytes delta", "translation": "网络本周期接收量" },
+        { "id": "network-send-bytes-delta", "source": "Network send bytes delta", "translation": "网络本周期发送量" },
+        { "id": "network-total-bytes-delta", "source": "Network total bytes delta", "translation": "网络本周期传输量" },
         { "id": "hard-faults", "source": "Hard faults", "translation": "硬缺页次数" },
         { "id": "hard-faults-delta", "source": "Hard faults delta", "translation": "硬缺页次数增量" },
         { "id": "peak-threads", "source": "Peak threads", "translation": "峰值线程数" },
@@ -2830,7 +2830,7 @@
         {
           "id": "reads-delta",
           "source": "Reads delta",
-          "translation": "读取操作增量"
+          "translation": "读取频率"
         },
         {
           "id": "read-bytes",
@@ -2840,7 +2840,7 @@
         {
           "id": "read-bytes-delta",
           "source": "Read bytes delta",
-          "translation": "读取字节数增量"
+          "translation": "读取速率"
         },
         {
           "id": "writes",
@@ -2850,7 +2850,7 @@
         {
           "id": "writes-delta",
           "source": "Writes delta",
-          "translation": "写入操作增量"
+          "translation": "写入频率"
         },
         {
           "id": "write-bytes",
@@ -2860,12 +2860,12 @@
         {
           "id": "write-bytes-delta",
           "source": "Write bytes delta",
-          "translation": "写入字节数增量"
+          "translation": "写入速率"
         },
         {
           "id": "other-delta",
           "source": "Other delta",
-          "translation": "其他操作增量"
+          "translation": "其他操作频率"
         },
         {
           "id": "other-bytes",
@@ -2875,7 +2875,7 @@
         {
           "id": "other-bytes-delta",
           "source": "Other bytes delta",
-          "translation": "其他操作字节数增量"
+          "translation": "其他传输速率"
         },
         {
           "id": "total-bytes",
@@ -2885,7 +2885,7 @@
         {
           "id": "total-bytes-delta",
           "source": "Total bytes delta",
-          "translation": "总字节数增量"
+          "translation": "总速率"
         },
         {
           "id": "total-bytes-average",
@@ -3186,7 +3186,7 @@
         {
           "id": "read-bytes-delta",
           "source": "Read bytes delta",
-          "translation": "读取字节数增量"
+          "translation": "读取速率"
         },
         {
           "id": "writes",
@@ -3201,7 +3201,7 @@
         {
           "id": "write-bytes-delta",
           "source": "Write bytes delta",
-          "translation": "写入字节数增量"
+          "translation": "写入速率"
         },
         {
           "id": "total",
@@ -3218,7 +3218,7 @@
         {
           "id": "total-bytes-delta",
           "source": "Total bytes delta",
-          "translation": "总字节数增量",
+          "translation": "总速率",
           "expected": 2
         },
         {
@@ -3239,7 +3239,7 @@
         {
           "id": "receive-bytes-delta",
           "source": "Receive bytes delta",
-          "translation": "接收字节数增量"
+          "translation": "接收速率"
         },
         {
           "id": "sends",
@@ -3254,7 +3254,7 @@
         {
           "id": "send-bytes-delta",
           "source": "Send bytes delta",
-          "translation": "发送字节数增量"
+          "translation": "发送速率"
         },
         {
           "id": "gpu-adapter",
@@ -5054,6 +5054,235 @@
       "items": [
         { "id": "windows", "source": "&Windows", "translation": "窗口(&W)", "expected": 2 },
         { "id": "desktop-windows", "source": "Deskto&p Windows...", "translation": "桌面窗口(&P)..." }
+      ]
+    },
+    {
+      "id": "extended-notifications-options",
+      "path": "plugins/ExtendedNotifications/ExtendedNotifications.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "processes", "source": "Processes", "translation": "进程" },
+        { "id": "services", "source": "Services", "translation": "服务" },
+        { "id": "devices", "source": "Devices", "translation": "设备" },
+        { "id": "process-help", "source": "You can configure processes for which notifications are displayed. Wildcards can be used, and ordering is considered.", "translation": "可配置需要显示通知的进程。支持通配符，并按列表顺序匹配。" },
+        { "id": "service-help", "source": "You can configure services for which notifications are displayed. Wildcards can be used, and ordering is considered.", "translation": "可配置需要显示通知的服务。支持通配符，并按列表顺序匹配。" },
+        { "id": "device-help", "source": "You can configure devices for which notifications are displayed. Wildcards can be used, and ordering is considered.", "translation": "可配置需要显示通知的设备。支持通配符，并按列表顺序匹配。" },
+        { "id": "move-up", "source": "Move up", "translation": "上移", "expected": 3 },
+        { "id": "move-down", "source": "Move down", "translation": "下移", "expected": 3 },
+        { "id": "include", "source": "Include", "translation": "包含", "expected": 3 },
+        { "id": "exclude", "source": "Exclude", "translation": "排除", "expected": 3 },
+        { "id": "add-update", "source": "Add/Update", "translation": "添加/更新", "expected": 3 },
+        { "id": "remove", "source": "Remove", "translation": "移除", "expected": 3 },
+        { "id": "process-examples", "source": "Examples:\\nnote*.exe\\nC:\\\\Windows\\\\system32\\\\cmd.exe\\nC:\\\\Windows\\\\*", "translation": "示例：\\nnote*.exe\\nC:\\\\Windows\\\\system32\\\\cmd.exe\\nC:\\\\Windows\\\\*" },
+        { "id": "service-examples", "source": "Examples:\\nWdi*\\nseclogon", "translation": "示例：\\nWdi*\\nseclogon" },
+        { "id": "device-examples", "source": "Examples:\\nUSB*\\n*Keyboard*", "translation": "示例：\\nUSB*\\n*Keyboard*" },
+        { "id": "logging", "source": "Logging", "translation": "日志记录" },
+        { "id": "file", "source": "File", "translation": "文件" },
+        { "id": "log-help", "source": "Log all events to this file (leave blank to disable this feature):", "translation": "将所有事件记录到此文件（留空则禁用）：" },
+        { "id": "browse", "source": "Browse...", "translation": "浏览..." },
+        { "id": "restart", "source": "Changes will require a restart of System Informer.", "translation": "更改将在重启 System Informer 后生效。" }
+      ]
+    },
+    {
+      "id": "networktools-options",
+      "path": "plugins/NetworkTools/NetworkTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "options", "source": "Options", "translation": "选项" },
+        { "id": "packet-length", "source": "Ping packet length:", "translation": "Ping 数据包长度：" },
+        { "id": "max-hops", "source": "Max Tracert Hops:", "translation": "最大跟踪跃点数：" },
+        { "id": "extended-tcp", "source": "Enable extended TCP statistics", "translation": "启用扩展 TCP 统计信息" },
+        { "id": "account", "source": "MaxMind GeoLite Account ID:", "translation": "MaxMind GeoLite 账户 ID：" },
+        { "id": "license", "source": "MaxMind GeoLite License Key:", "translation": "MaxMind GeoLite 许可证密钥：" },
+        { "id": "open-conf", "source": "Open GeoIP.conf", "translation": "打开 GeoIP.conf" },
+        { "id": "change", "source": "Change", "translation": "更改", "expected": 2 },
+        { "id": "download", "source": "Download update", "translation": "下载更新" },
+        { "id": "network-tools", "source": "Network Tools", "translation": "网络工具", "expected": 2 },
+        { "id": "geolite", "source": "GeoLite Update", "translation": "GeoLite 更新" },
+        { "id": "note", "source": "Note: You can also download GeoLite updates from the Main menu > Tools > Network Tools > Update GeoLite...", "translation": "提示：也可通过主菜单 > 工具 > 网络工具 > 更新 GeoLite 下载更新。" }
+      ]
+    },
+    {
+      "id": "networktools-options-runtime",
+      "path": "plugins/NetworkTools/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "country", "source": "GeoLite Country (Small)", "translation": "GeoLite 国家数据库（小）" },
+        { "id": "city", "source": "GeoLite City (Large)", "translation": "GeoLite 城市数据库（大）" }
+      ]
+    },
+    {
+      "id": "usernotes-options-followup",
+      "path": "plugins/UserNotes/UserNotes.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "options", "source": "Options", "translation": "选项" },
+        { "id": "collapse", "source": "Collapse services on start", "translation": "启动时折叠服务" },
+        { "id": "database", "source": "Current database configuration values:", "translation": "当前数据库配置值：" }
+      ]
+    },
+    {
+      "id": "options-resource-followup",
+      "path": "SystemInformer/SystemInformer.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "old-colors", "source": "Use old colors (black background)", "translation": "使用旧版配色（黑色背景）" },
+        { "id": "commit-summary", "source": "Show commit charge instead of physical memory in summary view", "translation": "在摘要视图中显示提交量而非物理内存" }
+      ]
+    },
+    {
+      "id": "extendedtools-options-note",
+      "path": "plugins/ExtendedTools/ExtendedTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "fps-note", "source": "Note: FPS monitoring requires either administrative privileges or the current user a member of the \"\"Performance Log Users\"\" group.", "translation": "提示：FPS 监控需要管理员权限，或当前用户属于\"\"性能日志用户\"\"组。" }
+      ]
+    },
+    {
+      "id": "onlinechecks-options-followup",
+      "path": "plugins/OnlineChecks/OnlineChecks.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "regex-help", "source": "Regex matched against the full file path; automatic scanning only.", "translation": "使用正则表达式匹配完整文件路径；仅适用于自动扫描。" }
+      ]
+    },
+    {
+      "id": "options-dialog-runtime-followup",
+      "path": "SystemInformer/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "reset-question", "source": "Do you want to reset all settings and restart System Informer?", "translation": "是否要重置所有设置并重启 System Informer？" },
+        { "id": "cleanup-question", "source": "Do you want to clean up unused settings?", "translation": "是否要清理未使用的设置？" },
+        { "id": "restore-task-manager", "source": "Do you want to restore the default Windows Task Manager?", "translation": "是否要恢复 Windows 默认任务管理器？" },
+        { "id": "make-task-manager", "source": "Do you want to make System Informer the default Windows Task Manager?", "translation": "是否要将 System Informer 设为默认任务管理器？" },
+        { "id": "changing-task-manager", "source": "Changing the default Task Manager", "translation": "正在更改默认任务管理器" },
+        { "id": "replace-task-manager-error", "source": "Unable to replace Task Manager", "translation": "无法替换任务管理器" },
+        { "id": "default-state", "source": "System Informer is the default Task Manager:", "translation": "System Informer 是默认任务管理器：" },
+        { "id": "restore-default", "source": "Restore default...", "translation": "恢复默认..." },
+        { "id": "not-default-state", "source": "System Informer is not the default Task Manager:", "translation": "System Informer 不是默认任务管理器：" },
+        { "id": "make-default", "source": "Make default...", "translation": "设为默认..." },
+        { "id": "restart-required", "source": "One or more options you have changed requires a restart of System Informer.", "translation": "一项或多项更改需要重启 System Informer 才能生效。", "expected": 2 },
+        { "id": "restart-now", "source": "Do you want to restart System Informer now?", "translation": "是否立即重启 System Informer？", "expected": 2 },
+        { "id": "unsafe-location", "source": "WARNING: You have not installed System Informer into a secure location.", "translation": "警告：System Informer 未安装在安全位置。" },
+        { "id": "unsafe-location-detail", "source": "%s is not recommended when running System Informer from outside a secure location (e.g. Program Files).\\r\\n\\r\\nAre you sure you want to continue?", "translation": "从不安全的位置（例如 Program Files 以外的位置）运行 System Informer 时，不建议使用%s。\\r\\n\\r\\n确定要继续吗？" },
+        { "id": "configure-error", "source": "Unable to configure this option.", "translation": "无法配置此选项。" },
+        { "id": "tray-required", "source": "You need to enable at minimum one tray icon (View menu > Tray Icons) before enabling the hide option.", "translation": "启用隐藏选项前，至少需要启用一个托盘图标（查看菜单 > 托盘图标）。" },
+        { "id": "admin-required", "source": "You need to enable this option with administrative privileges.", "translation": "需要使用管理员权限启用此选项。" },
+        { "id": "start-admin-title", "source": "Enabling the 'start as admin' option", "translation": "启用\"以管理员身份启动\"选项" },
+        { "id": "start-admin-error", "source": "Unable to enable start as admin.", "translation": "无法启用以管理员身份启动。" },
+        { "id": "setting-editor", "source": "Setting Editor", "translation": "设置编辑器" },
+        { "id": "no-schema", "source": "No schema description available.", "translation": "没有可用的架构说明。" },
+        { "id": "schema-range", "source": "The value is outside the schema's supported values.", "translation": "该值超出了架构支持的范围。" },
+        { "id": "type", "source": "Type", "translation": "类型" },
+        { "id": "value", "source": "Value", "translation": "值" },
+        { "id": "description", "source": "Description", "translation": "描述" },
+        { "id": "hide-modified", "source": "Hide modified", "translation": "隐藏已修改项" },
+        { "id": "hide-default", "source": "Hide default", "translation": "隐藏默认项" },
+        { "id": "highlight-modified", "source": "Highlight modified", "translation": "突出显示已修改项" },
+        { "id": "highlight-default", "source": "Highlight default", "translation": "突出显示默认项" },
+        { "id": "reset", "source": "&Reset", "translation": "重置(&R)", "expected": 4 },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C" }
+      ]
+    },
+    {
+      "id": "options-highlighting-runtime-followup",
+      "path": "SystemInformer/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "own-processes", "source": "Own processes", "translation": "自身进程" },
+        { "id": "own-processes-desc", "source": "Processes running under the same user account as System Informer.", "translation": "与 System Informer 在同一用户账户下运行的进程。" },
+        { "id": "system-processes", "source": "System processes", "translation": "系统进程" },
+        { "id": "system-processes-desc", "source": "Processes running under the NT AUTHORITY\\\\SYSTEM user account.", "translation": "以 NT AUTHORITY\\\\SYSTEM 账户运行的进程。" },
+        { "id": "service-processes", "source": "Service processes", "translation": "服务进程" },
+        { "id": "service-processes-desc", "source": "Processes which host one or more services.", "translation": "承载一个或多个服务的进程。" },
+        { "id": "background-processes", "source": "Background processes", "translation": "后台进程" },
+        { "id": "background-processes-desc", "source": "Processes with a background scheduling priority.", "translation": "使用后台调度优先级的进程。" },
+        { "id": "job-processes", "source": "Job processes", "translation": "作业进程" },
+        { "id": "job-processes-desc", "source": "Processes associated with a job.", "translation": "与作业对象关联的进程。" },
+        { "id": "wow64-processes", "source": "32-bit processes", "translation": "32 位进程" },
+        { "id": "wow64-processes-desc", "source": "Processes running under WOW64, i.e. 32-bit.", "translation": "在 WOW64 下运行的 32 位进程。" },
+        { "id": "debugged-processes", "source": "Debugged processes", "translation": "正在调试的进程" },
+        { "id": "debugged-processes-desc", "source": "Processes that are currently being debugged.", "translation": "当前正在被调试的进程。" },
+        { "id": "elevated-processes", "source": "Elevated processes", "translation": "已提升进程" },
+        { "id": "elevated-processes-desc", "source": "Processes with full privileges on a system with UAC enabled.", "translation": "在启用 UAC 的系统上拥有完整权限的进程。" },
+        { "id": "uiaccess-processes", "source": "UIAccess processes", "translation": "UIAccess 进程" },
+        { "id": "uiaccess-processes-desc", "source": "Processes with UIAccess privileges.", "translation": "拥有 UIAccess 权限的进程。" },
+        { "id": "pico-processes", "source": "Pico processes", "translation": "Pico 进程" },
+        { "id": "pico-processes-desc", "source": "Processes that belong to the Windows subsystem for Linux.", "translation": "属于 Windows Linux 子系统的进程。" },
+        { "id": "immersive", "source": "Immersive processes and DLLs", "translation": "沉浸式进程和 DLL" },
+        { "id": "immersive-desc", "source": "Processes and DLLs that belong to a Modern UI app.", "translation": "属于现代 UI 应用的进程和 DLL。" },
+        { "id": "suspended", "source": "Suspended processes and threads", "translation": "已挂起的进程和线程" },
+        { "id": "suspended-desc", "source": "Processes and threads that are suspended from execution.", "translation": "已暂停执行的进程和线程。" },
+        { "id": "partially-suspended", "source": "Partially suspended processes and threads", "translation": "部分挂起的进程和线程" },
+        { "id": "partially-suspended-desc", "source": "Processes and threads that are partially suspended from execution.", "translation": "部分线程已暂停执行的进程。" },
+        { "id": "dotnet", "source": ".NET processes and DLLs", "translation": ".NET 进程和 DLL" },
+        { "id": "dotnet-desc", "source": ".NET (i.e. managed) processes and DLLs.", "translation": ".NET（托管）进程和 DLL。" },
+        { "id": "packed", "source": "Packed processes", "translation": "已加壳进程" },
+        { "id": "packed-desc", "source": "Executables are sometimes \\\"packed\\\" to reduce their size.", "translation": "可执行文件有时会经过\\\"加壳\\\"处理以减小体积。" },
+        { "id": "low-coherency-process", "source": "Low process image coherency", "translation": "进程映像一致性低" },
+        { "id": "low-coherency-process-desc", "source": "The image file backing the process has low coherency when compared to the mapped image.", "translation": "进程映像文件与内存映射映像的一致性较低。" },
+        { "id": "gui-threads", "source": "GUI threads", "translation": "GUI 线程", "expected": 2 },
+        { "id": "gui-threads-desc", "source": "Threads that have made at least one GUI-related system call.", "translation": "至少执行过一次 GUI 相关系统调用的线程。" },
+        { "id": "unknown-process", "source": "Unknown process", "translation": "未知进程" },
+        { "id": "unknown-process-desc", "source": "Highlight network items whose owning process is unknown.", "translation": "突出显示所属进程未知的网络项目。" },
+        { "id": "subsystem-process", "source": "Subsystem process", "translation": "子系统进程" },
+        { "id": "subsystem-process-desc", "source": "Highlight network items owned by subsystem processes.", "translation": "突出显示属于子系统进程的网络项目。" },
+        { "id": "process-environment", "source": "Process environment", "translation": "进程环境变量" },
+        { "id": "user-environment", "source": "User environment", "translation": "用户环境变量" },
+        { "id": "system-environment", "source": "System environment", "translation": "系统环境变量" },
+        { "id": "cmd-variables", "source": "CMD variables", "translation": "CMD 变量" },
+        { "id": "enabled-default", "source": "Enabled by default", "translation": "默认启用" },
+        { "id": "enabled-default-desc", "source": "Token groups or privileges that are enabled by default.", "translation": "默认启用的令牌组或特权。" },
+        { "id": "enabled", "source": "Enabled", "translation": "已启用" },
+        { "id": "enabled-desc", "source": "Token groups or privileges that are enabled.", "translation": "当前已启用的令牌组或特权。" },
+        { "id": "disabled-default", "source": "Disabled by default", "translation": "默认禁用" },
+        { "id": "disabled-default-desc", "source": "Token groups or privileges that are disabled but enabled by default.", "translation": "当前禁用、但默认启用的令牌组或特权。" },
+        { "id": "disabled", "source": "Disabled", "translation": "已禁用" },
+        { "id": "disabled-desc", "source": "Token groups or privileges that are disabled.", "translation": "当前已禁用的令牌组或特权。" },
+        { "id": "removed-privilege", "source": "Removed privilege", "translation": "已移除的特权" },
+        { "id": "removed-privilege-desc", "source": "Token privileges that have been removed.", "translation": "已从令牌中移除的特权。" },
+        { "id": "private-pages", "source": "Private pages", "translation": "专用页面" },
+        { "id": "private-pages-desc", "source": "Highlight private pages in the Memory list.", "translation": "在内存列表中突出显示专用页面。" },
+        { "id": "system-pages", "source": "System pages", "translation": "系统页面" },
+        { "id": "system-pages-desc", "source": "Highlight system image pages in the Memory list.", "translation": "在内存列表中突出显示系统映像页面。" },
+        { "id": "cfg-pages", "source": "CFG pages", "translation": "CFG 页面" },
+        { "id": "cfg-pages-desc", "source": "Highlight CFG bitmap pages in the Memory list.", "translation": "在内存列表中突出显示 CFG 位图页面。" },
+        { "id": "execute-pages", "source": "Execute pages", "translation": "可执行页面" },
+        { "id": "execute-pages-desc", "source": "Highlight executable pages in the Memory list.", "translation": "在内存列表中突出显示可执行页面。" },
+        { "id": "untrusted-modules", "source": "Untrusted modules", "translation": "不受信任的模块" },
+        { "id": "untrusted-modules-desc", "source": "Modules that are not digitally signed or otherwise untrusted.", "translation": "未进行数字签名或因其他原因不受信任的模块。" },
+        { "id": "relocated-modules", "source": "Relocated modules", "translation": "已重定位模块" },
+        { "id": "relocated-modules-desc", "source": "Modules that were not loaded at their preferred image base.", "translation": "未加载到首选映像基址的模块。" },
+        { "id": "protected-handles", "source": "Protected handles", "translation": "受保护的句柄" },
+        { "id": "protected-handles-desc", "source": "Handles that are protected from being closed.", "translation": "受保护、无法直接关闭的句柄。" },
+        { "id": "inheritable-handles", "source": "Inheritable handles", "translation": "可继承句柄" },
+        { "id": "inheritable-handles-desc", "source": "Handles that can be inherited by child processes.", "translation": "可由子进程继承的句柄。" },
+        { "id": "disabled-services", "source": "Disabled Services", "translation": "已禁用服务" },
+        { "id": "disabled-services-desc", "source": "Services which have been disabled.", "translation": "已被禁用的服务。" },
+        { "id": "stopped-services", "source": "Stopped Services", "translation": "已停止服务" },
+        { "id": "stopped-services-desc", "source": "Services that are not running.", "translation": "当前未运行的服务。" },
+        { "id": "power-efficiency", "source": "Power efficiency", "translation": "节能模式" },
+        { "id": "power-efficiency-desc", "source": "Processes and threads with power efficiency.", "translation": "启用了节能模式的进程和线程。" }
+      ]
+    },
+    {
+      "id": "options-graph-runtime-followup",
+      "path": "SystemInformer/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "automatic", "source": "Automatic", "translation": "自动" },
+        { "id": "light", "source": "Light", "translation": "浅色" },
+        { "id": "dark", "source": "Dark", "translation": "深色" },
+        { "id": "custom", "source": "Custom", "translation": "自定义" },
+        { "id": "cpu-kernel", "source": "CPU kernel", "translation": "CPU 内核态", "expected": 2 },
+        { "id": "cpu-user", "source": "CPU user", "translation": "CPU 用户态", "expected": 2 },
+        { "id": "io-read-other", "source": "I/O R+O", "translation": "I/O 读取+其他", "expected": 2 },
+        { "id": "io-write", "source": "I/O W", "translation": "I/O 写入", "expected": 2 },
+        { "id": "private-bytes", "source": "Private bytes", "translation": "专用字节数", "expected": 2 },
+        { "id": "physical-memory", "source": "Physical memory", "translation": "物理内存", "expected": 2 },
+        { "id": "power", "source": "Power usage", "translation": "功耗", "expected": 2 },
+        { "id": "temperature", "source": "Temperature", "translation": "温度", "expected": 2 },
+        { "id": "fan", "source": "Fan RPM", "translation": "风扇转速", "expected": 2 }
       ]
     }
   ]
