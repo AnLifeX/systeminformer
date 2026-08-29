@@ -170,11 +170,11 @@
         { "id": "window-title", "source": "Window title", "translation": "窗口标题" },
         { "id": "window-status", "source": "Window status", "translation": "窗口状态" },
         { "id": "cycles", "source": "Cycles", "translation": "CPU 周期" },
-        { "id": "cycles-delta", "source": "Cycles delta", "translation": "CPU 周期增量" },
+        { "id": "cycles-delta", "source": "Cycles delta", "translation": "CPU 周期变化" },
         { "id": "virtualized", "source": "Virtualized", "translation": "已虚拟化", "expected": 2 },
         { "id": "context-switches", "source": "Context switches", "translation": "上下文切换" },
-        { "id": "context-switches-delta", "source": "Context switches delta", "translation": "上下文切换增量" },
-        { "id": "page-faults-delta", "source": "Page faults delta", "translation": "缺页增量" },
+        { "id": "context-switches-delta", "source": "Context switches delta", "translation": "上下文切换频率" },
+        { "id": "page-faults-delta", "source": "Page faults delta", "translation": "缺页频率" },
         { "id": "io-reads", "source": "I/O reads", "translation": "I/O 读取次数" },
         { "id": "io-writes", "source": "I/O writes", "translation": "I/O 写入次数" },
         { "id": "io-other", "source": "I/O other", "translation": "I/O 其他次数" },
@@ -191,7 +191,7 @@
         { "id": "peak-non-paged-pool", "source": "Peak non-paged pool", "translation": "峰值非分页池" },
         { "id": "minimum-working-set", "source": "Minimum working set", "translation": "最小内存工作集" },
         { "id": "maximum-working-set", "source": "Maximum working set", "translation": "最大内存工作集" },
-        { "id": "private-bytes-delta", "source": "Private bytes delta", "translation": "专用提交增量" },
+        { "id": "private-bytes-delta", "source": "Private bytes delta", "translation": "专用提交变化" },
         { "id": "subsystem", "source": "Subsystem", "translation": "子系统" },
         { "id": "package-name", "source": "Package name", "translation": "程序包名称" },
         { "id": "app-id", "source": "App ID", "translation": "应用 ID" },
@@ -638,7 +638,7 @@
         { "id": "paged-pool", "source": "Paged pool", "translation": "分页池" },
         { "id": "non-paged-pool", "source": "Non-paged pool", "translation": "非分页池" },
         { "id": "page-faults", "source": "Page faults", "translation": "缺页次数" },
-        { "id": "page-faults-delta", "source": "Page faults delta", "translation": "缺页增量" },
+        { "id": "page-faults-delta", "source": "Page faults delta", "translation": "缺页频率" },
         { "id": "memory-lists", "source": "Memory lists", "translation": "内存列表" },
         { "id": "zeroed", "source": "Zeroed", "translation": "已清零", "expected": 2 },
         { "id": "free", "source": "Free", "translation": "空闲", "expected": 2 },
@@ -762,7 +762,7 @@
       "path": "SystemInformer/thrdlist.c",
       "context": "L\"{text}\"",
       "items": [
-        { "id": "cycles-delta", "source": "Cycles delta", "translation": "CPU 周期增量" },
+        { "id": "cycles-delta", "source": "Cycles delta", "translation": "CPU 周期变化" },
         { "id": "start-win32", "source": "Start address (Win32)", "translation": "起始地址（Win32）" },
         { "id": "priority-symbolic", "source": "Priority (symbolic)", "translation": "优先级（符号）" },
         { "id": "service", "source": "Service", "translation": "服务" },
@@ -770,7 +770,7 @@
         { "id": "created", "source": "Created", "translation": "创建时间" },
         { "id": "start-module", "source": "Start module", "translation": "起始模块" },
         { "id": "context-switches", "source": "Context switches", "translation": "上下文切换" },
-        { "id": "context-switches-delta", "source": "Context switches delta", "translation": "上下文切换增量" },
+        { "id": "context-switches-delta", "source": "Context switches delta", "translation": "上下文切换频率" },
         { "id": "priority", "source": "Priority", "translation": "优先级" },
         { "id": "base-priority", "source": "Base priority", "translation": "基本优先级" },
         { "id": "page-priority", "source": "Page priority", "translation": "页面优先级" },
@@ -871,7 +871,7 @@
         { "id": "active-time", "source": "Active time", "translation": "活动时间" },
         { "id": "response-time", "source": "Response time", "translation": "响应时间" },
         { "id": "disk", "source": "Disk", "translation": "磁盘" },
-        { "id": "queue-delta", "source": "Queue delta", "translation": "队列增量" },
+        { "id": "queue-delta", "source": "Queue delta", "translation": "队列变化" },
         { "id": "split-total", "source": "Split total", "translation": "拆分 I/O 总数" },
         { "id": "volumes", "source": "Volume(s)", "translation": "卷" },
         { "id": "send-label", "source": "Send:", "translation": "发送：" },
@@ -1530,10 +1530,10 @@
         { "id": "system", "source": "System", "translation": "系统" },
         { "id": "processes", "source": "Processes", "translation": "进程数" },
         { "id": "one-graph", "source": "&Show one graph per CPU", "translation": "每个 CPU 显示一个图表(&S)" },
-        { "id": "context-switch-delta", "source": "Context switches delta", "translation": "上下文切换增量" },
-        { "id": "interrupts-delta", "source": "Interrupts delta", "translation": "中断增量" },
-        { "id": "dpcs-delta", "source": "DPCs delta", "translation": "延迟过程调用增量" },
-        { "id": "syscalls-delta", "source": "System calls delta", "translation": "系统调用增量" },
+        { "id": "context-switch-delta", "source": "Context switches delta", "translation": "上下文切换频率" },
+        { "id": "interrupts-delta", "source": "Interrupts delta", "translation": "中断频率" },
+        { "id": "dpcs-delta", "source": "DPCs delta", "translation": "延迟过程调用频率" },
+        { "id": "syscalls-delta", "source": "System calls delta", "translation": "系统调用频率" },
         { "id": "cores", "source": "Cores", "translation": "核心数" },
         { "id": "sockets", "source": "Sockets", "translation": "插槽数" },
         { "id": "logical-processors", "source": "Logical processors", "translation": "逻辑处理器数" },
@@ -1541,13 +1541,13 @@
         { "id": "l2-cache", "source": "L2 cache", "translation": "L2 缓存" },
         { "id": "l3-cache", "source": "L3 cache", "translation": "L3 缓存" },
         { "id": "dpc-full", "source": "Deferred procedure calls", "translation": "延迟过程调用（DPC）" },
-        { "id": "deltas", "source": "Deltas", "translation": "增量" },
+        { "id": "deltas", "source": "Deltas", "translation": "变化量" },
         { "id": "commit-charge", "source": "Commit charge", "translation": "提交量" },
         { "id": "cache-ws", "source": "Cache WS", "translation": "缓存工作集" },
         { "id": "kernel-ws", "source": "Kernel WS", "translation": "内核工作集" },
         { "id": "driver-ws", "source": "Driver WS", "translation": "驱动程序工作集" },
-        { "id": "allocs-delta", "source": "Allocs delta", "translation": "分配次数增量", "expected": 2 },
-        { "id": "frees-delta", "source": "Frees delta", "translation": "释放次数增量", "expected": 2 },
+        { "id": "allocs-delta", "source": "Allocs delta", "translation": "分配频率", "expected": 2 },
+        { "id": "frees-delta", "source": "Frees delta", "translation": "释放频率", "expected": 2 },
         { "id": "priority-0", "source": "Priority 0", "translation": "优先级 0", "expected": 2 },
         { "id": "priority-1", "source": "Priority 1", "translation": "优先级 1", "expected": 2 },
         { "id": "priority-2", "source": "Priority 2", "translation": "优先级 2", "expected": 2 },
@@ -1556,9 +1556,9 @@
         { "id": "priority-5", "source": "Priority 5", "translation": "优先级 5", "expected": 2 },
         { "id": "priority-6", "source": "Priority 6", "translation": "优先级 6", "expected": 2 },
         { "id": "priority-7", "source": "Priority 7", "translation": "优先级 7", "expected": 2 },
-        { "id": "pagefile-writes", "source": "Pagefile writes delta", "translation": "页面文件写入增量" },
-        { "id": "page-reads", "source": "Page reads delta", "translation": "页面读取增量" },
-        { "id": "mapped-writes-delta", "source": "Mapped writes delta", "translation": "映射写入增量" },
+        { "id": "pagefile-writes", "source": "Pagefile writes delta", "translation": "页面文件写入频率" },
+        { "id": "page-reads", "source": "Page reads delta", "translation": "页面读取频率" },
+        { "id": "mapped-writes-delta", "source": "Mapped writes delta", "translation": "映射写入频率" },
         { "id": "more", "source": "&More", "translation": "更多(&M)" },
         { "id": "mapped-io", "source": "Mapped IO", "translation": "映射 I/O" },
         { "id": "mapped-reads", "source": "Mapped reads", "translation": "映射读取" },
@@ -1573,7 +1573,7 @@
         { "id": "read-bytes-label", "source": "Read bytes:", "translation": "读取字节数：" },
         { "id": "write-bytes-label", "source": "Write bytes:", "translation": "写入字节数：" },
         { "id": "other-bytes-label", "source": "Other bytes:", "translation": "其他字节数：" },
-        { "id": "io-deltas", "source": "I/O deltas", "translation": "I/O 增量" },
+        { "id": "io-deltas", "source": "I/O deltas", "translation": "I/O 变化量" },
         { "id": "reads-delta", "source": "Reads delta", "translation": "读取频率" },
         { "id": "read-bytes-delta", "source": "Read bytes delta", "translation": "读取速率" },
         { "id": "writes-delta", "source": "Writes delta", "translation": "写入频率" },
@@ -1704,7 +1704,7 @@
         { "id": "network-send-bytes-delta", "source": "Network send bytes delta", "translation": "网络本周期发送量" },
         { "id": "network-total-bytes-delta", "source": "Network total bytes delta", "translation": "网络本周期传输量" },
         { "id": "hard-faults", "source": "Hard faults", "translation": "硬缺页次数" },
-        { "id": "hard-faults-delta", "source": "Hard faults delta", "translation": "硬缺页次数增量" },
+        { "id": "hard-faults-delta", "source": "Hard faults delta", "translation": "硬缺页频率" },
         { "id": "peak-threads", "source": "Peak threads", "translation": "峰值线程数" },
         { "id": "gpu-dedicated-resident", "source": "GPU dedicated bytes (resident)", "translation": "GPU 专用显存（驻留）" },
         { "id": "gpu-shared-resident", "source": "GPU shared bytes (resident)", "translation": "GPU 共享显存（驻留）" },
@@ -1723,8 +1723,8 @@
         { "id": "npu-shared-committed", "source": "NPU shared bytes (committed)", "translation": "NPU 共享内存（已提交）" },
         { "id": "firewall-allows", "source": "Firewall allows", "translation": "防火墙允许次数" },
         { "id": "firewall-blocks", "source": "Firewall blocks", "translation": "防火墙阻止次数" },
-        { "id": "firewall-allows-delta", "source": "Firewall allows delta", "translation": "防火墙允许次数增量" },
-        { "id": "firewall-blocks-delta", "source": "Firewall blocks delta", "translation": "防火墙阻止次数增量" }
+        { "id": "firewall-allows-delta", "source": "Firewall allows delta", "translation": "防火墙放行频率" },
+        { "id": "firewall-blocks-delta", "source": "Firewall blocks delta", "translation": "防火墙阻止频率" }
       ]
     },
     {
@@ -2665,7 +2665,7 @@
         {
           "id": "cycles-delta",
           "source": "Cycles delta",
-          "translation": "周期数增量"
+          "translation": "CPU 周期变化"
         },
         {
           "id": "context-switches",
@@ -2675,7 +2675,7 @@
         {
           "id": "context-switches-delta",
           "source": "Context switches delta",
-          "translation": "上下文切换增量"
+          "translation": "上下文切换频率"
         },
         {
           "id": "kernel-time",
@@ -2685,7 +2685,7 @@
         {
           "id": "kernel-delta",
           "source": "Kernel delta",
-          "translation": "内核态时间增量"
+          "translation": "内核态时间变化"
         },
         {
           "id": "user-time",
@@ -2695,7 +2695,7 @@
         {
           "id": "user-delta",
           "source": "User delta",
-          "translation": "用户态时间增量"
+          "translation": "用户态时间变化"
         },
         {
           "id": "total-time",
@@ -2705,7 +2705,7 @@
         {
           "id": "total-delta",
           "source": "Total delta",
-          "translation": "总时间增量"
+          "translation": "总时间变化"
         },
         {
           "id": "priority",
@@ -2720,7 +2720,7 @@
         {
           "id": "private-bytes-delta",
           "source": "Private bytes delta",
-          "translation": "专用提交增量"
+          "translation": "专用提交变化"
         },
         {
           "id": "peak-private-bytes",
@@ -2745,7 +2745,7 @@
         {
           "id": "page-faults-delta",
           "source": "Page faults delta",
-          "translation": "缺页增量"
+          "translation": "缺页频率"
         },
         {
           "id": "hard-faults",
@@ -2755,7 +2755,7 @@
         {
           "id": "hard-faults-delta",
           "source": "Hard faults delta",
-          "translation": "硬缺页次数增量"
+          "translation": "硬缺页频率"
         },
         {
           "id": "working-set",
