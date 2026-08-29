@@ -88,6 +88,13 @@ NTSTATUS NTAPI UpdaterToastDownloadThread(
 {
     PPH_UPDATER_CONTEXT updaterContext = (PPH_UPDATER_CONTEXT)Parameter;
 
+    if (updaterContext->PortableMode)
+    {
+        PhShellExecute(NULL, UPDATE_RELEASES_URL, NULL);
+        PhDereferenceObject(updaterContext);
+        return STATUS_SUCCESS;
+    }
+
     if (!UpdaterShowProgressToast(updaterContext))
     {
         updaterContext->ToastMode = FALSE;
@@ -290,24 +297,31 @@ VOID NTAPI UpdaterAvailableToastCallback(
     if (Reason == PhToastReasonAction &&
         UpdaterToastActionMatches(Arguments, UPDATER_TOAST_ACTION_DOWNLOAD))
     {
-        PhReferenceObject(updaterContext); // released by UpdaterToastDownloadThread
-
-        if (!NT_SUCCESS(PhCreateThread2(UpdaterToastDownloadThread, updaterContext)))
+        if (updaterContext->PortableMode)
         {
-            PhDereferenceObject(updaterContext); // undo the thread reference
+            PhShellExecute(NULL, UPDATE_RELEASES_URL, NULL);
+        }
+        else
+        {
+            PhReferenceObject(updaterContext); // released by UpdaterToastDownloadThread
 
-            // Release the toast/context here, then hand our owned reference to
-            // ShowUpdateDialog (which consumes exactly one reference).
-            InterlockedCompareExchangePointer((PVOID volatile*)&UpdaterAvailableToast, NULL, toastContext->Toast);
+            if (!NT_SUCCESS(PhCreateThread2(UpdaterToastDownloadThread, updaterContext)))
+            {
+                PhDereferenceObject(updaterContext); // undo the thread reference
 
-            if (toastContext->Toast)
-                PhReleaseToast(toastContext->Toast);
+                // Release the toast/context here, then hand our owned reference to
+                // ShowUpdateDialog (which consumes exactly one reference).
+                InterlockedCompareExchangePointer((PVOID volatile*)&UpdaterAvailableToast, NULL, toastContext->Toast);
 
-            PhFree(toastContext);
+                if (toastContext->Toast)
+                    PhReleaseToast(toastContext->Toast);
 
-            updaterContext->ToastMode = FALSE;
-            ShowUpdateDialog(updaterContext);
-            return;
+                PhFree(toastContext);
+
+                updaterContext->ToastMode = FALSE;
+                ShowUpdateDialog(updaterContext);
+                return;
+            }
         }
     }
 
@@ -411,19 +425,37 @@ BOOLEAN UpdaterShowAvailableToast(
     versionEsc = PhEscapeStringForXml(PhGetStringOrEmpty(Context->Version));
     sizeEsc = PhEscapeStringForXml(PhGetStringOrEmpty(Context->SetupFileLength));
 
-    xml = PhFormatString(
-        L"<toast launch=\"\" duration=\"long\">"
-        L"<visual><binding template=\"ToastGeneric\">"
-        L"<text>System Informer - Update Available</text>"
-        L"<text>Version %s (download %s)</text>"
-        L"</binding></visual>"
-        L"<actions>"
-        L"<action content=\"Download\" arguments=\"" UPDATER_TOAST_ACTION_DOWNLOAD L"\" activationType=\"foreground\"/>"
-        L"</actions>"
-        L"</toast>",
-        PhGetStringOrEmpty(versionEsc),
-        PhGetStringOrEmpty(sizeEsc)
-        );
+    if (Context->PortableMode)
+    {
+        xml = PhFormatString(
+            L"<toast launch=\"\" duration=\"long\">"
+            L"<visual><binding template=\"ToastGeneric\">"
+            L"<text>System Informer - Update Available</text>"
+            L"<text>Version %s (portable ZIP)</text>"
+            L"</binding></visual>"
+            L"<actions>"
+            L"<action content=\"Open releases\" arguments=\"" UPDATER_TOAST_ACTION_DOWNLOAD L"\" activationType=\"foreground\"/>"
+            L"</actions>"
+            L"</toast>",
+            PhGetStringOrEmpty(versionEsc)
+            );
+    }
+    else
+    {
+        xml = PhFormatString(
+            L"<toast launch=\"\" duration=\"long\">"
+            L"<visual><binding template=\"ToastGeneric\">"
+            L"<text>System Informer - Update Available</text>"
+            L"<text>Version %s (download %s)</text>"
+            L"</binding></visual>"
+            L"<actions>"
+            L"<action content=\"Download\" arguments=\"" UPDATER_TOAST_ACTION_DOWNLOAD L"\" activationType=\"foreground\"/>"
+            L"</actions>"
+            L"</toast>",
+            PhGetStringOrEmpty(versionEsc),
+            PhGetStringOrEmpty(sizeEsc)
+            );
+    }
 
     if (!xml)
     {

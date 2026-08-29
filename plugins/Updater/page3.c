@@ -11,9 +11,14 @@
 
 #include "updater.h"
 
-static TASKDIALOG_BUTTON TaskDialogButtonArray[] =
+static TASKDIALOG_BUTTON DownloadButtonArray[] =
 {
     { IDOK, L"Download" }
+};
+
+static TASKDIALOG_BUTTON PortableButtonArray[] =
+{
+    { IDOK, L"Open releases" }
 };
 
 /**
@@ -44,6 +49,12 @@ HRESULT CALLBACK ShowAvailableCallbackProc(
         {
             if ((INT)wParam == IDOK)
             {
+                if (context->PortableMode)
+                {
+                    PhShellExecute(WindowHandle, UPDATE_RELEASES_URL, NULL);
+                    return S_OK;
+                }
+
                 ShowProgressDialog(context);
                 return S_FALSE;
             }
@@ -76,8 +87,16 @@ VOID ShowAvailableDialog(
     config.dwCommonButtons = TDCBF_CANCEL_BUTTON;
     config.hMainIcon = PhGetApplicationIcon(FALSE, Context->WindowDpi);
     config.cxWidth = 200;
-    config.pButtons = TaskDialogButtonArray;
-    config.cButtons = RTL_NUMBER_OF(TaskDialogButtonArray);
+    if (Context->PortableMode)
+    {
+        config.pButtons = PortableButtonArray;
+        config.cButtons = RTL_NUMBER_OF(PortableButtonArray);
+    }
+    else
+    {
+        config.pButtons = DownloadButtonArray;
+        config.cButtons = RTL_NUMBER_OF(DownloadButtonArray);
+    }
     config.lpCallbackData = (LONG_PTR)Context;
     config.pfCallback = ShowAvailableCallbackProc;
 
@@ -108,11 +127,21 @@ VOID ShowAvailableDialog(
         config.pszMainInstruction = L"A newer build of System Informer is available.";
     }
 
-    config.pszContent = PhaFormatString(
-        L"Version: %s\r\nDownload size: %s\r\n\r\n<A HREF=\"changelog.txt\">View the changelog</A>",
-        PhGetStringOrEmpty(Context->Version),
-        PhGetStringOrEmpty(Context->SetupFileLength)
-        )->Buffer;
+    if (Context->PortableMode)
+    {
+        config.pszContent = PhaFormatString(
+            L"Version: %s\r\n\r\nPortable builds are updated manually. Open the release page to download the latest ZIP.\r\n\r\n<A HREF=\"changelog.txt\">View the changelog</A>",
+            PhGetStringOrEmpty(Context->Version)
+            )->Buffer;
+    }
+    else
+    {
+        config.pszContent = PhaFormatString(
+            L"Version: %s\r\nDownload size: %s\r\n\r\n<A HREF=\"changelog.txt\">View the changelog</A>",
+            PhGetStringOrEmpty(Context->Version),
+            PhGetStringOrEmpty(Context->SetupFileLength)
+            )->Buffer;
+    }
 
     PhTaskDialogNavigatePage(Context->DialogHandle, &config);
 }

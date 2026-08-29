@@ -1,7 +1,7 @@
 System Informer 简体中文便携版
 ================================
 
-这是由 Gaq152/systeminformer 的 zh-CN 分支自动编译的非官方汉化版本。
+这是由 AnLifeX/systeminformer 的 zh-CN 分支自动编译的非官方汉化版本。
 程序核心代码、驱动和插件来自 System Informer 官方仓库；此构建没有官方数字签名，
 Windows SmartScreen 可能提示未知发布者。
 
@@ -53,7 +53,7 @@ OnlineChecks 插件可能在首次启动时询问是否启用 Hybrid-Analysis。
 --------
 
 汉化分支：
-https://github.com/Gaq152/systeminformer/tree/zh-CN
+https://github.com/AnLifeX/systeminformer/tree/zh-CN
 
 官方项目：
 https://github.com/winsiderss/systeminformer

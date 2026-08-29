@@ -15,7 +15,7 @@ jobs:
       github.ref_type == 'tag' ||
       contains(github.event.head_commit.message, '[build]')
     permissions:
-      contents: read
+      contents: write
     runs-on: windows-2025-vs2026
 
     steps:
@@ -80,15 +80,118 @@ jobs:
       working-directory: ${{ github.workspace }}
       run: build\build_init.cmd
 
-    - name: Build localized release
+    - name: Build portable package
+      if: github.ref_type != 'tag'
+      shell: pwsh
+      working-directory: ${{ github.workspace }}
+      run: |
+        $buildTool = Join-Path $env:GITHUB_WORKSPACE "tools/CustomBuildTool/bin/Release/$env:PROCESSOR_ARCHITECTURE/CustomBuildTool.exe"
+        & $buildTool -bin
+        if ($LASTEXITCODE -ne 0) {
+          throw "Portable build failed with exit code $LASTEXITCODE."
+        }
+
+    - name: Build tagged release
+      if: github.ref_type == 'tag'
       shell: cmd
       working-directory: ${{ github.workspace }}
       run: build\build_release.cmd
 
-    - name: Upload localized x64 build
+    - name: Upload portable test package
+      if: github.ref_type != 'tag'
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # 7.0.1
       with:
-        name: systeminformer-zh-CN-x64-${{ github.sha }}
-        path: bin/Release64/**
+        name: systeminformer-zh-CN-portable-${{ github.sha }}
+        path: build/output/systeminformer-build-bin.zip
         if-no-files-found: error
         retention-days: 1
+
+    - name: Prepare tagged release
+      if: github.ref_type == 'tag'
+      id: release
+      shell: pwsh
+      run: |
+        $setupPath = Join-Path $env:GITHUB_WORKSPACE 'build/output/systeminformer-build-release-setup.exe'
+        $fileVersion = (Get-Item -LiteralPath $setupPath).VersionInfo.FileVersion
+        $versionMatch = [regex]::Match($fileVersion, '\d+\.\d+\.\d+\.\d+')
+        if (-not $versionMatch.Success) {
+          throw "Unable to determine the four-part version from '$fileVersion'."
+        }
+
+        "version=$($versionMatch.Value)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+    - name: Authenticode-sign installer when a certificate is configured
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      env:
+        WINDOWS_CODESIGN_CERTIFICATE_B64: ${{ secrets.WINDOWS_CODESIGN_CERTIFICATE_B64 }}
+        WINDOWS_CODESIGN_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CODESIGN_CERTIFICATE_PASSWORD }}
+      run: |
+        if ([string]::IsNullOrWhiteSpace($env:WINDOWS_CODESIGN_CERTIFICATE_B64)) {
+          Write-Warning 'No code-signing certificate is configured; the installer will be published unsigned.'
+          return
+        }
+
+        $certificatePath = Join-Path $env:RUNNER_TEMP 'systeminformer-codesign.pfx'
+        try {
+          [IO.File]::WriteAllBytes(
+            $certificatePath,
+            [Convert]::FromBase64String($env:WINDOWS_CODESIGN_CERTIFICATE_B64)
+          )
+          signtool sign /fd SHA256 /td SHA256 /tr https://timestamp.digicert.com /f $certificatePath /p $env:WINDOWS_CODESIGN_CERTIFICATE_PASSWORD build/output/systeminformer-build-release-setup.exe
+          if ($LASTEXITCODE -ne 0) {
+            throw "signtool failed with exit code $LASTEXITCODE."
+          }
+        }
+        finally {
+          Remove-Item -LiteralPath $certificatePath -Force -ErrorAction SilentlyContinue
+        }
+
+    - name: Create package checksums
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      run: |
+        $files = @(
+          'build/output/systeminformer-build-release-setup.exe'
+          'build/output/systeminformer-build-bin.zip'
+        )
+        $lines = foreach ($file in $files) {
+          $hash = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash
+          "$hash  $([IO.Path]::GetFileName($file))"
+        }
+        $lines | Out-File -FilePath 'build/output/systeminformer-zh-CN-SHA256SUMS.txt' -Encoding ascii
+
+    - name: Create signed updater metadata
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      env:
+        UPDATE_SIGNING_PRIVATE_KEY_B64: ${{ secrets.UPDATE_SIGNING_PRIVATE_KEY_B64 }}
+      run: |
+        if ([string]::IsNullOrWhiteSpace($env:UPDATE_SIGNING_PRIVATE_KEY_B64)) {
+          throw 'The UPDATE_SIGNING_PRIVATE_KEY_B64 repository secret is required for tagged releases.'
+        }
+
+        $escapedTag = [Uri]::EscapeDataString('${{ github.ref_name }}')
+        $metadataArgs = @{
+          SetupPath = 'build/output/systeminformer-build-release-setup.exe'
+          OutputPath = 'build/output/systeminformer-update.json'
+          Version = '${{ steps.release.outputs.version }}'
+          Commit = '${{ github.sha }}'
+          SetupUrl = "https://github.com/AnLifeX/systeminformer/releases/download/$escapedTag/systeminformer-build-release-setup.exe"
+          PrivateKeyBase64 = $env:UPDATE_SIGNING_PRIVATE_KEY_B64
+        }
+        ./tools/localization/New-UpdateMetadata.ps1 @metadataArgs
+
+    - name: Publish GitHub release
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        $assets = @(
+          'build/output/systeminformer-build-release-setup.exe'
+          'build/output/systeminformer-build-bin.zip'
+          'build/output/systeminformer-zh-CN-SHA256SUMS.txt'
+          'build/output/systeminformer-update.json'
+        )
+        gh release create '${{ github.ref_name }}' --repo '${{ github.repository }}' --verify-tag --title "System Informer ${{ steps.release.outputs.version }} 简体中文版" --generate-notes @assets

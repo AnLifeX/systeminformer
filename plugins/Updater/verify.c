@@ -18,14 +18,14 @@
 static CONST UCHAR UpdaterTrustedPublicKeyRelease[] =
 {
     0x45, 0x43, 0x53, 0x31, 0x20, 0x00, 0x00, 0x00,
-    0x07, 0xA4, 0x51, 0xD8, 0xD2, 0xA6, 0xC8, 0x29,
-    0x25, 0x66, 0x83, 0x33, 0x6D, 0x66, 0x12, 0xDF,
-    0x01, 0xDA, 0x06, 0x5A, 0x2D, 0xFA, 0x7C, 0x9B,
-    0x16, 0xFC, 0xA0, 0xA2, 0xB5, 0x2D, 0xAD, 0x2E,
-    0xD7, 0x17, 0xD2, 0x1B, 0x44, 0x1A, 0x32, 0x20,
-    0x1B, 0x21, 0xDF, 0x4F, 0x0C, 0x28, 0xA9, 0x80,
-    0x2E, 0x4B, 0x0B, 0xED, 0xCA, 0xBE, 0x61, 0xB6,
-    0x37, 0x62, 0xAB, 0xA5, 0x7E, 0xB5, 0xA4, 0x3D,
+    0x9C, 0xF8, 0x3B, 0x97, 0xB0, 0xD3, 0x8C, 0x48,
+    0x79, 0x2D, 0x91, 0xFF, 0xC9, 0x0B, 0xAA, 0xD5,
+    0x79, 0x28, 0x88, 0x6D, 0x79, 0x03, 0x4B, 0xE9,
+    0xB8, 0x7A, 0x75, 0x38, 0xF1, 0x8E, 0x60, 0xBB,
+    0xDB, 0x00, 0x2F, 0xB1, 0xC6, 0x0B, 0x37, 0x22,
+    0xF8, 0xE0, 0x04, 0x44, 0x3E, 0x7B, 0x50, 0x4E,
+    0xE0, 0x76, 0xA4, 0xC9, 0x42, 0x16, 0xEE, 0x9F,
+    0xDA, 0xD8, 0xDF, 0x94, 0xFD, 0xA9, 0x30, 0x96,
 };
 
 //
@@ -450,36 +450,17 @@ NTSTATUS UpdaterInitializeSigningSymCrypt(
 NTSTATUS UpdaterGetPublicKeysForChannel(
     _In_ PH_RELEASE_CHANNEL Channel,
     _Out_ CONST UCHAR** PublicKey,
-    _Out_ ULONG* PublicKeySize,
-    _Out_ CONST UCHAR** PublicKeyNext,
-    _Out_ ULONG* PublicKeySizeNext
+    _Out_ ULONG* PublicKeySize
     )
 {
     switch (Channel)
     {
     case PhReleaseChannel:
+    case PhPreviewChannel:
+    case PhCanaryChannel:
+    case PhDeveloperChannel:
         *PublicKey = UpdaterTrustedPublicKeyRelease;
         *PublicKeySize = ARRAYSIZE(UpdaterTrustedPublicKeyRelease);
-        *PublicKeyNext = UpdaterTrustedPublicKeyReleaseNext;
-        *PublicKeySizeNext = ARRAYSIZE(UpdaterTrustedPublicKeyReleaseNext);
-        return STATUS_SUCCESS;
-    case PhPreviewChannel:
-        *PublicKey = UpdaterTrustedPublicKeyPreview;
-        *PublicKeySize = ARRAYSIZE(UpdaterTrustedPublicKeyPreview);
-        *PublicKeyNext = UpdaterTrustedPublicKeyPreviewNext;
-        *PublicKeySizeNext = ARRAYSIZE(UpdaterTrustedPublicKeyPreviewNext);
-        return STATUS_SUCCESS;
-    case PhCanaryChannel:
-        *PublicKey = UpdaterTrustedPublicKeyCanary;
-        *PublicKeySize = ARRAYSIZE(UpdaterTrustedPublicKeyCanary);
-        *PublicKeyNext = UpdaterTrustedPublicKeyCanaryNext;
-        *PublicKeySizeNext = ARRAYSIZE(UpdaterTrustedPublicKeyCanaryNext);
-        return STATUS_SUCCESS;
-    case PhDeveloperChannel:
-        *PublicKey = UpdaterTrustedPublicKeyDeveloper;
-        *PublicKeySize = ARRAYSIZE(UpdaterTrustedPublicKeyDeveloper);
-        *PublicKeyNext = UpdaterTrustedPublicKeyDeveloperNext;
-        *PublicKeySizeNext = ARRAYSIZE(UpdaterTrustedPublicKeyDeveloperNext);
         return STATUS_SUCCESS;
     }
 
@@ -502,16 +483,12 @@ NTSTATUS UpdaterInitializeHash(
     PUPDATER_HASH_CONTEXT hashContext;
     const UCHAR* publicKey;
     ULONG publicKeySize;
-    const UCHAR* publicKeyNext;
-    ULONG publicKeySizeNext;
     ULONG querySize;
 
     status = UpdaterGetPublicKeysForChannel(
         Channel,
         &publicKey,
-        &publicKeySize,
-        &publicKeyNext,
-        &publicKeySizeNext
+        &publicKeySize
         );
 
     if (!NT_SUCCESS(status))
@@ -579,20 +556,6 @@ NTSTATUS UpdaterInitializeHash(
         goto CleanupExit;
     }
 
-    if (!NT_SUCCESS(status = UpdaterInitializeSigning(
-        &hashContext->Sign[UpdaterSigningGenerationNext],
-        (PUCHAR)publicKeyNext,
-        publicKeySizeNext,
-        BCRYPT_RSA_ALGORITHM,
-        BCRYPT_RSAPUBLIC_BLOB,
-        BCRYPT_SHA512_ALGORITHM,
-        &UpdaterPaddingInfo,
-        BCRYPT_PAD_PSS
-        )))
-    {
-        goto CleanupExit;
-    }
-
 CleanupExit:
     if (NT_SUCCESS(status))
     {
@@ -623,15 +586,11 @@ NTSTATUS UpdaterInitializeHashSymCrypt(
     PUPDATER_HASH_CONTEXT hashContext;
     const UCHAR* publicKey;
     ULONG publicKeySize;
-    const UCHAR* publicKeyNext;
-    ULONG publicKeySizeNext;
 
     status = UpdaterGetPublicKeysForChannel(
         Channel,
         &publicKey,
-        &publicKeySize,
-        &publicKeyNext,
-        &publicKeySizeNext
+        &publicKeySize
         );
 
     if (!NT_SUCCESS(status))
@@ -677,20 +636,6 @@ NTSTATUS UpdaterInitializeHashSymCrypt(
         PH_SYMCRYPT_SHA256_ALGORITHM_NAME,
         NULL,
         0
-        )))
-    {
-        goto CleanupExit;
-    }
-
-    if (!NT_SUCCESS(status = UpdaterInitializeSigningSymCrypt(
-        &hashContext->Sign[UpdaterSigningGenerationNext],
-        publicKeyNext,
-        publicKeySizeNext,
-        PH_SYMCRYPT_RSA_ALGORITHM_NAME,
-        PH_SYMCRYPT_RSAPUBLIC_BLOB_NAME,
-        PH_SYMCRYPT_SHA512_ALGORITHM_NAME,
-        &UpdaterPaddingInfoSymCrypt,
-        PH_SYMCRYPT_PAD_PSS
         )))
     {
         goto CleanupExit;

@@ -2173,12 +2173,14 @@
       "context": "L\"{text}\"",
       "items": [
         { "id": "download", "source": "Download", "translation": "下载" },
+        { "id": "open-releases", "source": "Open releases", "translation": "打开发布页" },
         { "id": "title", "source": "System Informer - Updater", "translation": "System Informer - 更新器" },
         { "id": "release", "source": "Would you like to download the Release build?", "translation": "是否要下载稳定版？" },
         { "id": "canary", "source": "Would you like to download the Canary build?", "translation": "是否要下载 Canary 版？" },
         { "id": "update", "source": "Would you like to download the update?", "translation": "是否要下载此更新？" },
         { "id": "newer", "source": "A newer build of System Informer is available.", "translation": "有较新的 System Informer 版本可用。" },
-        { "id": "details", "source": "Version: %s\\r\\nDownload size: %s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">View the changelog</A>", "translation": "版本：%s\\r\\n下载大小：%s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">查看更新日志</A>" }
+        { "id": "details", "source": "Version: %s\\r\\nDownload size: %s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">View the changelog</A>", "translation": "版本：%s\\r\\n下载大小：%s\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">查看更新日志</A>" },
+        { "id": "portable-details", "source": "Version: %s\\r\\n\\r\\nPortable builds are updated manually. Open the release page to download the latest ZIP.\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">View the changelog</A>", "translation": "版本：%s\\r\\n\\r\\n便携版需要手动更新。请打开发布页下载最新 ZIP。\\r\\n\\r\\n<A HREF=\\\"changelog.txt\\\">查看更新日志</A>" }
       ]
     },
     {
@@ -2223,12 +2225,35 @@
       ]
     },
     {
+      "id": "updater-toast-runtime",
+      "path": "plugins/Updater/toastmain.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "available-title", "source": "<text>System Informer - Update Available</text>", "translation": "<text>System Informer - 有可用更新</text>", "expected": 2 },
+        { "id": "portable-version", "source": "<text>Version %s (portable ZIP)</text>", "translation": "<text>版本 %s（便携 ZIP）</text>" },
+        { "id": "open-releases", "source": "<action content=\\\"Open releases\\\" arguments=\\\"", "translation": "<action content=\\\"打开发布页\\\" arguments=\\\"" },
+        { "id": "download-version", "source": "<text>Version %s (download %s)</text>", "translation": "<text>版本 %s（下载大小 %s）</text>" },
+        { "id": "download-action", "source": "<action content=\\\"Download\\\" arguments=\\\"", "translation": "<action content=\\\"下载\\\" arguments=\\\"" },
+        { "id": "downloading", "source": "<text>Downloading System Informer %s</text>", "translation": "<text>正在下载 System Informer %s</text>" },
+        { "id": "close", "source": "<action content=\\\"Close\\\" arguments=\\\"dismiss\\\" activationType=\\\"system\\\"/>", "translation": "<action content=\\\"关闭\\\" arguments=\\\"dismiss\\\" activationType=\\\"system\\\"/>" },
+        { "id": "starting", "source": "Starting download...", "translation": "正在开始下载..." },
+        { "id": "verified", "source": "<text>Update successfully downloaded and verified.</text>", "translation": "<text>更新已成功下载并通过验证。</text>" },
+        { "id": "install", "source": "<action content=\\\"Install\\\" arguments=\\\"", "translation": "<action content=\\\"安装\\\" arguments=\\\"" },
+        { "id": "cancel", "source": "<action content=\\\"Cancel\\\" arguments=\\\"dismiss\\\" activationType=\\\"system\\\"/>", "translation": "<action content=\\\"取消\\\" arguments=\\\"dismiss\\\" activationType=\\\"system\\\"/>" },
+        { "id": "signature-failed", "source": "Signature check failed.", "translation": "签名检查失败。" },
+        { "id": "hash-failed", "source": "Hash check failed.", "translation": "哈希检查失败。" },
+        { "id": "try-again", "source": "Click Check for updates to try again.", "translation": "请单击“检查更新”重试。", "expected": 2 },
+        { "id": "failed-title", "source": "<text>System Informer update failed</text>", "translation": "<text>System Informer 更新失败</text>" }
+      ]
+    },
+    {
       "id": "about-runtime",
       "path": "SystemInformer/about.c",
       "context": "L\"{text}\"",
       "items": [
         { "id": "thanks", "source": "Thanks to:\\n", "translation": "致谢：\\n" },
         { "id": "contributors", "source": "    <a href=\\\"https://github.com/winsiderss/systeminformer/graphs/contributors\\\">Contributors</a> - thank you for your additions!\\n", "translation": "    <a href=\\\"https://github.com/winsiderss/systeminformer/graphs/contributors\\\">贡献者</a> - 感谢你们的贡献！\\n" },
+        { "id": "zh-cn-contribution", "source": "    <a href=\\\"https://github.com/AnLifeX/systeminformer\\\">Simplified Chinese localization</a> - AnLifeX; based in part on <a href=\\\"https://github.com/Amarillys/systeminformer-cn\\\">systeminformer-cn</a>\\n", "translation": "    <a href=\\\"https://github.com/AnLifeX/systeminformer\\\">简体中文本地化</a> - AnLifeX；部分翻译参考 <a href=\\\"https://github.com/Amarillys/systeminformer-cn\\\">systeminformer-cn</a>\\n" },
         { "id": "donors", "source": "    Donors - thank you for your support!\\n\\n", "translation": "    捐赠者 - 感谢你们的支持！\\n\\n" },
         { "id": "components", "source": "System Informer uses the following components:\\n", "translation": "System Informer 使用以下组件：\\n" },
         { "id": "presentmon", "source": "    <a href=\\\"https://github.com/GameTechDev/PresentMon\\\">PresentMon</a> by Intel Corporation\\n", "translation": "    <a href=\\\"https://github.com/GameTechDev/PresentMon\\\">PresentMon</a>，由 Intel Corporation 开发\\n" },

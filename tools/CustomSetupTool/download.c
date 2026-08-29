@@ -6,7 +6,7 @@
 #include "..\thirdparty\miniz\miniz.h"
 
 #define SETUP_RELEASE_HOST L"github.com"
-#define SETUP_RELEASE_PATH L"/winsiderss/systeminformer/releases/latest/download/systeminformer-build-bin.zip"
+#define SETUP_RELEASE_PATH L"/AnLifeX/systeminformer/releases/latest/download/systeminformer-build-bin.zip"
 
 ULONG64 ParseVersionString(
     _In_ PPH_STRING VersionString

@@ -279,7 +279,7 @@ PPH_LIST PhpUpdaterQueryCommitHistory(
         goto CleanupExit;
     if (!NT_SUCCESS(status = PhHttpConnect(httpContext, L"api.github.com", PH_HTTP_DEFAULT_HTTPS_PORT)))
         goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpBeginRequest(httpContext, NULL, L"/repos/winsiderss/systeminformer/commits", PH_HTTP_FLAG_SECURE)))
+    if (!NT_SUCCESS(status = PhHttpBeginRequest(httpContext, NULL, L"/repos/AnLifeX/systeminformer/commits", PH_HTTP_FLAG_SECURE)))
         goto CleanupExit;
     if (!NT_SUCCESS(status = PhHttpSendRequest(httpContext, PH_HTTP_NO_ADDITIONAL_HEADERS, 0, PH_HTTP_NO_REQUEST_DATA, 0, 0)))
         goto CleanupExit;
@@ -723,7 +723,7 @@ INT_PTR CALLBACK TextDlgProc(
                         if (entry = PhGetSelectedListViewItemParam(context->ListViewHandle))
                         {
                             if (commitHashUrl = PhConcatStrings2(
-                                L"https://github.com/winsiderss/systeminformer/commit/",
+                                L"https://github.com/AnLifeX/systeminformer/commit/",
                                 PhGetString(entry->CommitHashString)
                                 ))
                             {
@@ -897,7 +897,7 @@ INT_PTR CALLBACK TextDlgProc(
                                         if (PhGetListViewItemParam(context->ListViewHandle, lvItemIndex, &entry))
                                         {
                                             if (commitHashUrl = PhConcatStrings2(
-                                                L"https://github.com/winsiderss/systeminformer/commit/",
+                                                L"https://github.com/AnLifeX/systeminformer/commit/",
                                                 PhGetString(entry->CommitHashString)
                                                 ))
                                             {

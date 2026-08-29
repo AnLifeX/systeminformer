@@ -32,6 +32,7 @@ EXTERN_C_START
 #define UPDATE_SWITCH_PREVIEW   1004
 #define UPDATE_SWITCH_CANARY    1005
 #define UPDATE_SWITCH_DEVELOPER 1006
+#define UPDATE_RELEASES_URL L"https://github.com/AnLifeX/systeminformer/releases/latest"
 
 #define PH_SHOWDIALOG  (WM_APP + 501)
 #define PH_SHOWLATEST  (WM_APP + 502)
@@ -391,7 +392,6 @@ typedef struct _PH_SYMCRYPT_PSS_PADDING_INFO
 typedef enum _UPDATER_SIGNING_GENERATION
 {
     UpdaterSigningGenerationCurrent,
-    UpdaterSigningGenerationNext,
     MaxUpdaterSigningGeneration,
 } UPDATER_SIGNING_GENERATION, *PUPDATER_SIGNING_GENERATION;
 

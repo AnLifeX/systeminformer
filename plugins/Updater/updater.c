@@ -574,24 +574,7 @@ BOOLEAN QueryUpdateData(
             Context->Channel = PhGetBuildReleaseChannel();
         }
 
-        switch (Context->Channel)
-        {
-        case PhReleaseChannel:
-            urlPath = L"/update.php?channel=release";
-            break;
-       //case PhPreviewChannel:
-       //    urlPath = L"/update.php?channel=preview";
-       //    break;
-        case PhCanaryChannel:
-            urlPath = L"/update.php?channel=canary";
-            break;
-       //case PhDeveloperChannel:
-       //    urlPath = L"/update.php?channel=developer";
-       //    break;
-        default:
-            status = STATUS_PATCH_CONFLICT;
-            goto CleanupExit;
-        }
+        urlPath = L"/AnLifeX/systeminformer/releases/latest/download/systeminformer-update.json";
 
         if (!NT_SUCCESS(status = PhHttpBeginRequest(httpContext, NULL, urlPath, PH_HTTP_FLAG_SECURE)))
         {
@@ -713,14 +696,11 @@ BOOLEAN QueryUpdateDataWithFailover(
 {
     static CONST PCWSTR Servers[] =
     {
-        L"system-informer.com",
-        L"systeminformer.com",
-        L"systeminformer.io",
-        L"systeminformer.sourceforge.io",
+        L"github.com",
     };
     static CONST USHORT Ports[] =
     {
-        443, 8443
+        443
     };
 
     for (ULONG i = 0; i < ARRAYSIZE(Servers); i++)
@@ -1568,6 +1548,16 @@ VOID ShowStartupUpdateDialog(
         PhIsNullOrEmptyString(context->SetupFileHash) ||
         PhIsNullOrEmptyString(context->SetupFileSignature) ||
         PhIsNullOrEmptyString(context->CommitHash))
+    {
+        goto CleanupExit;
+    }
+
+    // Ignore cached metadata left by the upstream updater.
+    if (!PhStartsWithString2(
+        context->SetupFileDownloadUrl,
+        L"https://github.com/AnLifeX/systeminformer/",
+        TRUE
+        ))
     {
         goto CleanupExit;
     }

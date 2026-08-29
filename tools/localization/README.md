@@ -11,6 +11,8 @@ CI 会在编译前应用汉化目录，编译结束后 runner 随即销毁。
 - `zh-CN.json`：汉化规则目录；
 - `localize.py`：检查、注入和还原工具；
 - `tests/`：脚本单元测试；
+- `New-UpdateMetadata.ps1`：生成并签署内置更新器元数据；
+- `RELEASE.md`：安装包、GitHub Release 与签名配置说明；
 - `.gitignore`：忽略本地 Python 缓存等生成内容。
 
 ## 常用命令

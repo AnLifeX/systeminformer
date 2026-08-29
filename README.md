@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/Gaq152/systeminformer/actions/workflows/localization-zh-cn.yml"><img src="https://img.shields.io/github/actions/workflow/status/Gaq152/systeminformer/localization-zh-cn.yml?branch=zh-CN&style=for-the-badge&label=zh-CN%20build" alt="zh-CN build"></a>
+    <a href="https://github.com/AnLifeX/systeminformer/actions/workflows/localization-zh-cn.yml"><img src="https://img.shields.io/github/actions/workflow/status/AnLifeX/systeminformer/localization-zh-cn.yml?branch=zh-CN&style=for-the-badge&label=zh-CN%20build" alt="zh-CN build"></a>
     <a href="LICENSE.txt"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
 </p>
 
@@ -22,13 +22,14 @@
 - 维护分支：`zh-CN`；`master` 用于跟随官方上游。
 - 当前已覆盖主窗口、常用菜单和对话框、进程/服务/网络列，以及部分内置插件。
 - 汉化仍未覆盖全部深层页面，后续会根据实测逐步补充。
-- CI 产物是未签名的 x64 便携版，不是安装程序；Windows SmartScreen 可能提示未知发布者。
+- `[build]` 测试构建只提供便携 ZIP；Tag 发布同时提供便携包和安装程序。未配置代码签名证书时，Windows SmartScreen 可能提示未知发布者。
 - GitHub Actions Artifact 只保留 1 天，避免占用免费账户存储空间。
 
 ## 下载和安全测试
 
-在仓库的 [Actions 页面](https://github.com/Gaq152/systeminformer/actions/workflows/localization-zh-cn.yml)
-打开最近一次成功的 `zh-CN build`，下载页面底部的 x64 Artifact 并完整解压。
+在仓库的 [Actions 页面](https://github.com/AnLifeX/systeminformer/actions/workflows/localization-zh-cn.yml)
+打开最近一次成功的 `zh-CN build`，下载页面底部的 portable Artifact。它只包含便携 ZIP，
+用于安装前隔离测试；正式安装程序只在 Tag 对应的 GitHub Release 中发布。
 
 首次仅检查界面时，建议先退出其他 System Informer 实例，然后在解压目录运行：
 
@@ -42,13 +43,14 @@
 - `-noplugins`：不加载插件，避免首次弹出在线文件信誉分析提示。
 
 确认基本界面正常后，可以按需去掉 `-noplugins` 测试插件。不要直接用 CI 便携版覆盖正式安装目录。
+便携版检测到新版本时只会打开本仓库的 Release 页面，需要手动下载并覆盖 ZIP；安装版才会下载、验证并启动更新安装程序。
 
 ## 构建触发规则
 
 普通提交到 `zh-CN` 不再执行完整编译。只有以下情况会构建并上传 Artifact：
 
-1. 提交信息包含区分大小写的 `[build]`；
-2. 向 GitHub 推送一个指向 `zh-CN` 提交的 Tag。
+1. 提交信息包含区分大小写的 `[build]`：只构建便携 ZIP，并上传保留 1 天的 Artifact；
+2. 向 GitHub 推送一个指向 `zh-CN` 提交的 Tag：构建便携包、安装程序、校验和与更新元数据，直接创建 GitHub Release，不上传 Artifact。
 
 示例：
 
@@ -68,6 +70,8 @@ git push origin zh-cn-v0.1.0
 `skipped` 工作流记录，但不会分配 Windows runner、不会编译，也不会上传 Artifact。
 
 目前尚未启用自动同步上游、自动检查上游、自动创建 Tag 或自动适配汉化规则；待汉化目录稳定后再增加。
+安装包发布、自有更新源和签名密钥的配置见
+`[tools/localization/RELEASE.md](tools/localization/RELEASE.md)`。
 
 ## 汉化实现
 

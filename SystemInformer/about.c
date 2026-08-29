@@ -58,6 +58,7 @@ static INT_PTR CALLBACK PhpAboutDlgProc(
                 L"    <a href=\"https://github.com/ionescu007\">ionescu007</a> - Alex Ionescu\n"
                 L"    <a href=\"https://github.com/yardenshafir\">yardenshafir</a> - Yarden Shafir\n"
                 L"    <a href=\"https://github.com/winsiderss/systeminformer/graphs/contributors\">Contributors</a> - thank you for your additions!\n"
+                L"    <a href=\"https://github.com/AnLifeX/systeminformer\">Simplified Chinese localization</a> - AnLifeX; based in part on <a href=\"https://github.com/Amarillys/systeminformer-cn\">systeminformer-cn</a>\n"
                 L"    Donors - thank you for your support!\n\n"
                 L"System Informer uses the following components:\n"
                 L"    <a href=\"https://github.com/GameTechDev/PresentMon\">PresentMon</a> by Intel Corporation\n"
@@ -261,7 +262,7 @@ PPH_STRING PhGetApplicationVersionString(
         // "System Informer %lu.%lu.%lu (<a href=\"https://github.com/winsiderss/systeminformer/commit/%hs\">%hs</a>) %ls"
         PhInitFormatS(&format[0], L"System Informer ");
         PhInitFormatSR(&format[1], commitVersionString->sr);
-        PhInitFormatS(&format[2], L" (<a href=\"https://github.com/winsiderss/systeminformer/commit/");
+        PhInitFormatS(&format[2], L" (<a href=\"https://github.com/AnLifeX/systeminformer/commit/");
         PhInitFormatSR(&format[3], commitHashString->sr);
         PhInitFormatS(&format[4], L"\">");
         PhInitFormatSR(&format[5], commitHashString->sr);
