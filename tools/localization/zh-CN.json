@@ -362,6 +362,7 @@
         { "id": "freeze", "source": "Freeze", "translation": "冻结" },
         { "id": "thaw", "source": "Thaw", "translation": "解冻" },
         { "id": "restart", "source": "Res&tart", "translation": "重新启动(&T)" },
+        { "id": "create-live-kernel-dump", "source": "Create live kernel dump fi&le", "translation": "创建实时内核转储文件(&L)" },
         { "id": "create-dump", "source": "Create dump fi&le", "translation": "创建转储文件(&L)" },
         { "id": "minimal", "source": "&Minimal...", "translation": "最小(&M)...", "expected": 2 },
         { "id": "limited", "source": "&Limited...", "translation": "受限(&L)..." },
@@ -383,6 +384,7 @@
         { "id": "page-priority", "source": "Pa&ge priority", "translation": "页面优先级(&G)" },
         { "id": "medium", "source": "&Medium", "translation": "中等(&M)" },
         { "id": "miscellaneous", "source": "&Miscellaneous", "translation": "其他(&M)" },
+        { "id": "activity", "source": "Activity moderation", "translation": "活动调节" },
         { "id": "critical", "source": "&Critical", "translation": "关键进程(&C)" },
         { "id": "detach-debugger", "source": "&Detach from debugger", "translation": "与调试器分离(&D)" },
         { "id": "efficiency", "source": "Efficiency mode", "translation": "效率模式" },
@@ -527,6 +529,8 @@
         { "id": "thread-stacks", "source": "Thread Stacks", "translation": "线程堆栈列表" },
         { "id": "users-list", "source": "Users List", "translation": "用户列表" },
         { "id": "token", "source": "Token", "translation": "令牌", "expected": 2 },
+        { "id": "default-token", "source": "Default token", "translation": "默认令牌" },
+        { "id": "integrity", "source": "Integrity", "translation": "完整性级别" },
         { "id": "user", "source": "User:", "translation": "用户：", "expected": 2 },
         { "id": "session", "source": "Session:", "translation": "会话：" },
         { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 11 },
@@ -962,6 +966,9 @@
         { "id": "write-bytes-label", "source": "Write bytes:", "translation": "写入字节数：" },
         { "id": "receives-delta", "source": "Receives delta", "translation": "接收次数增量" },
         { "id": "sends-delta", "source": "Sends delta", "translation": "发送次数增量" },
+        { "id": "network-io", "source": "Network I/O", "translation": "网络 I/O", "expected": 2 },
+        { "id": "receive-bytes-delta", "source": "Receive bytes delta", "translation": "接收字节增量", "expected": 2 },
+        { "id": "send-bytes-delta", "source": "Send bytes delta", "translation": "发送字节增量", "expected": 2 },
         { "id": "receive-bytes-label", "source": "Receive bytes:", "translation": "接收字节数：" },
         { "id": "send-bytes-label", "source": "Send bytes:", "translation": "发送字节数：" },
         { "id": "gpu-nodes", "source": "GPU Nodes", "translation": "GPU 节点" },
@@ -1624,60 +1631,12 @@
       ]
     },
     {
-      "id": "toolstatus-options-section",
-      "path": "plugins/ToolStatus/main.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "name", "source": "ToolStatus", "translation": "工具栏与状态栏" }
-      ]
-    },
-    {
-      "id": "extendedtools-options-section",
-      "path": "plugins/ExtendedTools/main.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "name", "source": "ExtendedTools", "translation": "扩展工具" }
-      ]
-    },
-    {
-      "id": "networktools-options-section",
-      "path": "plugins/NetworkTools/main.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "name", "source": "NetworkTools", "translation": "网络工具" }
-      ]
-    },
-    {
-      "id": "onlinechecks-options-section",
-      "path": "plugins/OnlineChecks/main.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "name", "source": "OnlineChecks", "translation": "在线检查" }
-      ]
-    },
-    {
-      "id": "updater-options-section",
-      "path": "plugins/Updater/main.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "name", "source": "Updater", "translation": "更新器" }
-      ]
-    },
-    {
-      "id": "usernotes-options-section",
-      "path": "plugins/UserNotes/main.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "name", "source": "UserNotes", "translation": "用户备注" }
-      ]
-    },
-    {
-      "id": "sysinfo-etw-sections",
+      "id": "sysinfo-etw-panel-titles",
       "path": "plugins/ExtendedTools/etwsys.c",
-      "context": "L\"{text}\"",
+      "context": "drawPanel->Title = PhCreateString(L\"{text}\");",
       "items": [
-        { "id": "disk", "source": "Disk", "translation": "磁盘", "expected": 2 },
-        { "id": "network", "source": "Network", "translation": "网络", "expected": 2 }
+        { "id": "disk", "source": "Disk", "translation": "磁盘" },
+        { "id": "network", "source": "Network", "translation": "网络" }
       ]
     },
     {
@@ -1975,10 +1934,7 @@
       "path": "phlib/util.c",
       "context": "L\"{text}\"",
       "items": [
-        { "id": "question-prefix", "source": "Do you want to ", "translation": "是否要" },
-        { "id": "continue-suffix", "source": " Are you sure you want to continue?", "translation": " 确定要继续吗？" },
-        { "id": "cancel", "source": "Cancel", "translation": "取消" },
-        { "id": "fallback", "source": "Are you sure you want to %s?", "translation": "确定要%s吗？" }
+        { "id": "cancel", "source": "Cancel", "translation": "取消" }
       ]
     },
     {
@@ -2335,36 +2291,11 @@
       ]
     },
     {
-      "id": "sysinfo-core-section-names",
-      "path": "SystemInformer/sysinfo.c",
-      "context": "L\"{text}\"",
-      "items": [
-        { "id": "memory", "source": "Memory", "translation": "内存" }
-      ]
-    },
-    {
       "id": "sysinfo-memory-panel-title",
       "path": "SystemInformer/sysscmem.c",
       "context": "L\"{text}\"",
       "items": [
         { "id": "memory", "source": "Memory", "translation": "内存" }
-      ]
-    },
-    {
-      "id": "sysinfo-memory-navigation-target",
-      "path": "SystemInformer/miniinfo.c",
-      "context": "PhShowSystemInformationDialog(L\"{text}\");",
-      "items": [
-        { "id": "memory", "source": "Memory", "translation": "内存" }
-      ]
-    },
-    {
-      "id": "sysinfo-plugin-navigation-targets",
-      "path": "plugins/ExtendedTools/iconext.c",
-      "context": "PhShowSystemInformationDialog(L\"{text}\");",
-      "items": [
-        { "id": "disk", "source": "Disk", "translation": "磁盘" },
-        { "id": "network", "source": "Network", "translation": "网络" }
       ]
     },
     {
@@ -2376,6 +2307,2732 @@
         { "id": "preview", "source": "Preview", "translation": "预览版" },
         { "id": "canary", "source": "Canary", "translation": "Canary 版" },
         { "id": "developer", "source": "Developer", "translation": "开发版" }
+      ]
+    },
+    {
+      "id": "toolbar-graph-names",
+      "path": "plugins/ToolStatus/graph.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "cpu", "source": "CPU history", "translation": "CPU 使用率历史" },
+        { "id": "physical", "source": "Physical memory history", "translation": "物理内存历史" },
+        { "id": "commit", "source": "Commit charge history", "translation": "提交量历史" },
+        { "id": "io", "source": "I/O history", "translation": "I/O 历史" },
+        { "id": "unavailable", "source": " (Unavailable)", "translation": "（不可用）", "expected": 2 }
+      ]
+    },
+    {
+      "id": "toolbar-extended-graph-names",
+      "path": "plugins/ExtendedTools/iconext.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "gpu", "source": "GPU history", "translation": "GPU 使用率历史" },
+        { "id": "npu", "source": "NPU history", "translation": "NPU 使用率历史" },
+        { "id": "disk", "source": "Disk history", "translation": "磁盘活动历史" },
+        { "id": "network", "source": "Network history", "translation": "网络活动历史" }
+      ]
+    },
+    {
+      "id": "permissions-submenu",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "power", "source": "Current Power Scheme", "translation": "当前电源方案", "expected": 2 },
+        { "id": "scm", "source": "Service Control Manager", "translation": "服务控制管理器", "expected": 2 },
+        { "id": "terminal", "source": "Terminal Server Listener", "translation": "终端服务器侦听器", "expected": 2 },
+        { "id": "wmi", "source": "WMI Root Namespace", "translation": "WMI 根命名空间", "expected": 2 },
+        { "id": "com-access", "source": "COM Access Permissions", "translation": "COM 访问权限", "expected": 2 },
+        { "id": "com-access-restrict", "source": "COM Access Restrictions", "translation": "COM 访问限制", "expected": 2 },
+        { "id": "com-launch", "source": "COM Launch Permissions", "translation": "COM 启动权限", "expected": 2 },
+        { "id": "com-launch-restrict", "source": "COM Launch Restrictions", "translation": "COM 启动限制", "expected": 2 },
+        { "id": "desktop", "source": "Current Window Desktop", "translation": "当前窗口桌面", "expected": 2 },
+        { "id": "station", "source": "Current Window Station", "translation": "当前窗口站", "expected": 2 }
+      ]
+    },
+    {
+      "id": "gpu-details-extended",
+      "path": "plugins/ExtendedTools/gpudetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "property", "source": "Property", "translation": "属性" },
+        { "id": "value", "source": "Value", "translation": "值" },
+        { "id": "location", "source": "Physical Location", "translation": "物理位置" },
+        { "id": "driver-date", "source": "Driver Date", "translation": "驱动程序日期" },
+        { "id": "driver-version", "source": "Driver Version", "translation": "驱动程序版本" },
+        { "id": "wddm", "source": "WDDM Version", "translation": "WDDM 版本" },
+        { "id": "vendor", "source": "Vendor ID", "translation": "厂商 ID" },
+        { "id": "device", "source": "Device ID", "translation": "设备 ID" },
+        { "id": "total-memory", "source": "Total Memory", "translation": "总显存" },
+        { "id": "reserved-memory", "source": "Reserved Memory", "translation": "保留显存" },
+        { "id": "memory-frequency", "source": "Memory Frequency", "translation": "显存频率" },
+        { "id": "memory-bandwidth", "source": "Memory Bandwidth", "translation": "显存带宽" },
+        { "id": "pcie-bandwidth", "source": "PCIE Bandwidth", "translation": "PCIe 带宽" },
+        { "id": "fan", "source": "Fan RPM", "translation": "风扇转速" },
+        { "id": "power", "source": "Power Usage", "translation": "功耗" },
+        { "id": "temperature", "source": "Temperature", "translation": "温度" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
+    },
+    {
+      "id": "gpu-details-hardware",
+      "path": "plugins/HardwareDevices/gpudetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "property", "source": "Property", "translation": "属性" },
+        { "id": "value", "source": "Value", "translation": "值" },
+        { "id": "location", "source": "Physical Location", "translation": "物理位置" },
+        { "id": "driver-date", "source": "Driver Date", "translation": "驱动程序日期" },
+        { "id": "driver-version", "source": "Driver Version", "translation": "驱动程序版本" },
+        { "id": "wddm", "source": "WDDM Version", "translation": "WDDM 版本" },
+        { "id": "vendor", "source": "Vendor ID", "translation": "厂商 ID" },
+        { "id": "device", "source": "Device ID", "translation": "设备 ID" },
+        { "id": "total-memory", "source": "Total Memory", "translation": "总显存" },
+        { "id": "reserved-memory", "source": "Reserved Memory", "translation": "保留显存" },
+        { "id": "gpu-frequency", "source": "GPU Frequency", "translation": "GPU 频率" },
+        { "id": "gpu-max-frequency", "source": "Max GPU Frequency", "translation": "GPU 最大频率" },
+        { "id": "memory-frequency", "source": "Memory Frequency", "translation": "显存频率" },
+        { "id": "memory-bandwidth", "source": "Memory Bandwidth", "translation": "显存带宽" },
+        { "id": "pcie-bandwidth", "source": "PCIE Bandwidth", "translation": "PCIe 带宽" },
+        { "id": "fan", "source": "Fan RPM", "translation": "风扇转速" },
+        { "id": "power", "source": "Power Usage", "translation": "功耗" },
+        { "id": "temperature", "source": "Temperature", "translation": "温度" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
+    },
+    {
+      "id": "npu-details-extended",
+      "path": "plugins/ExtendedTools/npudetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "property", "source": "Property", "translation": "属性" },
+        { "id": "value", "source": "Value", "translation": "值" },
+        { "id": "location", "source": "Physical Location", "translation": "物理位置" },
+        { "id": "driver-date", "source": "Driver Date", "translation": "驱动程序日期" },
+        { "id": "driver-version", "source": "Driver Version", "translation": "驱动程序版本" },
+        { "id": "wddm", "source": "WDDM Version", "translation": "WDDM 版本" },
+        { "id": "vendor", "source": "Vendor ID", "translation": "厂商 ID" },
+        { "id": "device", "source": "Device ID", "translation": "设备 ID" },
+        { "id": "total-memory", "source": "Total Memory", "translation": "总内存" },
+        { "id": "reserved-memory", "source": "Reserved Memory", "translation": "保留内存" },
+        { "id": "memory-frequency", "source": "Memory Frequency", "translation": "内存频率" },
+        { "id": "memory-bandwidth", "source": "Memory Bandwidth", "translation": "内存带宽" },
+        { "id": "pcie-bandwidth", "source": "PCIE Bandwidth", "translation": "PCIe 带宽" },
+        { "id": "fan", "source": "Fan RPM", "translation": "风扇转速" },
+        { "id": "power", "source": "Power Usage", "translation": "功耗" },
+        { "id": "temperature", "source": "Temperature", "translation": "温度" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
+    },
+    {
+      "id": "search-control-tooltips",
+      "path": "phlib/searchbox.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "regex", "source": "Regular Expression", "translation": "正则表达式" },
+        { "id": "case", "source": "Match Case", "translation": "区分大小写" },
+        { "id": "clear", "source": "Clear Search", "translation": "清除搜索" }
+      ]
+    },
+    {
+      "id": "toolbar-search-prompts",
+      "path": "plugins/ToolStatus/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "processes", "source": "Search Processes (Ctrl+K)", "translation": "搜索进程（Ctrl+K）" },
+        { "id": "services", "source": "Search Services (Ctrl+K)", "translation": "搜索服务（Ctrl+K）" },
+        { "id": "network", "source": "Search Network (Ctrl+K)", "translation": "搜索网络（Ctrl+K）" },
+        { "id": "disabled", "source": "Search disabled", "translation": "搜索已禁用" }
+      ]
+    },
+    {
+      "id": "toolbar-search-initial-prompt",
+      "path": "plugins/ToolStatus/toolbar.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "processes", "source": "Search Processes (Ctrl+K)", "translation": "搜索进程（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-threads",
+      "path": "SystemInformer/prpgthrd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Threads (Ctrl+K)", "translation": "搜索线程（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-modules",
+      "path": "SystemInformer/prpgmod.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Modules (Ctrl+K)", "translation": "搜索模块（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-memory",
+      "path": "SystemInformer/prpgmem.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Memory (Ctrl+K)", "translation": "搜索内存（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-environment",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Environment (Ctrl+K)", "translation": "搜索环境变量（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-handles",
+      "path": "SystemInformer/prpghndl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Handles (Ctrl+K)", "translation": "搜索句柄（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-wmi",
+      "path": "SystemInformer/prpgwmi.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search WMI Providers (Ctrl+K)", "translation": "搜索 WMI 提供程序（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-search-windows",
+      "path": "plugins/WindowExplorer/wnddlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Windows (Ctrl+K)", "translation": "搜索窗口（Ctrl+K）", "expected": 3 }
+      ]
+    },
+    {
+      "id": "search-prompts-monitor",
+      "path": "SystemInformer/informerwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Monitor (Ctrl+K)", "translation": "搜索监视事件（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "search-prompts-strings",
+      "path": "SystemInformer/memsrcht.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Strings (Ctrl+K)", "translation": "搜索字符串（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "search-prompts-users",
+      "path": "SystemInformer/usrlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Users", "translation": "搜索用户" }
+      ]
+    },
+    {
+      "id": "search-prompts-thread-stacks",
+      "path": "SystemInformer/thrdstks.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Thread Stacks", "translation": "搜索线程堆栈" }
+      ]
+    },
+    {
+      "id": "search-prompts-packages",
+      "path": "SystemInformer/runaspkg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Packages", "translation": "搜索程序包" }
+      ]
+    },
+    {
+      "id": "search-prompts-settings",
+      "path": "SystemInformer/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search settings...", "translation": "搜索设置..." }
+      ]
+    },
+    {
+      "id": "search-prompts-assemblies",
+      "path": "plugins/DotNetTools/asmpage.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Assemblies (Ctrl+K)", "translation": "搜索程序集（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "search-prompts-pool",
+      "path": "plugins/ExtendedTools/pooldialog.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Pool Tags (Ctrl+K)", "translation": "搜索池标记（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "search-prompts-objects",
+      "path": "plugins/ExtendedTools/objmgr.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "prompt", "source": "Search Objects (Ctrl+K)", "translation": "搜索对象（Ctrl+K）" }
+      ]
+    },
+    {
+      "id": "process-property-statistics-core",
+      "path": "SystemInformer/prpgstat.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "property",
+          "source": "Property",
+          "translation": "属性"
+        },
+        {
+          "id": "value",
+          "source": "Value",
+          "translation": "当前值"
+        },
+        {
+          "id": "min",
+          "source": "Min",
+          "translation": "最小值"
+        },
+        {
+          "id": "max",
+          "source": "Max",
+          "translation": "最大值"
+        },
+        {
+          "id": "difference",
+          "source": "Difference",
+          "translation": "差值"
+        },
+        {
+          "id": "average",
+          "source": "Average",
+          "translation": "平均值"
+        },
+        {
+          "id": "median",
+          "source": "Median",
+          "translation": "中位数"
+        },
+        {
+          "id": "memory-group",
+          "source": "Memory",
+          "translation": "内存"
+        },
+        {
+          "id": "other-group",
+          "source": "Other",
+          "translation": "其他",
+          "expected": 2
+        },
+        {
+          "id": "energy-group",
+          "source": "Energy",
+          "translation": "能耗"
+        },
+        {
+          "id": "cpu-user",
+          "source": "CPU (user)",
+          "translation": "CPU（用户态）"
+        },
+        {
+          "id": "cpu-kernel",
+          "source": "CPU (kernel)",
+          "translation": "CPU（内核态）"
+        },
+        {
+          "id": "cpu-average",
+          "source": "CPU (average)",
+          "translation": "CPU（平均）"
+        },
+        {
+          "id": "cpu-relative",
+          "source": "CPU (relative)",
+          "translation": "CPU（相对）"
+        },
+        {
+          "id": "cycles",
+          "source": "Cycles",
+          "translation": "周期数",
+          "expected": 2
+        },
+        {
+          "id": "cycles-delta",
+          "source": "Cycles delta",
+          "translation": "周期数增量"
+        },
+        {
+          "id": "context-switches",
+          "source": "Context switches",
+          "translation": "上下文切换次数"
+        },
+        {
+          "id": "context-switches-delta",
+          "source": "Context switches delta",
+          "translation": "上下文切换增量"
+        },
+        {
+          "id": "kernel-time",
+          "source": "Kernel time",
+          "translation": "内核态时间"
+        },
+        {
+          "id": "kernel-delta",
+          "source": "Kernel delta",
+          "translation": "内核态时间增量"
+        },
+        {
+          "id": "user-time",
+          "source": "User time",
+          "translation": "用户态时间"
+        },
+        {
+          "id": "user-delta",
+          "source": "User delta",
+          "translation": "用户态时间增量"
+        },
+        {
+          "id": "total-time",
+          "source": "Total time",
+          "translation": "总时间"
+        },
+        {
+          "id": "total-delta",
+          "source": "Total delta",
+          "translation": "总时间增量"
+        },
+        {
+          "id": "priority",
+          "source": "Priority",
+          "translation": "优先级"
+        },
+        {
+          "id": "private-bytes",
+          "source": "Private bytes",
+          "translation": "专用提交"
+        },
+        {
+          "id": "private-bytes-delta",
+          "source": "Private bytes delta",
+          "translation": "专用提交增量"
+        },
+        {
+          "id": "peak-private-bytes",
+          "source": "Peak private bytes",
+          "translation": "专用提交峰值"
+        },
+        {
+          "id": "virtual-size",
+          "source": "Virtual size",
+          "translation": "虚拟地址空间"
+        },
+        {
+          "id": "peak-virtual-size",
+          "source": "Peak virtual size",
+          "translation": "虚拟地址空间峰值"
+        },
+        {
+          "id": "page-faults",
+          "source": "Page faults",
+          "translation": "缺页次数"
+        },
+        {
+          "id": "page-faults-delta",
+          "source": "Page faults delta",
+          "translation": "缺页增量"
+        },
+        {
+          "id": "hard-faults",
+          "source": "Hard faults",
+          "translation": "硬缺页次数"
+        },
+        {
+          "id": "hard-faults-delta",
+          "source": "Hard faults delta",
+          "translation": "硬缺页次数增量"
+        },
+        {
+          "id": "working-set",
+          "source": "Working set",
+          "translation": "内存工作集"
+        },
+        {
+          "id": "peak-working-set",
+          "source": "Peak working set",
+          "translation": "内存工作集峰值"
+        },
+        {
+          "id": "private-ws",
+          "source": "Private WS",
+          "translation": "专用工作集"
+        },
+        {
+          "id": "shareable-ws",
+          "source": "Shareable WS",
+          "translation": "可共享工作集"
+        },
+        {
+          "id": "shared-ws",
+          "source": "Shared WS",
+          "translation": "共享工作集"
+        },
+        {
+          "id": "paged-pool",
+          "source": "Paged pool bytes",
+          "translation": "分页池字节数"
+        },
+        {
+          "id": "peak-paged-pool",
+          "source": "Peak paged pool bytes",
+          "translation": "分页池字节数峰值"
+        },
+        {
+          "id": "nonpaged-pool",
+          "source": "Nonpaged pool bytes",
+          "translation": "非分页池字节数"
+        },
+        {
+          "id": "peak-nonpaged-pool",
+          "source": "Peak nonpaged pool bytes",
+          "translation": "非分页池字节数峰值"
+        },
+        {
+          "id": "shared-commit",
+          "source": "Shared commit",
+          "translation": "共享提交量"
+        },
+        {
+          "id": "private-commit",
+          "source": "Private commit",
+          "translation": "专用提交量"
+        },
+        {
+          "id": "peak-private-commit",
+          "source": "Peak private commit",
+          "translation": "专用提交量峰值"
+        },
+        {
+          "id": "page-priority",
+          "source": "Page priority",
+          "translation": "页面优先级"
+        },
+        {
+          "id": "reads",
+          "source": "Reads",
+          "translation": "读取操作数"
+        },
+        {
+          "id": "reads-delta",
+          "source": "Reads delta",
+          "translation": "读取操作增量"
+        },
+        {
+          "id": "read-bytes",
+          "source": "Read bytes",
+          "translation": "读取字节数"
+        },
+        {
+          "id": "read-bytes-delta",
+          "source": "Read bytes delta",
+          "translation": "读取字节数增量"
+        },
+        {
+          "id": "writes",
+          "source": "Writes",
+          "translation": "写入操作数"
+        },
+        {
+          "id": "writes-delta",
+          "source": "Writes delta",
+          "translation": "写入操作增量"
+        },
+        {
+          "id": "write-bytes",
+          "source": "Write bytes",
+          "translation": "写入字节数"
+        },
+        {
+          "id": "write-bytes-delta",
+          "source": "Write bytes delta",
+          "translation": "写入字节数增量"
+        },
+        {
+          "id": "other-delta",
+          "source": "Other delta",
+          "translation": "其他操作增量"
+        },
+        {
+          "id": "other-bytes",
+          "source": "Other bytes",
+          "translation": "其他操作字节数"
+        },
+        {
+          "id": "other-bytes-delta",
+          "source": "Other bytes delta",
+          "translation": "其他操作字节数增量"
+        },
+        {
+          "id": "total-bytes",
+          "source": "Total bytes",
+          "translation": "总字节数"
+        },
+        {
+          "id": "total-bytes-delta",
+          "source": "Total bytes delta",
+          "translation": "总字节数增量"
+        },
+        {
+          "id": "total-bytes-average",
+          "source": "Total bytes (average)",
+          "translation": "总字节数（平均）"
+        },
+        {
+          "id": "io-priority",
+          "source": "I/O priority",
+          "translation": "I/O 优先级"
+        },
+        {
+          "id": "handles",
+          "source": "Handles",
+          "translation": "句柄数"
+        },
+        {
+          "id": "peak-handles",
+          "source": "Peak handles",
+          "translation": "句柄数峰值"
+        },
+        {
+          "id": "gdi-handles",
+          "source": "GDI handles",
+          "translation": "GDI 句柄数"
+        },
+        {
+          "id": "peak-gdi-handles",
+          "source": "Peak GDI handles",
+          "translation": "GDI 句柄数峰值"
+        },
+        {
+          "id": "user-handles",
+          "source": "USER handles",
+          "translation": "USER 句柄数"
+        },
+        {
+          "id": "peak-user-handles",
+          "source": "Peak USER handles",
+          "translation": "USER 句柄数峰值"
+        },
+        {
+          "id": "attributed-cycles",
+          "source": "Attributed cycles",
+          "translation": "归属周期数"
+        },
+        {
+          "id": "work-on-behalf",
+          "source": "Work on behalf cycles",
+          "translation": "代执行周期数"
+        },
+        {
+          "id": "cycles-high-user",
+          "source": "Cycles: high/foreground user",
+          "translation": "周期数：高优先级/前台用户态"
+        },
+        {
+          "id": "cycles-high-kernel",
+          "source": "Cycles: high/foreground kernel",
+          "translation": "周期数：高优先级/前台内核态"
+        },
+        {
+          "id": "cycles-above-user",
+          "source": "Cycles: above normal user",
+          "translation": "周期数：高于正常用户态"
+        },
+        {
+          "id": "cycles-above-kernel",
+          "source": "Cycles: above normal kernel",
+          "translation": "周期数：高于正常内核态"
+        },
+        {
+          "id": "cycles-normal-user",
+          "source": "Cycles: normal user",
+          "translation": "周期数：正常用户态"
+        },
+        {
+          "id": "cycles-normal-kernel",
+          "source": "Cycles: normal kernel",
+          "translation": "周期数：正常内核态"
+        },
+        {
+          "id": "cycles-low-user",
+          "source": "Cycles: low/background user",
+          "translation": "周期数：低优先级/后台用户态"
+        },
+        {
+          "id": "cycles-low-kernel",
+          "source": "Cycles: low/background kernel",
+          "translation": "周期数：低优先级/后台内核态"
+        },
+        {
+          "id": "disk-energy-uj",
+          "source": "Disk energy (uJ)",
+          "translation": "磁盘能耗（μJ）"
+        },
+        {
+          "id": "disk-energy-j",
+          "source": "Disk energy (J)",
+          "translation": "磁盘能耗（J）"
+        },
+        {
+          "id": "disk-energy-wh",
+          "source": "Disk energy (Wh)",
+          "translation": "磁盘能耗（Wh）"
+        },
+        {
+          "id": "disk-power",
+          "source": "Disk power (W)",
+          "translation": "磁盘功率（W）"
+        },
+        {
+          "id": "network-tail-uj",
+          "source": "Network tail energy (uJ)",
+          "translation": "网络尾部能耗（μJ）"
+        },
+        {
+          "id": "network-tail-j",
+          "source": "Network tail energy (J)",
+          "translation": "网络尾部能耗（J）"
+        },
+        {
+          "id": "network-tail-wh",
+          "source": "Network tail energy (Wh)",
+          "translation": "网络尾部能耗（Wh）"
+        },
+        {
+          "id": "network-tail-power",
+          "source": "Network tail power (W)",
+          "translation": "网络尾部功率（W）"
+        },
+        {
+          "id": "carbon",
+          "source": "Carbon impact",
+          "translation": "碳影响"
+        },
+        {
+          "id": "network-txrx",
+          "source": "Network Tx/Rx bytes",
+          "translation": "网络收发字节数"
+        },
+        {
+          "id": "mbb-txrx",
+          "source": "MBB Tx/Rx bytes",
+          "translation": "移动宽带收发字节数"
+        },
+        {
+          "id": "foreground-duration",
+          "source": "Foreground duration",
+          "translation": "前台持续时间"
+        },
+        {
+          "id": "desktop-visible",
+          "source": "Desktop visible duration",
+          "translation": "桌面可见持续时间"
+        },
+        {
+          "id": "psm-foreground",
+          "source": "PSM foreground duration",
+          "translation": "PSM 前台持续时间"
+        },
+        {
+          "id": "composition-rendered",
+          "source": "Composition rendered",
+          "translation": "已渲染合成帧数"
+        },
+        {
+          "id": "composition-dirty-generated",
+          "source": "Composition dirty generated",
+          "translation": "已生成脏合成区域数"
+        },
+        {
+          "id": "composition-dirty-propagated",
+          "source": "Composition dirty propagated",
+          "translation": "已传播脏合成区域数"
+        },
+        {
+          "id": "cpu-timeline",
+          "source": "CPU timeline active",
+          "translation": "CPU 活动时间线"
+        },
+        {
+          "id": "disk-timeline",
+          "source": "Disk timeline active",
+          "translation": "磁盘活动时间线"
+        },
+        {
+          "id": "network-timeline",
+          "source": "Network timeline active",
+          "translation": "网络活动时间线"
+        },
+        {
+          "id": "input-duration",
+          "source": "Input duration",
+          "translation": "输入持续时间"
+        },
+        {
+          "id": "audio-in",
+          "source": "Audio in duration",
+          "translation": "音频输入持续时间"
+        },
+        {
+          "id": "audio-out",
+          "source": "Audio out duration",
+          "translation": "音频输出持续时间"
+        },
+        {
+          "id": "display-required",
+          "source": "Display required duration",
+          "translation": "要求显示器开启的持续时间"
+        },
+        {
+          "id": "psm-background",
+          "source": "PSM background duration",
+          "translation": "PSM 后台持续时间"
+        },
+        {
+          "id": "keyboard-input",
+          "source": "Keyboard input",
+          "translation": "键盘输入次数"
+        },
+        {
+          "id": "mouse-input",
+          "source": "Mouse input",
+          "translation": "鼠标输入次数"
+        },
+        {
+          "id": "running-time",
+          "source": "Running time",
+          "translation": "运行时间"
+        },
+        {
+          "id": "suspended-time",
+          "source": "Suspended time",
+          "translation": "挂起时间"
+        },
+        {
+          "id": "hang-count",
+          "source": "Hang count",
+          "translation": "无响应次数"
+        },
+        {
+          "id": "ghost-count",
+          "source": "Ghost count",
+          "translation": "幽灵窗口次数"
+        },
+        {
+          "id": "network-txrx-compact",
+          "source": "NetworkTxRxBytes",
+          "translation": "网络收发字节总计"
+        }
+      ]
+    },
+    {
+      "id": "process-property-statistics-extended",
+      "path": "plugins/ExtendedTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "dedicated",
+          "source": "Dedicated memory",
+          "translation": "专用显存",
+          "expected": 2
+        },
+        {
+          "id": "shared",
+          "source": "Shared memory",
+          "translation": "共享显存",
+          "expected": 2
+        },
+        {
+          "id": "commit",
+          "source": "Commit memory",
+          "translation": "提交内存",
+          "expected": 2
+        },
+        {
+          "id": "total-memory",
+          "source": "Total memory",
+          "translation": "总内存",
+          "expected": 2
+        },
+        {
+          "id": "disk-io",
+          "source": "Disk I/O",
+          "translation": "磁盘 I/O"
+        },
+        {
+          "id": "reads",
+          "source": "Reads",
+          "translation": "读取操作数"
+        },
+        {
+          "id": "read-bytes",
+          "source": "Read bytes",
+          "translation": "读取字节数"
+        },
+        {
+          "id": "read-bytes-delta",
+          "source": "Read bytes delta",
+          "translation": "读取字节数增量"
+        },
+        {
+          "id": "writes",
+          "source": "Writes",
+          "translation": "写入操作数"
+        },
+        {
+          "id": "write-bytes",
+          "source": "Write bytes",
+          "translation": "写入字节数"
+        },
+        {
+          "id": "write-bytes-delta",
+          "source": "Write bytes delta",
+          "translation": "写入字节数增量"
+        },
+        {
+          "id": "total",
+          "source": "Total",
+          "translation": "总计",
+          "expected": 2
+        },
+        {
+          "id": "total-bytes",
+          "source": "Total bytes",
+          "translation": "总字节数",
+          "expected": 2
+        },
+        {
+          "id": "total-bytes-delta",
+          "source": "Total bytes delta",
+          "translation": "总字节数增量",
+          "expected": 2
+        },
+        {
+          "id": "network-io",
+          "source": "Network I/O",
+          "translation": "网络 I/O"
+        },
+        {
+          "id": "receives",
+          "source": "Receives",
+          "translation": "接收操作数"
+        },
+        {
+          "id": "receive-bytes",
+          "source": "Receive bytes",
+          "translation": "接收字节数"
+        },
+        {
+          "id": "receive-bytes-delta",
+          "source": "Receive bytes delta",
+          "translation": "接收字节数增量"
+        },
+        {
+          "id": "sends",
+          "source": "Sends",
+          "translation": "发送操作数"
+        },
+        {
+          "id": "send-bytes",
+          "source": "Send bytes",
+          "translation": "发送字节数"
+        },
+        {
+          "id": "send-bytes-delta",
+          "source": "Send bytes delta",
+          "translation": "发送字节数增量"
+        },
+        {
+          "id": "gpu-adapter",
+          "source": "GPU adapter",
+          "translation": "GPU 适配器"
+        },
+        {
+          "id": "virtual-memory",
+          "source": "Virtual memory",
+          "translation": "虚拟内存"
+        },
+        {
+          "id": "evicted",
+          "source": "Evicted bytes",
+          "translation": "已逐出字节数"
+        },
+        {
+          "id": "dma-buffer",
+          "source": "DMA buffer size",
+          "translation": "DMA 缓冲区大小"
+        },
+        {
+          "id": "dma-alloc",
+          "source": "DMA allocation list",
+          "translation": "DMA 分配列表"
+        },
+        {
+          "id": "dma-patch",
+          "source": "DMA patch list",
+          "translation": "DMA 修补列表"
+        },
+        {
+          "id": "contention",
+          "source": "Contention events",
+          "translation": "争用事件"
+        },
+        {
+          "id": "outputs",
+          "source": "Display outputs",
+          "translation": "显示输出"
+        }
+      ]
+    },
+    {
+      "id": "process-property-token-runtime",
+      "path": "SystemInformer/tokprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "name",
+          "source": "Name",
+          "translation": "名称",
+          "expected": 6
+        },
+        {
+          "id": "status",
+          "source": "Status",
+          "translation": "状态"
+        },
+        {
+          "id": "description",
+          "source": "Description",
+          "translation": "描述"
+        },
+        {
+          "id": "type",
+          "source": "Type",
+          "translation": "类型",
+          "expected": 3
+        },
+        {
+          "id": "use",
+          "source": "Use",
+          "translation": "用途"
+        },
+        {
+          "id": "flags",
+          "source": "Flags",
+          "translation": "标志"
+        },
+        {
+          "id": "privileges",
+          "source": "Privileges",
+          "translation": "特权"
+        },
+        {
+          "id": "restricting",
+          "source": "Restricting SIDs",
+          "translation": "限制 SID"
+        },
+        {
+          "id": "groups",
+          "source": "Groups",
+          "translation": "组"
+        },
+        {
+          "id": "logon-group",
+          "source": "Groups (Logon SID)",
+          "translation": "组（登录 SID）"
+        },
+        {
+          "id": "mandatory-group",
+          "source": "Groups (Mandatory label)",
+          "translation": "组（强制标签）"
+        },
+        {
+          "id": "unknown",
+          "source": "Unknown",
+          "translation": "未知",
+          "expected": 34
+        },
+        {
+          "id": "resolving",
+          "source": "Resolving...",
+          "translation": "正在解析...",
+          "expected": 2
+        },
+        {
+          "id": "unknown-sid",
+          "source": "[Unknown SID]",
+          "translation": "[未知 SID]"
+        },
+        {
+          "id": "restricted",
+          "source": " (restricted)",
+          "translation": "（受限）"
+        },
+        {
+          "id": "enabled",
+          "source": "Enabled",
+          "translation": "已启用",
+          "expected": 6
+        },
+        {
+          "id": "enabled-modified",
+          "source": "Enabled (modified)",
+          "translation": "已启用（已修改）",
+          "expected": 3
+        },
+        {
+          "id": "disabled",
+          "source": "Disabled",
+          "translation": "已禁用",
+          "expected": 6
+        },
+        {
+          "id": "disabled-modified",
+          "source": "Disabled (modified)",
+          "translation": "已禁用（已修改）",
+          "expected": 3
+        },
+        {
+          "id": "enabled-group",
+          "source": "Enabled (as a group)",
+          "translation": "已启用（作为组）"
+        },
+        {
+          "id": "removed",
+          "source": "Removed",
+          "translation": "已移除"
+        },
+        {
+          "id": "integrity",
+          "source": "Integrity",
+          "translation": "完整性"
+        },
+        {
+          "id": "logon-id",
+          "source": "Logon Id",
+          "translation": "登录 ID"
+        },
+        {
+          "id": "owner",
+          "source": "Owner",
+          "translation": "所有者"
+        },
+        {
+          "id": "mandatory",
+          "source": "Mandatory",
+          "translation": "强制"
+        },
+        {
+          "id": "deny-only",
+          "source": "Use for deny only",
+          "translation": "仅用于拒绝"
+        },
+        {
+          "id": "resource",
+          "source": "Resource",
+          "translation": "资源"
+        },
+        {
+          "id": "no-write-up",
+          "source": "No-Write-Up Policy",
+          "translation": "禁止向上写入策略"
+        },
+        {
+          "id": "no-write-desc",
+          "source": "Prevents the process from modifying objects with a higher integrity",
+          "translation": "防止进程修改完整性级别更高的对象"
+        },
+        {
+          "id": "sandbox-inert",
+          "source": "Sandbox Inert",
+          "translation": "沙盒无效"
+        },
+        {
+          "id": "sandbox-desc",
+          "source": "Ignore AppLocker rules and Software Restriction Policies",
+          "translation": "忽略 AppLocker 规则和软件限制策略"
+        },
+        {
+          "id": "uiaccess-desc",
+          "source": "Ignore User Interface Privilege Isolation",
+          "translation": "忽略用户界面特权隔离"
+        },
+        {
+          "id": "default-token",
+          "source": "Default Token",
+          "translation": "默认令牌"
+        },
+        {
+          "id": "protected",
+          "source": "Protected",
+          "translation": "受保护"
+        },
+        {
+          "id": "system",
+          "source": "System",
+          "translation": "系统"
+        },
+        {
+          "id": "high",
+          "source": "High",
+          "translation": "高"
+        },
+        {
+          "id": "medium-plus",
+          "source": "Medium +",
+          "translation": "中等+"
+        },
+        {
+          "id": "medium",
+          "source": "Medium",
+          "translation": "中等"
+        },
+        {
+          "id": "low",
+          "source": "Low",
+          "translation": "低"
+        },
+        {
+          "id": "untrusted",
+          "source": "Untrusted",
+          "translation": "不受信任"
+        },
+        {
+          "id": "custom",
+          "source": "Custom...",
+          "translation": "自定义..."
+        },
+        {
+          "id": "intermediate",
+          "source": "Intermediate level",
+          "translation": "中间级别"
+        },
+        {
+          "id": "integrity-level",
+          "source": "Integrity Level",
+          "translation": "完整性级别"
+        },
+        {
+          "id": "integrity-prompt",
+          "source": "Enter a custom integrity level:",
+          "translation": "输入自定义完整性级别："
+        },
+        {
+          "id": "integrity-object",
+          "source": "the integrity level",
+          "translation": "令牌完整性级别"
+        },
+        {
+          "id": "integrity-warning",
+          "source": "Once lowered, the integrity level of the token cannot be raised again.",
+          "translation": "令牌的完整性级别一旦降低，便无法再次提高。"
+        },
+        {
+          "id": "integrity-error",
+          "source": "Unable to set the integrity level",
+          "translation": "无法设置完整性级别"
+        },
+        {
+          "id": "empty-attributes",
+          "source": "There are no attributes to display.",
+          "translation": "没有可显示的属性。"
+        },
+        {
+          "id": "empty-claims",
+          "source": "There are no claims to display.",
+          "translation": "没有可显示的声明。"
+        },
+        {
+          "id": "empty-capabilities",
+          "source": "There are no capabilities to display.",
+          "translation": "没有可显示的功能。"
+        },
+        {
+          "id": "well-known",
+          "source": "WellKnownGroup",
+          "translation": "已知组"
+        },
+        {
+          "id": "deleted-account",
+          "source": "DeletedAccount",
+          "translation": "已删除账户"
+        },
+        {
+          "id": "invalid",
+          "source": "Invalid",
+          "translation": "无效",
+          "expected": 3
+        },
+        {
+          "id": "computer",
+          "source": "Computer",
+          "translation": "计算机"
+        },
+        {
+          "id": "label",
+          "source": "Label",
+          "translation": "标签"
+        },
+        {
+          "id": "logon-session",
+          "source": "Logon session",
+          "translation": "登录会话"
+        },
+        {
+          "id": "na",
+          "source": "N/A",
+          "translation": "不适用",
+          "expected": 9
+        },
+        {
+          "id": "general",
+          "source": "General",
+          "translation": "常规",
+          "expected": 2
+        },
+        {
+          "id": "container",
+          "source": "Container",
+          "translation": "容器"
+        },
+        {
+          "id": "capabilities",
+          "source": "Capabilities",
+          "translation": "功能"
+        },
+        {
+          "id": "claims",
+          "source": "Claims",
+          "translation": "声明"
+        },
+        {
+          "id": "policy",
+          "source": "Policy",
+          "translation": "策略",
+          "expected": 2
+        },
+        {
+          "id": "attributes",
+          "source": "Attributes",
+          "translation": "属性",
+          "expected": 2
+        },
+        { "id": "elevation-no-default", "source": "No (Default)", "translation": "否（默认）" },
+        { "id": "elevation-no-full", "source": "No (Full)", "translation": "否（完整）" },
+        { "id": "elevation-no-limited", "source": "No (Limited)", "translation": "否（受限）" },
+        { "id": "yes", "source": "Yes", "translation": "是", "expected": 4 },
+        { "id": "elevation-yes-default", "source": "Yes (Default)", "translation": "是（默认）" },
+        { "id": "elevation-yes-full", "source": "Yes (Full)", "translation": "是（完整）" },
+        { "id": "elevation-yes-limited", "source": "Yes (Limited)", "translation": "是（受限）" },
+        { "id": "no", "source": "No", "translation": "否", "expected": 3 },
+        { "id": "not-allowed", "source": "Not allowed", "translation": "不允许" },
+        { "id": "sid-user", "source": "User", "translation": "用户" },
+        { "id": "sid-group", "source": "Group", "translation": "账户组" },
+        { "id": "sid-domain", "source": "Domain", "translation": "域" },
+        { "id": "sid-alias", "source": "Alias", "translation": "别名" },
+        { "id": "trust-level-name", "source": "TrustLevel Name", "translation": "信任级别名称" },
+        { "id": "token", "source": "Token", "translation": "令牌", "expected": 3 },
+        { "id": "linked-token", "source": "Linked Token", "translation": "关联令牌", "expected": 2 },
+        { "id": "value", "source": "Value", "translation": "值", "expected": 3 },
+        { "id": "luids", "source": "LUIDs", "translation": "LUID" },
+        { "id": "memory", "source": "Memory", "translation": "内存" },
+        { "id": "properties", "source": "Properties", "translation": "属性信息", "expected": 2 },
+        { "id": "impersonation-level", "source": "Impersonation level", "translation": "模拟级别" },
+        { "id": "token-luid", "source": "Token LUID", "translation": "令牌 LUID" },
+        { "id": "authentication-luid", "source": "Authentication LUID", "translation": "身份验证 LUID" },
+        { "id": "modified-luid", "source": "ModifiedId LUID", "translation": "修改 ID LUID" },
+        { "id": "origin-luid", "source": "Origin LUID", "translation": "来源 LUID" },
+        { "id": "memory-used", "source": "Memory used", "translation": "已用内存" },
+        { "id": "memory-available", "source": "Memory available", "translation": "可用内存" },
+        { "id": "token-object-path", "source": "Token object path", "translation": "令牌对象路径", "expected": 2 },
+        { "id": "token-sddl", "source": "Token SDDL", "translation": "令牌 SDDL" }
+      ]
+    },
+    {
+      "id": "token-account-types",
+      "path": "phlib/lsasup.c",
+      "context": "return L\"{text}\";",
+      "items": [
+        { "id": "local", "source": "Local", "translation": "本地" },
+        { "id": "ad", "source": "ActiveDirectory", "translation": "Active Directory" },
+        { "id": "microsoft", "source": "Microsoft", "translation": "Microsoft 账户", "expected": 2 },
+        { "id": "azure", "source": "AzureAD", "translation": "Azure AD" },
+        { "id": "internet", "source": "Internet", "translation": "Internet 账户" },
+        { "id": "null-authority", "source": "NULL (Authority)", "translation": "NULL（颁发机构）" },
+        { "id": "world-authority", "source": "World (Authority)", "translation": "World（颁发机构）" },
+        { "id": "local-authority", "source": "Local (Authority)", "translation": "Local（颁发机构）" },
+        { "id": "nt-authority", "source": "NT (Authority)", "translation": "NT（颁发机构）" },
+        { "id": "app-authority", "source": "APP_PACKAGE (Authority)", "translation": "APP_PACKAGE（颁发机构）" },
+        { "id": "mandatory-label", "source": "Mandatory label", "translation": "强制标签" },
+        { "id": "unknown", "source": "Unknown", "translation": "未知" }
+      ]
+    },
+    {
+      "id": "process-property-loading",
+      "path": "SystemInformer/procprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "loading", "source": "Loading...", "translation": "正在加载..." },
+        { "id": "locate-file", "source": "Unable to locate the file.", "translation": "无法找到文件。" }
+      ]
+    },
+    {
+      "id": "symbol-loading-provider",
+      "path": "phlib/symprv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "for-image", "source": "Loading symbols for ", "translation": "正在加载符号：", "expected": 2 }
+      ]
+    },
+    {
+      "id": "symbol-loading-stack",
+      "path": "SystemInformer/thrdstk.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "loading", "source": "Loading symbols...", "translation": "正在加载符号..." },
+        { "id": "for-image", "source": "Loading symbols for image...", "translation": "正在为映像加载符号...", "expected": 2 },
+        { "id": "processing", "source": "Processing stack frames...", "translation": "正在处理堆栈帧...", "expected": 4 }
+      ]
+    },
+    {
+      "id": "string-loading-status",
+      "path": "SystemInformer/memsrcht.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "loading", "source": "Loading strings...", "translation": "正在加载字符串..." }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-main",
+      "path": "SystemInformer/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-memlists",
+      "path": "SystemInformer/memlists.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-windowexplorer-wnddlg",
+      "path": "plugins/WindowExplorer/wnddlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-envdlg",
+      "path": "SystemInformer/envdlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-memsrcht",
+      "path": "SystemInformer/memsrcht.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-ksisup",
+      "path": "SystemInformer/ksisup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-findobj",
+      "path": "SystemInformer/findobj.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-updater-updater",
+      "path": "plugins/Updater/updater.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-usrlist",
+      "path": "SystemInformer/usrlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-thrdstks",
+      "path": "SystemInformer/thrdstks.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-systeminformer-sysinfo",
+      "path": "SystemInformer/sysinfo.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-hardwaredevices-diskdetails",
+      "path": "plugins/HardwareDevices/diskdetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-extendedtools-gpunodes",
+      "path": "plugins/ExtendedTools/gpunodes.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-extendedtools-gpudetails",
+      "path": "plugins/ExtendedTools/gpudetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-extendedtools-objmgr",
+      "path": "plugins/ExtendedTools/objmgr.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-extendedtools-npunodes",
+      "path": "plugins/ExtendedTools/npunodes.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-hardwaredevices-netdetails",
+      "path": "plugins/HardwareDevices/netdetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-extendedtools-npudetails",
+      "path": "plugins/ExtendedTools/npudetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-networktools-update",
+      "path": "plugins/NetworkTools/update.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-hardwaredevices-gpunodes",
+      "path": "plugins/HardwareDevices/gpunodes.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "unable-create-window-plugins-extendedtools-pooldialog",
+      "path": "plugins/ExtendedTools/pooldialog.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "message",
+          "source": "Unable to create the window.",
+          "translation": "无法创建窗口。"
+        }
+      ]
+    },
+    {
+      "id": "process-property-thread-page",
+      "path": "SystemInformer/prpgthrd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "empty",
+          "source": "There are no threads to display.",
+          "translation": "没有可显示的线程。"
+        },
+        {
+          "id": "inspect",
+          "source": "&Inspect\\bEnter",
+          "translation": "检查(&I)\\bEnter"
+        },
+        {
+          "id": "terminate",
+          "source": "T&erminate\\bDel",
+          "translation": "终止(&E)\\bDel"
+        },
+        {
+          "id": "suspend",
+          "source": "&Suspend",
+          "translation": "挂起(&S)"
+        },
+        {
+          "id": "resume",
+          "source": "Res&ume",
+          "translation": "恢复(&U)"
+        },
+        {
+          "id": "freeze",
+          "source": "&Freeze",
+          "translation": "冻结(&F)"
+        },
+        {
+          "id": "thaw",
+          "source": "&Thaw",
+          "translation": "解冻(&T)"
+        },
+        {
+          "id": "analyze",
+          "source": "Analy&ze",
+          "translation": "分析(&Z)"
+        },
+        {
+          "id": "affinity",
+          "source": "&Affinity",
+          "translation": "处理器相关性(&A)"
+        },
+        {
+          "id": "boost",
+          "source": "&Boost",
+          "translation": "优先级提升(&B)"
+        },
+        {
+          "id": "critical",
+          "source": "Critical",
+          "translation": "关键线程"
+        },
+        {
+          "id": "permissions",
+          "source": "Per&missions",
+          "translation": "权限(&M)"
+        },
+        {
+          "id": "token",
+          "source": "&Token",
+          "translation": "令牌(&T)"
+        },
+        {
+          "id": "priority",
+          "source": "&Priority",
+          "translation": "优先级(&P)",
+          "expected": 2
+        },
+        {
+          "id": "time-critical",
+          "source": "Time &critical",
+          "translation": "时间关键(&C)"
+        },
+        {
+          "id": "highest",
+          "source": "&Highest",
+          "translation": "最高(&H)"
+        },
+        {
+          "id": "above-normal",
+          "source": "&Above normal",
+          "translation": "高于正常(&A)"
+        },
+        {
+          "id": "normal",
+          "source": "&Normal",
+          "translation": "正常(&N)",
+          "expected": 3
+        },
+        {
+          "id": "below-normal",
+          "source": "&Below normal",
+          "translation": "低于正常(&B)",
+          "expected": 2
+        },
+        {
+          "id": "lowest",
+          "source": "&Lowest",
+          "translation": "最低(&L)"
+        },
+        {
+          "id": "idle",
+          "source": "&Idle",
+          "translation": "空闲(&I)"
+        },
+        {
+          "id": "io-priority",
+          "source": "&I/O priority",
+          "translation": "I/O 优先级(&I)"
+        },
+        {
+          "id": "high",
+          "source": "&High",
+          "translation": "高(&H)"
+        },
+        {
+          "id": "low",
+          "source": "&Low",
+          "translation": "低(&L)",
+          "expected": 2
+        },
+        {
+          "id": "very-low",
+          "source": "&Very low",
+          "translation": "很低(&V)",
+          "expected": 2
+        },
+        {
+          "id": "page-priority",
+          "source": "Pa&ge priority",
+          "translation": "页面优先级(&G)"
+        },
+        {
+          "id": "medium",
+          "source": "&Medium",
+          "translation": "中等(&M)"
+        },
+        {
+          "id": "copy",
+          "source": "&Copy\\bCtrl+C",
+          "translation": "复制(&C)\\bCtrl+C"
+        },
+        {
+          "id": "shutdown-warning",
+          "source": "If the process ends, the operating system will shut down immediately.",
+          "translation": "如果该进程结束，操作系统将立即关机。"
+        },
+        {
+          "id": "hide-suspended",
+          "source": "Hide suspended",
+          "translation": "隐藏已挂起线程"
+        },
+        {
+          "id": "hide-gui",
+          "source": "Hide gui",
+          "translation": "隐藏 GUI 线程"
+        },
+        {
+          "id": "highlight-suspended",
+          "source": "Highlight suspended",
+          "translation": "突出显示已挂起线程"
+        },
+        {
+          "id": "highlight-delay",
+          "source": "Highlight delay execution",
+          "translation": "突出显示延迟执行等待"
+        },
+        {
+          "id": "highlight-user",
+          "source": "Highlight user request",
+          "translation": "突出显示用户请求等待"
+        },
+        {
+          "id": "highlight-alert",
+          "source": "Highlight alert by thread ID",
+          "translation": "突出显示按线程 ID 提醒的等待"
+        },
+        {
+          "id": "highlight-queue",
+          "source": "Highlight queue",
+          "translation": "突出显示队列等待"
+        },
+        {
+          "id": "highlight-executive",
+          "source": "Highlight executive",
+          "translation": "突出显示执行体等待"
+        },
+        {
+          "id": "highlight-gui",
+          "source": "Highlight gui",
+          "translation": "突出显示 GUI 线程"
+        },
+        {
+          "id": "save",
+          "source": "Save...",
+          "translation": "保存..."
+        }
+      ]
+    },
+    {
+      "id": "process-property-module-page",
+      "path": "SystemInformer/prpgmod.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "empty",
+          "source": "There are no modules to display.",
+          "translation": "没有可显示的模块。"
+        },
+        {
+          "id": "unload",
+          "source": "&Unload\\bDel",
+          "translation": "卸载(&U)\\bDel"
+        },
+        {
+          "id": "location",
+          "source": "Open &file location\\bCtrl+Enter",
+          "translation": "打开文件位置(&F)\\bCtrl+Enter"
+        },
+        {
+          "id": "properties",
+          "source": "P&roperties",
+          "translation": "属性(&R)"
+        },
+        {
+          "id": "copy",
+          "source": "&Copy\\bCtrl+C",
+          "translation": "复制(&C)\\bCtrl+C"
+        },
+        {
+          "id": "hide-dynamic",
+          "source": "Hide dynamic",
+          "translation": "隐藏动态模块"
+        },
+        {
+          "id": "hide-mapped",
+          "source": "Hide mapped",
+          "translation": "隐藏映射模块"
+        },
+        {
+          "id": "hide-static",
+          "source": "Hide static",
+          "translation": "隐藏静态模块"
+        },
+        {
+          "id": "hide-verified",
+          "source": "Hide verified",
+          "translation": "隐藏已验证模块"
+        },
+        {
+          "id": "hide-system",
+          "source": "Hide system",
+          "translation": "隐藏系统模块"
+        },
+        {
+          "id": "hide-coherency",
+          "source": "Hide low image coherency",
+          "translation": "隐藏映像一致性较低的模块"
+        },
+        {
+          "id": "hide-knowndll",
+          "source": "Hide knowndlls images",
+          "translation": "隐藏 KnownDLL 映像"
+        },
+        {
+          "id": "highlight-dotnet",
+          "source": "Highlight .NET modules",
+          "translation": "突出显示 .NET 模块"
+        },
+        {
+          "id": "highlight-immersive",
+          "source": "Highlight immersive modules",
+          "translation": "突出显示沉浸式模块"
+        },
+        {
+          "id": "highlight-relocated",
+          "source": "Highlight relocated modules",
+          "translation": "突出显示已重定位模块"
+        },
+        {
+          "id": "highlight-untrusted",
+          "source": "Highlight untrusted modules",
+          "translation": "突出显示不受信任模块"
+        },
+        {
+          "id": "highlight-system",
+          "source": "Highlight system modules",
+          "translation": "突出显示系统模块"
+        },
+        {
+          "id": "highlight-coherency",
+          "source": "Highlight low image coherency",
+          "translation": "突出显示映像一致性较低的模块"
+        },
+        {
+          "id": "highlight-knowndll",
+          "source": "Highlight knowndlls images",
+          "translation": "突出显示 KnownDLL 映像"
+        },
+        {
+          "id": "highlight-native",
+          "source": "Highlight native modules",
+          "translation": "突出显示本机模块"
+        },
+        {
+          "id": "highlight-mapped",
+          "source": "Highlight mapped modules",
+          "translation": "突出显示映射模块"
+        },
+        {
+          "id": "zero-pad",
+          "source": "Zero pad addresses",
+          "translation": "地址补前导零"
+        },
+        {
+          "id": "load",
+          "source": "Load module...",
+          "translation": "加载模块..."
+        },
+        {
+          "id": "save",
+          "source": "Save...",
+          "translation": "保存..."
+        },
+        {
+          "id": "load-warning",
+          "source": "Some programs may restrict access or ban your account when loading modules into the process.",
+          "translation": "向进程加载模块时，某些程序可能会限制访问或封禁你的账户。"
+        },
+        {
+          "id": "query-error",
+          "source": "Unable to query module information:\\n%s",
+          "translation": "无法查询模块信息：\\n%s"
+        }
+      ]
+    },
+    {
+      "id": "process-property-memory-page",
+      "path": "SystemInformer/prpgmem.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "empty",
+          "source": "There are no memory regions to display.",
+          "translation": "没有可显示的内存区域。"
+        },
+        {
+          "id": "read-write",
+          "source": "&Read/Write memory...",
+          "translation": "读取/写入内存(&R)..."
+        },
+        {
+          "id": "protection",
+          "source": "Change &protection...",
+          "translation": "更改保护属性(&P)..."
+        },
+        {
+          "id": "empty-ws",
+          "source": "&Empty working set...",
+          "translation": "清空工作集(&E)..."
+        },
+        {
+          "id": "free",
+          "source": "&Free",
+          "translation": "释放(&F)"
+        },
+        {
+          "id": "decommit",
+          "source": "&Decommit",
+          "translation": "取消提交(&D)"
+        },
+        {
+          "id": "save-context",
+          "source": "&Save...",
+          "translation": "保存(&S)..."
+        },
+        {
+          "id": "copy",
+          "source": "&Copy\\bCtrl+C",
+          "translation": "复制(&C)\\bCtrl+C"
+        },
+        {
+          "id": "hide-free",
+          "source": "Hide free pages",
+          "translation": "隐藏空闲页面"
+        },
+        {
+          "id": "hide-reserved",
+          "source": "Hide reserved pages",
+          "translation": "隐藏保留页面"
+        },
+        {
+          "id": "hide-guard",
+          "source": "Hide guard pages",
+          "translation": "隐藏保护页"
+        },
+        {
+          "id": "highlight-private",
+          "source": "Highlight private pages",
+          "translation": "突出显示专用页面"
+        },
+        {
+          "id": "highlight-system",
+          "source": "Highlight system pages",
+          "translation": "突出显示系统页面"
+        },
+        {
+          "id": "highlight-cfg",
+          "source": "Highlight CFG pages",
+          "translation": "突出显示 CFG 页面"
+        },
+        {
+          "id": "highlight-executable",
+          "source": "Highlight executable pages",
+          "translation": "突出显示可执行页面"
+        },
+        {
+          "id": "zero-pad",
+          "source": "Zero pad addresses",
+          "translation": "地址补前导零"
+        },
+        {
+          "id": "read-address",
+          "source": "Read/Write &address...",
+          "translation": "读取/写入地址(&A)..."
+        },
+        {
+          "id": "heaps",
+          "source": "Heaps...",
+          "translation": "堆..."
+        },
+        {
+          "id": "modified",
+          "source": "Modified...",
+          "translation": "已修改页面..."
+        },
+        {
+          "id": "strings",
+          "source": "Strings...",
+          "translation": "字符串..."
+        },
+        {
+          "id": "save",
+          "source": "Save...",
+          "translation": "保存..."
+        },
+        {
+          "id": "address-title",
+          "source": "Read/Write Address",
+          "translation": "读取/写入地址"
+        },
+        {
+          "id": "address-prompt",
+          "source": "Enter an address:",
+          "translation": "输入地址："
+        },
+        {
+          "id": "query-error",
+          "source": "Unable to query memory information:\\n%s",
+          "translation": "无法查询内存信息：\\n%s"
+        }
+      ]
+    },
+    {
+      "id": "process-property-environment-page",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "query-error",
+          "source": "Unable to query environment information:\\n",
+          "translation": "无法查询环境信息：\\n"
+        },
+        {
+          "id": "warning",
+          "source": "Some programs may restrict access or ban your account when editing the environment variable(s) of the process.",
+          "translation": "编辑进程的环境变量时，某些程序可能会限制访问或封禁你的账户。",
+          "expected": 3
+        },
+        {
+          "id": "set-error",
+          "source": "Unable to set the environment variable.",
+          "translation": "无法设置环境变量。",
+          "expected": 3
+        },
+        {
+          "id": "delete-error",
+          "source": "Unable to delete the environment variable.",
+          "translation": "无法删除环境变量。",
+          "expected": 3
+        },
+        {
+          "id": "edit",
+          "source": "Edit",
+          "translation": "编辑"
+        },
+        {
+          "id": "delete",
+          "source": "Delete",
+          "translation": "删除"
+        },
+        {
+          "id": "copy",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        },
+        {
+          "id": "hide-process",
+          "source": "Hide process",
+          "translation": "隐藏进程环境变量"
+        },
+        {
+          "id": "hide-user",
+          "source": "Hide user",
+          "translation": "隐藏用户环境变量"
+        },
+        {
+          "id": "hide-system",
+          "source": "Hide system",
+          "translation": "隐藏系统环境变量"
+        },
+        {
+          "id": "hide-cmd",
+          "source": "Hide cmd",
+          "translation": "隐藏 CMD 环境变量"
+        },
+        {
+          "id": "highlight-process",
+          "source": "Highlight process",
+          "translation": "突出显示进程环境变量"
+        },
+        {
+          "id": "highlight-user",
+          "source": "Highlight user",
+          "translation": "突出显示用户环境变量"
+        },
+        {
+          "id": "highlight-system",
+          "source": "Highlight system",
+          "translation": "突出显示系统环境变量"
+        },
+        {
+          "id": "highlight-cmd",
+          "source": "Highlight cmd",
+          "translation": "突出显示 CMD 环境变量"
+        },
+        {
+          "id": "new-variable",
+          "source": "New variable...",
+          "translation": "新建变量..."
+        }
+      ]
+    },
+    {
+      "id": "process-property-handle-page",
+      "path": "SystemInformer/prpghndl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "empty",
+          "source": "There are no handles to display.",
+          "translation": "没有可显示的句柄。"
+        },
+        {
+          "id": "close",
+          "source": "C&lose\\bDel",
+          "translation": "关闭(&L)\\bDel"
+        },
+        {
+          "id": "protected",
+          "source": "&Protected",
+          "translation": "受保护(&P)"
+        },
+        {
+          "id": "inherit",
+          "source": "&Inherit",
+          "translation": "可继承(&I)"
+        },
+        {
+          "id": "security",
+          "source": "Secu&rity",
+          "translation": "安全(&R)"
+        },
+        {
+          "id": "properties",
+          "source": "Prope&rties\\bEnter",
+          "translation": "属性(&R)\\bEnter"
+        },
+        {
+          "id": "copy",
+          "source": "&Copy\\bCtrl+C",
+          "translation": "复制(&C)\\bCtrl+C"
+        },
+        {
+          "id": "hide-protected",
+          "source": "Hide protected handles",
+          "translation": "隐藏受保护句柄"
+        },
+        {
+          "id": "hide-inherit",
+          "source": "Hide inherit handles",
+          "translation": "隐藏可继承句柄"
+        },
+        {
+          "id": "hide-unnamed",
+          "source": "Hide unnamed handles",
+          "translation": "隐藏未命名句柄"
+        },
+        {
+          "id": "hide-etw",
+          "source": "Hide etw handles",
+          "translation": "隐藏 ETW 句柄"
+        },
+        {
+          "id": "snapshots",
+          "source": "Handle snapshots",
+          "translation": "句柄快照"
+        },
+        {
+          "id": "highlight-protected",
+          "source": "Highlight protected handles",
+          "translation": "突出显示受保护句柄"
+        },
+        {
+          "id": "highlight-inherit",
+          "source": "Highlight inherit handles",
+          "translation": "突出显示可继承句柄"
+        },
+        {
+          "id": "statistics",
+          "source": "Statistics",
+          "translation": "统计信息"
+        }
+      ]
+    },
+    {
+      "id": "process-property-windows-page",
+      "path": "plugins/WindowExplorer/wnddlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "empty",
+          "source": "There are no windows to display.",
+          "translation": "没有可显示的窗口。"
+        },
+        {
+          "id": "front",
+          "source": "Bring to front",
+          "translation": "置于前台"
+        },
+        {
+          "id": "restore",
+          "source": "Restore",
+          "translation": "还原"
+        },
+        {
+          "id": "minimize",
+          "source": "Minimize",
+          "translation": "最小化"
+        },
+        {
+          "id": "maximize",
+          "source": "Maximize",
+          "translation": "最大化"
+        },
+        {
+          "id": "close",
+          "source": "Close",
+          "translation": "关闭"
+        },
+        {
+          "id": "destroy",
+          "source": "Destroy",
+          "translation": "销毁"
+        },
+        {
+          "id": "visible",
+          "source": "Visible",
+          "translation": "可见"
+        },
+        {
+          "id": "enabled",
+          "source": "Enabled",
+          "translation": "已启用"
+        },
+        {
+          "id": "top",
+          "source": "Always on top",
+          "translation": "总在最前"
+        },
+        {
+          "id": "opacity",
+          "source": "&Opacity",
+          "translation": "不透明度(&O)"
+        },
+        {
+          "id": "opaque",
+          "source": "&Opaque",
+          "translation": "不透明(&O)"
+        },
+        {
+          "id": "inspect",
+          "source": "&Inspect",
+          "translation": "检查(&I)"
+        },
+        {
+          "id": "location",
+          "source": "Open &file location",
+          "translation": "打开文件位置(&F)"
+        },
+        {
+          "id": "highlight",
+          "source": "Highlight",
+          "translation": "突出显示"
+        },
+        {
+          "id": "process",
+          "source": "Go to process...",
+          "translation": "转到进程..."
+        },
+        {
+          "id": "thread",
+          "source": "Go to thread...",
+          "translation": "转到线程..."
+        },
+        {
+          "id": "properties",
+          "source": "Properties",
+          "translation": "属性"
+        },
+        {
+          "id": "copy",
+          "source": "Copy\\bCtrl+C",
+          "translation": "复制\\bCtrl+C"
+        },
+        {
+          "id": "enum-message",
+          "source": "Enumerate message-only windows",
+          "translation": "枚举仅消息窗口",
+          "expected": 2
+        },
+        {
+          "id": "enum-hidden",
+          "source": "Enumerate non-visible windows",
+          "translation": "枚举不可见窗口",
+          "expected": 2
+        },
+        {
+          "id": "highlight-message",
+          "source": "Highlight message-only windows",
+          "translation": "突出显示仅消息窗口",
+          "expected": 2
+        },
+        {
+          "id": "icons",
+          "source": "Enable icons",
+          "translation": "启用图标",
+          "expected": 2
+        },
+        {
+          "id": "desktop",
+          "source": "Show desktop windows",
+          "translation": "显示桌面窗口",
+          "expected": 2
+        },
+        {
+          "id": "enum-tree",
+          "source": "Enumerate windows",
+          "translation": "按父子关系枚举窗口",
+          "expected": 2
+        },
+        {
+          "id": "enum-z",
+          "source": "Enumerate windows by z-order",
+          "translation": "按 Z 顺序枚举窗口",
+          "expected": 2
+        },
+        {
+          "id": "enum-owner",
+          "source": "Enumerate windows by owner",
+          "translation": "按所有者枚举窗口",
+          "expected": 2
+        },
+        {
+          "id": "snapshot",
+          "source": "Use snapshot window finder",
+          "translation": "使用快照式窗口查找器"
+        },
+        {
+          "id": "destroy-error",
+          "source": "Unable to destroy the window.",
+          "translation": "无法销毁窗口。",
+          "expected": 2
+        },
+        {
+          "id": "process-missing",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。",
+          "expected": 4
+        },
+        {
+          "id": "window-missing",
+          "source": "The window does not exist.",
+          "translation": "窗口不存在。",
+          "expected": 2
+        },
+        {
+          "id": "confirm-title",
+          "source": "Confirm Parent Visibility Change",
+          "translation": "确认更改父窗口可见性",
+          "expected": 3
+        },
+        {
+          "id": "dpi",
+          "source": "Enter new Window DPI:",
+          "translation": "输入新的窗口 DPI：",
+          "expected": 6
+        }
+      ]
+    },
+    {
+      "id": "process-property-general-runtime",
+      "path": "SystemInformer/prpggen.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "none",
+          "source": "None",
+          "translation": "无",
+          "expected": 3
+        },
+        {
+          "id": "light",
+          "source": "Light",
+          "translation": "轻度保护"
+        },
+        {
+          "id": "full",
+          "source": "Full",
+          "translation": "完全保护"
+        },
+        {
+          "id": "unknown",
+          "source": "Unknown",
+          "translation": "未知"
+        },
+        {
+          "id": "secure",
+          "source": "Secure (IUM)",
+          "translation": "安全进程（IUM）",
+          "expected": 2
+        },
+        {
+          "id": "yes",
+          "source": "Yes",
+          "translation": "是"
+        },
+        {
+          "id": "na",
+          "source": "N/A",
+          "translation": "不适用",
+          "expected": 9
+        },
+        {
+          "id": "nonexistent",
+          "source": "Non-existent process (%lu)",
+          "translation": "不存在的进程（%lu）"
+        },
+        {
+          "id": "pe-missing",
+          "source": "Make sure the PE Viewer executable file is present.",
+          "translation": "请确认 PE 查看器的可执行文件存在。"
+        },
+        {
+          "id": "explorer-missing",
+          "source": "Make sure the Explorer executable file is present.",
+          "translation": "请确认文件资源管理器的可执行文件存在。"
+        },
+        {
+          "id": "locate",
+          "source": "Unable to locate the file.",
+          "translation": "无法找到文件。",
+          "expected": 2
+        },
+        {
+          "id": "process-missing",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。"
+        },
+        {
+          "id": "no-write",
+          "source": "No-Write-Up",
+          "translation": "禁止向上写入"
+        },
+        {
+          "id": "no-read",
+          "source": "No-Read-Up",
+          "translation": "禁止向上读取"
+        },
+        {
+          "id": "no-execute",
+          "source": "No-Execute-Up",
+          "translation": "禁止向上执行"
+        },
+        {
+          "id": "update",
+          "source": "update",
+          "translation": "更新"
+        },
+        {
+          "id": "integrity-object",
+          "source": "the integrity label",
+          "translation": "进程完整性标签"
+        },
+        {
+          "id": "integrity-warning",
+          "source": "Altering the integrity label for a process may produce undesirable results, instability or data corruption.",
+          "translation": "更改进程的完整性标签可能导致意外结果、系统不稳定或数据损坏。"
+        },
+        {
+          "id": "integrity-error",
+          "source": "Unable to set the integrity label",
+          "translation": "无法设置完整性标签"
+        },
+        {
+          "id": "operation-error",
+          "source": "Unable to perform the operation.",
+          "translation": "无法执行该操作。"
+        }
+      ]
+    },
+    {
+      "id": "process-property-performance-runtime",
+      "path": "SystemInformer/prpgperf.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "read-other",
+          "source": "R+O: ",
+          "translation": "读取+其他："
+        },
+        {
+          "id": "read",
+          "source": "R: ",
+          "translation": "读取："
+        },
+        { "id": "cpu-kernel", "source": "% (K: ", "translation": "%（内核态：", "expected": 2 },
+        { "id": "cpu-user", "source": "%, U: ", "translation": "%，用户态：", "expected": 2 },
+        { "id": "io-write-inline", "source": ", W: ", "translation": "，写入：" },
+        { "id": "io-write-line", "source": "\\nW: ", "translation": "\\n写入：" },
+        { "id": "io-other-line", "source": "\\nO: ", "translation": "\\n其他：" }
+      ]
+    },
+    {
+      "id": "process-property-token-resource-followup",
+      "path": "SystemInformer/SystemInformer.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "virtualized", "source": "Virtualized:", "translation": "已虚拟化：" },
+        { "id": "primary-group", "source": "Primary group:", "translation": "主要组：" },
+        { "id": "uiaccess", "source": "UIAccess:", "translation": "UIAccess：" },
+        { "id": "linked-token", "source": "Linked token", "translation": "关联令牌" },
+        { "id": "source", "source": "Source", "translation": "来源" },
+        { "id": "luid", "source": "LUID:", "translation": "LUID：" },
+        { "id": "capabilities", "source": "Capabilities", "translation": "功能" }
+      ]
+    },
+    {
+      "id": "process-property-environment-runtime-followup",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "value", "source": "Value", "translation": "值" },
+        { "id": "process", "source": "Process", "translation": "进程", "expected": 2 },
+        { "id": "user", "source": "User", "translation": "用户", "expected": 2 },
+        { "id": "system", "source": "System", "translation": "系统", "expected": 2 },
+        { "id": "empty", "source": "There are no environment variables to display.", "translation": "没有可显示的环境变量。", "expected": 2 }
+      ]
+    },
+    {
+      "id": "process-property-general-runtime-followup",
+      "path": "SystemInformer/prpggen.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "verified-link", "source": "<a>(Verified) %s</a>", "translation": "<a>（已验证）%s</a>" },
+        { "id": "verified", "source": "(Verified) ", "translation": "（已验证）" },
+        { "id": "unverified", "source": "(UNVERIFIED) ", "translation": "（未验证）" },
+        { "id": "ago", "source": "%s ago (%s)", "translation": "%s 前（%s）", "expected": 2 }
+      ]
+    },
+    {
+      "id": "extendedtools-commit-memory-followup",
+      "path": "plugins/ExtendedTools/ExtendedTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "commit-memory", "source": "Commit memory", "translation": "提交内存", "expected": 2 }
+      ]
+    },
+    {
+      "id": "window-explorer-runtime-followup",
+      "path": "plugins/WindowExplorer/wnddlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "resume", "source": "Resume", "translation": "继续" },
+        { "id": "parent-hidden", "source": "The parent window(s) of this window are currently invisible.\\n\\n", "translation": "此窗口的父窗口当前不可见。\\n\\n", "expected": 3 },
+        { "id": "show-parent", "source": "Do you want to make the parent window(s) visible along with this window?", "translation": "是否要在显示此窗口的同时显示其父窗口？", "expected": 3 }
+      ]
+    },
+    {
+      "id": "usernotes-comment-confirmation-followup",
+      "path": "plugins/UserNotes/prpcmpage.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "replace-prefix", "source": "Do you want to replace the comment for %s which is currently\\n    \\\"%s\\\"\\n", "translation": "是否要替换 %s 当前的备注：\\n    \\\"%s\\\"\\n" },
+        { "id": "replace-suffix", "source": "with\\n    \\\"%s\\\"?", "translation": "替换为\\n    \\\"%s\\\"？" },
+        { "id": "title", "source": "Comment", "translation": "备注" }
+      ]
+    },
+    {
+      "id": "thread-stack-window-followup",
+      "path": "SystemInformer/thrdstk.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "Stack - thread %lu", "translation": "堆栈 - 线程 %lu" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "stack-address", "source": "Stack address", "translation": "堆栈地址" },
+        { "id": "frame-address", "source": "Frame address", "translation": "帧地址" },
+        { "id": "file-name", "source": "File name", "translation": "文件名" },
+        { "id": "line-number", "source": "Line number", "translation": "行号" },
+        { "id": "architecture", "source": "Architecture", "translation": "体系结构" },
+        { "id": "hide-user", "source": "Hide user frames", "translation": "隐藏用户帧" },
+        { "id": "hide-system", "source": "Hide system frames", "translation": "隐藏系统帧" },
+        { "id": "hide-inline", "source": "Hide inline frames", "translation": "隐藏内联帧" },
+        { "id": "highlight-user", "source": "Highlight user frames", "translation": "突出显示用户帧" },
+        { "id": "highlight-system", "source": "Highlight system frames", "translation": "突出显示系统帧" },
+        { "id": "highlight-inline", "source": "Highlight inline frames", "translation": "突出显示内联帧" }
+      ]
+    },
+    {
+      "id": "handle-properties-window-followup",
+      "path": "SystemInformer/hndlprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "Handle", "translation": "句柄" },
+        { "id": "basic", "source": "Basic information", "translation": "基本信息" },
+        { "id": "security", "source": "Security information", "translation": "安全信息", "expected": 2 },
+        { "id": "references", "source": "References", "translation": "引用", "expected": 2 },
+        { "id": "quota", "source": "Quota charges", "translation": "配额占用" },
+        { "id": "name", "source": "Name", "translation": "名称", "expected": 6 },
+        { "id": "value", "source": "Value", "translation": "值", "expected": 3 },
+        { "id": "object-address", "source": "Object address", "translation": "对象地址" },
+        { "id": "granted-access", "source": "Granted access", "translation": "已授予访问权限" },
+        { "id": "file", "source": "File information", "translation": "文件信息" },
+        { "id": "process", "source": "Process information", "translation": "进程信息" },
+        { "id": "thread", "source": "Thread information", "translation": "线程信息" }
       ]
     },
     {
