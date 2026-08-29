@@ -1,9 +1,10 @@
 # 简体中文版发布说明
 
-本分支的普通 `[build]` 构建只产生一个保留 1 天的便携 ZIP Actions Artifact；推送 tag 时不会上传 Artifact，而是直接创建 GitHub Release。Release 包含：
+本分支面向自用 x64 Windows：普通 `[build]` 构建只产生一个保留 1 天的 x64 便携版 Actions Artifact，Artifact 内直接是程序文件，不再套一层 ZIP；推送 tag 时不会上传 Artifact，而是直接创建 GitHub Release。x64 成品仍包含运行 WOW64 功能所必需的 `x86` 辅助目录，这不等于发布独立的 i386 版本。Release 包含：
 
 - `systeminformer-build-release-setup.exe`：安装程序
-- `systeminformer-build-bin.zip`：便携版
+- `systeminformer-build-win64-bin.zip`：供用户下载的 x64 便携版
+- `systeminformer-build-bin.zip`：安装程序使用的 x64 安装载荷（保留 `amd64` 目录结构）
 - `systeminformer-zh-CN-SHA256SUMS.txt`：发布文件校验和
 - `systeminformer-update.json`：内置更新器读取的签名元数据
 

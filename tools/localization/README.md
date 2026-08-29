@@ -99,7 +99,7 @@ python -m unittest discover -s tools/localization/tests -v
 - `zh-CN` 分支提交信息包含 `[build]`；
 - 推送一个指向 `zh-CN` 提交的 Tag。
 
-普通提交可能显示为 `skipped`，但不会占用 Windows runner 或上传 Artifact。Artifact 保留期为 1 天。
+普通提交可能显示为 `skipped`，但不会占用 Windows runner 或上传 Artifact。`[build]` 只构建 x64 主程序及其必需的 x86/WOW64 辅助组件，并将 `Release64` 的内容直接作为单个 Artifact 上传；不会生成 ARM64 或独立 i386 成品。Artifact 保留期为 1 天。
 
 目前未实现自动同步上游、自动检查上游、自动创建 Tag 或自动修复漂移规则。上游同步完成后应先人工运行
 `check --state source` 并完成适配，再决定是否触发构建。

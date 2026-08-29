@@ -1206,51 +1206,65 @@ namespace CustomBuildTool
         /// Builds zip archives containing binary files for each platform and a combined archive.
         /// </summary>
         /// <param name="Flags">Build flags indicating which configurations to process.</param>
+        /// <param name="X64Only">When true, creates only the x64 archive and an x64-only combined setup payload.</param>
         /// <returns>True if all zip archives are built successfully; otherwise, false.</returns>
-        public static bool BuildBinZip(BuildFlags Flags)
+        public static bool BuildBinZip(BuildFlags Flags, bool X64Only = false)
         {
             string buildConfiguration = Flags.HasFlag(BuildFlags.BuildDebug) ? "Debug" : "Release";
             string buildDirectory = GetBuildBaseDirectory(Flags);
             string toolchainSuffix = GetToolchainSuffix(Flags);
 
-            var buildZipFilesMap = new Dictionary<string, string>(4, StringComparer.OrdinalIgnoreCase)
+            var buildZipFiles = new List<(string SourceDirectory, string ArchiveName, string IncludedPathPrefix)>();
+
+            if (X64Only)
             {
-                [Path.Join([buildDirectory, $"{buildConfiguration}32"])] = $"systeminformer-build{toolchainSuffix}-win32-bin.zip",
-                [Path.Join([buildDirectory, $"{buildConfiguration}64"])] = $"systeminformer-build{toolchainSuffix}-win64-bin.zip",
-                [Path.Join([buildDirectory, $"{buildConfiguration}ARM64"])] = $"systeminformer-build{toolchainSuffix}-arm64-bin.zip",
-                [buildDirectory] = $"systeminformer-build{toolchainSuffix}-bin.zip",
-            };
+                buildZipFiles.Add((
+                    Path.Join([buildDirectory, $"{buildConfiguration}64"]),
+                    $"systeminformer-build{toolchainSuffix}-win64-bin.zip",
+                    null));
+                buildZipFiles.Add((
+                    buildDirectory,
+                    $"systeminformer-build{toolchainSuffix}-bin.zip",
+                    $"{buildConfiguration}64\\"));
+            }
+            else
+            {
+                buildZipFiles.Add((Path.Join([buildDirectory, $"{buildConfiguration}32"]), $"systeminformer-build{toolchainSuffix}-win32-bin.zip", null));
+                buildZipFiles.Add((Path.Join([buildDirectory, $"{buildConfiguration}64"]), $"systeminformer-build{toolchainSuffix}-win64-bin.zip", null));
+                buildZipFiles.Add((Path.Join([buildDirectory, $"{buildConfiguration}ARM64"]), $"systeminformer-build{toolchainSuffix}-arm64-bin.zip", null));
+                buildZipFiles.Add((buildDirectory, $"systeminformer-build{toolchainSuffix}-bin.zip", null));
+            }
 
             Program.PrintColorMessage(BuildTimeSpan(), ConsoleColor.DarkGray, false);
             Program.PrintColorMessage("Generating zip files... ", ConsoleColor.Cyan);
 
             try
             {
-                foreach (var zipEntry in buildZipFilesMap)
+                foreach (var zipEntry in buildZipFiles)
                 {
-                    string zipFilePath = Path.Join([BuildOutputFolder, zipEntry.Value]);
+                    string zipFilePath = Path.Join([BuildOutputFolder, zipEntry.ArchiveName]);
 
                     Win32.DeleteFile(zipFilePath, Flags);
                 }
 
                 // Create zips
 
-                foreach (var zipEntry in buildZipFilesMap)
+                foreach (var zipEntry in buildZipFiles)
                 {
-                    string zipFilePath = Path.Join([BuildOutputFolder, zipEntry.Value]);
+                    string zipFilePath = Path.Join([BuildOutputFolder, zipEntry.ArchiveName]);
 
-                    Program.PrintColorMessage($"Building {zipEntry.Value}... ", ConsoleColor.Cyan);
+                    Program.PrintColorMessage($"Building {zipEntry.ArchiveName}... ", ConsoleColor.Cyan);
 
-                    Zip.CreateCompressedFolder(zipEntry.Key, zipFilePath, Flags);
+                    Zip.CreateCompressedFolder(zipEntry.SourceDirectory, zipFilePath, Flags, zipEntry.IncludedPathPrefix);
                 }
 
                 // Total stats
 
-                foreach (var zipEntry in buildZipFilesMap)
+                foreach (var zipEntry in buildZipFiles)
                 {
-                    string zipFilePath = Path.Join([BuildOutputFolder, zipEntry.Value]);
+                    string zipFilePath = Path.Join([BuildOutputFolder, zipEntry.ArchiveName]);
 
-                    Program.PrintColorMessage($"{zipEntry.Value}: ", ConsoleColor.Green, false);
+                    Program.PrintColorMessage($"{zipEntry.ArchiveName}: ", ConsoleColor.Green, false);
                     Program.PrintColorMessage("...", ConsoleColor.Gray, false);
                     Program.PrintColorMessage($" {Win32.GetFileSize(zipFilePath).ToPrettySize()}", ConsoleColor.Yellow);
                 }

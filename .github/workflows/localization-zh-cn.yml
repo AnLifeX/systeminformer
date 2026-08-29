@@ -80,29 +80,43 @@ jobs:
       working-directory: ${{ github.workspace }}
       run: build\build_init.cmd
 
-    - name: Build portable package
+    - name: Build x64 portable package
       if: github.ref_type != 'tag'
       shell: pwsh
       working-directory: ${{ github.workspace }}
       run: |
         $buildTool = Join-Path $env:GITHUB_WORKSPACE "tools/CustomBuildTool/bin/Release/$env:PROCESSOR_ARCHITECTURE/CustomBuildTool.exe"
-        & $buildTool -bin
+        & $buildTool -bin --x64-only
         if ($LASTEXITCODE -ne 0) {
           throw "Portable build failed with exit code $LASTEXITCODE."
         }
 
-    - name: Build tagged release
+    - name: Build tagged x64 release
       if: github.ref_type == 'tag'
-      shell: cmd
+      shell: pwsh
       working-directory: ${{ github.workspace }}
-      run: build\build_release.cmd
+      run: |
+        $buildTool = Join-Path $env:GITHUB_WORKSPACE "tools/CustomBuildTool/bin/Release/$env:PROCESSOR_ARCHITECTURE/CustomBuildTool.exe"
+        & $buildTool -release --x64-only
+        if ($LASTEXITCODE -ne 0) {
+          throw "Tagged x64 release build failed with exit code $LASTEXITCODE."
+        }
+
+    - name: Prepare x64 portable artifact
+      if: github.ref_type != 'tag'
+      shell: pwsh
+      run: |
+        $portableArchive = Join-Path $env:GITHUB_WORKSPACE 'build/output/systeminformer-build-win64-bin.zip'
+        $portableDirectory = Join-Path $env:RUNNER_TEMP 'systeminformer-zh-CN-win64-portable'
+        New-Item -ItemType Directory -Path $portableDirectory -Force | Out-Null
+        Expand-Archive -LiteralPath $portableArchive -DestinationPath $portableDirectory -Force
 
     - name: Upload portable test package
       if: github.ref_type != 'tag'
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # 7.0.1
       with:
-        name: systeminformer-zh-CN-portable-${{ github.sha }}
-        path: build/output/systeminformer-build-bin.zip
+        name: systeminformer-zh-CN-win64-portable-${{ github.sha }}
+        path: ${{ runner.temp }}/systeminformer-zh-CN-win64-portable/**
         if-no-files-found: error
         retention-days: 1
 
@@ -153,6 +167,7 @@ jobs:
       run: |
         $files = @(
           'build/output/systeminformer-build-release-setup.exe'
+          'build/output/systeminformer-build-win64-bin.zip'
           'build/output/systeminformer-build-bin.zip'
         )
         $lines = foreach ($file in $files) {
@@ -190,6 +205,7 @@ jobs:
       run: |
         $assets = @(
           'build/output/systeminformer-build-release-setup.exe'
+          'build/output/systeminformer-build-win64-bin.zip'
           'build/output/systeminformer-build-bin.zip'
           'build/output/systeminformer-zh-CN-SHA256SUMS.txt'
           'build/output/systeminformer-update.json'

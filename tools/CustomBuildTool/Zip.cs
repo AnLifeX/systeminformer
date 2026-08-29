@@ -143,13 +143,19 @@ namespace CustomBuildTool
         /// <param name="SourceDirectoryName">The path to the directory to compress.</param>
         /// <param name="DestinationArchiveFileName">The path where the ZIP archive will be created.</param>
         /// <param name="Flags">Build flags controlling verbosity and other options.</param>
+        /// <param name="IncludedPathPrefix">Optional relative path prefix used to limit files in a combined archive.</param>
         /// <remarks>
         /// This method:
         /// - Skips files in debug directories and files with debug/linker extensions
         /// - Transforms Release configuration paths to architecture names (e.g., Release64 to amd64)
         /// - Uses optimal compression level
         /// </remarks>
-        public static void CreateCompressedFolder(string SourceDirectoryName, string DestinationArchiveFileName, BuildFlags Flags = BuildFlags.None)
+        public static void CreateCompressedFolder(
+            string SourceDirectoryName,
+            string DestinationArchiveFileName,
+            BuildFlags Flags = BuildFlags.None,
+            string IncludedPathPrefix = null
+            )
         {
             var progressReporter = new CompressionProgressReporter();
             var pathReplacements = new[] // Path replacements for archive entry names
@@ -166,6 +172,12 @@ namespace CustomBuildTool
                 {
                     bool shouldSkip = false;
                     string name = GetEntryName(file, SourceDirectoryName, false);
+
+                    if (!string.IsNullOrEmpty(IncludedPathPrefix) &&
+                        !name.StartsWith(IncludedPathPrefix, StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
 
                     foreach (var prefix in SkipPathPrefixes)
                     {

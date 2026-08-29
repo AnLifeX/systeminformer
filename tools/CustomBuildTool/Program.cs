@@ -519,12 +519,17 @@ namespace CustomBuildTool
         private static Command CreateBinCommand(Option<bool> VerboseOption)
         {
             var cmd = new Command("-bin", "Builds the binary package.");
+            var x64OnlyOption = new Option<bool>("--x64-only") { Description = "Builds and packages only the x64 distribution (plus required x86 helper files)." };
             cmd.Aliases.Add("-build-zip");
+            cmd.Add(x64OnlyOption);
             cmd.SetAction(parseResult =>
             {
                 bool verbose = parseResult.GetValue(VerboseOption);
+                bool x64Only = parseResult.GetValue(x64OnlyOption);
                 BuildToolsId.CheckForOutOfDateTools();
-                BuildFlags flags = BuildFlags.Release | (verbose ? BuildFlags.BuildVerbose : BuildFlags.None);
+                BuildFlags flags = x64Only
+                    ? BuildFlags.Build32bit | BuildFlags.Build64bit | BuildFlags.BuildRelease | BuildFlags.BuildApi | (verbose ? BuildFlags.BuildVerbose : BuildFlags.None)
+                    : BuildFlags.Release | (verbose ? BuildFlags.BuildVerbose : BuildFlags.None);
                 Build.SetupBuildEnvironment(true);
                 if (!Build.TryNormalizeBuildFlags(ref flags, true)) Environment.Exit(1);
 
@@ -533,9 +538,11 @@ namespace CustomBuildTool
                 if (!Build.BuildSolutionParallel("plugins\\Plugins.sln", flags))
                     Environment.Exit(1);
 
+                if (!Build.CopyWow64Files(flags))
+                    Environment.Exit(1);
                 if (!Build.CopyTextFiles(true, flags))
                     Environment.Exit(1);
-                if (!Build.BuildBinZip(flags))
+                if (!Build.BuildBinZip(flags, x64Only))
                     Environment.Exit(1);
                 if (!Build.CopyTextFiles(false, flags))
                     Environment.Exit(1);
@@ -765,12 +772,17 @@ namespace CustomBuildTool
         private static Command CreateReleaseCommand(Option<bool> VerboseOption)
         {
             var cmd = new Command("-release", "Builds the release configuration.");
+            var x64OnlyOption = new Option<bool>("--x64-only") { Description = "Builds and packages only the x64 distribution (plus required x86 helper files)." };
             cmd.Aliases.Add("-build-release");
+            cmd.Add(x64OnlyOption);
             cmd.SetAction(parseResult =>
             {
                 bool verbose = parseResult.GetValue(VerboseOption);
+                bool x64Only = parseResult.GetValue(x64OnlyOption);
                 BuildToolsId.CheckForOutOfDateTools();
-                BuildFlags flags = BuildFlags.Release | (verbose ? BuildFlags.BuildVerbose : BuildFlags.None);
+                BuildFlags flags = x64Only
+                    ? BuildFlags.Build32bit | BuildFlags.Build64bit | BuildFlags.BuildRelease | BuildFlags.BuildApi | (verbose ? BuildFlags.BuildVerbose : BuildFlags.None)
+                    : BuildFlags.Release | (verbose ? BuildFlags.BuildVerbose : BuildFlags.None);
                 Build.SetupBuildEnvironment(true);
                 if (!Build.TryNormalizeBuildFlags(ref flags, true)) Environment.Exit(1);
 
@@ -778,7 +790,7 @@ namespace CustomBuildTool
                 if (!Build.BuildSolutionParallel("plugins\\Plugins.sln", flags)) Environment.Exit(1);
                 if (!Build.CopyWow64Files(flags)) Environment.Exit(1);
                 if (!Build.CopyTextFiles(true, flags)) Environment.Exit(1);
-                if (!Build.BuildBinZip(flags)) Environment.Exit(1);
+                if (!Build.BuildBinZip(flags, x64Only)) Environment.Exit(1);
 
                 foreach (var (channel, _) in BuildConfig.Build_Channels)
                 {
