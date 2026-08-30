@@ -7209,6 +7209,23 @@
         { "id": "details-menu", "source": "&Details", "translation": "详细信息(&D)" },
         { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
       ]
+    },
+    {
+      "id": "unloaded-modules-runtime-audit",
+      "path": "plugins/ExtendedTools/unldll.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "open-process-error", "source": "Unable to open the process.", "translation": "无法打开进程。" },
+        { "id": "number", "source": "No.", "translation": "序号" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "base-address", "source": "Base Address", "translation": "基址" },
+        { "id": "size", "source": "Size", "translation": "大小" },
+        { "id": "timestamp", "source": "Time Stamp", "translation": "时间戳" },
+        { "id": "checksum", "source": "Checksum", "translation": "校验和" },
+        { "id": "version", "source": "Version", "translation": "版本" },
+        { "id": "trace-error", "source": "Unable to retrieve unload event trace information.", "translation": "无法检索卸载事件跟踪信息。" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
     }
   ]
 }
