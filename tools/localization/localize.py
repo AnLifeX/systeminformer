@@ -45,6 +45,7 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "NTVDM",
     "NPU",
     "PID",
+    "Ping",
     "PingGraphLayout",
     "Shift",
     "SID",

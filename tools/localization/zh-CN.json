@@ -6809,6 +6809,23 @@
       "items": [
         { "id": "user", "source": "User", "translation": "用户" }
       ]
+    },
+    {
+      "id": "network-traceroute-runtime-audit",
+      "path": "plugins/NetworkTools/tracert.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "tracing", "source": "Tracing %s...", "translation": "正在跟踪 %s...", "expected": 2 },
+        { "id": "tracing-route", "source": "Tracing route to %s with %lu bytes of data...", "translation": "正在跟踪到 %s 的路由，数据大小为 %lu 字节...", "expected": 2 },
+        { "id": "traceroute", "source": "Traceroute", "translation": "路由跟踪" },
+        { "id": "whois", "source": "Whois", "translation": "Whois 查询" },
+        { "id": "copy", "source": "Copy", "translation": "复制" },
+        { "id": "tracing-state", "source": "Tracing %s... %s", "translation": "正在跟踪 %s... %s" },
+        { "id": "error", "source": "error", "translation": "错误", "expected": 2 },
+        { "id": "continuous", "source": "continuous ping active", "translation": "连续 Ping 进行中", "expected": 2 },
+        { "id": "complete", "source": "complete", "translation": "已完成", "expected": 2 },
+        { "id": "route-state", "source": "Tracing route to %s with %lu bytes of data... %s.", "translation": "正在跟踪到 %s 的路由，数据大小为 %lu 字节... %s。" }
+      ]
     }
   ]
 }
