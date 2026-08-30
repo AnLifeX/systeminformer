@@ -240,6 +240,8 @@ class LocalizationCliTests(unittest.TestCase):
                     'UpdaterUpdateProgressToast(context, L"Downloading update...");',
                     'UpdateSetProgressFinalizingState(context, L"Finalizing update...");',
                     'SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, reinterpret_cast<LPARAM>(L"Preparing update..."));',
+                    'wcsncpy_s(listview->szMarkup, RTL_NUMBER_OF(listview->szMarkup), L"Loading history...", _TRUNCATE);',
+                    'PhpShowContinueMessageProcesses(hwndDlg, verb, L"Terminating a process will lose data.", FALSE, processes, count);',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -303,6 +305,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertIn("Downloading update...", result.stdout)
         self.assertIn("Finalizing update...", result.stdout)
         self.assertIn("Preparing update...", result.stdout)
+        self.assertIn("Terminating a process will lose data.", result.stdout)
         self.assertNotIn("&Copy", result.stdout)
         self.assertNotIn("section placeholder", result.stdout)
         self.assertNotIn("PingGraphLayout", result.stdout)
@@ -321,7 +324,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
         self.assertNotIn("[PUSHBUTTON] Close", result.stdout)
-        self.assertIn("uncovered=16", result.stdout)
+        self.assertIn("uncovered=18", result.stdout)
 
 
 if __name__ == "__main__":

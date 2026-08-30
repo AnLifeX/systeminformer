@@ -347,7 +347,10 @@ jobs:
             $metadata.setup_url -ne $expectedUrl -or
             $metadata.setup_length -ne $setupLength -or
             $metadata.setup_hash -ne $setupHash -or
-            $metadata.setup_sig.Length -ne 128) {
+            $metadata.setup_sig.Length -ne 128 -or
+            $metadata.changelog.Count -lt 1 -or
+            $metadata.changelog[0].sha -ne $env:GITHUB_SHA -or
+            $metadata.changelog[0].commit.author.date -notmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$') {
           throw 'Updater metadata does not match the validated release payload.'
         }
 

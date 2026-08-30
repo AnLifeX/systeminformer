@@ -643,6 +643,144 @@ static int __cdecl PhpStringObjectTypeCompare(
     return PhCompareString(entry1, entry2, TRUE);
 }
 
+typedef struct _PHP_OBJECT_TYPE_DISPLAY_NAME
+{
+    PCWSTR TypeName;
+    PCWSTR DisplayName;
+} PHP_OBJECT_TYPE_DISPLAY_NAME, *PPHP_OBJECT_TYPE_DISPLAY_NAME;
+
+static const PHP_OBJECT_TYPE_DISPLAY_NAME PhpObjectTypeDisplayNames[] =
+{
+    { L"Everything", L"Everything" },
+    { L"ActivationObject", L"ActivationObject" },
+    { L"ActivityReference", L"ActivityReference" },
+    { L"Adapter", L"Adapter" },
+    { L"ALPC Port", L"ALPC Port" },
+    { L"Callback", L"Callback" },
+    { L"Composition", L"Composition" },
+    { L"Controller", L"Controller" },
+    { L"CoreMessaging", L"CoreMessaging" },
+    { L"CoverageSampler", L"CoverageSampler" },
+    { L"DebugObject", L"DebugObject" },
+    { L"Desktop", L"Desktop" },
+    { L"Device", L"Device" },
+    { L"Directory", L"Directory" },
+    { L"DmaAdapter", L"DmaAdapter" },
+    { L"Driver", L"Driver" },
+    { L"DxgkCompositionObject", L"DxgkCompositionObject" },
+    { L"DxgkCurrentDxgThreadObject", L"DxgkCurrentDxgThreadObject" },
+    { L"DxgkDisplayManagerObject", L"DxgkDisplayManagerObject" },
+    { L"DxgkSharedBundleObject", L"DxgkSharedBundleObject" },
+    { L"DxgkSharedKeyedMutexObject", L"DxgkSharedKeyedMutexObject" },
+    { L"DxgkSharedProtectedSessionObject", L"DxgkSharedProtectedSessionObject" },
+    { L"DxgkSharedResource", L"DxgkSharedResource" },
+    { L"DxgkSharedSwapChainObject", L"DxgkSharedSwapChainObject" },
+    { L"DxgkSharedSyncObject", L"DxgkSharedSyncObject" },
+    { L"EnergyTracker", L"EnergyTracker" },
+    { L"EtwConsumer", L"EtwConsumer" },
+    { L"EtwRegistration", L"EtwRegistration" },
+    { L"EtwSessionDemuxEntry", L"EtwSessionDemuxEntry" },
+    { L"Event", L"Event" },
+    { L"File", L"File" },
+    { L"FilterCommunicationPort", L"FilterCommunicationPort" },
+    { L"FilterConnectionPort", L"FilterConnectionPort" },
+    { L"IoCompletion", L"IoCompletion" },
+    { L"IoCompletionReserve", L"IoCompletionReserve" },
+    { L"IRTimer", L"IRTimer" },
+    { L"Job", L"Job" },
+    { L"Key", L"Key" },
+    { L"KeyedEvent", L"KeyedEvent" },
+    { L"Mutant", L"Mutant" },
+    { L"NdisCmState", L"NdisCmState" },
+    { L"Partition", L"Partition" },
+    { L"PcwObject", L"PcwObject" },
+    { L"PowerRequest", L"PowerRequest" },
+    { L"Process", L"Process" },
+    { L"Profile", L"Profile" },
+    { L"PsSiloContextNonPaged", L"PsSiloContextNonPaged" },
+    { L"PsSiloContextPaged", L"PsSiloContextPaged" },
+    { L"RawInputManager", L"RawInputManager" },
+    { L"RegistryTransaction", L"RegistryTransaction" },
+    { L"Section", L"Section" },
+    { L"Semaphore", L"Semaphore" },
+    { L"Session", L"Session" },
+    { L"SymbolicLink", L"SymbolicLink" },
+    { L"Thread", L"Thread" },
+    { L"Timer", L"Timer" },
+    { L"TmEn", L"TmEn" },
+    { L"TmRm", L"TmRm" },
+    { L"TmTm", L"TmTm" },
+    { L"TmTx", L"TmTx" },
+    { L"Token", L"Token" },
+    { L"TpWorkerFactory", L"TpWorkerFactory" },
+    { L"Type", L"Type" },
+    { L"UserApcReserve", L"UserApcReserve" },
+    { L"VRegConfigurationContext", L"VRegConfigurationContext" },
+    { L"WaitCompletionPacket", L"WaitCompletionPacket" },
+    { L"WindowStation", L"WindowStation" },
+    { L"WmiGuid", L"WmiGuid" }
+};
+
+static PCWSTR PhpGetObjectTypeDisplayName(
+    _In_ PPH_STRING TypeName
+    )
+{
+    for (ULONG i = 0; i < RTL_NUMBER_OF(PhpObjectTypeDisplayNames); i++)
+    {
+        if (PhEqualString2(TypeName, PhpObjectTypeDisplayNames[i].TypeName, TRUE))
+            return PhpObjectTypeDisplayNames[i].DisplayName;
+    }
+
+    // Keep future Windows object types searchable even before a display translation is added.
+    return TypeName->Buffer;
+}
+
+static INT PhpAddObjectTypeComboBoxItem(
+    _In_ PPH_HANDLE_SEARCH_CONTEXT Context,
+    _In_ PPH_STRING TypeName
+    )
+{
+    INT index;
+    PPH_STRING typeName;
+
+    index = ComboBox_AddString(Context->TypeWindowHandle, PhpGetObjectTypeDisplayName(TypeName));
+
+    if (index < 0)
+        return index;
+
+    typeName = PhReferenceObject(TypeName);
+
+    if (ComboBox_SetItemData(Context->TypeWindowHandle, index, typeName) == CB_ERR)
+    {
+        PhDereferenceObject(typeName);
+        ComboBox_DeleteString(Context->TypeWindowHandle, index);
+        return CB_ERR;
+    }
+
+    return index;
+}
+
+static VOID PhpDeleteObjectTypeComboBoxItems(
+    _In_ PPH_HANDLE_SEARCH_CONTEXT Context
+    )
+{
+    INT count;
+
+    count = ComboBox_GetCount(Context->TypeWindowHandle);
+
+    for (INT i = 0; i < count; i++)
+    {
+        PPH_STRING typeName;
+
+        typeName = (PPH_STRING)ComboBox_GetItemData(Context->TypeWindowHandle, i);
+
+        if (typeName && (INT_PTR)typeName != CB_ERR)
+            PhDereferenceObject(typeName);
+    }
+
+    ComboBox_ResetContent(Context->TypeWindowHandle);
+}
+
 VOID PhpUpdateDropdownThemeMetrics(
     _In_ PPH_HANDLE_SEARCH_CONTEXT Context,
     _In_ LONG WindowDpi
@@ -694,11 +832,14 @@ VOID PhpPopulateObjectTypes(
     POBJECT_TYPES_INFORMATION objectTypes;
     POBJECT_TYPE_INFORMATION objectType;
     PPH_LIST objectTypeList;
+    PPH_STRING everythingType;
 
     objectTypeList = PhCreateList(100);
 
     // Add a custom object type for searching all objects.
-    ComboBox_AddString(Context->TypeWindowHandle, L"Everything");
+    everythingType = PhCreateString(L"Everything");
+    PhpAddObjectTypeComboBoxItem(Context, everythingType);
+    PhDereferenceObject(everythingType);
     ComboBox_SetCurSel(Context->TypeWindowHandle, 0);
 
     // Enumerate the available object types.
@@ -733,15 +874,18 @@ VOID PhpPopulateObjectTypes(
         for (ULONG i = 0; i < objectTypeList->Count; i++)
         {
             PPH_STRING entry = objectTypeList->Items[i];
+            PCWSTR displayName;
             SIZE textSize;
 
-            if (GetTextExtentPoint32(comboDc, entry->Buffer, (ULONG)entry->Length / sizeof(WCHAR), &textSize))
+            displayName = PhpGetObjectTypeDisplayName(entry);
+
+            if (GetTextExtentPoint32(comboDc, displayName, (ULONG)PhCountStringZ(displayName), &textSize))
             {
                 if (textSize.cx > maxLength)
                     maxLength = textSize.cx;
             }
 
-            ComboBox_AddString(Context->TypeWindowHandle, PhGetString(objectTypeList->Items[i]));
+            PhpAddObjectTypeComboBoxItem(Context, entry);
             PhDereferenceObject(objectTypeList->Items[i]);
         }
 
@@ -1321,6 +1465,7 @@ INT_PTR CALLBACK PhFindObjectsDlgProc(
             PhDeleteLayoutManager(&context->LayoutManager);
 
             PhpDeleteHandleObjectTree(context);
+            PhpDeleteObjectTypeComboBoxItems(context);
 
             if (context->WindowText)
                 PhDereferenceObject(context->WindowText);
@@ -1382,8 +1527,22 @@ INT_PTR CALLBACK PhFindObjectsDlgProc(
                     {
                         // Setup search parameters.
 
+                        INT typeIndex;
+                        PPH_STRING typeName;
+
                         context->SearchAll = !!PhIsNullOrEmptyString(PhaGetWindowText(context->SearchWindowHandle));
-                        PhMoveReference(&context->SearchTypeString, PhGetWindowText(context->TypeWindowHandle));
+
+                        typeIndex = ComboBox_GetCurSel(context->TypeWindowHandle);
+
+                        if (typeIndex == CB_ERR)
+                            break;
+
+                        typeName = (PPH_STRING)ComboBox_GetItemData(context->TypeWindowHandle, typeIndex);
+
+                        if (!typeName || (INT_PTR)typeName == CB_ERR)
+                            break;
+
+                        PhMoveReference(&context->SearchTypeString, PhReferenceObject(typeName));
 
                         // Clean up previous results.
 

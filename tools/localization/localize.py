@@ -100,6 +100,7 @@ UI_CALL_PATTERNS = (
             r"\bPhShow(?:Status|Error[A-Za-z0-9_]*|Information[A-Za-z0-9_]*|"
             r"Warning[A-Za-z0-9_]*|Message[A-Za-z0-9_]*|TaskDialog|"
             r"KsiMessage[A-Za-z0-9_]*|ContinueStatus|ConfirmMessage)\s*\("
+            r"|\bPhpShowContinueMessage[A-Za-z0-9_]*\s*\("
         ),
     ),
     (
@@ -115,6 +116,13 @@ UI_CALL_PATTERNS = (
         "task-dialog-message",
         re.compile(
             r"\bSendMessageW?\s*\([^;]*?\bTDM_UPDATE_ELEMENT_TEXT\b",
+            re.DOTALL,
+        ),
+    ),
+    (
+        "empty-list-markup",
+        re.compile(
+            r"\bwcsncpy_s\s*\([^;]*?\bszMarkup\b",
             re.DOTALL,
         ),
     ),

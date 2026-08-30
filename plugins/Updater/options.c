@@ -271,23 +271,29 @@ PPH_LIST PhpUpdaterQueryCommitHistory(
     PPH_LIST results = NULL;
     PPH_BYTES jsonString = NULL;
     PPH_HTTP_CONTEXT httpContext = NULL;
-    PVOID jsonObject = NULL;
+    PVOID jsonRootObject = NULL;
+    PVOID jsonObject;
     ULONG i;
     ULONG arrayLength;
 
     if (!NT_SUCCESS(status = PhHttpInitialize(&httpContext)))
         goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpConnect(httpContext, L"api.github.com", PH_HTTP_DEFAULT_HTTPS_PORT)))
+    if (!NT_SUCCESS(status = PhHttpConnect(httpContext, L"github.com", PH_HTTP_DEFAULT_HTTPS_PORT)))
         goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpBeginRequest(httpContext, NULL, L"/repos/AnLifeX/systeminformer/commits", PH_HTTP_FLAG_SECURE)))
+    if (!NT_SUCCESS(status = PhHttpBeginRequest(httpContext, NULL, L"/AnLifeX/systeminformer/releases/latest/download/systeminformer-update.json", PH_HTTP_FLAG_SECURE)))
         goto CleanupExit;
+    PhHttpSetFeature(httpContext, PH_HTTP_FEATURE_KEEP_ALIVE, FALSE);
     if (!NT_SUCCESS(status = PhHttpSendRequest(httpContext, PH_HTTP_NO_ADDITIONAL_HEADERS, 0, PH_HTTP_NO_REQUEST_DATA, 0, 0)))
         goto CleanupExit;
     if (!NT_SUCCESS(status = PhHttpReceiveResponse(httpContext)))
         goto CleanupExit;
+    if (!NT_SUCCESS(status = PhHttpQueryResponseStatus(httpContext)))
+        goto CleanupExit;
     if (!NT_SUCCESS(status = PhHttpDownloadString(httpContext, FALSE, &jsonString)))
         goto CleanupExit;
-    if (!NT_SUCCESS(status = PhCreateJsonParserEx(&jsonObject, jsonString, FALSE)))
+    if (!NT_SUCCESS(status = PhCreateJsonParserEx(&jsonRootObject, jsonString, FALSE)))
+        goto CleanupExit;
+    if (!(jsonObject = PhGetJsonObject(jsonRootObject, "changelog")))
         goto CleanupExit;
 
     if (PhGetJsonObjectType(jsonObject) != PH_JSON_OBJECT_TYPE_ARRAY)
@@ -296,16 +302,11 @@ PPH_LIST PhpUpdaterQueryCommitHistory(
         goto CleanupExit;
     }
 
-    if (!(arrayLength = PhGetJsonArrayLength(jsonObject)))
-    {
-        status = STATUS_UNSUCCESSFUL;
-        goto CleanupExit;
-    }
+    arrayLength = PhGetJsonArrayLength(jsonObject);
+    results = PhCreateList(arrayLength ? arrayLength : 1);
 
     if (arrayLength > 0)
     {
-        results = PhCreateList(arrayLength);
-
         for (i = 0; i < arrayLength; i++)
         {
             PPH_UPDATER_COMMIT_ENTRY entry;
@@ -397,9 +398,9 @@ CleanupExit:
         PhHttpDestroy(httpContext);
     }
 
-    if (jsonObject)
+    if (jsonRootObject)
     {
-        PhFreeJsonObject(jsonObject);
+        PhFreeJsonObject(jsonRootObject);
     }
 
     PhClearReference(&jsonString);
@@ -508,10 +509,8 @@ NTSTATUS NTAPI PhpUpdaterQueryCommitHistoryThread(
     HWND windowHandle = (HWND)ThreadParameter;
     PPH_LIST commentHistoryList;
 
-    if (commentHistoryList = PhpUpdaterQueryCommitHistory())
-    {
-        PostMessage(windowHandle, WM_UPDATER_COMMITS, 0, (LPARAM)commentHistoryList);
-    }
+    commentHistoryList = PhpUpdaterQueryCommitHistory();
+    PostMessage(windowHandle, WM_UPDATER_COMMITS, 0, (LPARAM)commentHistoryList);
 
     return STATUS_SUCCESS;
 }
@@ -650,6 +649,8 @@ INT_PTR CALLBACK TextDlgProc(
                 PhDereferenceObject(context->LatestCommitHash);
             if (context->CurrentCommitHash)
                 PhDereferenceObject(context->CurrentCommitHash);
+            if (context->BuildMessage)
+                PhDereferenceObject(context->BuildMessage);
             if (context->ListViewBoldFont)
                 DeleteFont(context->ListViewBoldFont);
 
@@ -707,7 +708,12 @@ INT_PTR CALLBACK TextDlgProc(
                     NMLVEMPTYMARKUP* listview = (NMLVEMPTYMARKUP*)lParam;
 
                     listview->dwFlags = EMF_CENTERED;
-                    wcsncpy_s(listview->szMarkup, RTL_NUMBER_OF(listview->szMarkup), L"Querying changelog...", _TRUNCATE);
+                    wcsncpy_s(
+                        listview->szMarkup,
+                        RTL_NUMBER_OF(listview->szMarkup),
+                        context->BuildMessage ? context->BuildMessage->Buffer : L"Querying changelog...",
+                        _TRUNCATE
+                        );
 
                     SetWindowLongPtr(WindowHandle, DWLP_MSGRESULT, TRUE);
                     return TRUE;
@@ -926,7 +932,17 @@ INT_PTR CALLBACK TextDlgProc(
             PPH_LIST commitList = (PPH_LIST)lParam;
 
             if (!commitList)
+            {
+                PhMoveReference(&context->BuildMessage, PhCreateString(L"Unable to query the changelog."));
+                InvalidateRect(context->ListViewHandle, NULL, TRUE);
                 break;
+            }
+
+            if (commitList->Count == 0)
+            {
+                PhMoveReference(&context->BuildMessage, PhCreateString(L"No changelog entries are available."));
+                InvalidateRect(context->ListViewHandle, NULL, TRUE);
+            }
 
             ExtendedListView_SetRedraw(context->ListViewHandle, FALSE);
 

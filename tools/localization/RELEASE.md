@@ -5,7 +5,7 @@
 - `systeminformer-build-release-setup.exe`：安装程序
 - `systeminformer-build-win64-bin.zip`：供用户下载的 x64 便携版
 - `systeminformer-zh-CN-SHA256SUMS.txt`：发布文件校验和
-- `systeminformer-update.json`：内置更新器读取的签名元数据
+- `systeminformer-update.json`：内置更新器读取的签名元数据和最近 30 条提交记录
 
 构建过程仍会在 runner 内生成 `systeminformer-build-bin.zip`，将其嵌入安装程序后不再作为
 Release 资产公开；普通安装和更新都不需要用户单独下载该内部载荷。
@@ -17,6 +17,8 @@ UTC 日期和时间生成；这既保留上游的主次版本，又保证只有�
 可供已安装版本识别的更新版本。
 
 安装版通过内置更新器下载并验证新的安装程序。便携版只提示新版本并打开 Release 页面，更新时应手动下载新的 ZIP 后覆盖。
+更新日志直接来自发布提交的本地 Git 历史，并随更新元数据发布；客户端不再调用有匿名限额的
+GitHub commits API，因此不会因共享出口触发 API 限流而一直停留在查询状态。
 
 ## 两类签名
 

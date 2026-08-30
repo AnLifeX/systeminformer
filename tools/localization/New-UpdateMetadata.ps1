@@ -19,6 +19,12 @@ param(
     [ValidatePattern('^https://')]
     [string]$SetupUrl,
 
+    [ValidatePattern('^https://')]
+    [string]$RepositoryUrl = 'https://github.com/AnLifeX/systeminformer',
+
+    [ValidateRange(1, 100)]
+    [int]$ChangelogCount = 30,
+
     [Parameter(Mandatory, ParameterSetName = 'Base64Key')]
     [string]$PrivateKeyBase64,
 
@@ -85,6 +91,48 @@ $updated = [DateTime]::UtcNow.Date.ToString(
     [System.Globalization.CultureInfo]::InvariantCulture
 )
 
+$repositoryRoot = (Resolve-Path -LiteralPath (Join-Path (Join-Path $PSScriptRoot '..') '..')).Path
+$logLines = @(
+    & git -C $repositoryRoot log --first-parent -n $ChangelogCount '--format=%H%x09%aI%x09%an%x09%s' $Commit
+)
+if ($LASTEXITCODE -ne 0) {
+    throw "Unable to read the Git changelog for commit $Commit."
+}
+
+$changelog = @(
+    foreach ($line in $logLines) {
+        $parts = $line -split "`t", 4
+        if ($parts.Count -ne 4 -or $parts[0] -notmatch '^[0-9a-fA-F]{40}$') {
+            throw "Unexpected Git changelog record: $line"
+        }
+
+        $sha = $parts[0].ToLowerInvariant()
+        $authorDate = [DateTimeOffset]::Parse(
+            $parts[1],
+            [System.Globalization.CultureInfo]::InvariantCulture,
+            [System.Globalization.DateTimeStyles]::RoundtripKind
+        ).UtcDateTime.ToString(
+            'yyyy-MM-ddTHH:mm:ssZ',
+            [System.Globalization.CultureInfo]::InvariantCulture
+        )
+        [ordered]@{
+            sha      = $sha
+            html_url = "$RepositoryUrl/commit/$sha"
+            commit   = [ordered]@{
+                message = $parts[3]
+                author  = [ordered]@{
+                    name = $parts[2]
+                    date = $authorDate
+                }
+            }
+        }
+    }
+)
+
+if ($changelog.Count -eq 0 -or $changelog[0].sha -ne $Commit.ToLowerInvariant()) {
+    throw "The changelog does not start at release commit $Commit."
+}
+
 $metadata = [ordered]@{
     version      = $Version
     updated      = $updated
@@ -93,6 +141,7 @@ $metadata = [ordered]@{
     setup_hash   = [System.Convert]::ToHexString($hash)
     setup_sig    = [System.Convert]::ToHexString($signature)
     setup_url    = $SetupUrl
+    changelog    = $changelog
 }
 
 $outputFullPath = [System.IO.Path]::GetFullPath($OutputPath)
@@ -101,7 +150,7 @@ if ($outputDirectory) {
     [System.IO.Directory]::CreateDirectory($outputDirectory) | Out-Null
 }
 
-$json = $metadata | ConvertTo-Json
+$json = $metadata | ConvertTo-Json -Depth 6
 [System.IO.File]::WriteAllText(
     $outputFullPath,
     $json + [Environment]::NewLine,
