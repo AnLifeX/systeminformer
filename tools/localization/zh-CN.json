@@ -6761,6 +6761,54 @@
         { "id": "mf-card", "source": "MF card", "translation": "MF 卡" },
         { "id": "connection", "source": "Connection", "translation": "连接" }
       ]
+    },
+    {
+      "id": "process-wmi-runtime-audit",
+      "path": "SystemInformer/prpgwmi.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "statistics-title", "source": "Statistics for %s: \\r\\n\\r\\n", "translation": "%s 的统计信息：\\r\\n\\r\\n", "expected": 2 },
+        { "id": "query-error", "source": "Unable to query provider information:\\n", "translation": "无法查询提供程序信息：\\n" },
+        { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。", "expected": 2 },
+        { "id": "operation-error", "source": "Unable to perform the operation.", "translation": "无法执行该操作。", "expected": 5 },
+        { "id": "suspend", "source": "&Suspend", "translation": "挂起(&S)" },
+        { "id": "resume", "source": "Res&ume", "translation": "恢复(&U)" },
+        { "id": "unload", "source": "Un&load", "translation": "卸载(&L)" },
+        { "id": "inspect", "source": "&Inspect", "translation": "检查(&I)" },
+        { "id": "statistics", "source": "S&tatistics", "translation": "统计信息(&T)" },
+        { "id": "open-location", "source": "Open &file location", "translation": "打开文件位置(&F)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "pe-viewer-missing", "source": "Make sure the PE Viewer executable file is present.", "translation": "请确认 PE 查看器的可执行文件存在。" },
+        { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。" },
+        { "id": "file-name", "source": "File name", "translation": "文件名" },
+        { "id": "empty", "source": "There are no providers to display.", "translation": "没有可显示的提供程序。" },
+        { "id": "hide-default", "source": "Hide default namespace", "translation": "隐藏默认命名空间" },
+        { "id": "highlight-default", "source": "Highlight default namespace", "translation": "突出显示默认命名空间" }
+      ]
+    },
+    {
+      "id": "process-wmi-provider-column",
+      "path": "SystemInformer/prpgwmi.c",
+      "context": "PROCESS_WMI_COLUMN_ITEM_PROVIDER, TRUE, L\"{text}\", 140",
+      "items": [
+        { "id": "provider", "source": "Provider", "translation": "提供程序" }
+      ]
+    },
+    {
+      "id": "process-wmi-namespace-column",
+      "path": "SystemInformer/prpgwmi.c",
+      "context": "PROCESS_WMI_COLUMN_ITEM_NAMESPACE, TRUE, L\"{text}\", 180",
+      "items": [
+        { "id": "namespace", "source": "Namespace", "translation": "命名空间" }
+      ]
+    },
+    {
+      "id": "process-wmi-user-column",
+      "path": "SystemInformer/prpgwmi.c",
+      "context": "PROCESS_WMI_COLUMN_ITEM_USER, TRUE, L\"{text}\", 80",
+      "items": [
+        { "id": "user", "source": "User", "translation": "用户" }
+      ]
     }
   ]
 }
