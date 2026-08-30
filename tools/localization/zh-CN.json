@@ -7440,6 +7440,22 @@
         { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。" },
         { "id": "change-error", "source": "Unable to change service trigger information.", "translation": "无法更改服务触发器信息。" }
       ]
+    },
+    {
+      "id": "tpm-index-list-runtime-audit",
+      "path": "plugins/ExtendedTools/tpm.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "index", "source": "Index", "translation": "索引" },
+        { "id": "data-size", "source": "Data size", "translation": "数据大小" },
+        { "id": "owner-rights", "source": "Owner rights", "translation": "所有者权限" },
+        { "id": "auth-rights", "source": "Auth rights", "translation": "授权权限" },
+        { "id": "platform-rights", "source": "Platform rights", "translation": "平台权限" },
+        { "id": "attributes", "source": "Attributes", "translation": "属性" },
+        { "id": "edit", "source": "&Edit", "translation": "编辑(&E)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "query-error", "source": "Unable to query the TPM", "translation": "无法查询 TPM" }
+      ]
     }
   ]
 }
