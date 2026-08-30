@@ -9336,6 +9336,154 @@
           "translation": "无法执行安装程序。"
         }
       ]
+    },
+    {
+      "id": "remaining-smbios-name",
+      "path": "plugins/ExtendedTools/smbios.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "smbios-name",
+          "source": "Name",
+          "translation": "名称",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "remaining-handle-type-columns",
+      "path": "SystemInformer/hndlprp.c",
+      "context": "PhAddListViewColumn(context->ListViewHandle, 1, 1, 1, LVCFMT_LEFT, 50, L\"{text}\");",
+      "items": [
+        {
+          "id": "handle-type-columns",
+          "source": "Type",
+          "translation": "类型",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "remaining-live-dump-error",
+      "path": "SystemInformer/kdump.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "live-dump-save-error",
+          "source": "Unable to save the live kernel dump.",
+          "translation": "无法保存实时内核转储。",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "remaining-plugin-properties-menu",
+      "path": "SystemInformer/plugman.c",
+      "context": "PhCreateEMenuItem(0, PH_PLUGIN_TREE_ITEM_MENU_PROPERTIES, L\"{text}\", NULL, NULL)",
+      "items": [
+        {
+          "id": "plugin-properties-menu",
+          "source": "Properties",
+          "translation": "属性..."
+        }
+      ]
+    },
+    {
+      "id": "remaining-environment-confirm-actions",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "hwndDlg,\r\n                        L\"{text}\"",
+      "items": [
+        {
+          "id": "environment-edit-dialog-confirm",
+          "source": "edit",
+          "translation": "修改"
+        }
+      ]
+    },
+    {
+      "id": "remaining-environment-delete",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "context->WindowHandle,\r\n                        L\"{text}\"",
+      "items": [
+        {
+          "id": "environment-delete-confirm",
+          "source": "delete",
+          "translation": "移除"
+        }
+      ]
+    },
+    {
+      "id": "remaining-environment-list-edit",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "Context->WindowHandle,\r\n                    L\"{text}\"",
+      "items": [
+        {
+          "id": "environment-edit-list-confirm",
+          "source": "edit",
+          "translation": "修改"
+        }
+      ]
+    },
+    {
+      "id": "remaining-cpu-cache-unavailable",
+      "path": "SystemInformer/syssccpu.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "cpu-cache-unavailable",
+          "source": "N/A",
+          "translation": "不可用",
+          "expected": 4
+        }
+      ]
+    },
+    {
+      "id": "hardware-disk-panel-title",
+      "path": "plugins/HardwareDevices/HardwareDevices.rc",
+      "context": "\"{text}\",IDC_TITLE",
+      "items": [
+        {
+          "id": "disk",
+          "source": "DISK",
+          "translation": "磁盘设备"
+        }
+      ]
+    },
+    {
+      "id": "hardware-disk-device-name",
+      "path": "plugins/HardwareDevices/HardwareDevices.rc",
+      "context": "\"{text}\",IDC_DEVICENAME",
+      "items": [
+        {
+          "id": "disk",
+          "source": "DISK",
+          "translation": "磁盘设备"
+        }
+      ]
+    },
+    {
+      "id": "hardware-network-panel-title",
+      "path": "plugins/HardwareDevices/HardwareDevices.rc",
+      "context": "\"{text}\",IDC_TITLE",
+      "items": [
+        {
+          "id": "network",
+          "source": "NET",
+          "translation": "网络设备"
+        }
+      ]
+    },
+    {
+      "id": "hardware-network-device-name",
+      "path": "plugins/HardwareDevices/HardwareDevices.rc",
+      "context": "\"{text}\",IDC_DEVICENAME",
+      "items": [
+        {
+          "id": "network",
+          "source": "NET",
+          "translation": "网络设备"
+        }
+      ]
     }
   ]
 }
