@@ -7430,6 +7430,16 @@
         { "id": "data-not-allowed", "source": "The trigger type \\\"%s\\\" does not allow data items to be configured.", "translation": "触发器类型\\\"%s\\\"不允许配置数据项。" },
         { "id": "remove-data", "source": "If you continue, they will be removed.", "translation": "如果继续，这些数据项将被删除。" }
       ]
+    },
+    {
+      "id": "service-trigger-page-errors-audit",
+      "path": "plugins/ExtendedServices/triggpg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "query-error", "source": "Unable to query service trigger information.", "translation": "无法查询服务触发器信息。" },
+        { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。" },
+        { "id": "change-error", "source": "Unable to change service trigger information.", "translation": "无法更改服务触发器信息。" }
+      ]
     }
   ]
 }
