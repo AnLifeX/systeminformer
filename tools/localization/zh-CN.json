@@ -7107,6 +7107,40 @@
         { "id": "query-error", "source": "Unable to query firmware table.", "translation": "无法查询固件表。" },
         { "id": "legacy-bios", "source": "Windows was installed using legacy BIOS.", "translation": "Windows 使用传统 BIOS 模式安装。" }
       ]
+    },
+    {
+      "id": "hidden-processes-runtime-audit",
+      "path": "SystemInformer/hidnproc.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "process", "source": "Process", "translation": "进程" },
+        { "id": "handles", "source": "Handles", "translation": "句柄" },
+        { "id": "brute-force", "source": "Brute force", "translation": "暴力扫描", "expected": 2 },
+        { "id": "csr-handles", "source": "CSR handles", "translation": "CSR 句柄", "expected": 2 },
+        { "id": "etw-handles", "source": "ETW handles", "translation": "ETW 句柄", "expected": 2 },
+        { "id": "process-handles", "source": "Process handles", "translation": "进程句柄", "expected": 3 },
+        { "id": "registry-handles", "source": "Registry handles", "translation": "注册表句柄", "expected": 2 },
+        { "id": "ntdll-handles", "source": "Ntdll handles", "translation": "Ntdll 句柄", "expected": 2 },
+        { "id": "terminate", "source": "terminate", "translation": "终止" },
+        { "id": "selected-processes", "source": "the selected process(es)", "translation": "选中的进程" },
+        { "id": "terminate-warning-1", "source": "Terminating a Zombie process may cause the system to become unstable ", "translation": "终止僵尸进程可能会导致系统不稳定，" },
+        { "id": "terminate-warning-2", "source": "or crash.", "translation": "甚至崩溃。" },
+        { "id": "terminate-error", "source": "Unable to terminate the process", "translation": "无法终止进程" },
+        { "id": "text-files", "source": "Text files (*.txt)", "translation": "文本文件 (*.txt)" },
+        { "id": "all-files", "source": "All files (*.*)", "translation": "所有文件 (*.*)" },
+        { "id": "report-method", "source": "Method: ", "translation": "扫描方式：" },
+        { "id": "report-brute-force", "source": "Brute Force\\r\\n", "translation": "暴力扫描\\r\\n" },
+        { "id": "report-csr-handles", "source": "CSR Handles\\r\\n", "translation": "CSR 句柄\\r\\n" },
+        { "id": "report-counts", "source": "Zombie: %u\\r\\nTerminated: %u\\r\\n\\r\\n", "translation": "僵尸进程：%u\\r\\n已终止：%u\\r\\n\\r\\n" },
+        { "id": "report-zombie", "source": "[Zombie] ", "translation": "[僵尸进程] " },
+        { "id": "report-terminated", "source": "[Terminated] ", "translation": "[已终止] " },
+        { "id": "report-handles", "source": "%s (%u) Handles: %u\\r\\n", "translation": "%s (%u) 句柄数：%u\\r\\n" },
+        { "id": "create-file-error", "source": "Unable to create the file", "translation": "无法创建文件" },
+        { "id": "create-process-error", "source": "Unable to create a process structure for the selected process.", "translation": "无法为选中的进程创建进程结构。" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "summary", "source": "%u zombie process(es), %u terminated process(es).", "translation": "%u 个僵尸进程，%u 个已终止进程。", "expected": 2 },
+        { "id": "scan-error", "source": "Unable to perform the scan", "translation": "无法执行扫描" }
+      ]
     }
   ]
 }
