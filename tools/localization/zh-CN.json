@@ -6826,6 +6826,35 @@
         { "id": "complete", "source": "complete", "translation": "已完成", "expected": 2 },
         { "id": "route-state", "source": "Tracing route to %s with %lu bytes of data... %s.", "translation": "正在跟踪到 %s 的路由，数据大小为 %lu 字节... %s。" }
       ]
+    },
+    {
+      "id": "dotnet-assemblies-runtime-audit",
+      "path": "plugins/DotNetTools/asmpage.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "inspect", "source": "&Inspect", "translation": "检查(&I)" },
+        { "id": "inspect-native", "source": "Inspect native image", "translation": "检查本机映像" },
+        { "id": "open-location", "source": "Open &file location", "translation": "打开文件位置(&F)" },
+        { "id": "open-native", "source": "Open native file location", "translation": "打开本机文件位置" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "pe-missing", "source": "Make sure the PE Viewer executable file is present.", "translation": "请确认 PE 查看器的可执行文件存在。", "expected": 3 },
+        { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。", "expected": 2 },
+        { "id": "structure", "source": "Structure", "translation": "结构" },
+        { "id": "address", "source": "Address", "translation": "地址" },
+        { "id": "flags", "source": "Flags", "translation": "标志" },
+        { "id": "file-name", "source": "File name", "translation": "文件名" },
+        { "id": "native-path", "source": "Native image path", "translation": "本机映像路径" },
+        { "id": "base-address", "source": "Base address", "translation": "基址" },
+        { "id": "unknown", "source": "Unknown", "translation": "未知" },
+        { "id": "loading", "source": "Loading .NET assemblies...", "translation": "正在加载 .NET 程序集..." },
+        { "id": "hide-dynamic", "source": "Hide dynamic", "translation": "隐藏动态程序集" },
+        { "id": "hide-native", "source": "Hide native", "translation": "隐藏本机程序集" },
+        { "id": "highlight-dynamic", "source": "Highlight dynamic", "translation": "突出显示动态程序集" },
+        { "id": "highlight-native", "source": "Highlight native", "translation": "突出显示本机程序集" },
+        { "id": "empty", "source": "There are no assemblies to display.", "translation": "没有可显示的程序集。" },
+        { "id": "trace-error", "source": "Unable to start the event tracing session: ", "translation": "无法启动事件跟踪会话：" },
+        { "id": "unknown-error", "source": "Unknown error", "translation": "未知错误" }
+      ]
     }
   ]
 }

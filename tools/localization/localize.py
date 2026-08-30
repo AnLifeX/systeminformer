@@ -42,6 +42,7 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "FPS",
     "GPU",
     "I/O",
+    "MVID",
     "NTVDM",
     "NPU",
     "PID",
