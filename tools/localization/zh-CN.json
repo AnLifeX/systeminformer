@@ -6650,6 +6650,26 @@
         { "id": "registered", "source": "This service has registered the following PnP devices:", "translation": "此服务注册了以下 PnP 设备：" },
         { "id": "unsupported", "source": "This service type doesn't support PnP devices.", "translation": "此服务类型不支持 PnP 设备。" }
       ]
+    },
+    {
+      "id": "service-control-runtime-audit",
+      "path": "SystemInformer/srvctl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "stop", "source": "S&top", "translation": "停止(&T)", "expected": 2 },
+        { "id": "pause", "source": "&Pause", "translation": "暂停(&P)", "expected": 4 },
+        { "id": "continue", "source": "C&ontinue", "translation": "继续(&O)" },
+        { "id": "start", "source": "&Start", "translation": "启动(&S)", "expected": 3 },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "display-name", "source": "Display name", "translation": "显示名称" },
+        { "id": "file-name", "source": "File name", "translation": "文件名" },
+        { "id": "go-service", "source": "Go to service", "translation": "转到服务" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "process-missing", "source": "The process does not exist.", "translation": "进程不存在。" },
+        { "id": "service-missing", "source": "The service does not exist.", "translation": "服务不存在。", "expected": 2 },
+        { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。" },
+        { "id": "locate-file-error", "source": "Unable to locate the file.", "translation": "无法找到文件。", "expected": 2 }
+      ]
     }
   ]
 }
