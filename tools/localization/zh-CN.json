@@ -7388,6 +7388,21 @@
         { "id": "dependents-title", "source": "The following services depend on this service:", "translation": "以下服务依赖此服务：" },
         { "id": "dependents-error", "source": "Unable to enumerate dependents: ", "translation": "无法枚举依赖此服务的项：" }
       ]
+    },
+    {
+      "id": "extended-service-properties-runtime-audit",
+      "path": "plugins/ExtendedServices/other.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "display-name", "source": "Display name", "translation": "显示名称" },
+        { "id": "not-available", "source": "N/A", "translation": "不可用" },
+        { "id": "query-error", "source": "Unable to query service information.", "translation": "无法查询服务信息。" },
+        { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。" },
+        { "id": "lsa-error", "source": "Unable to open LSA policy", "translation": "无法打开 LSA 策略" },
+        { "id": "duplicate-privilege", "source": "The selected privilege has already been added.", "translation": "所选权限已添加。" },
+        { "id": "change-error", "source": "Unable to change service information.", "translation": "无法更改服务信息。" }
+      ]
     }
   ]
 }
