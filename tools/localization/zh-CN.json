@@ -6625,6 +6625,31 @@
         { "id": "display-name", "source": "Hardware Devices", "translation": "硬件设备" },
         { "id": "description", "source": "Plugin for monitoring hardware devices like Disk drives and Network adapters via the System Information window.", "translation": "通过系统信息窗口监视磁盘驱动器、网络适配器等硬件设备。" }
       ]
+    },
+    {
+      "id": "service-pnp-runtime-audit",
+      "path": "plugins/ExtendedServices/svcpnp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "state-error", "source": "Failed to change the device state.", "translation": "无法更改设备状态。", "expected": 2 },
+        { "id": "restart-error", "source": "Failed to restart the device.", "translation": "无法重启设备。", "expected": 3 },
+        { "id": "uninstall-error", "source": "Failed to uninstall the device.", "translation": "无法卸载设备。", "expected": 2 },
+        { "id": "enable", "source": "Enable", "translation": "启用" },
+        { "id": "disable", "source": "Disable", "translation": "禁用" },
+        { "id": "restart", "source": "Restart", "translation": "重启" },
+        { "id": "uninstall", "source": "Uninstall", "translation": "卸载" },
+        { "id": "open-key", "source": "Open key", "translation": "打开注册表项" },
+        { "id": "hardware", "source": "Hardware", "translation": "硬件" },
+        { "id": "software", "source": "Software", "translation": "软件" },
+        { "id": "user", "source": "User", "translation": "用户" },
+        { "id": "config", "source": "Config", "translation": "配置" },
+        { "id": "properties", "source": "Properties", "translation": "属性" },
+        { "id": "pnp-devices", "source": "PnP Devices", "translation": "PnP 设备" },
+        { "id": "connected", "source": "Connected", "translation": "已连接" },
+        { "id": "disconnected", "source": "Disconnected", "translation": "已断开" },
+        { "id": "registered", "source": "This service has registered the following PnP devices:", "translation": "此服务注册了以下 PnP 设备：" },
+        { "id": "unsupported", "source": "This service type doesn't support PnP devices.", "translation": "此服务类型不支持 PnP 设备。" }
+      ]
     }
   ]
 }
