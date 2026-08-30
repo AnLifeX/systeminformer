@@ -3368,19 +3368,9 @@
           "translation": "标志"
         },
         {
-          "id": "privileges",
-          "source": "Privileges",
-          "translation": "特权"
-        },
-        {
           "id": "restricting",
           "source": "Restricting SIDs",
           "translation": "限制 SID"
-        },
-        {
-          "id": "groups",
-          "source": "Groups",
-          "translation": "组"
         },
         {
           "id": "logon-group",
@@ -5946,6 +5936,64 @@
       "context": "\"{text}\"",
       "items": [
         { "id": "wow64-suffix", "source": "binary instead.", "translation": "架构版本。" }
+      ]
+    },
+    {
+      "id": "token-properties-runtime-audit",
+      "path": "SystemInformer/tokprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "duplicate-error", "source": "Unable to duplicate the token.", "translation": "无法复制令牌。" },
+        { "id": "remove", "source": "remove", "translation": "移除", "expected": 3 },
+        { "id": "selected-privileges", "source": "the selected privilege(s)", "translation": "所选特权" },
+        { "id": "privilege-warning-prefix", "source": "Removing privileges may reduce the functionality of the process, ", "translation": "移除特权可能会削弱进程功能，" },
+        { "id": "privilege-warning-suffix", "source": "and is permanent for the lifetime of the process.", "translation": "并且在进程的整个生命周期内无法恢复。" },
+        { "id": "operation-error", "source": "Unable to %s %s.", "translation": "无法%s%s。", "expected": 2 },
+        { "id": "open-token-error", "source": "Unable to open the token.", "translation": "无法打开令牌。", "expected": 3 },
+        { "id": "uiaccess-flag", "source": "the UIAccess flag", "translation": "UIAccess 标志" },
+        { "id": "uiaccess-warning-prefix", "source": "Removing this flag may reduce the functionality of the process ", "translation": "移除此标志可能会削弱进程功能，" },
+        { "id": "uiaccess-warning-suffix", "source": "provided it is an accessibility application.", "translation": "尤其当它是辅助功能应用程序时。" },
+        { "id": "disable-uiaccess-error", "source": "Unable to disable UIAccess flag.", "translation": "无法禁用 UIAccess 标志。" },
+        { "id": "set", "source": "set", "translation": "设置", "expected": 3 },
+        { "id": "enable", "source": "&Enable", "translation": "启用(&E)", "expected": 2 },
+        { "id": "disable", "source": "&Disable", "translation": "禁用(&D)", "expected": 2 },
+        { "id": "reset", "source": "Re&set", "translation": "重置(&S)", "expected": 2 },
+        { "id": "remove-menu", "source": "&Remove", "translation": "移除(&R)", "expected": 2 },
+        { "id": "copy-menu", "source": "&Copy", "translation": "复制(&C)", "expected": 3 },
+        { "id": "open-token-error-no-period", "source": "Unable to open the token", "translation": "无法打开令牌" },
+        { "id": "copy", "source": "Copy", "translation": "复制", "expected": 4 }
+      ]
+    },
+    {
+      "id": "token-properties-privilege-fallback",
+      "path": "SystemInformer/tokprp.c",
+      "context": "PhGetStringOrDefault(privilegeName, L\"{text}\")",
+      "items": [
+        { "id": "privilege", "source": "privilege", "translation": "某项特权" }
+      ]
+    },
+    {
+      "id": "token-properties-group-error",
+      "path": "SystemInformer/tokprp.c",
+      "context": "action, L\"{text}\")->Buffer",
+      "items": [
+        { "id": "group", "source": "group", "translation": "令牌组" }
+      ]
+    },
+    {
+      "id": "token-properties-privileges-heading",
+      "path": "SystemInformer/tokprp.c",
+      "context": "PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_PRIVILEGES, L\"{text}\");",
+      "items": [
+        { "id": "privileges", "source": "Privileges", "translation": "特权" }
+      ]
+    },
+    {
+      "id": "token-properties-groups-heading",
+      "path": "SystemInformer/tokprp.c",
+      "context": "PhAddListViewGroup(tokenPageContext->ListViewHandle, PH_PROCESS_TOKEN_CATEGORY_GROUPS, L\"{text}\");",
+      "items": [
+        { "id": "groups", "source": "Groups", "translation": "组" }
       ]
     }
   ]

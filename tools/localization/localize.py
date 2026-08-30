@@ -45,6 +45,7 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "NPU",
     "PID",
     "Shift",
+    "SID",
     "SMBIOS",
     "Static",
     "System Informer",
