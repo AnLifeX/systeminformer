@@ -6026,6 +6026,29 @@
         { "id": "copy-full-name", "source": "Copy &Full Name\\bCtrl+Alt+C", "translation": "复制完整名称(&F)\\bCtrl+Alt+C", "expected": 2 },
         { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C", "expected": 2 }
       ]
+    },
+    {
+      "id": "usernotes-priority-runtime-audit",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "configure-ifeo", "source": "Unable to configure IFEO priority for this image.", "translation": "无法为此映像配置 IFEO 优先级。" },
+        { "id": "update-gpu-priority", "source": "Unable to update graphics scheduling priority", "translation": "无法更新图形调度优先级" },
+        { "id": "query-gpu-priority", "source": "Unable to query graphics scheduling priority", "translation": "无法查询图形调度优先级" },
+        { "id": "deleted-ifeo", "source": "Successfully deleted the IFEO key.", "translation": "已成功删除 IFEO 注册表项。", "expected": 3 },
+        { "id": "update-priority", "source": "Unable to update the IFEO for priority.", "translation": "无法更新优先级的 IFEO 配置。", "expected": 2 },
+        { "id": "update-io-priority", "source": "Unable to update the IFEO for IO priority.", "translation": "无法更新 I/O 优先级的 IFEO 配置。", "expected": 2 },
+        { "id": "update-page-priority", "source": "Unable to update the IFEO for page priority.", "translation": "无法更新页面优先级的 IFEO 配置。", "expected": 2 },
+        { "id": "query-priority", "source": "Unable to query priority.", "translation": "无法查询优先级。", "expected": 2 },
+        { "id": "query-io-priority", "source": "Unable to query IO priority.", "translation": "无法查询 I/O 优先级。", "expected": 2 },
+        { "id": "query-current-affinity", "source": "Unable to query the current affinity.", "translation": "无法查询当前处理器相关性。", "expected": 2 },
+        { "id": "multi-group-affinity", "source": "This process has multi-group affinity, %s", "translation": "此进程具有多处理器组相关性，%s", "expected": 2 },
+        { "id": "thread-affinity-only", "source": "you can only change affinity for individual threads.", "translation": "只能更改单个线程的处理器相关性。", "expected": 2 },
+        { "id": "query-process-affinity", "source": "Unable to query process affinity.", "translation": "无法查询进程处理器相关性。", "expected": 2 },
+        { "id": "query-page-priority", "source": "Unable to query page priority.", "translation": "无法查询页面优先级。", "expected": 2 },
+        { "id": "query-boost", "source": "Unable to query process boost.", "translation": "无法查询进程优先级提升状态。", "expected": 3 },
+        { "id": "query-efficiency", "source": "Unable to query process efficiency mode.", "translation": "无法查询进程效率模式。", "expected": 3 }
+      ]
     }
   ]
 }
