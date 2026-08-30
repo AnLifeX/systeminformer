@@ -7483,6 +7483,828 @@
         { "id": "create-file-error", "source": "Unable to create the file", "translation": "无法创建文件" },
         { "id": "update-error", "source": "Unable to update the EFI variable.", "translation": "无法更新 EFI 变量。", "expected": 2 }
       ]
+    },
+    {
+      "id": "established-glossary-reuse-01",
+      "path": "SystemInformer/chproc.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to enumerate processes",
+          "translation": "无法枚举进程"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Name",
+          "translation": "名称"
+        },
+        {
+          "id": "reuse-03",
+          "source": "User name",
+          "translation": "用户名"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-02",
+      "path": "SystemInformer/colsetmgr.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Name",
+          "translation": "名称"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-03",
+      "path": "SystemInformer/gdihndl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Type",
+          "translation": "类型"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Handle",
+          "translation": "句柄"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Information",
+          "translation": "信息"
+        },
+        {
+          "id": "reuse-04",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-04",
+      "path": "SystemInformer/hndlprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy",
+          "translation": "复制(&C)",
+          "expected": 3
+        },
+        {
+          "id": "reuse-02",
+          "source": "Access",
+          "translation": "访问权限",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-05",
+      "path": "SystemInformer/hndlstat.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to open the process",
+          "translation": "无法打开进程"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Type",
+          "translation": "类型"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Count",
+          "translation": "次数"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-06",
+      "path": "SystemInformer/infodlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to create the file",
+          "translation": "无法创建文件"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-07",
+      "path": "SystemInformer/logwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to create the file",
+          "translation": "无法创建文件"
+        },
+        {
+          "id": "reuse-02",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-08",
+      "path": "SystemInformer/memmod.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Index",
+          "translation": "索引"
+        },
+        {
+          "id": "reuse-02",
+          "source": "File",
+          "translation": "文件"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Address",
+          "translation": "地址"
+        },
+        {
+          "id": "reuse-04",
+          "source": "Symbol",
+          "translation": "符号"
+        },
+        {
+          "id": "reuse-05",
+          "source": "Unable to perform the scan",
+          "translation": "无法执行扫描",
+          "expected": 2
+        },
+        {
+          "id": "reuse-06",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        },
+        {
+          "id": "reuse-07",
+          "source": "Unable to open the process.",
+          "translation": "无法打开进程。"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-09",
+      "path": "SystemInformer/miniinfo.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Opacity",
+          "translation": "不透明度(&O)"
+        },
+        {
+          "id": "reuse-02",
+          "source": "&Refresh\\bF5",
+          "translation": "刷新(&R)\\bF5"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Refresh a&utomatically\\bF6",
+          "translation": "自动刷新(&U)\\bF6"
+        },
+        {
+          "id": "reuse-04",
+          "source": "Process",
+          "translation": "进程"
+        },
+        {
+          "id": "reuse-05",
+          "source": "&Go to process",
+          "translation": "转到进程(&G)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-10",
+      "path": "SystemInformer/modlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Timeline",
+          "translation": "时间线"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-11",
+      "path": "SystemInformer/mtgndlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to open the process.",
+          "translation": "无法打开进程。"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Policy",
+          "translation": "策略"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-12",
+      "path": "SystemInformer/netlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to perform the operation.",
+          "translation": "无法执行该操作。"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-13",
+      "path": "SystemInformer/netstk.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to open the process.",
+          "translation": "无法打开进程。"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Name",
+          "translation": "名称"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-14",
+      "path": "SystemInformer/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Name",
+          "translation": "名称",
+          "expected": 5
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-15",
+      "path": "SystemInformer/plugman.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Plugin",
+          "translation": "插件信息"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Disable",
+          "translation": "禁用"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Unknown",
+          "translation": "未知",
+          "expected": 2
+        },
+        {
+          "id": "reuse-04",
+          "source": "Property",
+          "translation": "属性"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-16",
+      "path": "SystemInformer/proctree.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "CPU history",
+          "translation": "CPU 使用率历史"
+        },
+        {
+          "id": "reuse-02",
+          "source": "I/O history",
+          "translation": "I/O 历史"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Unable to perform the operation.",
+          "translation": "无法执行该操作。"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-18",
+      "path": "SystemInformer/prpgmem.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to create the file",
+          "translation": "无法创建文件",
+          "expected": 2
+        },
+        {
+          "id": "reuse-02",
+          "source": "Unable to open the process",
+          "translation": "无法打开进程"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-19",
+      "path": "SystemInformer/prpgmod.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to create the file",
+          "translation": "无法创建文件"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-20",
+      "path": "SystemInformer/prpgstat.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-21",
+      "path": "SystemInformer/prpgthrd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to create the file",
+          "translation": "无法创建文件"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Unable to %s thread %lu",
+          "translation": "无法%s线程 %lu"
+        },
+        {
+          "id": "reuse-03",
+          "source": "set the boost priority of",
+          "translation": "设置以下对象的优先级提升："
+        },
+        {
+          "id": "reuse-04",
+          "source": "enable",
+          "translation": "启用"
+        },
+        {
+          "id": "reuse-05",
+          "source": "disable",
+          "translation": "禁用"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-22",
+      "path": "SystemInformer/prpgvdm.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "File name",
+          "translation": "文件名"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Terminate",
+          "translation": "终止"
+        },
+        {
+          "id": "reuse-03",
+          "source": "Open &file location",
+          "translation": "打开文件位置(&F)"
+        },
+        {
+          "id": "reuse-04",
+          "source": "&Inspect",
+          "translation": "检查(&I)"
+        },
+        {
+          "id": "reuse-05",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-23",
+      "path": "SystemInformer/runas.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to execute the command.",
+          "translation": "无法执行命令。"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-24",
+      "path": "SystemInformer/runaspkg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Package",
+          "translation": "程序包"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Unable to execute the command.",
+          "translation": "无法执行命令。"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-25",
+      "path": "SystemInformer/sessprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Name",
+          "translation": "名称"
+        },
+        {
+          "id": "reuse-02",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-26",
+      "path": "SystemInformer/srvlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unable to perform the operation.",
+          "translation": "无法执行该操作。"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-27",
+      "path": "SystemInformer/syssccpu.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Enabled",
+          "translation": "已启用"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Disabled",
+          "translation": "已禁用"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-28",
+      "path": "SystemInformer/thrdlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Timeline",
+          "translation": "时间线"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-29",
+      "path": "SystemInformer/usrlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Copy",
+          "translation": "复制"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-30",
+      "path": "phlib/extlv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Reset sort",
+          "translation": "重置排序"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-31",
+      "path": "phlib/guisup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Close",
+          "translation": "关闭"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-32",
+      "path": "plugins/DotNetTools/DotNetTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Options",
+          "translation": "选项"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Refresh",
+          "translation": "刷新"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-33",
+      "path": "plugins/DotNetTools/perfpage.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-34",
+      "path": "plugins/ExtendedTools/acpitable.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Name",
+          "translation": "名称"
+        },
+        {
+          "id": "reuse-02",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-35",
+      "path": "plugins/ExtendedTools/pooldialog.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy\\bCtrl+C",
+          "translation": "复制(&C)\\bCtrl+C"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-36",
+      "path": "plugins/ExtendedTools/pooldialogbig.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Address",
+          "translation": "地址"
+        },
+        {
+          "id": "reuse-02",
+          "source": "Size",
+          "translation": "大小"
+        },
+        {
+          "id": "reuse-03",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-37",
+      "path": "plugins/ExtendedTools/pwrgrid.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Start time",
+          "translation": "启动时间"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-38",
+      "path": "plugins/ExtendedTools/smbios.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-39",
+      "path": "plugins/HardwareDevices/diskdetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Property",
+          "translation": "属性",
+          "expected": 2
+        },
+        {
+          "id": "reuse-02",
+          "source": "&Copy",
+          "translation": "复制(&C)",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-40",
+      "path": "plugins/HardwareDevices/diskoptions.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Disk Drives",
+          "translation": "磁盘驱动器"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-41",
+      "path": "plugins/HardwareDevices/gpuoptions.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Graphics Devices",
+          "translation": "图形设备"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-42",
+      "path": "plugins/HardwareDevices/netdetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Property",
+          "translation": "属性"
+        },
+        {
+          "id": "reuse-02",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-43",
+      "path": "plugins/HardwareDevices/netoptions.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Network Adapters",
+          "translation": "网络适配器"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-44",
+      "path": "plugins/HardwareDevices/powergraph.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Unknown",
+          "translation": "未知"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-45",
+      "path": "plugins/HardwareDevices/prpsh.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Close",
+          "translation": "关闭"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-46",
+      "path": "plugins/NetworkTools/tracetree.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Country",
+          "translation": "国家或地区"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-47",
+      "path": "plugins/NetworkTools/whois.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-48",
+      "path": "plugins/OnlineChecks/OnlineChecks.rc",
+      "context": "\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "Hybrid-Analysis",
+          "translation": "Hybrid-Analysis 检测",
+          "expected": 2
+        },
+        {
+          "id": "reuse-02",
+          "source": "VirusTotal",
+          "translation": "VirusTotal 检测"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-49",
+      "path": "plugins/Updater/Updater.rc",
+      "context": "\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "OK",
+          "translation": "确定"
+        }
+      ]
+    },
+    {
+      "id": "established-glossary-reuse-50",
+      "path": "plugins/Updater/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "reuse-01",
+          "source": "&Copy",
+          "translation": "复制(&C)"
+        }
+      ]
     }
   ]
 }
