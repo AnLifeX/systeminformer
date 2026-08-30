@@ -7244,6 +7244,21 @@
         { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
         { "id": "explorer-help", "source": "Make sure the Explorer executable file is present.", "translation": "请确保资源管理器可执行文件存在。" }
       ]
+    },
+    {
+      "id": "pagefiles-runtime-audit",
+      "path": "SystemInformer/pagfiles.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "file-name", "source": "File name", "translation": "文件名" },
+        { "id": "usage", "source": "Usage", "translation": "使用量" },
+        { "id": "peak-usage", "source": "Peak usage", "translation": "峰值使用量" },
+        { "id": "total", "source": "Total", "translation": "总计" },
+        { "id": "minimum", "source": "Minimum", "translation": "最小值" },
+        { "id": "maximum", "source": "Maximum", "translation": "最大值" },
+        { "id": "query-error", "source": "Unable to query pagefile information.", "translation": "无法查询分页文件信息。", "expected": 2 },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
     }
   ]
 }
