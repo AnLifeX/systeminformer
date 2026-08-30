@@ -6049,6 +6049,38 @@
         { "id": "query-boost", "source": "Unable to query process boost.", "translation": "无法查询进程优先级提升状态。", "expected": 3 },
         { "id": "query-efficiency", "source": "Unable to query process efficiency mode.", "translation": "无法查询进程效率模式。", "expected": 3 }
       ]
+    },
+    {
+      "id": "extendedtools-reparse-runtime-audit",
+      "path": "plugins/ExtendedTools/reparse.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "security-id-title", "source": "NTFS SecurityID", "translation": "NTFS 安全 ID" },
+        { "id": "filename", "source": "Filename", "translation": "文件名", "expected": 3 },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)", "expected": 2 },
+        { "id": "reparse-title", "source": "NTFS Reparse Points", "translation": "NTFS 重解析点" },
+        { "id": "object-id-title", "source": "NTFS Object Identifiers", "translation": "NTFS 对象标识符" },
+        { "id": "security-title", "source": "NTFS Security Descriptors", "translation": "NTFS 安全描述符" },
+        { "id": "file-index", "source": "File index", "translation": "文件索引", "expected": 2 },
+        { "id": "reparse-tag", "source": "Reparse tag", "translation": "重解析标记" },
+        { "id": "object-id", "source": "Object identifier", "translation": "对象 ID" },
+        { "id": "volume", "source": "Volume", "translation": "卷" },
+        { "id": "security-id", "source": "SecurityID", "translation": "安全 ID" },
+        { "id": "hash", "source": "Hash", "translation": "哈希" },
+        { "id": "length", "source": "Length", "translation": "长度" },
+        { "id": "owner", "source": "Owner", "translation": "所有者" },
+        { "id": "enumerate-error", "source": "Unable to enumerate the objects.", "translation": "无法枚举对象。" },
+        { "id": "remove-menu", "source": "Remove...", "translation": "移除..." },
+        { "id": "find-files", "source": "Find files...", "translation": "查找文件..." },
+        { "id": "remove", "source": "remove", "translation": "移除", "expected": 2 },
+        { "id": "reparse-object", "source": "the repase point", "translation": "重解析点" },
+        { "id": "reparse-warning", "source": "The repase point will be permanently deleted.", "translation": "该重解析点将被永久删除。" },
+        { "id": "object-id-object", "source": "the object identifier", "translation": "对象标识符" },
+        { "id": "object-id-warning", "source": "The object identifier will be permanently deleted.", "translation": "该对象标识符将被永久删除。" },
+        { "id": "remove-reparse-error", "source": "Unable to remove the reparse point.", "translation": "无法移除重解析点。" },
+        { "id": "remove-object-id-error", "source": "Unable to remove the object identifier.", "translation": "无法移除对象标识符。" },
+        { "id": "locate-security-id-error", "source": "Unable to locate files with the SecurityId.", "translation": "无法定位具有指定安全 ID 的文件。" }
+      ]
     }
   ]
 }
