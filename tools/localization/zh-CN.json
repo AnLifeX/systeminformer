@@ -7276,6 +7276,23 @@
         { "id": "bad-replies", "source": "Bad replies: %lu", "translation": "无效回复：%lu" },
         { "id": "anonymous-replies", "source": "Anon replies: %lu", "translation": "匿名回复：%lu" }
       ]
+    },
+    {
+      "id": "network-device-graph-runtime-audit",
+      "path": "plugins/HardwareDevices/netgraph.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "connected", "source": "Connected", "translation": "已连接" },
+        { "id": "per-second", "source": "/s", "translation": "/秒", "expected": 3 },
+        { "id": "disconnected", "source": "Disconnected", "translation": "已断开连接" },
+        { "id": "not-available", "source": "N/A", "translation": "不可用" },
+        { "id": "rate", "source": "%s/s", "translation": "%s/秒" },
+        { "id": "send", "source": "S: ", "translation": "发送：" },
+        { "id": "receive", "source": "R: ", "translation": "接收：", "expected": 3 },
+        { "id": "newline-send", "source": "\\nS: ", "translation": "\\n发送：", "expected": 2 },
+        { "id": "pending", "source": "Pending...", "translation": "正在查询...", "expected": 3 },
+        { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 5 }
+      ]
     }
   ]
 }
