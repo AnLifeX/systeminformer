@@ -7293,6 +7293,19 @@
         { "id": "pending", "source": "Pending...", "translation": "正在查询...", "expected": 3 },
         { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 5 }
       ]
+    },
+    {
+      "id": "disk-device-graph-runtime-audit",
+      "path": "plugins/HardwareDevices/diskgraph.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "disk-title", "source": "Disk ", "translation": "磁盘 ", "expected": 2 },
+        { "id": "read", "source": "R: ", "translation": "读取：", "expected": 3 },
+        { "id": "write", "source": "W: ", "translation": "写入：" },
+        { "id": "newline-write", "source": "\\nW: ", "translation": "\\n写入：", "expected": 2 },
+        { "id": "pending", "source": "Pending...", "translation": "正在查询...", "expected": 3 },
+        { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 6 }
+      ]
     }
   ]
 }
