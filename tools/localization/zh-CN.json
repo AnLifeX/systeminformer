@@ -7376,6 +7376,18 @@
         { "id": "window-class-error", "source": "Unable to register window class.", "translation": "无法注册窗口类。", "expected": 8 },
         { "id": "detours-error", "source": "Unable to commit detours transaction.", "translation": "无法提交 Detours 事务。" }
       ]
+    },
+    {
+      "id": "service-dependencies-runtime-audit",
+      "path": "plugins/ExtendedServices/depend.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "dependencies-title", "source": "This service depends on the following services:", "translation": "此服务依赖以下服务：" },
+        { "id": "dependencies-error", "source": "Unable to enumerate dependencies: ", "translation": "无法枚举依赖项：" },
+        { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。", "expected": 2 },
+        { "id": "dependents-title", "source": "The following services depend on this service:", "translation": "以下服务依赖此服务：" },
+        { "id": "dependents-error", "source": "Unable to enumerate dependents: ", "translation": "无法枚举依赖此服务的项：" }
+      ]
     }
   ]
 }
