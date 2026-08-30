@@ -32,12 +32,21 @@ DEFAULT_AUDIT_PATHS = ("SystemInformer", "plugins", "phlib")
 INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "ANSI",
     "ASLR",
+    "Alt",
     "CET",
+    "CPU",
+    "Ctrl",
     "DPI",
+    "I/O",
+    "NTVDM",
     "PID",
+    "Shift",
+    "Static",
+    "System Informer",
     "TID",
     "UIAccess",
     "Unicode",
+    "WMI",
     "WOW64",
 }
 C_STRING_PATTERN = re.compile(r'(?<![A-Za-z0-9_])(?:u8|u|U|L)?"((?:\\.|[^"\\])*)"')
@@ -382,6 +391,8 @@ def is_probably_user_text(value: str) -> bool:
 
     stripped = value.strip()
     if stripped in INTENTIONALLY_UNTRANSLATED_UI_TEXT:
+        return False
+    if re.fullmatch(r"CPU \d+", stripped):
         return False
     if stripped in {"%s", "%ls", "%u", "%lu", "%d", "%I64u", "%I64x"}:
         return False
