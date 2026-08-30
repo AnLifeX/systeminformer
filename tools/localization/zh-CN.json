@@ -7471,6 +7471,18 @@
         { "id": "not-implemented", "source": "TPM write not yet implemented", "translation": "TPM 写入功能尚未实现" },
         { "id": "read-error", "source": "Unable to read TPM", "translation": "无法读取 TPM" }
       ]
+    },
+    {
+      "id": "firmware-variable-editor-runtime-audit",
+      "path": "plugins/ExtendedTools/firmware_editor.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "query-error", "source": "Unable to query the EFI variable.", "translation": "无法查询 EFI 变量。", "expected": 2 },
+        { "id": "binary-files", "source": "Binary files (*.bin)", "translation": "二进制文件 (*.bin)" },
+        { "id": "all-files", "source": "All files (*.*)", "translation": "所有文件 (*.*)" },
+        { "id": "create-file-error", "source": "Unable to create the file", "translation": "无法创建文件" },
+        { "id": "update-error", "source": "Unable to update the EFI variable.", "translation": "无法更新 EFI 变量。", "expected": 2 }
+      ]
     }
   ]
 }
