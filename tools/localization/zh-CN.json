@@ -7226,6 +7226,24 @@
         { "id": "trace-error", "source": "Unable to retrieve unload event trace information.", "translation": "无法检索卸载事件跟踪信息。" },
         { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
       ]
+    },
+    {
+      "id": "working-set-watch-runtime-audit",
+      "path": "plugins/ExtendedTools/wswatch.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "open-process-error", "source": "Unable to open the process.", "translation": "无法打开进程。" },
+        { "id": "instruction", "source": "Instruction", "translation": "指令" },
+        { "id": "filename", "source": "Filename", "translation": "文件名" },
+        { "id": "count", "source": "Count", "translation": "次数" },
+        { "id": "symbol-provider-error", "source": "Unable to create the symbol provider.", "translation": "无法创建符号提供程序。" },
+        { "id": "enable-error", "source": "Unable to enable WS watch.", "translation": "无法启用工作集监视。" },
+        { "id": "pe-viewer-help", "source": "Make sure the PE Viewer executable file is present.", "translation": "请确保 PE 查看器可执行文件存在。", "expected": 2 },
+        { "id": "inspect", "source": "&Inspect", "translation": "检查(&I)" },
+        { "id": "open-location", "source": "Open &file location", "translation": "打开文件位置(&F)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "explorer-help", "source": "Make sure the Explorer executable file is present.", "translation": "请确保资源管理器可执行文件存在。" }
+      ]
     }
   ]
 }
