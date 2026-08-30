@@ -6136,6 +6136,29 @@
         { "id": "process-name", "source": "Process name", "translation": "进程名称" },
         { "id": "thread-name", "source": "Thread name", "translation": "线程名称" }
       ]
+    },
+    {
+      "id": "named-pipes-runtime-audit",
+      "path": "plugins/ExtendedTools/namedpipes.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "end", "source": "End", "translation": "端点" },
+        { "id": "name", "source": "Name", "translation": "名称", "expected": 2 },
+        { "id": "process", "source": "Process", "translation": "进程" },
+        { "id": "handle", "source": "Handle", "translation": "句柄" },
+        { "id": "granted-access", "source": "Granted access", "translation": "授予的访问权限" },
+        { "id": "type", "source": "Type", "translation": "类型", "expected": 2 },
+        { "id": "configuration", "source": "Configuration", "translation": "配置", "expected": 2 },
+        { "id": "max-instances", "source": "Max instances", "translation": "最大实例数", "expected": 2 },
+        { "id": "current-instances", "source": "Current instances", "translation": "当前实例数", "expected": 2 },
+        { "id": "read-data", "source": "Read data available", "translation": "可读数据量", "expected": 2 },
+        { "id": "outbound-quota", "source": "Outbound quota", "translation": "出站配额", "expected": 2 },
+        { "id": "state", "source": "State", "translation": "状态", "expected": 2 },
+        { "id": "remote-clients", "source": "Remote clients", "translation": "远程客户端", "expected": 2 },
+        { "id": "read-mode", "source": "Read mode", "translation": "读取模式", "expected": 2 },
+        { "id": "completion-mode", "source": "Completion mode", "translation": "完成模式", "expected": 2 },
+        { "id": "server", "source": "Server", "translation": "服务器", "expected": 2 }
+      ]
     }
   ]
 }
