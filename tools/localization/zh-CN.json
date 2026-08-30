@@ -7059,6 +7059,28 @@
         { "id": "execute-error", "source": "Unable to execute the program.", "translation": "无法执行程序。", "expected": 2 },
         { "id": "location-missing", "source": "The location could not be found.", "translation": "找不到该位置。" }
       ]
+    },
+    {
+      "id": "wait-chain-runtime-audit",
+      "path": "plugins/ExtendedTools/waitchain.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "go-process", "source": "Go to Process...", "translation": "转到进程..." },
+        { "id": "go-thread", "source": "Go to Thread...", "translation": "转到线程..." },
+        { "id": "process-missing", "source": "The process does not exist.", "translation": "进程不存在。" },
+        { "id": "true", "source": "true", "translation": "是" },
+        { "id": "type", "source": "Type", "translation": "类型" },
+        { "id": "thread-id", "source": "ThreadId", "translation": "线程 ID" },
+        { "id": "process-id", "source": "ProcessId", "translation": "进程 ID" },
+        { "id": "status", "source": "Status", "translation": "状态" },
+        { "id": "context-switches", "source": "Context Switches", "translation": "上下文切换次数" },
+        { "id": "wait-time", "source": "WaitTime", "translation": "等待时间" },
+        { "id": "timeout", "source": "Timeout", "translation": "超时" },
+        { "id": "alertable", "source": "Alertable", "translation": "可警报" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "empty", "source": "There are no threads to display.", "translation": "没有可显示的线程。" },
+        { "id": "querying", "source": "Querying thread wait chain sessions...", "translation": "正在查询线程等待链会话..." }
+      ]
     }
   ]
 }
