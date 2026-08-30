@@ -6247,6 +6247,42 @@
         { "id": "executing-one", "source": "Executing memory command...", "translation": "正在执行一项内存命令..." },
         { "id": "empty-list-error", "source": "Unable to empty the memory list.", "translation": "无法清空内存列表。" }
       ]
+    },
+    {
+      "id": "find-objects-runtime-audit",
+      "path": "SystemInformer/findobj.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "process", "source": "Process", "translation": "进程" },
+        { "id": "type", "source": "Type", "translation": "类型" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "handle", "source": "Handle", "translation": "句柄" },
+        { "id": "object-address", "source": "Object address", "translation": "对象地址" },
+        { "id": "original-name", "source": "Original name", "translation": "原始名称" },
+        { "id": "granted-access", "source": "Granted access", "translation": "授予的访问权限" },
+        { "id": "everything", "source": "Everything", "translation": "全部", "expected": 3 },
+        { "id": "mapped-file", "source": "Mapped file", "translation": "映射文件" },
+        { "id": "mapped-image", "source": "Mapped image", "translation": "映射映像" },
+        { "id": "third-party", "source": "Unidentified third party object.", "translation": "未识别的第三方对象。" },
+        { "id": "title", "source": "Find Handles or DLLs", "translation": "查找句柄或 DLL" },
+        { "id": "cancel", "source": "Cancel", "translation": "取消" },
+        { "id": "close-menu", "source": "C&lose\\bDel", "translation": "关闭(&L)\\bDel" },
+        { "id": "go-process", "source": "Go to &process...", "translation": "转到进程(&P)..." },
+        { "id": "properties", "source": "Prope&rties", "translation": "属性(&R)" },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C" },
+        { "id": "close", "source": "close", "translation": "关闭", "expected": 2 },
+        { "id": "selected-handle", "source": "the selected handle", "translation": "选中的句柄" },
+        { "id": "selected-handles", "source": "the selected handles", "translation": "选中的多个句柄" },
+        { "id": "close-warning", "source": "Closing handles may cause system instability and data corruption.", "translation": "关闭句柄可能导致系统不稳定和数据损坏。" },
+        { "id": "critical-handles", "source": "critical handle(s)", "translation": "关键句柄" },
+        { "id": "critical-warning", "source": "You are about to close one or more handles for a critical process with strict handle checks enabled. This will shut down the operating system immediately.\\r\\n\\r\\n", "translation": "即将关闭启用了严格句柄检查的关键进程所持有的一个或多个句柄。这会导致操作系统立即关闭。\\r\\n\\r\\n" },
+        { "id": "close-error", "source": "Unable to close \\\"%s\\\"", "translation": "无法关闭 \\\"%s\\\"" },
+        { "id": "process-missing", "source": "The process does not exist.", "translation": "该进程不存在。" },
+        { "id": "results", "source": "%s (%lu results)", "translation": "%s（%lu 个结果）" },
+        { "id": "find", "source": "Find", "translation": "查找" },
+        { "id": "too-many-handles", "source": "Unable to search for handles because the total number of handles on the system is too large.", "translation": "无法搜索句柄，因为系统中的句柄总数过多。" },
+        { "id": "check-processes", "source": "Please check if there are any processes with an extremely large number of handles open.", "translation": "请检查是否有进程打开了数量极多的句柄。" }
+      ]
     }
   ]
 }
