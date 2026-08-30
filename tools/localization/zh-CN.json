@@ -6426,6 +6426,39 @@
       "items": [
         { "id": "of", "source": " of ", "translation": " / " }
       ]
+    },
+    {
+      "id": "handle-menu-runtime-audit",
+      "path": "SystemInformer/hndlmenu.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "file-properties", "source": "File propert&ies", "translation": "文件属性(&I)" },
+        { "id": "open-file-location", "source": "Open &file location", "translation": "打开文件位置(&F)", "expected": 2 },
+        { "id": "open-key", "source": "Open &key", "translation": "打开注册表项(&K)" },
+        { "id": "go-process", "source": "Go to process...", "translation": "转到进程..." },
+        { "id": "process-properties", "source": "Process propert&ies", "translation": "进程属性(&I)" },
+        { "id": "read-write-memory", "source": "Read/Write &memory", "translation": "读/写内存(&M)" },
+        { "id": "go-thread", "source": "Go to t&hread...", "translation": "转到线程(&H)..." },
+        { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。" },
+        { "id": "open-location-error", "source": "Unable to open the file location.", "translation": "无法打开文件位置。" },
+        { "id": "unnamed", "source": "The object is unnamed.", "translation": "该对象未命名。", "expected": 3 },
+        { "id": "open-key-error", "source": "Unable to open key.", "translation": "无法打开注册表项。" },
+        { "id": "process-properties-error", "source": "Unable to show the process properties.", "translation": "无法显示进程属性。", "expected": 2 },
+        { "id": "process-missing", "source": "The process does not exist.", "translation": "该进程不存在。", "expected": 2 },
+        { "id": "map-section-error", "source": "Unable to map a view of the section.", "translation": "无法映射节区视图。", "expected": 2 },
+        { "id": "section-size", "source": "The section size is greater than 32 MB. Only the first 32 MB will be available.", "translation": "节区大小超过 32 MB。仅可使用前 32 MB。" },
+        { "id": "section-title", "source": "Section - ", "translation": "节区 - " },
+        { "id": "query-section-error", "source": "Unable to query the section.", "translation": "无法查询节区。", "expected": 2 },
+        { "id": "file-properties-error", "source": "Unable to open the file properties.", "translation": "无法打开文件属性。" }
+      ]
+    },
+    {
+      "id": "handle-menu-section-title",
+      "path": "SystemInformer/hndlmenu.c",
+      "context": ": PhCreateString(L\"{text}\");",
+      "items": [
+        { "id": "section", "source": "Section", "translation": "节区" }
+      ]
     }
   ]
 }
