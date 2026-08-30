@@ -7141,6 +7141,30 @@
         { "id": "summary", "source": "%u zombie process(es), %u terminated process(es).", "translation": "%u 个僵尸进程，%u 个已终止进程。", "expected": 2 },
         { "id": "scan-error", "source": "Unable to perform the scan", "translation": "无法执行扫描" }
       ]
+    },
+    {
+      "id": "process-minidump-runtime-audit",
+      "path": "SystemInformer/mdump.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "open-process-error", "source": "Unable to open the process", "translation": "无法打开进程" },
+        { "id": "access-file-error", "source": "Unable to access the dump file", "translation": "无法访问转储文件" },
+        { "id": "processing-module", "source": "Processing module ", "translation": "正在处理模块 " },
+        { "id": "processing-thread", "source": "Processing thread ", "translation": "正在处理线程 " },
+        { "id": "processing-memory", "source": "Processing memory regions", "translation": "正在处理内存区域" },
+        { "id": "processing-kernel", "source": "Processing kernel minidump", "translation": "正在处理内核小型转储" },
+        { "id": "wow64-missing", "source": "The 32-bit version of System Informer could not be located.", "translation": "找不到 32 位版本的 System Informer。" },
+        { "id": "fallback-64", "source": "A 64-bit dump will be created instead. Do you want to continue?", "translation": "将改为创建 64 位转储。是否继续？" },
+        { "id": "kernel-error", "source": "Unable to create kernel minidump.", "translation": "无法创建内核小型转储。" },
+        { "id": "admin-required-1", "source": "Kernel minidump of processes require administrative privileges. ", "translation": "创建进程的内核小型转储需要管理员权限。" },
+        { "id": "admin-required-2", "source": "Make sure System Informer is running with administrative privileges.", "translation": "请确保 System Informer 正以管理员权限运行。" },
+        { "id": "creating-dump", "source": "Creating the dump file...", "translation": "正在创建转储文件...", "expected": 3 },
+        { "id": "create-error", "source": "Unable to create the minidump", "translation": "无法创建小型转储" },
+        { "id": "create-error-period", "source": "Unable to create the minidump.", "translation": "无法创建小型转储。" },
+        { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。" },
+        { "id": "cancelling", "source": "Cancelling...", "translation": "正在取消..." },
+        { "id": "creating-minidump", "source": "Creating the minidump file...", "translation": "正在创建小型转储文件...", "expected": 3 }
+      ]
     }
   ]
 }
