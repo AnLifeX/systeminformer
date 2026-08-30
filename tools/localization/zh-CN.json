@@ -7081,6 +7081,32 @@
         { "id": "empty", "source": "There are no threads to display.", "translation": "没有可显示的线程。" },
         { "id": "querying", "source": "Querying thread wait chain sessions...", "translation": "正在查询线程等待链会话..." }
       ]
+    },
+    {
+      "id": "firmware-variables-runtime-audit",
+      "path": "plugins/ExtendedTools/firmware.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "non-volatile", "source": "Non Volatile, ", "translation": "非易失性, " },
+        { "id": "boot-service", "source": "Boot Service, ", "translation": "启动服务, " },
+        { "id": "runtime", "source": "Runtime Access, ", "translation": "运行时访问, " },
+        { "id": "hardware-error", "source": "Hardware Error Record, ", "translation": "硬件错误记录, " },
+        { "id": "authenticated", "source": "Authenticated Write Access, ", "translation": "经过身份验证的写入访问, " },
+        { "id": "authenticated-time", "source": "Authenticated Write Access (Time Based), ", "translation": "经过身份验证的写入访问（基于时间）, " },
+        { "id": "append", "source": "Append Write, ", "translation": "追加写入, " },
+        { "id": "delete-error", "source": "Unable to delete firmware variable.", "translation": "无法删除固件变量。" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "attributes", "source": "Attributes", "translation": "属性" },
+        { "id": "guid-name", "source": "Guid Name", "translation": "GUID 名称" },
+        { "id": "guid", "source": "Guid", "translation": "GUID" },
+        { "id": "data-length", "source": "Data Length", "translation": "数据长度" },
+        { "id": "edit", "source": "&Edit", "translation": "编辑(&E)" },
+        { "id": "delete", "source": "&Delete", "translation": "删除(&D)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" },
+        { "id": "privilege-error", "source": "Unable to enable environment privilege.", "translation": "无法启用环境权限。" },
+        { "id": "query-error", "source": "Unable to query firmware table.", "translation": "无法查询固件表。" },
+        { "id": "legacy-bios", "source": "Windows was installed using legacy BIOS.", "translation": "Windows 使用传统 BIOS 模式安装。" }
+      ]
     }
   ]
 }
