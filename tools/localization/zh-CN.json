@@ -7367,6 +7367,15 @@
         { "id": "unknown-error", "source": "An unknown error occurred.", "translation": "发生未知错误。" },
         { "id": "program-error", "source": "Unable to execute the program.", "translation": "无法执行程序。", "expected": 3 }
       ]
+    },
+    {
+      "id": "delay-hook-errors-audit",
+      "path": "SystemInformer/delayhook.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "window-class-error", "source": "Unable to register window class.", "translation": "无法注册窗口类。", "expected": 8 },
+        { "id": "detours-error", "source": "Unable to commit detours transaction.", "translation": "无法提交 Detours 事务。" }
+      ]
     }
   ]
 }
