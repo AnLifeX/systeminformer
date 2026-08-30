@@ -6236,6 +6236,17 @@
         { "id": "current-delta", "source": "Current (delta)", "translation": "当前分配数（增量）" },
         { "id": "bytes-delta", "source": "Bytes (delta)", "translation": "字节数（增量）" }
       ]
+    },
+    {
+      "id": "memory-lists-runtime-audit",
+      "path": "SystemInformer/memlists.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "not-applicable", "source": "N/A", "translation": "不适用" },
+        { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 24 },
+        { "id": "executing-one", "source": "Executing memory command...", "translation": "正在执行一项内存命令..." },
+        { "id": "empty-list-error", "source": "Unable to empty the memory list.", "translation": "无法清空内存列表。" }
+      ]
     }
   ]
 }
