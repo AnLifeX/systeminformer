@@ -7306,6 +7306,19 @@
         { "id": "pending", "source": "Pending...", "translation": "正在查询...", "expected": 3 },
         { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 6 }
       ]
+    },
+    {
+      "id": "searchbox-context-menu-audit",
+      "path": "phlib/searchbox.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "undo", "source": "Undo", "translation": "撤销" },
+        { "id": "cut", "source": "Cut", "translation": "剪切" },
+        { "id": "copy", "source": "Copy", "translation": "复制" },
+        { "id": "paste", "source": "Paste", "translation": "粘贴" },
+        { "id": "delete", "source": "Delete", "translation": "删除" },
+        { "id": "select-all", "source": "Select All", "translation": "全选" }
+      ]
     }
   ]
 }
