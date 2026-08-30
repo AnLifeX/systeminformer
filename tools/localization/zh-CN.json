@@ -6100,6 +6100,42 @@
         { "id": "settings-load", "source": "Unable to load the settings file.", "translation": "无法加载设置文件。" },
         { "id": "command-line-options", "source": "Command line options:", "translation": "命令行选项：" }
       ]
+    },
+    {
+      "id": "thread-stacks-runtime-audit",
+      "path": "SystemInformer/thrdstks.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "process", "source": "Go to process...", "translation": "转到进程..." },
+        { "id": "thread", "source": "Go to thread...", "translation": "转到线程..." },
+        { "id": "expand", "source": "Expand all", "translation": "全部展开" },
+        { "id": "collapse", "source": "Collapse all", "translation": "全部折叠" },
+        { "id": "hide-user", "source": "Hide user frames", "translation": "隐藏用户帧" },
+        { "id": "hide-system", "source": "Hide system frames", "translation": "隐藏系统帧" },
+        { "id": "hide-inline", "source": "Hide inline frames", "translation": "隐藏内联帧" },
+        { "id": "highlight-user", "source": "Highlight user frames", "translation": "突出显示用户帧" },
+        { "id": "highlight-system", "source": "Highlight system frames", "translation": "突出显示系统帧" },
+        { "id": "highlight-inline", "source": "Highlight inline frames", "translation": "突出显示内联帧" },
+        { "id": "copy", "source": "Copy", "translation": "复制" },
+        { "id": "symbol", "source": "Symbol", "translation": "符号" },
+        { "id": "frame", "source": "Frame", "translation": "帧" },
+        { "id": "architecture", "source": "Architecture", "translation": "体系结构" },
+        { "id": "stack-address", "source": "Stack address", "translation": "堆栈地址" },
+        { "id": "frame-address", "source": "Frame address", "translation": "帧地址" },
+        { "id": "parameter-1", "source": "Stack parameter #1", "translation": "堆栈参数 #1" },
+        { "id": "parameter-2", "source": "Stack parameter #2", "translation": "堆栈参数 #2" },
+        { "id": "parameter-3", "source": "Stack parameter #3", "translation": "堆栈参数 #3" },
+        { "id": "parameter-4", "source": "Stack parameter #4", "translation": "堆栈参数 #4" },
+        { "id": "control-address", "source": "Control address", "translation": "控制地址" },
+        { "id": "return-address", "source": "Return address", "translation": "返回地址" },
+        { "id": "file-name", "source": "File name", "translation": "文件名" },
+        { "id": "line-number", "source": "Line number", "translation": "行号" },
+        { "id": "frame-distance", "source": "Frame distance", "translation": "帧距离" },
+        { "id": "start-address", "source": "Start address", "translation": "起始地址" },
+        { "id": "start-symbolic", "source": "Start address (symbolic)", "translation": "起始地址（符号）" },
+        { "id": "process-name", "source": "Process name", "translation": "进程名称" },
+        { "id": "thread-name", "source": "Thread name", "translation": "线程名称" }
+      ]
     }
   ]
 }
