@@ -6895,6 +6895,35 @@
         { "id": "modifiers", "source": "Modifiers:\\r\\n", "translation": "修饰符：\\r\\n" },
         { "id": "change-error", "source": "Unable to change memory protection", "translation": "无法更改内存保护属性" }
       ]
+    },
+    {
+      "id": "thread-stack-runtime-audit",
+      "path": "SystemInformer/thrdstk.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "file-prefix", "source": "File: ", "translation": "文件：" },
+        { "id": "line", "source": ": line ", "translation": "：行 " },
+        { "id": "file-line", "source": "File: %s: line %lu\\n", "translation": "文件：%s：行 %lu\\n" },
+        { "id": "parameter-1", "source": "Stack parameter #1", "translation": "堆栈参数 #1" },
+        { "id": "parameter-2", "source": "Stack parameter #2", "translation": "堆栈参数 #2" },
+        { "id": "parameter-3", "source": "Stack parameter #3", "translation": "堆栈参数 #3" },
+        { "id": "parameter-4", "source": "Stack parameter #4", "translation": "堆栈参数 #4" },
+        { "id": "control-address", "source": "Control address", "translation": "控制地址" },
+        { "id": "return-address", "source": "Return address", "translation": "返回地址" },
+        { "id": "frame-distance", "source": "Frame distance", "translation": "帧距离" },
+        { "id": "driver-required", "source": "Inspecting kernel stacks requires a connection to the kernel driver.", "translation": "检查内核堆栈需要连接内核驱动程序。" },
+        { "id": "open-error", "source": "Unable to open the thread.", "translation": "无法打开线程。", "expected": 2 },
+        { "id": "load-error", "source": "Unable to load the stack.", "translation": "无法加载堆栈。" },
+        { "id": "refresh-error", "source": "Unable to refresh the stack.", "translation": "无法刷新堆栈。" },
+        { "id": "inspect", "source": "&Inspect", "translation": "检查(&I)" },
+        { "id": "open-location", "source": "Open &file location", "translation": "打开文件位置(&F)" },
+        { "id": "copy", "source": "Copy", "translation": "复制" },
+        { "id": "pe-missing", "source": "Make sure the PE Viewer executable file is present.", "translation": "请确认 PE 查看器的可执行文件存在。", "expected": 2 },
+        { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。" },
+        { "id": "processing-frame", "source": "Processing stack frame #", "translation": "正在处理堆栈帧 #" },
+        { "id": "no-unwind", "source": " (No unwind info)", "translation": "（无展开信息）", "expected": 2 },
+        { "id": "inline", "source": " (Inline function)", "translation": "（内联函数）" }
+      ]
     }
   ]
 }
