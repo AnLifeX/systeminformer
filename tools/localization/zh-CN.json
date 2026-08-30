@@ -6599,6 +6599,32 @@
         { "id": "paste-key", "source": "Paste the license key below:", "translation": "在下方粘贴许可证密钥：" },
         { "id": "help-link", "source": "Checkout <a href=\"\"https://support.maxmind.com/hc/en-us/articles/4407111582235-Generate-a-License-Key\"\">How-to-generate-a-license-key</a>", "translation": "查看<a href=\"\"https://support.maxmind.com/hc/en-us/articles/4407111582235-Generate-a-License-Key\"\">许可证密钥生成方法</a>" }
       ]
+    },
+    {
+      "id": "hardware-devices-runtime-audit",
+      "path": "plugins/HardwareDevices/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "state-error", "source": "Failed to change the device state.", "translation": "无法更改设备状态。", "expected": 2 },
+        { "id": "restart-error", "source": "Failed to restart the device.", "translation": "无法重启设备。", "expected": 3 },
+        { "id": "uninstall-error", "source": "Failed to uninstall the device.", "translation": "无法卸载设备。", "expected": 2 },
+        { "id": "device", "source": "Device", "translation": "设备" },
+        { "id": "enable", "source": "Enable", "translation": "启用" },
+        { "id": "disable", "source": "Disable", "translation": "禁用" },
+        { "id": "restart", "source": "Restart", "translation": "重启" },
+        { "id": "uninstall", "source": "Uninstall", "translation": "卸载" },
+        { "id": "search-online", "source": "Search &online\\bCtrl+M", "translation": "在线搜索(&O)\\bCtrl+M" },
+        { "id": "driver-update", "source": "Search driver update", "translation": "搜索驱动程序更新" },
+        { "id": "open-key", "source": "Open key", "translation": "打开注册表项" },
+        { "id": "hardware", "source": "Hardware", "translation": "硬件" },
+        { "id": "software", "source": "Software", "translation": "软件" },
+        { "id": "user", "source": "User", "translation": "用户" },
+        { "id": "config", "source": "Config", "translation": "配置" },
+        { "id": "security", "source": "Secu&rity", "translation": "安全(&R)" },
+        { "id": "properties", "source": "Properties", "translation": "属性" },
+        { "id": "display-name", "source": "Hardware Devices", "translation": "硬件设备" },
+        { "id": "description", "source": "Plugin for monitoring hardware devices like Disk drives and Network adapters via the System Information window.", "translation": "通过系统信息窗口监视磁盘驱动器、网络适配器等硬件设备。" }
+      ]
     }
   ]
 }
