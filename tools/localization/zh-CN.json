@@ -7259,6 +7259,23 @@
         { "id": "query-error", "source": "Unable to query pagefile information.", "translation": "无法查询分页文件信息。", "expected": 2 },
         { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
       ]
+    },
+    {
+      "id": "ping-runtime-audit",
+      "path": "plugins/NetworkTools/ping.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "Ping %s", "translation": "Ping：%s" },
+        { "id": "status", "source": "Pinging %s with %lu bytes of data...", "translation": "正在 Ping %s，数据大小为 %lu 字节..." },
+        { "id": "average", "source": "Average: %.2f ms", "translation": "平均值：%.2f 毫秒" },
+        { "id": "minimum", "source": "Minimum: %.2f ms", "translation": "最小值：%.2f 毫秒" },
+        { "id": "maximum", "source": "Maximum: %.2f ms", "translation": "最大值：%.2f 毫秒" },
+        { "id": "sent", "source": "Pings sent: %lu", "translation": "已发送：%lu" },
+        { "id": "lost", "source": "Pings lost: %lu (%.0f%%)", "translation": "已丢失：%lu (%.0f%%)" },
+        { "id": "deviation", "source": "Deviation: %.2f ms", "translation": "标准差：%.2f 毫秒" },
+        { "id": "bad-replies", "source": "Bad replies: %lu", "translation": "无效回复：%lu" },
+        { "id": "anonymous-replies", "source": "Anon replies: %lu", "translation": "匿名回复：%lu" }
+      ]
     }
   ]
 }
