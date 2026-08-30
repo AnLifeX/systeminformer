@@ -60,6 +60,7 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "WMI",
     "WOW64",
 }
+FORMAT_ONLY_UNITS = {"B", "KB", "MB", "GB", "TB", "ms", "s"}
 C_STRING_PATTERN = re.compile(r'(?<![A-Za-z0-9_])(?:u8|u|U|L)?"((?:\\.|[^"\\])*)"')
 RC_TEXT_PATTERN = re.compile(
     r'^\s*(?P<kind>CAPTION|LTEXT|CTEXT|RTEXT|PUSHBUTTON|DEFPUSHBUTTON|'
@@ -432,6 +433,11 @@ def is_probably_user_text(value: str) -> bool:
         return False
     if stripped in {"%s", "%ls", "%u", "%lu", "%d", "%I64u", "%I64x"}:
         return False
+    without_placeholders = PRINTF_PATTERN.sub("", stripped)
+    if without_placeholders != stripped:
+        remaining_words = re.findall(r"[A-Za-z]+", without_placeholders)
+        if not remaining_words or all(word in FORMAT_ONLY_UNITS for word in remaining_words):
+            return False
     if stripped.startswith(("http://", "https://")):
         return False
     if re.match(r"^-[A-Za-z][A-Za-z0-9_-]*(?:\s|\\n|$)", stripped):

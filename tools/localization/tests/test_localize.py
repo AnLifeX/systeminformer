@@ -217,6 +217,10 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhSetDialogItemText(hwndDlg, IDC_LAYOUT, L"PingGraphLayout");',
                     'PhSetDialogItemText(hwndDlg, IDC_INFO, L"0x01 - PAGE_NOACCESS\\r\\n");',
                     'PhSetDialogItemText(hwndDlg, IDC_BREAK, L"\\r\\n");',
+                    'PhSetDialogItemText(hwndDlg, IDC_PERCENT, L"%.0f%%");',
+                    'PhSetDialogItemText(hwndDlg, IDC_LATENCY, L"%.1f ms");',
+                    'PhSetDialogItemText(hwndDlg, IDC_RATE, L"%s/s");',
+                    'PhSetDialogItemText(hwndDlg, IDC_COUNTS, L"%lu | %lu");',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -271,6 +275,10 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("section placeholder", result.stdout)
         self.assertNotIn("PingGraphLayout", result.stdout)
         self.assertNotIn("PAGE_NOACCESS", result.stdout)
+        self.assertNotIn("%.0f%%", result.stdout)
+        self.assertNotIn("%.1f ms", result.stdout)
+        self.assertNotIn("%s/s", result.stdout)
+        self.assertNotIn("%lu | %lu", result.stdout)
         self.assertNotIn("Software", result.stdout)
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
