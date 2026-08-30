@@ -342,6 +342,13 @@ jobs:
         $setupLength = (Get-Item -LiteralPath $setupPath).Length
         $setupHash = (Get-FileHash -LiteralPath $setupPath -Algorithm SHA256).Hash
         $expectedUrl = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$([Uri]::EscapeDataString($env:RELEASE_TAG))/systeminformer-build-release-setup.exe"
+        $changelogDate = $metadata.changelog[0].commit.author.date
+        $changelogDateIsUtc = if ($changelogDate -is [DateTime]) {
+          $changelogDate.Kind -eq [DateTimeKind]::Utc
+        }
+        else {
+          [string]$changelogDate -match '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$'
+        }
         if ($metadata.version -ne $env:RELEASE_VERSION -or
             $metadata.commit -ne $env:GITHUB_SHA -or
             $metadata.setup_url -ne $expectedUrl -or
@@ -350,7 +357,7 @@ jobs:
             $metadata.setup_sig.Length -ne 128 -or
             $metadata.changelog.Count -lt 1 -or
             $metadata.changelog[0].sha -ne $env:GITHUB_SHA -or
-            $metadata.changelog[0].commit.author.date -notmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$') {
+            -not $changelogDateIsUtc) {
           throw 'Updater metadata does not match the validated release payload.'
         }
 
@@ -388,7 +395,7 @@ jobs:
           throw "Draft $env:RELEASE_TAG targets $($release.targetCommitish), not this workflow commit; refusing cleanup."
         }
 
-        gh release delete $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --cleanup-tag --yes
+        gh release delete $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --yes
         if ($LASTEXITCODE -ne 0) {
           throw "Unable to remove incomplete draft release $env:RELEASE_TAG."
         }
