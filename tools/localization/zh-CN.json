@@ -9784,6 +9784,195 @@
       "items": [
         { "id": "searching", "source": "Searching memory strings...", "translation": "正在搜索内存字符串..." }
       ]
+    },
+    {
+      "id": "setup-bootstrap-dialog",
+      "path": "tools/CustomSetupTool/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "legacy-title", "source": "Hey there, before we continue...", "translation": "继续之前，请注意..." },
+        { "id": "legacy-renamed", "source": "- Process Hacker was renamed System Informer.\\n", "translation": "- Process Hacker 已更名为 System Informer。\\n" },
+        { "id": "legacy-windows", "source": "- Process Hacker does not support Windows 10 or 11.\\n", "translation": "- Process Hacker 不支持 Windows 10 或 11。\\n" },
+        { "id": "legacy-updates", "source": "- Process Hacker will not be updated.\\n", "translation": "- Process Hacker 将不再更新。\\n" },
+        { "id": "legacy-uninstall", "source": "- Process Hacker will not be uninstalled.\\n\\n", "translation": "- Process Hacker 不会被自动卸载。\\n\\n" },
+        { "id": "legacy-install", "source": "This update will now install System Informer.\\n\\nPlease remember to uninstall Process Hacker. Thanks <3", "translation": "本次更新将安装 System Informer。\\n\\n请记得手动卸载 Process Hacker。谢谢 <3" },
+        { "id": "initializing", "source": "Initializing...", "translation": "正在初始化..." },
+        { "id": "application-name", "source": "System Informer - Setup", "translation": "System Informer - 安装程序" }
+      ]
+    },
+    {
+      "id": "setup-resource-dialogs",
+      "path": "tools/CustomSetupTool/resource.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "setup-title", "source": "System Informer Setup", "translation": "System Informer 安装程序" },
+        { "id": "welcome", "source": "Welcome to the System Informer Setup Wizard", "translation": "欢迎使用 System Informer 安装向导" },
+        { "id": "install-description", "source": "This will install System Informer on your computer. System Informer helps you monitor system resources, debug software, and detect malware.", "translation": "此向导将在计算机上安装 System Informer。System Informer 可帮助你监视系统资源、调试软件和检测恶意程序。" },
+        { "id": "close-apps", "source": "It is recommended you close all other applications before continuing.", "translation": "建议先关闭所有其他应用程序再继续。", "expected": 2 },
+        { "id": "install-next", "source": "Click Next to continue, or Cancel to exit setup.", "translation": "单击“下一步”继续，或单击“取消”退出安装程序。" },
+        { "id": "uninstall-title", "source": "System Informer Uninstall", "translation": "System Informer 卸载程序" },
+        { "id": "uninstall-welcome", "source": "Welcome to the System Informer Uninstall Wizard", "translation": "欢迎使用 System Informer 卸载向导" },
+        { "id": "uninstall-description", "source": "This will uninstall System Informer from your computer. System Informer helps you monitor system resources, debug software, and detect malware.", "translation": "此向导将从计算机中卸载 System Informer。System Informer 可帮助你监视系统资源、调试软件和检测恶意程序。" },
+        { "id": "uninstall-next", "source": "Click Next to continue, or Cancel to exit uninstallation.", "translation": "单击“下一步”继续，或单击“取消”退出卸载程序。" },
+        { "id": "options", "source": "Setup Options", "translation": "安装选项" },
+        { "id": "destination", "source": "Select Destination Location", "translation": "选择安装位置" },
+        { "id": "destination-question", "source": "Where should System Informer be installed?", "translation": "System Informer 应安装到哪里？" },
+        { "id": "destination-description", "source": "Setup will install System Informer into the following folder.", "translation": "安装程序会将 System Informer 安装到以下文件夹。" },
+        { "id": "destination-help", "source": "To continue, click Next. If you would like to select a different folder, click Browse.", "translation": "单击“下一步”继续。如需选择其他文件夹，请单击“浏览”。" },
+        { "id": "browse", "source": "Browse...", "translation": "浏览..." },
+        { "id": "shortcuts", "source": "Shortcut Options", "translation": "快捷方式选项" },
+        { "id": "start-menu", "source": "Choose Start Menu Folder", "translation": "选择开始菜单文件夹" },
+        { "id": "start-menu-description", "source": "Choose a Start Menu folder for System Informer shortcuts.", "translation": "选择用于放置 System Informer 快捷方式的开始菜单文件夹。" },
+        { "id": "start-menu-help", "source": "Select an existing Start Menu folder or enter a name to create a new folder.", "translation": "选择现有的开始菜单文件夹，或输入名称创建新文件夹。" },
+        { "id": "no-start-menu", "source": "Do not create Start Menu shortcuts", "translation": "不创建开始菜单快捷方式" },
+        { "id": "desktop-shortcut", "source": "Create desktop shortcut", "translation": "创建桌面快捷方式" },
+        { "id": "installing", "source": "Installing", "translation": "正在安装", "expected": 2 },
+        { "id": "installing-description", "source": "Please wait while Setup installs System Informer on your computer.", "translation": "安装程序正在计算机上安装 System Informer，请稍候。" },
+        { "id": "status", "source": "Status:", "translation": "状态：" },
+        { "id": "complete", "source": "Installation Complete", "translation": "安装完成" },
+        { "id": "complete-title", "source": "Completing the System Informer Setup Wizard", "translation": "正在完成 System Informer 安装向导" },
+        { "id": "complete-description", "source": "Setup has finished installing System Informer on your computer. The application may be launched by selecting the installed shortcuts.", "translation": "System Informer 已安装到计算机。可以通过已创建的快捷方式启动程序。" },
+        { "id": "finish", "source": "Click Finish to exit Setup.", "translation": "单击“完成”退出安装程序。", "expected": 2 },
+        { "id": "start", "source": "Start System Informer", "translation": "启动 System Informer" },
+        { "id": "failed", "source": "Setup Failed", "translation": "安装失败" },
+        { "id": "failed-title", "source": "System Informer Setup Wizard failed", "translation": "System Informer 安装向导失败" },
+        { "id": "failed-description", "source": "Setup was unable to complete the operation.", "translation": "安装程序无法完成操作。" },
+        { "id": "uninstall", "source": "Uninstall", "translation": "卸载" },
+        { "id": "ready-uninstall", "source": "Ready to Uninstall", "translation": "准备卸载" },
+        { "id": "ready-uninstall-description", "source": "Setup is ready to remove System Informer from your computer.", "translation": "安装程序已准备好从计算机中移除 System Informer。" },
+        { "id": "ready-uninstall-help", "source": "Click Uninstall to continue with the uninstallation, or click Back if you want to review or change any settings.", "translation": "单击“卸载”继续；如需查看或更改设置，请单击“上一步”。" },
+        { "id": "remove-settings", "source": "Remove application settings", "translation": "删除应用程序设置" },
+        { "id": "update", "source": "Update", "translation": "更新" },
+        { "id": "ready-update", "source": "Ready to Update", "translation": "准备更新" },
+        { "id": "ready-update-description", "source": "Setup is ready to update System Informer on your computer.", "translation": "安装程序已准备好更新计算机上的 System Informer。" },
+        { "id": "ready-update-help", "source": "Click Update to continue with the installation, or click Back if you want to review or change any settings.", "translation": "单击“更新”继续；如需查看或更改设置，请单击“上一步”。" },
+        { "id": "repair", "source": "Repair", "translation": "修复" },
+        { "id": "ready-repair", "source": "Ready to Repair", "translation": "准备修复" },
+        { "id": "ready-repair-description", "source": "Setup is ready to repair System Informer on your computer.", "translation": "安装程序已准备好修复计算机上的 System Informer。" },
+        { "id": "ready-repair-help", "source": "Click Repair to continue, or click Back if you want to review or change any settings.", "translation": "单击“修复”继续；如需查看或更改设置，请单击“上一步”。" }
+      ]
+    },
+    {
+      "id": "setup-install-task-dialogs",
+      "path": "tools/CustomSetupTool/startpage.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "failed", "source": "Setup failed with an error.", "translation": "安装失败，发生错误。" },
+        { "id": "failed-details", "source": "%s\\r\\n\\r\\nSelect Close to exit setup.", "translation": "%s\\r\\n\\r\\n请选择“关闭”退出安装程序。" },
+        { "id": "close", "source": "Select Close to exit setup.", "translation": "请选择“关闭”退出安装程序。", "expected": 2 },
+        { "id": "install", "source": "Install", "translation": "安装" },
+        { "id": "description", "source": "A free, powerful, multi-purpose tool that helps you monitor system resources, debug software and detect malware.", "translation": "一款免费、强大且用途广泛的工具，可帮助你监视系统资源、调试软件和检测恶意程序。" },
+        { "id": "complete-suffix", "source": " complete.", "translation": " 已完成。" },
+        { "id": "start-on-exit", "source": "Start program when setup exits", "translation": "退出安装程序时启动程序" },
+        { "id": "folder-format", "source": "Installation Folder:\\r\\n\\r\\n%s", "translation": "安装文件夹：\\r\\n\\r\\n%s", "expected": 2 },
+        { "id": "browse", "source": "Browse", "translation": "浏览" },
+        { "id": "next", "source": "Next", "translation": "下一步" },
+        { "id": "options", "source": "Setup Options", "translation": "安装选项" },
+        { "id": "folder-help", "source": "Installation Folder:\\r\\n\\r\\nSelect \\\"Browse\\\" to continue.", "translation": "安装文件夹：\\r\\n\\r\\n请选择\\\"浏览\\\"继续。" },
+        { "id": "change-directory", "source": "Change directory", "translation": "更改目录" },
+        { "id": "continue", "source": "Continue", "translation": "继续" },
+        { "id": "warning", "source": "WARNING", "translation": "警告", "expected": 2 },
+        { "id": "nonempty-prefix", "source": "The selected installation directory already contains files and data. ", "translation": "所选安装目录已包含文件和数据。 " },
+        { "id": "nonempty-question", "source": "If you continue this directory and files will be deleted.\\r\\n\\r\\nDo you want to change the directory?", "translation": "如果继续，目录中的文件和数据将被删除。\\r\\n\\r\\n是否要更改目录？" },
+        { "id": "preparing", "source": "Preparing to install...", "translation": "正在准备安装..." }
+      ]
+    },
+    {
+      "id": "setup-install-progress",
+      "path": "tools/CustomSetupTool/install.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "create-directory", "source": "Creating the installation directory...", "translation": "正在创建安装目录..." },
+        { "id": "stop-application", "source": "Stopping System Informer...", "translation": "正在停止 System Informer..." },
+        { "id": "stop-driver", "source": "Stopping the kernel driver...", "translation": "正在停止内核驱动程序..." },
+        { "id": "update-settings", "source": "Updating settings...", "translation": "正在更新设置..." },
+        { "id": "convert-settings", "source": "Converting settings...", "translation": "正在转换设置..." },
+        { "id": "remove-integration", "source": "Removing previous Windows integration...", "translation": "正在移除之前的 Windows 集成..." },
+        { "id": "remove-shortcuts", "source": "Removing previous shortcuts...", "translation": "正在移除之前的快捷方式..." },
+        { "id": "create-uninstaller", "source": "Creating the uninstaller...", "translation": "正在创建卸载程序..." },
+        { "id": "create-registration", "source": "Creating uninstall registration...", "translation": "正在创建卸载注册信息..." },
+        { "id": "create-localdumps", "source": "Creating LocalDumps configuration...", "translation": "正在创建 LocalDumps 配置..." },
+        { "id": "create-integration", "source": "Creating Windows integration...", "translation": "正在创建 Windows 集成..." },
+        { "id": "create-shortcuts", "source": "Creating shortcuts...", "translation": "正在创建快捷方式..." },
+        { "id": "extract", "source": "Extracting files...", "translation": "正在解压文件..." },
+        { "id": "complete", "source": "Installation complete.", "translation": "安装完成。" },
+        { "id": "failed", "source": "Installation failed.", "translation": "安装失败。" }
+      ]
+    },
+    {
+      "id": "setup-extract-progress",
+      "path": "tools/CustomSetupTool/extract.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "extracting", "source": "Extracting: ", "translation": "正在解压：" },
+        { "id": "progress", "source": "Progress: ", "translation": "进度：" },
+        { "id": "of", "source": " of ", "translation": " / " },
+        { "id": "finalizing", "source": "Finalizing: ", "translation": "正在完成：" }
+      ]
+    },
+    {
+      "id": "setup-uninstall-dialogs",
+      "path": "tools/CustomSetupTool/uninstall.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "complete-progress", "source": "Uninstall complete.", "translation": "卸载完成。" },
+        { "id": "failed-progress", "source": "Uninstall failed.", "translation": "卸载失败。" },
+        { "id": "complete", "source": "System Informer has been uninstalled.", "translation": "System Informer 已卸载。" },
+        { "id": "reboot", "source": "A reboot is required to complete the uninstall.", "translation": "需要重新启动计算机才能完成卸载。" },
+        { "id": "close", "source": "Click close to exit setup.", "translation": "单击“关闭”退出安装程序。" },
+        { "id": "uninstalling", "source": "Uninstalling System Informer...", "translation": "正在卸载 System Informer..." },
+        { "id": "failed", "source": "Uninstall failed with an error.", "translation": "卸载失败，发生错误。" },
+        { "id": "retry-help", "source": "Click retry to try again or close to exit setup.", "translation": "单击“重试”再次尝试，或单击“关闭”退出安装程序。" },
+        { "id": "uninstall", "source": "Uninstall", "translation": "卸载" },
+        { "id": "confirm", "source": "Are you sure you want to uninstall System Informer?", "translation": "确定要卸载 System Informer 吗？" },
+        { "id": "remove-settings", "source": "Remove application settings", "translation": "删除应用程序设置" }
+      ]
+    },
+    {
+      "id": "setup-update-dialogs",
+      "path": "tools/CustomSetupTool/update.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "download", "source": "Downloading update...", "translation": "正在下载更新..." },
+        { "id": "prepare-directory", "source": "Preparing the update directory...", "translation": "正在准备更新目录..." },
+        { "id": "stop-application", "source": "Stopping System Informer...", "translation": "正在停止 System Informer..." },
+        { "id": "stop-driver", "source": "Stopping the kernel driver...", "translation": "正在停止内核驱动程序..." },
+        { "id": "update-uninstaller", "source": "Updating the uninstaller...", "translation": "正在更新卸载程序..." },
+        { "id": "extract", "source": "Extracting updated files...", "translation": "正在解压更新文件..." },
+        { "id": "update-settings", "source": "Updating settings...", "translation": "正在更新设置..." },
+        { "id": "convert-settings", "source": "Converting settings...", "translation": "正在转换设置..." },
+        { "id": "update-registration", "source": "Updating uninstall registration...", "translation": "正在更新卸载注册信息..." },
+        { "id": "update-localdumps", "source": "Updating LocalDumps configuration...", "translation": "正在更新 LocalDumps 配置..." },
+        { "id": "update-integration", "source": "Updating Windows integration...", "translation": "正在更新 Windows 集成..." },
+        { "id": "complete", "source": "Update complete.", "translation": "更新完成。", "expected": 2 },
+        { "id": "failed", "source": "Update failed.", "translation": "更新失败。" },
+        { "id": "version", "source": "Updating to version %lu.%lu.%lu.%lu...", "translation": "正在更新到版本 %lu.%lu.%lu.%lu..." },
+        { "id": "close", "source": "Select Close to exit.", "translation": "请选择“关闭”退出。" },
+        { "id": "retry", "source": "Retry", "translation": "重试" },
+        { "id": "close-button", "source": "Close", "translation": "关闭" },
+        { "id": "error", "source": "Error updating to the latest version.", "translation": "更新到最新版本时出错。" }
+      ]
+    },
+    {
+      "id": "setup-wizard-dialogs",
+      "path": "tools/CustomSetupTool/wizard.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "cancel-title", "source": "Cancel Setup?", "translation": "取消安装？" },
+        { "id": "cancel-question", "source": "Setup is currently in progress. Cancelling now may leave System Informer partially installed or updated.\\r\\n\\r\\nAre you sure you want to cancel?", "translation": "安装程序正在运行。现在取消可能导致 System Informer 仅完成部分安装或更新。\\r\\n\\r\\n确定要取消吗？" },
+        { "id": "back", "source": "< &Back", "translation": "< 上一步(&B)" },
+        { "id": "next", "source": "&Next >", "translation": "下一步(&N) >" },
+        { "id": "restart-error", "source": "Unable to restart the application.", "translation": "无法重新启动应用程序。", "expected": 2 },
+        { "id": "no-folder", "source": "No folder will be created", "translation": "不会创建文件夹" },
+        { "id": "invalid-folder-title", "source": "Invalid Start Menu folder", "translation": "开始菜单文件夹无效" },
+        { "id": "invalid-folder", "source": "Enter a valid Start Menu folder name.", "translation": "请输入有效的开始菜单文件夹名称。" },
+        { "id": "uninstall", "source": "&Uninstall", "translation": "卸载(&U)" },
+        { "id": "uninstalling", "source": "Uninstalling", "translation": "正在卸载" },
+        { "id": "uninstalling-description", "source": "Please wait while Setup removes System Informer from your computer.", "translation": "安装程序正在从计算机中移除 System Informer，请稍候。" },
+        { "id": "unknown-error", "source": "An unknown error occurred.", "translation": "发生未知错误。" },
+        { "id": "retry", "source": "Retry", "translation": "重试" },
+        { "id": "title", "source": "System Informer Setup", "translation": "System Informer 安装程序" }
+      ]
     }
   ]
 }

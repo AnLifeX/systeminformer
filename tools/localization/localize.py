@@ -28,7 +28,7 @@ ESCAPE_PATTERN = re.compile(
 )
 
 SOURCE_SUFFIXES = {".c", ".cc", ".cpp", ".cxx", ".h", ".hpp", ".rc"}
-DEFAULT_AUDIT_PATHS = ("SystemInformer", "plugins", "phlib")
+DEFAULT_AUDIT_PATHS = ("SystemInformer", "plugins", "phlib", "tools/CustomSetupTool")
 INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "<section placeholder>",
     "ACPI",
@@ -106,7 +106,7 @@ UI_CALL_PATTERNS = (
         "window-text",
         re.compile(
             r"\b(?:PhSetWindowText|SetWindowTextW?|PhSetDialogItemText|"
-            r"SetDlgItemTextW?)\s*\("
+            r"SetDlgItemTextW?|SetupSetProgressText|SetupSetWizardButtonText)\s*\("
         ),
     ),
     (

@@ -233,6 +233,8 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhSetDialogItemText(hwndDlg, IDC_INFINITY, L"\\u221E");',
                     'PhSetDialogItemText(hwndDlg, IDC_DOMAIN, L"<a href=\\\"https://example.com/\\\">example.com</a>");',
                     'PhSetDialogItemText(hwndDlg, IDC_CREDIT, L"<a href=\\\"https://example.com/user\\\">user</a> - Example Name\\n");',
+                    'SetupSetProgressText(context, L"Installing files...", NULL);',
+                    'SetupSetWizardButtonText(parent, IDNEXT, L"Continue");',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -289,6 +291,8 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertIn("Download", result.stdout)
         self.assertIn("Retry", result.stdout)
         self.assertIn("NetworkTools", result.stdout)
+        self.assertIn("Installing files...", result.stdout)
+        self.assertIn("Continue", result.stdout)
         self.assertNotIn("&Copy", result.stdout)
         self.assertNotIn("section placeholder", result.stdout)
         self.assertNotIn("PingGraphLayout", result.stdout)
@@ -307,7 +311,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
         self.assertNotIn("[PUSHBUTTON] Close", result.stdout)
-        self.assertIn("uncovered=9", result.stdout)
+        self.assertIn("uncovered=11", result.stdout)
 
 
 if __name__ == "__main__":
