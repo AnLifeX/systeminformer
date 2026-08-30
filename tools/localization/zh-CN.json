@@ -5995,6 +5995,37 @@
       "items": [
         { "id": "groups", "source": "Groups", "translation": "组" }
       ]
+    },
+    {
+      "id": "extendedtools-object-manager-audit",
+      "path": "plugins/ExtendedTools/objmgr.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "query-error", "source": "Unable to query directory object.", "translation": "无法查询目录对象。" },
+        { "id": "directory-count", "source": "Objects in current directory: %s", "translation": "当前目录中的对象数：%s", "expected": 2 },
+        { "id": "third-party-object", "source": "Unidentified third party object.", "translation": "无法识别的第三方对象。" },
+        { "id": "target-error", "source": "Unable to locate the target.", "translation": "无法定位目标。", "expected": 2 },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "type", "source": "Type", "translation": "类型", "expected": 2 },
+        { "id": "target", "source": "Target", "translation": "目标" },
+        { "id": "object-address", "source": "Object address", "translation": "对象地址" },
+        { "id": "reset-sort", "source": "&Reset sort", "translation": "重置排序(&R)" },
+        { "id": "properties-enter", "source": "Prope&rties\\bEnter", "translation": "属性(&R)\\bEnter" },
+        { "id": "properties-shift-enter", "source": "Prope&rties\\bShift+Enter", "translation": "属性(&R)\\bShift+Enter", "expected": 2 },
+        { "id": "handles", "source": "&Handles\\bCtrl+H", "translation": "句柄(&H)\\bCtrl+H", "expected": 2 },
+        { "id": "open-link", "source": "&Open link\\bEnter", "translation": "打开链接(&O)\\bEnter" },
+        { "id": "upper-driver", "source": "Go to &upper device driver", "translation": "转到上层设备驱动程序(&U)" },
+        { "id": "lower-driver", "source": "&Go to lower device driver", "translation": "转到下层设备驱动程序(&G)" },
+        { "id": "device-driver", "source": "&Go to device driver", "translation": "转到设备驱动程序(&G)" },
+        { "id": "process", "source": "&Go to process...", "translation": "转到进程(&G)..." },
+        { "id": "thread", "source": "&Go to thread...", "translation": "转到线程(&G)..." },
+        { "id": "file-location", "source": "&Open file location", "translation": "打开文件位置(&O)", "expected": 2 },
+        { "id": "drive-volume", "source": "Sh&ow drive volume", "translation": "显示驱动器卷(&O)" },
+        { "id": "security", "source": "&Security\\bCtrl+Enter", "translation": "安全(&S)\\bCtrl+Enter", "expected": 2 },
+        { "id": "copy-address", "source": "Copy Object &Address\\bCtrl+Shift+C", "translation": "复制对象地址(&A)\\bCtrl+Shift+C", "expected": 2 },
+        { "id": "copy-full-name", "source": "Copy &Full Name\\bCtrl+Alt+C", "translation": "复制完整名称(&F)\\bCtrl+Alt+C", "expected": 2 },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C", "expected": 2 }
+      ]
     }
   ]
 }
