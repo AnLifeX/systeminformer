@@ -7005,6 +7005,26 @@
         { "id": "edit", "source": "&Edit", "translation": "编辑(&E)" },
         { "id": "delete-menu", "source": "&Delete", "translation": "删除(&D)" }
       ]
+    },
+    {
+      "id": "graph-scroll-context-menu-audit",
+      "path": "phlib/graphscroll.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "here", "source": "Scroll Here", "translation": "滚动到此处" },
+        { "id": "left-edge", "source": "Left Edge", "translation": "左边缘" },
+        { "id": "top", "source": "Top", "translation": "顶部" },
+        { "id": "right-edge", "source": "Right Edge", "translation": "右边缘" },
+        { "id": "bottom", "source": "Bottom", "translation": "底部" },
+        { "id": "page-left", "source": "Page Left", "translation": "向左翻页" },
+        { "id": "page-up", "source": "Page Up", "translation": "向上翻页" },
+        { "id": "page-right", "source": "Page Right", "translation": "向右翻页" },
+        { "id": "page-down", "source": "Page Down", "translation": "向下翻页" },
+        { "id": "scroll-left", "source": "Scroll Left", "translation": "向左滚动" },
+        { "id": "scroll-up", "source": "Scroll Up", "translation": "向上滚动" },
+        { "id": "scroll-right", "source": "Scroll Right", "translation": "向右滚动" },
+        { "id": "scroll-down", "source": "Scroll Down", "translation": "向下滚动" }
+      ]
     }
   ]
 }
