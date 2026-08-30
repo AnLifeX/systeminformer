@@ -38,7 +38,9 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "CET",
     "CPU",
     "Ctrl",
+    "DEP",
     "DPI",
+    "DRAM",
     "FPS",
     "GPU",
     "I/O",
@@ -46,15 +48,20 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "NTVDM",
     "NPU",
     "PID",
+    "PID (LXSS)",
     "Ping",
     "PingGraphLayout",
+    "RAPL",
     "Shift",
     "SID",
     "SDDL",
     "SMBIOS",
+    "SMART",
     "Static",
     "System Informer",
     "TID",
+    "TID (LXSS)",
+    "TTL",
     "UIAccess",
     "Unicode",
     "WMI",
@@ -429,7 +436,7 @@ def is_probably_user_text(value: str) -> bool:
         return False
     if re.fullmatch(r"0x[0-9A-Fa-f]+\s+-\s+[A-Z][A-Z0-9_]+(?:\\r\\n)?", stripped):
         return False
-    if re.fullmatch(r"(?:\\[abfnrtv\\'\"?])+", stripped):
+    if not ESCAPE_PATTERN.sub("", stripped):
         return False
     if stripped in {"%s", "%ls", "%u", "%lu", "%d", "%I64u", "%I64x"}:
         return False
@@ -441,6 +448,12 @@ def is_probably_user_text(value: str) -> bool:
             return False
     if stripped.startswith(("http://", "https://")):
         return False
+    if stripped.startswith('<a href=\\"http'):
+        if (
+            re.search(r"</a>\s+-\s+.+(?:\\n)?$", stripped)
+            or re.search(r">[^<]*\.[^<]*</a>(?:\\n)?$", stripped)
+        ):
+            return False
     if re.match(r"^-[A-Za-z][A-Za-z0-9_-]*(?:\s|\\n|$)", stripped):
         return False
 

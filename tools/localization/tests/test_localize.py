@@ -222,6 +222,11 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhSetDialogItemText(hwndDlg, IDC_RATE, L"%s/s");',
                     'PhSetDialogItemText(hwndDlg, IDC_COUNTS, L"%lu | %lu");',
                     'PhSetDialogItemText(hwndDlg, IDC_FORMATTED, L"%s\\n%s");',
+                    'PhSetDialogItemText(hwndDlg, IDC_DEP, L"DEP");',
+                    'PhSetDialogItemText(hwndDlg, IDC_LXSS, L"PID (LXSS)");',
+                    'PhSetDialogItemText(hwndDlg, IDC_INFINITY, L"\\u221E");',
+                    'PhSetDialogItemText(hwndDlg, IDC_DOMAIN, L"<a href=\\\"https://example.com/\\\">example.com</a>");',
+                    'PhSetDialogItemText(hwndDlg, IDC_CREDIT, L"<a href=\\\"https://example.com/user\\\">user</a> - Example Name\\n");',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -281,6 +286,11 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("%s/s", result.stdout)
         self.assertNotIn("%lu | %lu", result.stdout)
         self.assertNotIn("%s\\n%s", result.stdout)
+        self.assertNotIn("[window-text] DEP", result.stdout)
+        self.assertNotIn("PID (LXSS)", result.stdout)
+        self.assertNotIn("u221E", result.stdout)
+        self.assertNotIn("example.com", result.stdout)
+        self.assertNotIn("Example Name", result.stdout)
         self.assertNotIn("Software", result.stdout)
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
