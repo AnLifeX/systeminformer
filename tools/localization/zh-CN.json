@@ -8305,6 +8305,1037 @@
           "translation": "复制(&C)"
         }
       ]
+    },
+    {
+      "id": "manual-ui-glossary-01",
+      "path": "SystemInformer/gdihndl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Object",
+          "translation": "对象"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-02",
+      "path": "SystemInformer/hndlprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Principal",
+          "translation": "主体",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-03",
+      "path": "SystemInformer/hndlstat.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to enumerate process handles",
+          "translation": "无法枚举进程句柄"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-04",
+      "path": "SystemInformer/kdump.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to create live kernel dump.",
+          "translation": "无法创建实时内核转储。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-05",
+      "path": "SystemInformer/logwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-06",
+      "path": "SystemInformer/memmod.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "ImageBase",
+          "translation": "映像基址"
+        },
+        {
+          "id": "manual-02",
+          "source": "Offset",
+          "translation": "偏移"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-07",
+      "path": "SystemInformer/miniinfo.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Opaque",
+          "translation": "不透明"
+        },
+        {
+          "id": "manual-02",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-08",
+      "path": "SystemInformer/mwpgproc.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "This filter cannot function because digital signature checking is not enabled.\\r\\n%s",
+          "translation": "由于未启用数字签名检查，此筛选器无法工作。\\r\\n%s"
+        },
+        {
+          "id": "manual-02",
+          "source": "Enable it in Options > General and restart System Informer.",
+          "translation": "请在“选项 > 常规”中启用该功能，然后重启 System Informer。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-09",
+      "path": "SystemInformer/netlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "This node cannot be displayed because it is currently hidden by your active filter settings or preferences.",
+          "translation": "当前筛选设置或首选项隐藏了此节点，因此无法显示。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-10",
+      "path": "SystemInformer/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "\\\"%s\\\" is not one of the supported values (%s).\\r\\nThe value was applied anyway.",
+          "translation": "\\\"%s\\\"不是受支持的值之一（%s）。\\r\\n仍已应用该值。"
+        },
+        {
+          "id": "manual-02",
+          "source": "Default",
+          "translation": "默认"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-11",
+      "path": "SystemInformer/plugin.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to load the following plugin(s)",
+          "translation": "无法加载以下插件"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-12",
+      "path": "SystemInformer/plugman.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Disabled Plugins (%lu)",
+          "translation": "已禁用插件 (%lu)",
+          "expected": 3
+        },
+        {
+          "id": "manual-02",
+          "source": "(unnamed)",
+          "translation": "（未命名）"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-13",
+      "path": "SystemInformer/proctree.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Private bytes history",
+          "translation": "专用字节历史"
+        },
+        {
+          "id": "manual-02",
+          "source": "This node cannot be displayed because it is currently hidden by your active filter settings or preferences.",
+          "translation": "当前筛选设置或首选项隐藏了此节点，因此无法显示。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-14",
+      "path": "SystemInformer/prpgenv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "the selected environment variable",
+          "translation": "选中的环境变量",
+          "expected": 3
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-15",
+      "path": "SystemInformer/prpghndl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。"
+        },
+        {
+          "id": "manual-02",
+          "source": "Unable to query the process.",
+          "translation": "无法查询进程。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-16",
+      "path": "SystemInformer/prpgmem.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to find the memory region for the selected address.",
+          "translation": "找不到所选地址对应的内存区域。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-17",
+      "path": "SystemInformer/prpgmod.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "load",
+          "translation": "加载"
+        },
+        {
+          "id": "manual-02",
+          "source": "a module",
+          "translation": "模块"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-18",
+      "path": "SystemInformer/prpgthrd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "critical status on the thread",
+          "translation": "线程的关键状态",
+          "expected": 2
+        },
+        {
+          "id": "manual-02",
+          "source": "Unable to change the thread critical status.",
+          "translation": "无法更改线程关键状态。"
+        },
+        {
+          "id": "manual-03",
+          "source": "Unable to open the thread",
+          "translation": "无法打开线程"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-19",
+      "path": "SystemInformer/prpgvdm.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Module name",
+          "translation": "模块名称"
+        },
+        {
+          "id": "manual-02",
+          "source": "Thread Id",
+          "translation": "线程 ID"
+        },
+        {
+          "id": "manual-03",
+          "source": "Task Id",
+          "translation": "任务 ID"
+        },
+        {
+          "id": "manual-04",
+          "source": "Unable to terminate the task.",
+          "translation": "无法终止任务。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-20",
+      "path": "SystemInformer/runas.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to start the program.",
+          "translation": "无法启动程序。",
+          "expected": 3
+        },
+        {
+          "id": "manual-02",
+          "source": "Unable to start the execution alias with a process token.",
+          "translation": "无法使用进程令牌启动执行别名。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-21",
+      "path": "SystemInformer/sessmsg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Message from %s",
+          "translation": "来自 %s 的消息"
+        },
+        {
+          "id": "manual-02",
+          "source": "Unable to send the message",
+          "translation": "无法发送消息"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-22",
+      "path": "SystemInformer/sessprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Value",
+          "translation": "值"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-23",
+      "path": "SystemInformer/sessshad.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to shadow session.",
+          "translation": "无法镜像会话。"
+        },
+        {
+          "id": "manual-02",
+          "source": "You cannot remote control the current session.",
+          "translation": "无法远程控制当前会话。"
+        },
+        {
+          "id": "manual-03",
+          "source": "Unable to remote control the session",
+          "translation": "无法远程控制会话",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-24",
+      "path": "SystemInformer/srvcr.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to create the service.",
+          "translation": "无法创建服务。",
+          "expected": 2
+        },
+        {
+          "id": "manual-02",
+          "source": "The binary path is empty.",
+          "translation": "二进制文件路径为空。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-25",
+      "path": "SystemInformer/srvlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "This node cannot be displayed because it is currently hidden by your active filter settings or preferences.",
+          "translation": "当前筛选设置或首选项隐藏了此节点，因此无法显示。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-26",
+      "path": "SystemInformer/srvprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "password",
+          "translation": "密码"
+        },
+        {
+          "id": "manual-02",
+          "source": "N/A",
+          "translation": "不可用"
+        },
+        {
+          "id": "manual-03",
+          "source": "Unable to change service configuration.",
+          "translation": "无法更改服务配置。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-27",
+      "path": "SystemInformer/syssccpu.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Virtual machine",
+          "translation": "虚拟机"
+        },
+        {
+          "id": "manual-02",
+          "source": "Disabled / Hyper-V",
+          "translation": "已禁用 / Hyper-V"
+        },
+        {
+          "id": "manual-03",
+          "source": "Not capable",
+          "translation": "不支持"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-28",
+      "path": "SystemInformer/usrlist.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to locate routines.",
+          "translation": "无法定位例程。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-29",
+      "path": "phlib/guisup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to create the window context.",
+          "translation": "无法创建窗口上下文。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-30",
+      "path": "plugins/DotNetTools/DotNetTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": ".NET performance",
+          "translation": ".NET 性能"
+        },
+        {
+          "id": "manual-02",
+          "source": ".NET assemblies",
+          "translation": ".NET 程序集",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-31",
+      "path": "plugins/DotNetTools/perfpage.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Counter",
+          "translation": "计数器"
+        },
+        {
+          "id": "manual-02",
+          "source": "Value",
+          "translation": "值"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-32",
+      "path": "plugins/ExtendedServices/srvprgrs.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Attempting to stop %s...",
+          "translation": "正在尝试停止 %s..."
+        },
+        {
+          "id": "manual-02",
+          "source": "Attempting to start %s...",
+          "translation": "正在尝试启动 %s..."
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-33",
+      "path": "plugins/ExtendedServices/svcpkg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "N/A",
+          "translation": "不可用",
+          "expected": 6
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-34",
+      "path": "plugins/ExtendedTools/acpitable.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Value",
+          "translation": "值"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-35",
+      "path": "plugins/ExtendedTools/cacheprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "L%lu %s latency: %lu cycles (%lu KB)",
+          "translation": "L%lu %s 延迟：%lu 个周期 (%lu KB)"
+        },
+        {
+          "id": "manual-02",
+          "source": "DRAM latency: %lu cycles (%lu KB)",
+          "translation": "DRAM 延迟：%lu 个周期 (%lu KB)"
+        },
+        {
+          "id": "manual-03",
+          "source": "size (KB) [cycles]",
+          "translation": "大小 (KB) [周期]"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-36",
+      "path": "plugins/ExtendedTools/disktab.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to select the process.",
+          "translation": "无法选择进程。"
+        },
+        {
+          "id": "manual-02",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-37",
+      "path": "plugins/ExtendedTools/fwtab.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "The process does not exist.",
+          "translation": "进程不存在。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-38",
+      "path": "plugins/ExtendedTools/modsrv.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to query module references.",
+          "translation": "无法查询模块引用。",
+          "expected": 2
+        },
+        {
+          "id": "manual-02",
+          "source": "This module was not referenced by a service.",
+          "translation": "没有服务引用此模块。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-39",
+      "path": "plugins/ExtendedTools/pooldialog.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Show allocations",
+          "translation": "显示分配"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-40",
+      "path": "plugins/ExtendedTools/pooldialogbig.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Large Allocations (%s)",
+          "translation": "大型分配 (%s)"
+        },
+        {
+          "id": "manual-02",
+          "source": "NonPaged",
+          "translation": "非分页"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-41",
+      "path": "plugins/ExtendedTools/pwrgrid.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "No forecast data available.",
+          "translation": "没有可用的预测数据。"
+        },
+        {
+          "id": "manual-02",
+          "source": "Severity",
+          "translation": "严重程度"
+        },
+        {
+          "id": "manual-03",
+          "source": "Low impact",
+          "translation": "低影响"
+        },
+        {
+          "id": "manual-04",
+          "source": "Block duration",
+          "translation": "阻止时长"
+        },
+        {
+          "id": "manual-05",
+          "source": "Starts in",
+          "translation": "开始倒计时"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-42",
+      "path": "plugins/ExtendedTools/smbios.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Value",
+          "translation": "值"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-43",
+      "path": "plugins/ExtendedTools/thrdact.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "end",
+          "translation": "结束"
+        },
+        {
+          "id": "manual-02",
+          "source": "I/O for the selected thread",
+          "translation": "选中线程的 I/O"
+        },
+        {
+          "id": "manual-03",
+          "source": "There is no synchronous I/O to cancel.",
+          "translation": "没有可取消的同步 I/O。"
+        },
+        {
+          "id": "manual-04",
+          "source": "Unable to cancel synchronous I/O",
+          "translation": "无法取消同步 I/O"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-44",
+      "path": "plugins/HardwareDevices/diskdetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Volume %wc: [%s]",
+          "translation": "卷 %wc：[%s]"
+        },
+        {
+          "id": "manual-02",
+          "source": "Volume %wc:",
+          "translation": "卷 %wc：",
+          "expected": 2
+        },
+        {
+          "id": "manual-03",
+          "source": "Value",
+          "translation": "值"
+        },
+        {
+          "id": "manual-04",
+          "source": "Best",
+          "translation": "最佳"
+        },
+        {
+          "id": "manual-05",
+          "source": "Raw",
+          "translation": "原始值"
+        },
+        {
+          "id": "manual-06",
+          "source": "Raw (Hex)",
+          "translation": "原始值（十六进制）"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-45",
+      "path": "plugins/HardwareDevices/gpunodes.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "There are no graphics nodes to display.",
+          "translation": "没有可显示的图形节点。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-46",
+      "path": "plugins/HardwareDevices/netdetails.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unknown network adapter",
+          "translation": "未知网络适配器"
+        },
+        {
+          "id": "manual-02",
+          "source": "Value",
+          "translation": "值"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-47",
+      "path": "plugins/HardwareDevices/powergraph.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "N/A",
+          "translation": "不可用",
+          "expected": 6
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-48",
+      "path": "plugins/HardwareDevices/poweroptions.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "RAPL Drives",
+          "translation": "RAPL 设备"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-49",
+      "path": "plugins/NetworkTools/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Paste the license key here:",
+          "translation": "在此粘贴许可证密钥："
+        },
+        {
+          "id": "manual-02",
+          "source": "Paste the account id here:",
+          "translation": "在此粘贴账户 ID："
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-50",
+      "path": "plugins/NetworkTools/tracetree.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Time 1",
+          "translation": "时间 1"
+        },
+        {
+          "id": "manual-02",
+          "source": "Time 2",
+          "translation": "时间 2"
+        },
+        {
+          "id": "manual-03",
+          "source": "Time 3",
+          "translation": "时间 3"
+        },
+        {
+          "id": "manual-04",
+          "source": "Time 4",
+          "translation": "时间 4"
+        },
+        {
+          "id": "manual-05",
+          "source": "IP Address",
+          "translation": "IP 地址"
+        },
+        {
+          "id": "manual-06",
+          "source": "Hostname",
+          "translation": "主机名"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-51",
+      "path": "plugins/NetworkTools/update.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "The GeoLite updater doesn't support legacy versions of Windows.",
+          "translation": "GeoLite 更新程序不支持旧版 Windows。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-52",
+      "path": "plugins/NetworkTools/whois.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Whois %s...",
+          "translation": "正在查询 Whois：%s..."
+        },
+        {
+          "id": "manual-02",
+          "source": "&Select all",
+          "translation": "全选(&A)"
+        },
+        {
+          "id": "manual-03",
+          "source": "Unable to display the whois window.",
+          "translation": "无法显示 Whois 窗口。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-53",
+      "path": "plugins/OnlineChecks/OnlineChecks.rc",
+      "context": "\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Checkout <a href=\"\"\"\">How-to-generate-a-license-key</a>",
+          "translation": "查看 <a href=\"\"\"\">如何生成许可证密钥</a>"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-54",
+      "path": "plugins/OnlineChecks/exclude.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "This looks like a wildcard path, not a regular expression.",
+          "translation": "这看起来是通配符路径，而不是正则表达式。"
+        },
+        {
+          "id": "manual-02",
+          "source": "Convert it to a regular expression? Backslashes will be escaped and wildcards expanded.",
+          "translation": "是否将其转换为正则表达式？反斜杠将被转义，通配符将被展开。"
+        },
+        {
+          "id": "manual-03",
+          "source": "The regular expression could not be compiled.",
+          "translation": "无法编译正则表达式。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-55",
+      "path": "plugins/OnlineChecks/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Set - using your key",
+          "translation": "已设置 - 使用你的密钥"
+        },
+        {
+          "id": "manual-02",
+          "source": "Unset - optional",
+          "translation": "未设置 - 可选"
+        },
+        {
+          "id": "manual-03",
+          "source": "Paste the license key here:",
+          "translation": "在此粘贴许可证密钥：",
+          "expected": 2
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-56",
+      "path": "plugins/OnlineChecks/upload.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to query the service.",
+          "translation": "无法查询服务。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-57",
+      "path": "plugins/ToolStatus/find.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to display Find dialog.",
+          "translation": "无法显示“查找”对话框。"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-58",
+      "path": "plugins/Updater/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Last update check: %s (%s ago)",
+          "translation": "上次检查更新：%s（%s前）"
+        },
+        {
+          "id": "manual-02",
+          "source": "Next update check: %s (%s)",
+          "translation": "下次检查更新：%s（%s）"
+        },
+        {
+          "id": "manual-03",
+          "source": "Next update check: %s",
+          "translation": "下次检查更新：%s"
+        },
+        {
+          "id": "manual-04",
+          "source": "Date",
+          "translation": "日期"
+        },
+        {
+          "id": "manual-05",
+          "source": "Author",
+          "translation": "作者"
+        },
+        {
+          "id": "manual-06",
+          "source": "Comments",
+          "translation": "备注"
+        },
+        {
+          "id": "manual-07",
+          "source": "Commit",
+          "translation": "提交"
+        },
+        {
+          "id": "manual-08",
+          "source": "View on Github",
+          "translation": "在 GitHub 上查看"
+        }
+      ]
+    },
+    {
+      "id": "manual-ui-glossary-59",
+      "path": "plugins/Updater/utils.c",
+      "context": "L\"{text}\"",
+      "items": [
+        {
+          "id": "manual-01",
+          "source": "Unable to execute the setup.",
+          "translation": "无法执行安装程序。"
+        }
+      ]
     }
   ]
 }
