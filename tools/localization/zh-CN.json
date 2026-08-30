@@ -5908,6 +5908,45 @@
         { "id": "refresh", "source": "Refresh (F5)", "translation": "刷新 (F5)", "expected": 2 },
         { "id": "acpi-tables", "source": "ACPI Tables", "translation": "ACPI 表" }
       ]
+    },
+    {
+      "id": "kernel-driver-runtime-audit",
+      "path": "SystemInformer/ksisup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "access-restricted", "source": "Access to the kernel driver is restricted.", "translation": "对内核驱动程序的访问受到限制。" },
+        { "id": "reduced-title", "source": "Reduced driver functionality", "translation": "驱动程序功能受限", "expected": 5 },
+        { "id": "kernel-unsupported-prefix", "source": "The kernel driver is not yet supported on this kernel ", "translation": "此内核版本暂不受内核驱动程序支持。", "expected": 2 },
+        { "id": "canary-prefix", "source": "version. For the latest kernel support switch to the Canary ", "translation": "如需最新内核支持，请切换到 Canary " },
+        { "id": "canary-suffix", "source": "update channel (Help > Check for updates > Canary > Check).", "translation": "更新通道（帮助 > 检查更新 > Canary > 检查）。" },
+        { "id": "request-prefix", "source": "version. Request support by submitting a GitHub issue with ", "translation": "请提交 GitHub Issue 请求支持，并附上" },
+        { "id": "request-suffix", "source": "the Windows Kernel version.", "translation": "Windows 内核版本。" },
+        { "id": "config-not-found", "source": "The dynamic configuration was not found.", "translation": "未找到动态配置。" },
+        { "id": "config-access", "source": "Failed to access the dynamic configuration.", "translation": "无法访问动态配置。" },
+        { "id": "config-activate", "source": "Failed to activate the dynamic configuration.", "translation": "无法激活动态配置。" },
+        { "id": "load-title", "source": "Unable to load kernel driver", "translation": "无法加载内核驱动程序", "expected": 8 },
+        { "id": "driver-not-found", "source": "The kernel driver was not found.", "translation": "未找到内核驱动程序。" },
+        { "id": "reboot-required", "source": "The last System Informer update requires a reboot.", "translation": "最近一次 System Informer 更新需要重启系统。" },
+        { "id": "alternate-question", "source": "Try again with alternate driver load method?", "translation": "是否使用备用驱动程序加载方法重试？" },
+        { "id": "loaded-title", "source": "Kernel driver loaded", "translation": "内核驱动程序已加载" },
+        { "id": "alternate-success-prefix", "source": "The kernel driver was successfully loaded using an alternate ", "translation": "已使用备用方法成功加载内核驱动程序。" },
+        { "id": "alternate-success-middle", "source": "method. The settings used to load the driver have been saved. ", "translation": "用于加载驱动程序的设置已保存。" },
+        { "id": "alternate-success-suffix", "source": "You can revert these settings in the advanced options.", "translation": "可在高级选项中还原这些设置。" },
+        { "id": "service-error", "source": "Unable to load the kernel driver service.", "translation": "无法加载内核驱动程序服务。" },
+        { "id": "restart-error", "source": "Unable to restart.", "translation": "无法重启。" },
+        { "id": "windows-prefix", "source": "The kernel driver is not supported on this Windows version, the ", "translation": "此 Windows 版本不受内核驱动程序支持；" },
+        { "id": "windows-suffix", "source": "minimum supported version is Windows 10.", "translation": "最低支持版本为 Windows 10。" },
+        { "id": "wow64-prefix", "source": "The kernel driver is not supported under Wow64, use the native ", "translation": "内核驱动程序不支持 WOW64，请改用原生" },
+        { "id": "architecture", "source": "The kernel driver is not supported on this architecture.", "translation": "内核驱动程序不支持此体系结构。" }
+      ]
+    },
+    {
+      "id": "kernel-driver-runtime-narrow-audit",
+      "path": "SystemInformer/ksisup.c",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "wow64-suffix", "source": "binary instead.", "translation": "架构版本。" }
+      ]
     }
   ]
 }
