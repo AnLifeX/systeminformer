@@ -7356,6 +7356,17 @@
         { "id": "not-waiting", "source": "The thread does not appear to be waiting.", "translation": "该线程似乎未处于等待状态。" },
         { "id": "wait-state-error", "source": "Unable to determine whether the thread is waiting.", "translation": "无法确定线程是否处于等待状态。" }
       ]
+    },
+    {
+      "id": "application-support-errors-audit",
+      "path": "SystemInformer/appsup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "directory-error", "source": "Unable to locate the application directory.", "translation": "无法定位应用程序目录。" },
+        { "id": "command-error", "source": "Unable to execute the command.", "translation": "无法执行命令。", "expected": 2 },
+        { "id": "unknown-error", "source": "An unknown error occurred.", "translation": "发生未知错误。" },
+        { "id": "program-error", "source": "Unable to execute the program.", "translation": "无法执行程序。", "expected": 3 }
+      ]
     }
   ]
 }
