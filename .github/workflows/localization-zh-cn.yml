@@ -17,6 +17,11 @@ jobs:
     permissions:
       contents: write
     runs-on: windows-2025-vs2026
+    env:
+      # CustomBuildTool defaults to 0.0 outside the upstream release service.
+      # Keep these aligned with the major/minor version used by upstream master.
+      BUILD_MAJORVERSION: '4'
+      BUILD_MINORVERSION: '0'
 
     steps:
     - name: Checkout repository

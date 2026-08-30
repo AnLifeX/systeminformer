@@ -10,6 +10,10 @@
 构建过程仍会在 runner 内生成 `systeminformer-build-bin.zip`，将其嵌入安装程序后不再作为
 Release 资产公开；普通安装和更新都不需要用户单独下载该内部载荷。
 
+上游 `CustomBuildTool` 在非官方构建环境中默认使用 `0.0` 作为主次版本。发布工作流通过
+`BUILD_MAJORVERSION` 和 `BUILD_MINORVERSION` 显式跟随当前上游 `master` 的 `4.0`；上游切换
+主版本或次版本时，应在同步汉化规则的同一个提交中更新这两个值。
+
 安装版通过内置更新器下载并验证新的安装程序。便携版只提示新版本并打开 Release 页面，更新时应手动下载新的 ZIP 后覆盖。
 
 ## 两类签名
