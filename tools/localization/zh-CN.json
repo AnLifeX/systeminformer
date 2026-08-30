@@ -6982,6 +6982,29 @@
       "items": [
         { "id": "process", "source": "Process", "translation": "进程" }
       ]
+    },
+    {
+      "id": "environment-dialog-runtime-audit",
+      "path": "SystemInformer/envdlg.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "edit-title", "source": "Edit %s", "translation": "编辑 %s" },
+        { "id": "value", "source": "Value", "translation": "值", "expected": 2 },
+        { "id": "new-entry", "source": "New entry", "translation": "新建条目" },
+        { "id": "new-prompt", "source": "Enter the new value:", "translation": "输入新值：" },
+        { "id": "edit-entry", "source": "Edit entry", "translation": "编辑条目" },
+        { "id": "edit-prompt", "source": "Edit the value:", "translation": "编辑值：" },
+        { "id": "set-error", "source": "Unable to set the environment variable.", "translation": "无法设置环境变量。", "expected": 3 },
+        { "id": "delete", "source": "delete", "translation": "删除" },
+        { "id": "variable", "source": "the environment variable \\\"%s\\\"", "translation": "环境变量 \\\"%s\\\"" },
+        { "id": "delete-error", "source": "Unable to delete the environment variable.", "translation": "无法删除环境变量。" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "user", "source": "User", "translation": "用户" },
+        { "id": "system", "source": "System", "translation": "系统" },
+        { "id": "add", "source": "&Add", "translation": "添加(&A)" },
+        { "id": "edit", "source": "&Edit", "translation": "编辑(&E)" },
+        { "id": "delete-menu", "source": "&Delete", "translation": "删除(&D)" }
+      ]
     }
   ]
 }
