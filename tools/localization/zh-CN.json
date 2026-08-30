@@ -6202,6 +6202,40 @@
         { "id": "add-process-error", "source": "Unable to add the process to the job", "translation": "无法将进程添加到作业" },
         { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
       ]
+    },
+    {
+      "id": "pool-tree-runtime-audit",
+      "path": "plugins/ExtendedTools/pooltree.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "tag-name", "source": "Tag Name", "translation": "标记名称" },
+        { "id": "driver", "source": "Driver", "translation": "驱动程序" },
+        { "id": "description", "source": "Description", "translation": "描述" },
+        { "id": "paged-alloc-total", "source": "Paged allocations (total)", "translation": "分页池分配次数（总计）" },
+        { "id": "paged-free-total", "source": "Paged frees (total)", "translation": "分页池释放次数（总计）" },
+        { "id": "paged-current-total", "source": "Paged current (total)", "translation": "分页池当前分配数（总计）" },
+        { "id": "paged-bytes-total", "source": "Paged bytes (total)", "translation": "分页池字节数（总计）" },
+        { "id": "nonpaged-alloc-total", "source": "Non-paged allocations (total)", "translation": "非分页池分配次数（总计）" },
+        { "id": "nonpaged-free-total", "source": "Non-paged frees (total)", "translation": "非分页池释放次数（总计）" },
+        { "id": "nonpaged-current-total", "source": "Non-paged current (total)", "translation": "非分页池当前分配数（总计）" },
+        { "id": "nonpaged-bytes-total", "source": "Non-paged bytes (total)", "translation": "非分页池字节数（总计）" },
+        { "id": "alloc-total", "source": "Allocations (total)", "translation": "分配次数（总计）" },
+        { "id": "free-total", "source": "Frees (total)", "translation": "释放次数（总计）" },
+        { "id": "current-total", "source": "Current (total)", "translation": "当前分配数（总计）" },
+        { "id": "bytes-total", "source": "Bytes (total)", "translation": "字节数（总计）" },
+        { "id": "paged-alloc-delta", "source": "Paged allocations (delta)", "translation": "分页池分配次数（增量）" },
+        { "id": "paged-free-delta", "source": "Paged frees (delta)", "translation": "分页池释放次数（增量）" },
+        { "id": "paged-current-delta", "source": "Paged current (delta)", "translation": "分页池当前分配数（增量）" },
+        { "id": "paged-bytes-delta", "source": "Paged bytes (delta)", "translation": "分页池字节数（增量）" },
+        { "id": "nonpaged-alloc-delta", "source": "Non-paged allocations (delta)", "translation": "非分页池分配次数（增量）" },
+        { "id": "nonpaged-free-delta", "source": "Non-paged frees (delta)", "translation": "非分页池释放次数（增量）" },
+        { "id": "nonpaged-current-delta", "source": "Non-paged current (delta)", "translation": "非分页池当前分配数（增量）" },
+        { "id": "nonpaged-bytes-delta", "source": "Non-paged bytes (delta)", "translation": "非分页池字节数（增量）" },
+        { "id": "alloc-delta", "source": "Allocations (delta)", "translation": "分配次数（增量）" },
+        { "id": "free-delta", "source": "Frees (delta)", "translation": "释放次数（增量）" },
+        { "id": "current-delta", "source": "Current (delta)", "translation": "当前分配数（增量）" },
+        { "id": "bytes-delta", "source": "Bytes (delta)", "translation": "字节数（增量）" }
+      ]
     }
   ]
 }
