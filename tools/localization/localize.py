@@ -82,7 +82,12 @@ UI_CALL_PATTERNS = (
         "column",
         re.compile(r"\b(?:PhAddTreeNewColumn[A-Za-z0-9_]*|PhAddListViewColumn)\s*\("),
     ),
-    ("menu", re.compile(r"\bPhCreateEMenuItem\s*\(")),
+    (
+        "menu",
+        re.compile(
+            r"\b(?:Ph(?:Plugin)?CreateEMenuItem|PhSetEMenuItemText)\s*\("
+        ),
+    ),
     (
         "message",
         re.compile(
@@ -97,6 +102,10 @@ UI_CALL_PATTERNS = (
             r"\b(?:PhSetWindowText|SetWindowTextW?|PhSetDialogItemText|"
             r"SetDlgItemTextW?)\s*\("
         ),
+    ),
+    (
+        "task-dialog-text",
+        re.compile(r"\b(?:pszMainInstruction|pszContent|pszButtonText)\s*="),
     ),
     ("page", re.compile(r"\bPhMwpCreateInternalPage\s*\(")),
 )

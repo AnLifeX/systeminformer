@@ -1941,6 +1941,8 @@
       "path": "phlib/util.c",
       "context": "L\"{text}\"",
       "items": [
+        { "id": "question-prefix", "source": "Do you want to ", "translation": "是否要" },
+        { "id": "continue-suffix", "source": " Are you sure you want to continue?", "translation": " 确定要继续吗？" },
         { "id": "cancel", "source": "Cancel", "translation": "取消" }
       ]
     },
