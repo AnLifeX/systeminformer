@@ -7179,6 +7179,36 @@
         { "id": "properties-error", "source": "Unable to show the process properties.", "translation": "无法显示进程属性。" },
         { "id": "terminated-detail", "source": "The process has already terminated; only the process record is available.", "translation": "该进程已终止；当前仅有进程记录可用。" }
       ]
+    },
+    {
+      "id": "measured-boot-log-runtime-audit",
+      "path": "plugins/ExtendedTools/wbcl.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "variable-details", "source": "Variable: %s\\r\\nGUID: %s\\r\\nData length: %I64u", "translation": "变量：%s\\r\\nGUID：%s\\r\\n数据长度：%I64u" },
+        { "id": "image-details", "source": "Image base: 0x%I64x\\r\\nImage length: 0x%I64x\\r\\nLink-time address: 0x%I64x\\r\\nDevice path length: %I64u bytes", "translation": "映像基址：0x%I64x\\r\\n映像长度：0x%I64x\\r\\n链接时地址：0x%I64x\\r\\n设备路径长度：%I64u 字节" },
+        { "id": "blob-details", "source": "Blob base: 0x%I64x\\r\\nBlob length: 0x%I64x", "translation": "数据块基址：0x%I64x\\r\\n数据块长度：0x%I64x" },
+        { "id": "live-read-error", "source": "Unable to read the measured boot log", "translation": "无法读取测量启动日志" },
+        { "id": "log-filter", "source": "Measured boot logs (*.log)", "translation": "测量启动日志 (*.log)" },
+        { "id": "all-files", "source": "All files (*.*)", "translation": "所有文件 (*.*)" },
+        { "id": "file-read-error", "source": "Unable to read the log file", "translation": "无法读取日志文件" },
+        { "id": "pcr-index", "source": "PCR index: %lu\\r\\n", "translation": "PCR 索引：%lu\\r\\n" },
+        { "id": "event-type-detail", "source": "Event type: %s (0x%08lx)\\r\\n", "translation": "事件类型：%s (0x%08lx)\\r\\n" },
+        { "id": "unknown", "source": "Unknown", "translation": "未知" },
+        { "id": "digest-detail", "source": "Digest (%s): ", "translation": "摘要 (%s)：" },
+        { "id": "event-size", "source": "\\r\\nEvent size: %lu bytes\\r\\n\\r\\n", "translation": "\\r\\n事件大小：%lu 字节\\r\\n\\r\\n" },
+        { "id": "details-label", "source": "Details:\\r\\n", "translation": "详细信息：\\r\\n" },
+        { "id": "raw-data", "source": "\\r\\nRaw event data:\\r\\n", "translation": "\\r\\n原始事件数据：\\r\\n" },
+        { "id": "entry-title", "source": "Boot log entry", "translation": "启动日志条目" },
+        { "id": "pcr", "source": "PCR", "translation": "PCR 索引" },
+        { "id": "event-type", "source": "Event type", "translation": "事件类型" },
+        { "id": "digest", "source": "Digest", "translation": "摘要" },
+        { "id": "digest-value", "source": "Digest value", "translation": "摘要值" },
+        { "id": "size", "source": "Size", "translation": "大小" },
+        { "id": "details", "source": "Details", "translation": "详细信息" },
+        { "id": "details-menu", "source": "&Details", "translation": "详细信息(&D)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
     }
   ]
 }
