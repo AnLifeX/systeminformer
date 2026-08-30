@@ -7319,6 +7319,16 @@
         { "id": "delete", "source": "Delete", "translation": "删除" },
         { "id": "select-all", "source": "Select All", "translation": "全选" }
       ]
+    },
+    {
+      "id": "plugin-import-error-audit",
+      "path": "phlib/mapldr.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "load-error", "source": "Unable to load plugin.", "translation": "无法加载插件。", "expected": 2 },
+        { "id": "ordinal-details", "source": "Name: %s\\r\\nOrdinal: %u\\r\\nModule: %hs", "translation": "名称：%s\\r\\n序号：%u\\r\\n模块：%hs" },
+        { "id": "function-details", "source": "Name: %s\\r\\nFunction: %hs\\r\\nModule: %hs", "translation": "名称：%s\\r\\n函数：%hs\\r\\n模块：%hs" }
+      ]
     }
   ]
 }
