@@ -7165,6 +7165,20 @@
         { "id": "cancelling", "source": "Cancelling...", "translation": "正在取消..." },
         { "id": "creating-minidump", "source": "Creating the minidump file...", "translation": "正在创建小型转储文件...", "expected": 3 }
       ]
+    },
+    {
+      "id": "process-record-runtime-audit",
+      "path": "SystemInformer/procrec.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "missing-parent", "source": "Non-existent process (%u)", "translation": "不存在的进程 (%u)" },
+        { "id": "unknown-parent", "source": "Unknown process (%u)", "translation": "未知进程 (%u)" },
+        { "id": "not-available", "source": "N/A", "translation": "不可用", "expected": 7 },
+        { "id": "explorer-help", "source": "Make sure the Explorer executable file is present.", "translation": "请确保资源管理器可执行文件存在。" },
+        { "id": "full-command", "source": "[FULL] %s\\r\\n", "translation": "[完整命令] %s\\r\\n" },
+        { "id": "properties-error", "source": "Unable to show the process properties.", "translation": "无法显示进程属性。" },
+        { "id": "terminated-detail", "source": "The process has already terminated; only the process record is available.", "translation": "该进程已终止；当前仅有进程记录可用。" }
+      ]
     }
   ]
 }
