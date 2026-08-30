@@ -157,6 +157,74 @@ class LocalizationCliTests(unittest.TestCase):
             'CAPTION "常规"\nPUSHBUTTON "关闭",IDOK\n',
         )
 
+    def test_audit_reports_uncovered_ui_sinks_and_ignores_covered_text(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        source_dir = root / "src"
+        source_dir.mkdir()
+        source_file = source_dir / "demo.c"
+        source_file.write_text(
+            "\n".join(
+                (
+                    'PhCreateEMenuItem(0, 1, L"&Copy", NULL, NULL);',
+                    "PhShowError2(",
+                    "    hwndDlg,",
+                    '    L"Unable to save the file.",',
+                    '    L"%s",',
+                    '    L"The destination is read-only.");',
+                    'registryPath = L"Software\\\\Demo";',
+                    '// PhShowStatus(hwndDlg, L"Commented-out error.", status, 0);',
+                    '/* PhShowStatus(hwndDlg, L"Disabled error.", status, 0); */',
+                )
+            ),
+            encoding="utf-8",
+        )
+        resource_file = source_dir / "demo.rc"
+        resource_file.write_text(
+            'CAPTION "Advanced options"\nPUSHBUTTON "Close",IDOK\n',
+            encoding="utf-8",
+        )
+        catalog = root / "catalog.json"
+        catalog.write_text(
+            json.dumps(
+                {
+                    "schema": 1,
+                    "locale": "zh-CN",
+                    "translations": [
+                        {
+                            "id": "menu.copy",
+                            "path": "src/demo.c",
+                            "context": 'PhCreateEMenuItem(0, 1, L"{text}", NULL, NULL);',
+                            "source": "&Copy",
+                            "translation": "复制(&C)",
+                        },
+                        {
+                            "id": "resource.close",
+                            "path": "src/demo.rc",
+                            "context": 'PUSHBUTTON "{text}",IDOK',
+                            "source": "Close",
+                            "translation": "关闭",
+                        },
+                    ],
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+        result = self.run_cli(root, catalog, "audit", "--path", "src")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Unable to save the file.", result.stdout)
+        self.assertIn("The destination is read-only.", result.stdout)
+        self.assertIn("Advanced options", result.stdout)
+        self.assertNotIn("&Copy", result.stdout)
+        self.assertNotIn("Software", result.stdout)
+        self.assertNotIn("Commented-out error", result.stdout)
+        self.assertNotIn("Disabled error", result.stdout)
+        self.assertNotIn("[PUSHBUTTON] Close", result.stdout)
+        self.assertIn("uncovered=3", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

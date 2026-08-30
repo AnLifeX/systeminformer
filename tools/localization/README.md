@@ -29,6 +29,12 @@ python tools/localization/localize.py apply
 # 确认所有规则均处于已汉化状态
 python tools/localization/localize.py check --state translated
 
+# 静态审计高置信度 UI 文本，列出尚未纳入目录的菜单、列名、弹窗等
+python tools/localization/localize.py audit
+
+# 只审计指定目录或文件（--path 可以重复）
+python tools/localization/localize.py audit --path SystemInformer --path plugins/WindowExplorer
+
 # 将生成的源码改动还原为上游原文
 python tools/localization/localize.py revert
 
@@ -38,6 +44,11 @@ python -m unittest discover -s tools/localization/tests -v
 
 `apply` 和 `revert` 都具有幂等性：重复执行不会重复修改。脚本会保留原文件是否含 UTF-8 BOM
 以及原有换行符格式。
+
+`audit` 不修改源码。它扫描主程序、插件和 `phlib` 中高置信度的用户界面文本入口，包括资源
+对话框、菜单、列表列名、窗口文字以及状态/错误/确认弹窗，并按文件与行号报告尚未纳入目录的
+候选文本。它用于发现很难靠人工触发的异常分支，但结果仍需人工排除协议值、路径和调试文本；
+静态审计不是完整的运行时覆盖率证明。
 
 完成本地查看后务必执行 `revert`，不要把注入后生成的 C/RC 文件提交到 `zh-CN` 分支。
 
