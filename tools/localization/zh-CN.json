@@ -7048,6 +7048,17 @@
         { "id": "delete", "source": "&Delete", "translation": "删除(&D)" },
         { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
       ]
+    },
+    {
+      "id": "phlib-common-dialog-runtime-audit",
+      "path": "phlib/util.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "operation-error", "source": "Unable to perform the operation.", "translation": "无法执行该操作。", "expected": 9 },
+        { "id": "confirm", "source": "Are you sure you want to %s?", "translation": "确定要%s吗？" },
+        { "id": "execute-error", "source": "Unable to execute the program.", "translation": "无法执行程序。", "expected": 2 },
+        { "id": "location-missing", "source": "The location could not be found.", "translation": "找不到该位置。" }
+      ]
     }
   ]
 }
