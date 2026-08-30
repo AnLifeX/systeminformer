@@ -16,7 +16,7 @@ from typing import Iterable
 
 TEXT_MARKER = "{text}"
 PRINTF_PATTERN = re.compile(
-    r"%(?:%|(?:\d+\$)?[-+ #0']*(?:\*|\d+)?(?:\.(?:\*|\d+))?"
+    r"(?<![0-9%])%(?:%|(?:\d+\$)?[-+ #0']*(?:\*|\d+)?(?:\.(?:\*|\d+))?"
     r"(?:hh|h|ll|l|j|z|t|L|I32|I64|w)?[diuoxXfFeEgGaAcCsSpnZ])"
 )
 BRACE_PATTERN = re.compile(
@@ -182,6 +182,19 @@ def contains_unescaped_quote(value: str) -> bool:
     return False
 
 
+def contains_unescaped_rc_quote(value: str) -> bool:
+    """Return whether an RC string payload contains a quote not doubled as ""."""
+    index = 0
+    while index < len(value):
+        if value[index] != '"':
+            index += 1
+            continue
+        if index + 1 >= len(value) or value[index + 1] != '"':
+            return True
+        index += 2
+    return False
+
+
 def validate_tokens(entry: Translation) -> None:
     checks = (
         ("printf placeholders", token_counter(PRINTF_PATTERN, entry.source), token_counter(PRINTF_PATTERN, entry.translation)),
@@ -207,6 +220,14 @@ def validate_tokens(entry: Translation) -> None:
     ):
         raise LocalizationError(
             f"{entry.identifier}: translation contains an unescaped C string quote"
+        )
+
+    if (
+        Path(entry.path).suffix.lower() == ".rc"
+        and contains_unescaped_rc_quote(entry.translation)
+    ):
+        raise LocalizationError(
+            f"{entry.identifier}: translation contains an unescaped RC string quote"
         )
 
 

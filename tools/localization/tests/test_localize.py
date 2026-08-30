@@ -95,6 +95,17 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn("printf placeholders changed", result.stderr)
 
+    def test_percent_wrapped_argument_is_not_a_printf_placeholder(self):
+        temporary, root, _source_file, catalog = self.make_repository(
+            "Append /fail=%1% to pass the count", "附加 /fail=%1% 可传递计数"
+        )
+        self.addCleanup(temporary.cleanup)
+
+        result = self.run_cli(root, catalog, "check")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("source drift detected", result.stderr)
+        self.assertNotIn("printf placeholders changed", result.stderr)
+
     def test_rejects_source_drift(self):
         temporary, root, _source_file, catalog = self.make_repository(
             r"CPU: %u\n", r"处理器：%u\n", expected=2
@@ -115,6 +126,40 @@ class LocalizationCliTests(unittest.TestCase):
         result = self.run_cli(root, catalog, "check")
         self.assertEqual(result.returncode, 1)
         self.assertIn("unescaped C string quote", result.stderr)
+
+    def test_rejects_unescaped_quote_in_rc_translation(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        source_dir = root / "src"
+        source_dir.mkdir()
+        (source_dir / "demo.rc").write_text(
+            'LTEXT "Open file",IDC_STATIC\n', encoding="utf-8"
+        )
+        catalog = root / "catalog.json"
+        catalog.write_text(
+            json.dumps(
+                {
+                    "schema": 1,
+                    "locale": "zh-CN",
+                    "translations": [
+                        {
+                            "id": "dialog.open",
+                            "path": "src/demo.rc",
+                            "context": 'LTEXT "{text}",IDC_STATIC',
+                            "source": "Open file",
+                            "translation": '打开"文件"',
+                        }
+                    ],
+                },
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+        result = self.run_cli(root, catalog, "check")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("unescaped RC string quote", result.stderr)
 
     def test_grouped_translations_use_shared_path_and_context(self):
         temporary = tempfile.TemporaryDirectory()
