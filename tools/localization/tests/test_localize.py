@@ -221,6 +221,7 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhSetDialogItemText(hwndDlg, IDC_LATENCY, L"%.1f ms");',
                     'PhSetDialogItemText(hwndDlg, IDC_RATE, L"%s/s");',
                     'PhSetDialogItemText(hwndDlg, IDC_COUNTS, L"%lu | %lu");',
+                    'PhSetDialogItemText(hwndDlg, IDC_FORMATTED, L"%s\\n%s");',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -279,6 +280,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("%.1f ms", result.stdout)
         self.assertNotIn("%s/s", result.stdout)
         self.assertNotIn("%lu | %lu", result.stdout)
+        self.assertNotIn("%s\\n%s", result.stdout)
         self.assertNotIn("Software", result.stdout)
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)

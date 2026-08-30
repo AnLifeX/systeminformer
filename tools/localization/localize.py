@@ -435,6 +435,7 @@ def is_probably_user_text(value: str) -> bool:
         return False
     without_placeholders = PRINTF_PATTERN.sub("", stripped)
     if without_placeholders != stripped:
+        without_placeholders = ESCAPE_PATTERN.sub("", without_placeholders)
         remaining_words = re.findall(r"[A-Za-z]+", without_placeholders)
         if not remaining_words or all(word in FORMAT_ONLY_UNITS for word in remaining_words):
             return False
