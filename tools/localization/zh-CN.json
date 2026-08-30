@@ -6396,6 +6396,36 @@
         { "id": "waiting-shared", "source": "Waiting shared count", "translation": "等待共享访问数" },
         { "id": "waiting-exclusive", "source": "Waiting exclusive count", "translation": "等待独占访问数" }
       ]
+    },
+    {
+      "id": "system-memory-runtime-audit",
+      "path": "SystemInformer/sysscmem.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "other", "source": "Other", "translation": "其他", "expected": 3 },
+        { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 3 },
+        { "id": "chip", "source": "Chip", "translation": "芯片" },
+        { "id": "proprietary", "source": "Proprietary", "translation": "专有" },
+        { "id": "row-of-chips", "source": "Row of chips", "translation": "芯片组" },
+        { "id": "die", "source": "Die", "translation": "裸片" },
+        { "id": "local-nonvolatile", "source": "Local non-volatile", "translation": "本地非易失性" },
+        { "id": "total", "source": " total", "translation": " 总计" },
+        { "id": "compressed", "source": "Compressed memory: ", "translation": "压缩内存：" },
+        { "id": "total-compressed", "source": "Total compressed: ", "translation": "压缩总量：" },
+        { "id": "memory-saved", "source": "Total memory saved: ", "translation": "节省的内存总量：" },
+        { "id": "not-applicable", "source": "N/A", "translation": "不适用", "expected": 23 },
+        { "id": "undefined", "source": "Undefined", "translation": "未定义", "expected": 3 },
+        { "id": "no-symbols", "source": "no symbols", "translation": "无符号", "expected": 2 },
+        { "id": "no-driver", "source": "no driver", "translation": "无驱动程序", "expected": 2 }
+      ]
+    },
+    {
+      "id": "system-memory-slot-separator",
+      "path": "SystemInformer/sysscmem.c",
+      "context": "PhInitFormatU(&format[0], MemorySlotsUsed);\r\n            PhInitFormatS(&format[1], L\"{text}\");\r\n            PhInitFormatU(&format[2], MemorySlotsTotal);",
+      "items": [
+        { "id": "of", "source": " of ", "translation": " / " }
+      ]
     }
   ]
 }
