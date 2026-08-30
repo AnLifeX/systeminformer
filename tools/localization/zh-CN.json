@@ -5527,6 +5527,10 @@
         { "id": "removed-devices", "source": "Removed devices", "translation": "已移除设备" },
         { "id": "tray-icons", "source": "Tray icons", "translation": "系统托盘图标" },
         { "id": "admin-option-error", "source": "Unable to enable option start as admin.", "translation": "无法启用“以管理员身份启动”选项。" },
+        { "id": "string-type", "source": "String", "translation": "字符串", "expected": 2 },
+        { "id": "integer-type", "source": "Integer", "translation": "整数" },
+        { "id": "integer-pair-type", "source": "IntegerPair", "translation": "整数对" },
+        { "id": "scalable-integer-pair-type", "source": "ScalableIntegerPair", "translation": "可缩放整数对" },
         { "id": "integer-hex", "source": "Integer (hex)", "translation": "整数（十六进制）" }
       ]
     },
