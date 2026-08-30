@@ -6159,6 +6159,49 @@
         { "id": "completion-mode", "source": "Completion mode", "translation": "完成模式", "expected": 2 },
         { "id": "server", "source": "Server", "translation": "服务器", "expected": 2 }
       ]
+    },
+    {
+      "id": "job-properties-runtime-audit",
+      "path": "SystemInformer/jobprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "job", "source": "Job", "translation": "作业", "expected": 4 },
+        { "id": "name", "source": "Name", "translation": "名称", "expected": 2 },
+        { "id": "value", "source": "Value", "translation": "值" },
+        { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 17 },
+        { "id": "unnamed", "source": "(unnamed job)", "translation": "（未命名作业）" },
+        { "id": "active-processes", "source": "Active processes", "translation": "活动进程数" },
+        { "id": "affinity", "source": "Affinity", "translation": "处理器相关性" },
+        { "id": "breakaway", "source": "Breakaway OK", "translation": "允许脱离" },
+        { "id": "enabled", "source": "Enabled", "translation": "已启用", "expected": 4 },
+        { "id": "unhandled-exception", "source": "Die on unhandled exception", "translation": "发生未处理异常时终止" },
+        { "id": "job-memory", "source": "Job memory", "translation": "作业内存" },
+        { "id": "job-time", "source": "Job time", "translation": "作业时间" },
+        { "id": "kill-on-close", "source": "Kill on job close", "translation": "关闭作业时终止" },
+        { "id": "priority-class", "source": "Priority class", "translation": "优先级类别" },
+        { "id": "process-memory", "source": "Process memory", "translation": "进程内存" },
+        { "id": "process-time", "source": "Process time", "translation": "进程时间" },
+        { "id": "scheduling-class", "source": "Scheduling class", "translation": "调度类别" },
+        { "id": "silent-breakaway", "source": "Silent breakaway OK", "translation": "允许静默脱离" },
+        { "id": "working-set-minimum", "source": "Working set minimum", "translation": "最小工作集" },
+        { "id": "working-set-maximum", "source": "Working set maximum", "translation": "最大工作集" },
+        { "id": "desktop", "source": "Desktop", "translation": "桌面" },
+        { "id": "limited", "source": "Limited", "translation": "受限", "expected": 8 },
+        { "id": "display-settings", "source": "Display settings", "translation": "显示设置" },
+        { "id": "exit-windows", "source": "Exit windows", "translation": "退出 Windows" },
+        { "id": "global-atoms", "source": "Global atoms", "translation": "全局原子" },
+        { "id": "handles", "source": "Handles", "translation": "句柄" },
+        { "id": "read-clipboard", "source": "Read clipboard", "translation": "读取剪贴板" },
+        { "id": "system-parameters", "source": "System parameters", "translation": "系统参数" },
+        { "id": "write-clipboard", "source": "Write clipboard", "translation": "写入剪贴板" },
+        { "id": "terminate", "source": "terminate", "translation": "终止" },
+        { "id": "the-job", "source": "the job", "translation": "该作业" },
+        { "id": "terminate-warning", "source": "Terminating a job will terminate all processes assigned to it.", "translation": "终止作业将同时终止分配给该作业的所有进程。" },
+        { "id": "terminate-error", "source": "Unable to terminate the job", "translation": "无法终止作业" },
+        { "id": "choose-process", "source": "Select a process to add to the job permanently.", "translation": "选择要永久添加到该作业的进程。" },
+        { "id": "add-process-error", "source": "Unable to add the process to the job", "translation": "无法将进程添加到作业" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
     }
   ]
 }
