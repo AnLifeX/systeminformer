@@ -6855,6 +6855,36 @@
         { "id": "trace-error", "source": "Unable to start the event tracing session: ", "translation": "无法启动事件跟踪会话：" },
         { "id": "unknown-error", "source": "Unknown error", "translation": "未知错误" }
       ]
+    },
+    {
+      "id": "window-properties-visible-labels-audit",
+      "path": "plugins/WindowExplorer/wndprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "window-title", "source": "Window %Ix", "translation": "窗口 %Ix" },
+        { "id": "general", "source": "General", "translation": "常规", "expected": 3 },
+        { "id": "properties", "source": "Properties", "translation": "属性", "expected": 2 },
+        { "id": "property-store", "source": "Property Store", "translation": "属性存储" },
+        { "id": "dwm-attributes", "source": "DWM Attributes", "translation": "DWM 属性" },
+        { "id": "ui-automation", "source": "UI Automation", "translation": "UI 自动化" },
+        { "id": "children", "source": "Children", "translation": "子窗口", "expected": 2 },
+        { "id": "options", "source": "Options", "translation": "选项" },
+        { "id": "name", "source": "Name", "translation": "名称", "expected": 7 },
+        { "id": "value", "source": "Value", "translation": "值", "expected": 5 },
+        { "id": "alias", "source": "Alias", "translation": "别名" },
+        { "id": "handle", "source": "Handle", "translation": "句柄" },
+        { "id": "class", "source": "Class", "translation": "类", "expected": 2 },
+        { "id": "process-id", "source": "Process ID", "translation": "进程 ID", "expected": 2 },
+        { "id": "thread-id", "source": "Thread ID", "translation": "线程 ID" }
+      ]
+    },
+    {
+      "id": "window-properties-child-text-column",
+      "path": "plugins/WindowExplorer/wndprp.c",
+      "context": "PhAddListViewColumn(context->ListViewHandle, 2, 2, 2, LVCFMT_LEFT, 250, L\"{text}\")",
+      "items": [
+        { "id": "text", "source": "Text", "translation": "文本" }
+      ]
     }
   ]
 }
