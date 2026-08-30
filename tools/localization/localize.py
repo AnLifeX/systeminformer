@@ -106,7 +106,16 @@ UI_CALL_PATTERNS = (
         "window-text",
         re.compile(
             r"\b(?:PhSetWindowText|SetWindowTextW?|PhSetDialogItemText|"
-            r"SetDlgItemTextW?|SetupSetProgressText|SetupSetWizardButtonText)\s*\("
+            r"SetDlgItemTextW?|SetupSetProgressText|SetupSetWizardButtonText|"
+            r"UpdateSetDialogStatusText|UpdateSetDialogInitialProgressText|"
+            r"UpdaterUpdateProgressToast|UpdateSetProgressFinalizingState)\s*\("
+        ),
+    ),
+    (
+        "task-dialog-message",
+        re.compile(
+            r"\bSendMessageW?\s*\([^;]*?\bTDM_UPDATE_ELEMENT_TEXT\b",
+            re.DOTALL,
         ),
     ),
     (

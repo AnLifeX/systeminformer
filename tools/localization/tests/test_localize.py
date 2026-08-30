@@ -235,6 +235,11 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhSetDialogItemText(hwndDlg, IDC_CREDIT, L"<a href=\\\"https://example.com/user\\\">user</a> - Example Name\\n");',
                     'SetupSetProgressText(context, L"Installing files...", NULL);',
                     'SetupSetWizardButtonText(parent, IDNEXT, L"Continue");',
+                    'UpdateSetDialogStatusText(context, L"Connecting to update server...");',
+                    'UpdateSetDialogInitialProgressText(context, L"Starting update download...");',
+                    'UpdaterUpdateProgressToast(context, L"Downloading update...");',
+                    'UpdateSetProgressFinalizingState(context, L"Finalizing update...");',
+                    'SendMessage(context->DialogHandle, TDM_UPDATE_ELEMENT_TEXT, TDE_MAIN_INSTRUCTION, reinterpret_cast<LPARAM>(L"Preparing update..."));',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -293,6 +298,11 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertIn("NetworkTools", result.stdout)
         self.assertIn("Installing files...", result.stdout)
         self.assertIn("Continue", result.stdout)
+        self.assertIn("Connecting to update server...", result.stdout)
+        self.assertIn("Starting update download...", result.stdout)
+        self.assertIn("Downloading update...", result.stdout)
+        self.assertIn("Finalizing update...", result.stdout)
+        self.assertIn("Preparing update...", result.stdout)
         self.assertNotIn("&Copy", result.stdout)
         self.assertNotIn("section placeholder", result.stdout)
         self.assertNotIn("PingGraphLayout", result.stdout)
@@ -311,7 +321,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
         self.assertNotIn("[PUSHBUTTON] Close", result.stdout)
-        self.assertIn("uncovered=11", result.stdout)
+        self.assertIn("uncovered=16", result.stdout)
 
 
 if __name__ == "__main__":

@@ -2292,6 +2292,101 @@
       ]
     },
     {
+      "id": "updater-winhttp-download-runtime",
+      "path": "plugins/Updater/updater.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "notification-title", "source": "New version of System Informer available", "translation": "有新的 System Informer 版本可用", "expected": 2 },
+        { "id": "notification-hint", "source": "Help menu > Check for updates", "translation": "帮助菜单 > 检查更新", "expected": 2 },
+        { "id": "initializing-request", "source": "Initializing download request...", "translation": "正在初始化下载请求...", "expected": 2 },
+        { "id": "connecting", "source": "Connecting...", "translation": "正在连接...", "expected": 2 },
+        { "id": "sending-request", "source": "Sending download request...", "translation": "正在发送下载请求...", "expected": 2 },
+        { "id": "waiting-response", "source": "Waiting for response...", "translation": "正在等待响应...", "expected": 2 },
+        { "id": "downloading-release", "source": "Downloading release %s...", "translation": "正在下载版本 %s...", "expected": 2 },
+        { "id": "initial-progress", "source": "Downloaded: ~ of ~ (0%)\\r\\nSpeed: ~ KB/s", "translation": "已下载：~ / ~（0%）\\r\\n速度：~ KB/秒", "expected": 2 }
+      ]
+    },
+    {
+      "id": "updater-winhttp-progress-downloaded",
+      "path": "plugins/Updater/updater.c",
+      "context": "PhInitFormatS(&format[0], L\"{text}\");",
+      "items": [
+        { "id": "text", "source": "Downloaded: ", "translation": "已下载：", "expected": 2 }
+      ]
+    },
+    {
+      "id": "updater-winhttp-progress-separator",
+      "path": "plugins/Updater/updater.c",
+      "context": "PhInitFormatS(&format[2], L\"{text}\");",
+      "items": [
+        { "id": "text", "source": " of ", "translation": " / ", "expected": 2 }
+      ]
+    },
+    {
+      "id": "updater-winhttp-progress-open-percent",
+      "path": "plugins/Updater/updater.c",
+      "context": "PhInitFormatS(&format[4], L\"{text}\");",
+      "items": [
+        { "id": "text", "source": " (", "translation": "（", "expected": 2 }
+      ]
+    },
+    {
+      "id": "updater-winhttp-progress-speed",
+      "path": "plugins/Updater/updater.c",
+      "context": "PhInitFormatS(&format[6], L\"{text}\");",
+      "items": [
+        { "id": "text", "source": "%)\\r\\nSpeed: ", "translation": "%）\\r\\n速度：", "expected": 2 }
+      ]
+    },
+    {
+      "id": "updater-winhttp-callback-runtime",
+      "path": "plugins/Updater/toastnotify.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "initializing-request", "source": "Initializing download request...", "translation": "正在初始化下载请求..." },
+        { "id": "connecting", "source": "Connecting...", "translation": "正在连接..." },
+        { "id": "sending-request", "source": "Sending download request...", "translation": "正在发送下载请求..." },
+        { "id": "waiting-response", "source": "Waiting for response...", "translation": "正在等待响应..." },
+        { "id": "downloading-release", "source": "Downloading release %s...", "translation": "正在下载版本 %s..." },
+        { "id": "initial-progress", "source": "Downloaded: ~ of ~ (0%)\\r\\nSpeed: ~ KB/s", "translation": "已下载：~ / ~（0%）\\r\\n速度：~ KB/秒" }
+      ]
+    },
+    {
+      "id": "updater-bits-runtime",
+      "path": "plugins/Updater/downloadbits.cpp",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "finalizing", "source": "Finalizing BITS download...", "translation": "正在完成 BITS 下载...", "expected": 2 },
+        { "id": "queued", "source": "Queued BITS download...", "translation": "BITS 下载已排队...", "expected": 2 },
+        { "id": "connecting", "source": "Connecting with BITS...", "translation": "正在通过 BITS 连接...", "expected": 2 },
+        { "id": "downloading", "source": "Downloading with BITS...", "translation": "正在通过 BITS 下载...", "expected": 2 },
+        { "id": "retry-pending", "source": "BITS download retry pending...", "translation": "BITS 下载正在等待重试...", "expected": 2 },
+        { "id": "initializing", "source": "Initializing BITS download...", "translation": "正在初始化 BITS 下载...", "expected": 2 },
+        { "id": "initial-progress", "source": "Downloaded: ~ of ~ (0%)\\r\\nSpeed: ~ KB/s", "translation": "已下载：~ / ~（0%）\\r\\n速度：~ KB/秒" },
+        { "id": "job-name", "source": "System Informer Update", "translation": "System Informer 更新" }
+      ]
+    },
+    {
+      "id": "updater-delivery-optimization-runtime",
+      "path": "plugins/Updater/downloadp2p.cpp",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "finalizing", "source": "Finalizing Delivery Optimization download...", "translation": "正在完成传递优化下载..." },
+        { "id": "initializing", "source": "Initializing Delivery Optimization...", "translation": "正在初始化传递优化...", "expected": 2 },
+        { "id": "starting", "source": "Starting Delivery Optimization download...", "translation": "正在开始传递优化下载...", "expected": 2 },
+        { "id": "initial-progress", "source": "Downloaded: ~ of ~ (0%)\\r\\nSpeed: ~ KB/s", "translation": "已下载：~ / ~（0%）\\r\\n速度：~ KB/秒" }
+      ]
+    },
+    {
+      "id": "updater-toast-progress-runtime",
+      "path": "plugins/Updater/toastmain.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "speed", "source": "Speed: %s/s", "translation": "速度：%s/秒" },
+        { "id": "downloaded", "source": "Downloaded: ~ of ~", "translation": "已下载：~ / ~" }
+      ]
+    },
+    {
       "id": "updater-final-pages",
       "path": "plugins/Updater/page5.c",
       "context": "L\"{text}\"",
