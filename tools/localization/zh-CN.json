@@ -6283,6 +6283,29 @@
         { "id": "too-many-handles", "source": "Unable to search for handles because the total number of handles on the system is too large.", "translation": "无法搜索句柄，因为系统中的句柄总数过多。" },
         { "id": "check-processes", "source": "Please check if there are any processes with an extremely large number of handles open.", "translation": "请检查是否有进程打开了数量极多的句柄。" }
       ]
+    },
+    {
+      "id": "tool-status-runtime-audit",
+      "path": "plugins/ToolStatus/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "shortcut-suffix", "source": " (Ctrl+K)", "translation": "（Ctrl+K）" },
+        { "id": "process-missing", "source": "The process (PID %lu) does not exist.", "translation": "进程（PID %lu）不存在。", "expected": 2 },
+        { "id": "lock", "source": "&Lock", "translation": "锁定(&L)", "expected": 2 },
+        { "id": "log-off", "source": "Log o&ff", "translation": "注销(&F)", "expected": 2 },
+        { "id": "sleep", "source": "&Sleep", "translation": "睡眠(&S)", "expected": 2 },
+        { "id": "hibernate", "source": "&Hibernate", "translation": "休眠(&H)", "expected": 2 },
+        { "id": "update-restart", "source": "Update and restart", "translation": "更新并重启", "expected": 2 },
+        { "id": "update-shutdown", "source": "Update and shut down", "translation": "更新并关机", "expected": 2 },
+        { "id": "restart", "source": "R&estart", "translation": "重启(&E)", "expected": 2 },
+        { "id": "advanced-options", "source": "Restart to advanced options", "translation": "重启到高级选项", "expected": 2 },
+        { "id": "boot-options", "source": "Restart to boot &options", "translation": "重启到启动选项(&O)", "expected": 2 },
+        { "id": "firmware-options", "source": "Restart to firmware options", "translation": "重启到固件选项", "expected": 2 },
+        { "id": "shutdown", "source": "Shu&t down", "translation": "关机(&T)", "expected": 2 },
+        { "id": "hybrid-shutdown", "source": "H&ybrid shut down", "translation": "混合关机(&Y)", "expected": 2 },
+        { "id": "display-name", "source": "Toolbar and Status Bar", "translation": "工具栏和状态栏" },
+        { "id": "description", "source": "Adds a Toolbar, Status Bar and Search box.", "translation": "添加工具栏、状态栏和搜索框。" }
+      ]
     }
   ]
 }
