@@ -1638,6 +1638,54 @@
       ]
     },
     {
+      "id": "extendedtools-options-section",
+      "path": "plugins/ExtendedTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "ExtendedTools", "translation": "扩展工具" }
+      ]
+    },
+    {
+      "id": "networktools-options-section",
+      "path": "plugins/NetworkTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "NetworkTools", "translation": "网络工具" }
+      ]
+    },
+    {
+      "id": "onlinechecks-options-section",
+      "path": "plugins/OnlineChecks/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "OnlineChecks", "translation": "在线检查" }
+      ]
+    },
+    {
+      "id": "toolstatus-options-section",
+      "path": "plugins/ToolStatus/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "ToolStatus", "translation": "工具栏与状态栏" }
+      ]
+    },
+    {
+      "id": "updater-options-section",
+      "path": "plugins/Updater/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "Updater", "translation": "更新程序" }
+      ]
+    },
+    {
+      "id": "usernotes-options-section",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "title", "source": "UserNotes", "translation": "用户备注" }
+      ]
+    },
+    {
       "id": "sysinfo-etw-panel-titles",
       "path": "plugins/ExtendedTools/etwsys.c",
       "context": "drawPanel->Title = PhCreateString(L\"{text}\");",
@@ -1892,8 +1940,28 @@
       "path": "plugins/UserNotes/main.c",
       "context": "L\"{text}\"",
       "items": [
+        { "id": "affinity", "source": "&Affinity", "translation": "处理器相关性(&A)" },
+        { "id": "set-affinity", "source": "Set &affinity", "translation": "设置处理器相关性(&A)" },
         { "id": "boost", "source": "&Boost", "translation": "优先级提升(&B)" },
-        { "id": "efficiency", "source": "&Efficiency", "translation": "效率模式(&E)" }
+        { "id": "set-boost", "source": "Set &boost", "translation": "设置优先级提升(&B)" },
+        { "id": "efficiency", "source": "&Efficiency", "translation": "效率模式(&E)" },
+        { "id": "set-efficiency", "source": "Set &efficiency mode", "translation": "设置效率模式(&E)" },
+        { "id": "save-image", "source": "&Save for %s", "translation": "为 %s 保存(&S)", "expected": 6 },
+        { "id": "save-command-line", "source": "Save &for this command line", "translation": "为此命令行保存(&F)", "expected": 6 },
+        { "id": "save-ifeo", "source": "&Save for %s (IFEO)", "translation": "为 %s 保存（IFEO）(&S)", "expected": 3 },
+        { "id": "collapse-default", "source": "Col&lapse by default", "translation": "默认折叠(&L)" },
+        { "id": "highlight", "source": "Highligh&t", "translation": "突出显示(&T)" },
+        { "id": "graphics-priority", "source": "Graphics priority...", "translation": "图形优先级..." },
+        { "id": "ifeo-update-error", "source": "Unable to update the IFEO key for priority.", "translation": "无法更新优先级的 IFEO 注册表项。", "expected": 3 },
+        { "id": "select-priority", "source": "Select the default process priority.", "translation": "选择默认进程优先级。" },
+        { "id": "priority-persistence", "source": "The process priority will be applied by Windows even when System Informer isn't currently running. ", "translation": "即使 System Informer 当前未运行，Windows 也会应用此进程优先级。 " },
+        { "id": "realtime-note", "source": "Note: Realtime priority requires the User has the SeIncreaseBasePriorityPrivilege or the process running as Administrator.", "translation": "注意：实时优先级要求用户拥有 SeIncreaseBasePriorityPrivilege 特权，或以管理员身份运行此进程。", "expected": 2 },
+        { "id": "select-io-priority", "source": "Select the default process IO priority.", "translation": "选择默认进程 I/O 优先级。" },
+        { "id": "io-priority-persistence", "source": "The IO priority will be applied by Windows even when System Informer isn't currently running. ", "translation": "即使 System Informer 当前未运行，Windows 也会应用此 I/O 优先级。 " },
+        { "id": "high-io-note", "source": "Note: High IO priority requires the User has the SeIncreaseBasePriorityPrivilege or the process running as Administrator.", "translation": "注意：高 I/O 优先级要求用户拥有 SeIncreaseBasePriorityPrivilege 特权，或以管理员身份运行此进程。" },
+        { "id": "select-page-priority", "source": "Select the default process page priority.", "translation": "选择默认进程页面优先级。" },
+        { "id": "page-priority-persistence", "source": "The page priority will be applied by Windows even when System Informer isn't currently running.", "translation": "即使 System Informer 当前未运行，Windows 也会应用此页面优先级。" },
+        { "id": "select-graphics-priority", "source": "Select the graphics scheduling priority.", "translation": "选择图形调度优先级。" }
       ]
     },
     {
@@ -1913,6 +1981,20 @@
         { "id": "ping", "source": "&Ping", "translation": "Ping(&P)" },
         { "id": "traceroute", "source": "&Traceroute", "translation": "路由跟踪(&T)" },
         { "id": "whois", "source": "&Whois", "translation": "Whois 查询(&W)" }
+      ]
+    },
+    {
+      "id": "extendedservices-context-menus",
+      "path": "plugins/ExtendedServices/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "services", "source": "Ser&vices", "translation": "服务(&V)", "expected": 2 },
+        { "id": "go-service", "source": "&Go to service", "translation": "转到服务(&G)", "expected": 2 },
+        { "id": "start", "source": "Sta&rt", "translation": "启动(&R)", "expected": 2 },
+        { "id": "continue", "source": "&Continue", "translation": "继续(&C)", "expected": 2 },
+        { "id": "pause", "source": "&Pause", "translation": "暂停(&P)", "expected": 2 },
+        { "id": "stop", "source": "St&op", "translation": "停止(&O)", "expected": 2 },
+        { "id": "restart", "source": "R&estart", "translation": "重新启动(&E)" }
       ]
     },
     {
@@ -1977,7 +2059,12 @@
         { "id": "named-pipes", "source": "&Named Pipes", "translation": "命名管道(&N)" },
         { "id": "reparse-points", "source": "NTFS Reparse Points", "translation": "NTFS 重解析点" },
         { "id": "object-identifiers", "source": "NTFS Object Identifiers", "translation": "NTFS 对象标识符" },
-        { "id": "security-descriptors", "source": "NTFS Security Descriptors", "translation": "NTFS 安全描述符" }
+        { "id": "security-descriptors", "source": "NTFS Security Descriptors", "translation": "NTFS 安全描述符" },
+        { "id": "unloaded-modules", "source": "&Unloaded modules", "translation": "已卸载模块(&U)" },
+        { "id": "working-set-watch", "source": "&WS watch", "translation": "工作集监视(&W)" },
+        { "id": "wait-chain", "source": "Wait Chain Tra&versal", "translation": "等待链遍历(&V)", "expected": 2 },
+        { "id": "cancel-io", "source": "Ca&ncel I/O", "translation": "取消 I/O(&N)" },
+        { "id": "services", "source": "Ser&vices", "translation": "服务(&V)" }
       ]
     },
     {

@@ -216,6 +216,7 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhPluginCreateEMenuItem(plugin, 0, 2, L"Set &affinity", NULL);',
                     'config.pszMainInstruction = PhaConcatStrings(3, L"Do you want to ", action, L"?");',
                     'buttons[0].pszButtonText = L"Terminate";',
+                    'optionsEntry->CreateSection(L"NetworkTools", module, template, callback, NULL);',
                     'PhCreateEMenuItem(0, 2, L"<section placeholder>", NULL, NULL);',
                     'PhSetDialogItemText(hwndDlg, IDC_LAYOUT, L"PingGraphLayout");',
                     'PhSetDialogItemText(hwndDlg, IDC_INFO, L"0x01 - PAGE_NOACCESS\\r\\n");',
@@ -283,6 +284,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertIn("Set &affinity", result.stdout)
         self.assertIn("Do you want to ", result.stdout)
         self.assertIn("Terminate", result.stdout)
+        self.assertIn("NetworkTools", result.stdout)
         self.assertNotIn("&Copy", result.stdout)
         self.assertNotIn("section placeholder", result.stdout)
         self.assertNotIn("PingGraphLayout", result.stdout)
@@ -301,7 +303,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
         self.assertNotIn("[PUSHBUTTON] Close", result.stdout)
-        self.assertIn("uncovered=6", result.stdout)
+        self.assertIn("uncovered=7", result.stdout)
 
 
 if __name__ == "__main__":

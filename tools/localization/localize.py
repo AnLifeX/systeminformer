@@ -64,8 +64,14 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "TTL",
     "UIAccess",
     "Unicode",
+    "VirusTotal",
+    "Hybrid-Analysis",
     "WMI",
     "WOW64",
+    "&filescan.io",
+    "&hybrid-analysis.com",
+    "&virustotal.com",
+    "virusscan.&jotti.org",
 }
 FORMAT_ONLY_UNITS = {"B", "KB", "MB", "GB", "TB", "ms", "s"}
 C_STRING_PATTERN = re.compile(r'(?<![A-Za-z0-9_])(?:u8|u|U|L)?"((?:\\.|[^"\\])*)"')
@@ -107,7 +113,12 @@ UI_CALL_PATTERNS = (
         "task-dialog-text",
         re.compile(r"\b(?:pszMainInstruction|pszContent|pszButtonText)\s*="),
     ),
-    ("page", re.compile(r"\bPhMwpCreateInternalPage\s*\(")),
+    (
+        "page",
+        re.compile(
+            r"\b(?:PhMwpCreateInternalPage|optionsEntry->CreateSection)\s*\("
+        ),
+    ),
 )
 
 
