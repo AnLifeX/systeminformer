@@ -6924,6 +6924,27 @@
         { "id": "no-unwind", "source": " (No unwind info)", "translation": "（无展开信息）", "expected": 2 },
         { "id": "inline", "source": " (Inline function)", "translation": "（内联函数）" }
       ]
+    },
+    {
+      "id": "memory-editor-runtime-audit",
+      "path": "SystemInformer/memedit.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "edit-error", "source": "Unable to edit the memory region.", "translation": "无法编辑内存区域。", "expected": 3 },
+        { "id": "read-error", "source": "Unable to read memory", "translation": "无法读取内存", "expected": 2 },
+        { "id": "open-process-error", "source": "Unable to open the process", "translation": "无法打开进程", "expected": 3 },
+        { "id": "title", "source": "%s (%u) (0x%Ix - 0x%Ix)", "translation": "%s（%u）（0x%Ix - 0x%Ix）" },
+        { "id": "bytes-per-row", "source": "%u bytes per row", "translation": "每行 %u 字节", "expected": 2 },
+        { "id": "binary-files", "source": "Binary files (*.bin)", "translation": "二进制文件 (*.bin)" },
+        { "id": "all-files", "source": "All files (*.*)", "translation": "所有文件 (*.*)" },
+        { "id": "create-file-error", "source": "Unable to create the file", "translation": "无法创建文件" },
+        { "id": "offset-title", "source": "Go to Offset", "translation": "转到偏移量" },
+        { "id": "offset-prompt", "source": "Enter an offset:", "translation": "输入偏移量：" },
+        { "id": "write", "source": "write", "translation": "写入" },
+        { "id": "process-memory", "source": "process memory", "translation": "进程内存" },
+        { "id": "write-warning", "source": "Some programs may restrict access or ban your account when editing the memory of the process.", "translation": "编辑进程内存时，某些程序可能会限制访问或封禁你的账户。" },
+        { "id": "write-error", "source": "Unable to write memory", "translation": "无法写入内存" }
+      ]
     }
   ]
 }
