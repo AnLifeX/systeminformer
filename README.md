@@ -69,7 +69,10 @@ git push origin zh-cn-v0.1.0
 由于 GitHub Actions 不能在 `on.push` 中按提交信息过滤，普通 `zh-CN` 推送可能留下一个
 `skipped` 工作流记录，但不会分配 Windows runner、不会编译，也不会上传 Artifact。
 
-目前尚未启用自动同步上游、自动检查上游、自动创建 Tag 或自动适配汉化规则；待汉化目录稳定后再增加。
+每天会检查一次官方 `winsiderss/systeminformer` 的 `master`。仅当上游出现尚未检查的新提交时，
+才在固定的 `automation/upstream-check` 分支上临时合并并运行汉化规则、静态审计和单元测试；
+该流程不编译、不上传 Artifact，也不会自动合并到 `zh-CN`、创建 Tag 或发布 Release。
+检查失败会保留完整 Actions 日志，并在下一次定时任务中重新尝试，不会改变正式汉化分支。
 安装包发布、自有更新源和签名密钥的配置见
 `[tools/localization/RELEASE.md](tools/localization/RELEASE.md)`。
 

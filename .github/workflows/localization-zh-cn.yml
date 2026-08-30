@@ -32,7 +32,9 @@ jobs:
 
     - name: Check upstream source contexts
       shell: pwsh
-      run: python tools/localization/localize.py check --state source
+      run: |
+        python tools/localization/localize.py check --state source
+        python tools/localization/localize.py audit
 
     - name: Apply Simplified Chinese localization
       shell: pwsh
@@ -168,7 +170,6 @@ jobs:
         $files = @(
           'build/output/systeminformer-build-release-setup.exe'
           'build/output/systeminformer-build-win64-bin.zip'
-          'build/output/systeminformer-build-bin.zip'
         )
         $lines = foreach ($file in $files) {
           $hash = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash
@@ -206,7 +207,6 @@ jobs:
         $assets = @(
           'build/output/systeminformer-build-release-setup.exe'
           'build/output/systeminformer-build-win64-bin.zip'
-          'build/output/systeminformer-build-bin.zip'
           'build/output/systeminformer-zh-CN-SHA256SUMS.txt'
           'build/output/systeminformer-update.json'
         )

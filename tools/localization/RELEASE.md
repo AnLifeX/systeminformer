@@ -4,9 +4,11 @@
 
 - `systeminformer-build-release-setup.exe`：安装程序
 - `systeminformer-build-win64-bin.zip`：供用户下载的 x64 便携版
-- `systeminformer-build-bin.zip`：安装程序使用的 x64 安装载荷（保留 `amd64` 目录结构）
 - `systeminformer-zh-CN-SHA256SUMS.txt`：发布文件校验和
 - `systeminformer-update.json`：内置更新器读取的签名元数据
+
+构建过程仍会在 runner 内生成 `systeminformer-build-bin.zip`，将其嵌入安装程序后不再作为
+Release 资产公开；普通安装和更新都不需要用户单独下载该内部载荷。
 
 安装版通过内置更新器下载并验证新的安装程序。便携版只提示新版本并打开 Release 页面，更新时应手动下载新的 ZIP 后覆盖。
 
@@ -46,8 +48,9 @@ $keyBase64 = $null
 确认工作区已提交、推送且构建成功后，为要发布的提交创建并推送 tag：
 
 ```powershell
-git tag v4.0.26241.138-zh-cn.1
-git push origin v4.0.26241.138-zh-cn.1
+git tag -a zh-cn-v0.1.0 -m "System Informer 简体中文版 0.1.0"
+git push origin zh-cn-v0.1.0
 ```
 
+`zh-cn-v0.1.0` 是汉化发行版本；程序用于更新比较的四段版本号会从实际构建结果中自动读取。
 tag 工作流会重新构建汉化版本、可选地执行 Authenticode 签名、重新计算校验和、生成更新器签名元数据，最后创建 GitHub Release。不要在审核完成前推送发布 tag。

@@ -1,0 +1,101 @@
+name: 'zh-CN upstream check'
+
+on:
+  schedule:
+    - cron: '37 18 * * *'
+      timezone: 'Australia/Perth'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Run the check even when the upstream commit was already checked'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: zh-cn-upstream-check
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout zh-CN with history
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
+        with:
+          ref: zh-CN
+          fetch-depth: 0
+
+      - name: Fetch official upstream and previous check branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git remote add official https://github.com/winsiderss/systeminformer.git
+          git fetch --no-tags official master
+          git fetch --no-tags origin automation/upstream-check:refs/remotes/origin/automation/upstream-check || true
+
+      - name: Detect unchecked upstream commit
+        id: detect
+        shell: bash
+        env:
+          FORCE_CHECK: ${{ inputs.force || false }}
+        run: |
+          set -euo pipefail
+          upstream_sha="$(git rev-parse official/master)"
+          changed=true
+
+          if [ "$FORCE_CHECK" != "true" ]; then
+            if git merge-base --is-ancestor "$upstream_sha" origin/zh-CN; then
+              changed=false
+            elif git show-ref --verify --quiet refs/remotes/origin/automation/upstream-check && \
+                 git merge-base --is-ancestor "$upstream_sha" origin/automation/upstream-check; then
+              changed=false
+            fi
+          fi
+
+          echo "upstream_sha=$upstream_sha" >> "$GITHUB_OUTPUT"
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+          if [ "$changed" = "false" ]; then
+            echo "Upstream master $upstream_sha has already been checked; stopping before localization checks."
+          else
+            echo "Unchecked upstream master detected: $upstream_sha"
+          fi
+
+      - name: Merge upstream into fixed check branch
+        if: steps.detect.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch --force-create automation/upstream-check origin/zh-CN
+          git merge --no-ff --no-edit official/master
+
+      - name: Test localization tool
+        if: steps.detect.outputs.changed == 'true'
+        run: python -m unittest discover -s tools/localization/tests -v
+
+      - name: Check upstream source contexts and visible text coverage
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          python tools/localization/localize.py check --state source
+          python tools/localization/localize.py audit
+
+      - name: Apply and verify Simplified Chinese localization
+        if: steps.detect.outputs.changed == 'true'
+        run: |
+          python tools/localization/localize.py apply
+          python tools/localization/localize.py check --state translated
+          git diff --check
+
+      - name: Record successful upstream check
+        if: steps.detect.outputs.changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git restore --source=HEAD --staged --worktree -- .
+          git push --force-with-lease origin HEAD:automation/upstream-check
