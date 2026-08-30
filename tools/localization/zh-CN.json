@@ -6945,6 +6945,43 @@
         { "id": "write-warning", "source": "Some programs may restrict access or ban your account when editing the memory of the process.", "translation": "编辑进程内存时，某些程序可能会限制访问或封禁你的账户。" },
         { "id": "write-error", "source": "Unable to write memory", "translation": "无法写入内存" }
       ]
+    },
+    {
+      "id": "informer-window-runtime-audit",
+      "path": "SystemInformer/informerwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "empty", "source": "No events to display.", "translation": "没有可显示的事件。" },
+        { "id": "copy", "source": "&Copy\\bCtrl+C", "translation": "复制(&C)\\bCtrl+C" },
+        { "id": "time", "source": "Time", "translation": "时间" },
+        { "id": "duration", "source": "Duration", "translation": "持续时间" },
+        { "id": "start-key", "source": "Start key", "translation": "启动键" },
+        { "id": "attached-process", "source": "Attached process", "translation": "关联进程" },
+        { "id": "attached-pid", "source": "Attached PID", "translation": "关联 PID" },
+        { "id": "attached-start-key", "source": "Attached start key", "translation": "关联启动键" },
+        { "id": "category", "source": "Category", "translation": "类别" },
+        { "id": "event", "source": "Event", "translation": "事件" },
+        { "id": "path", "source": "Path", "translation": "路径" },
+        { "id": "result", "source": "Result", "translation": "结果" },
+        { "id": "details", "source": "Details", "translation": "详细信息" },
+        { "id": "superseded", "source": "Superseded", "translation": "已取代" },
+        { "id": "opened", "source": "Opened", "translation": "已打开" },
+        { "id": "created", "source": "Created", "translation": "已创建" },
+        { "id": "overwritten", "source": "Overwritten", "translation": "已覆盖" },
+        { "id": "exists", "source": "Exists", "translation": "存在" },
+        { "id": "missing", "source": "Does Not Exist", "translation": "不存在" },
+        { "id": "pause", "source": "Pause", "translation": "暂停", "expected": 2 },
+        { "id": "resume", "source": "Resume", "translation": "继续" },
+        { "id": "start-key-error", "source": "Failed to get process start key.", "translation": "无法获取进程启动键。" }
+      ]
+    },
+    {
+      "id": "informer-process-column",
+      "path": "SystemInformer/informerwnd.c",
+      "context": "PhAddTreeNewColumn(tn, PHIC_PROCESS,TRUE, L\"{text}\"",
+      "items": [
+        { "id": "process", "source": "Process", "translation": "进程" }
+      ]
     }
   ]
 }
