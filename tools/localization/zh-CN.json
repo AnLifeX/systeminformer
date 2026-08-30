@@ -6306,6 +6306,36 @@
         { "id": "display-name", "source": "Toolbar and Status Bar", "translation": "工具栏和状态栏" },
         { "id": "description", "source": "Adds a Toolbar, Status Bar and Search box.", "translation": "添加工具栏、状态栏和搜索框。" }
       ]
+    },
+    {
+      "id": "main-window-runtime-audit",
+      "path": "SystemInformer/mainwnd.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "reduced", "source": " (RF)", "translation": "（功能受限）" },
+        { "id": "administrator", "source": " (Administrator)", "translation": "（管理员）" },
+        { "id": "text-files", "source": "Text files (*.txt;*.log)", "translation": "文本文件 (*.txt;*.log)" },
+        { "id": "csv-files", "source": "Comma-separated values (*.csv)", "translation": "逗号分隔值 (*.csv)" },
+        { "id": "all-files", "source": "All files (*.*)", "translation": "所有文件 (*.*)", "expected": 2 },
+        { "id": "executable-files", "source": "Executable files (*.exe;*.dll;*.com;*.ocx;*.sys;*.scr;*.cpl;*.ax;*.acm;*.lib;*.winmd;*.mui;*.mun;*.efi;*.pdb)", "translation": "可执行文件 (*.exe;*.dll;*.com;*.ocx;*.sys;*.scr;*.cpl;*.ax;*.acm;*.lib;*.winmd;*.mui;*.mun;*.efi;*.pdb)" },
+        { "id": "create-file-error", "source": "Unable to create the file", "translation": "无法创建文件" },
+        { "id": "pe-viewer-missing", "source": "Make sure the PE Viewer executable file is present.", "translation": "请确认 PE 查看器的可执行文件存在。" },
+        { "id": "wsl-error", "source": "Unable to shutdown WSL instances.", "translation": "无法关闭 WSL 实例。" },
+        { "id": "close-window-error", "source": "Unable to close the window.", "translation": "无法关闭窗口。" },
+        { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。", "expected": 2 },
+        { "id": "locate-file-error", "source": "Unable to locate the file.", "translation": "无法找到文件。", "expected": 4 },
+        { "id": "process-missing", "source": "The process does not exist.", "translation": "进程不存在。", "expected": 6 },
+        { "id": "service-missing", "source": "The service does not exist.", "translation": "服务不存在。", "expected": 4 },
+        { "id": "save-settings-error", "source": "Unable to save application settings.", "translation": "无法保存应用程序设置。" },
+        { "id": "defender-offline", "source": "Windows Defender Offline Scan", "translation": "Windows Defender 脱机扫描" },
+        { "id": "restart-native", "source": "R&estart (Native)", "translation": "重启（原生）(&E)" },
+        { "id": "shutdown-native", "source": "Shu&t down (Native)", "translation": "关机（原生）(&T)" },
+        { "id": "restart-critical", "source": "R&estart (Critical)", "translation": "重启（关键）(&E)" },
+        { "id": "shutdown-critical", "source": "Shu&t down (Critical)", "translation": "关机（关键）(&T)" },
+        { "id": "column-set-title", "source": "Column Set Name", "translation": "列集名称" },
+        { "id": "column-set-prompt", "source": "Enter a name for this column set:", "translation": "输入此列集的名称：" },
+        { "id": "restart-process", "source": "Res&tart", "translation": "重启(&T)" }
+      ]
     }
   ]
 }

@@ -213,6 +213,7 @@ class LocalizationCliTests(unittest.TestCase):
             "\n".join(
                 (
                     'PhCreateEMenuItem(0, 1, L"&Copy", NULL, NULL);',
+                    'PhCreateEMenuItem(0, 2, L"<section placeholder>", NULL, NULL);',
                     "PhShowError2(",
                     "    hwndDlg,",
                     '    L"Unable to save the file.",',
@@ -264,6 +265,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertIn("The destination is read-only.", result.stdout)
         self.assertIn("Advanced options", result.stdout)
         self.assertNotIn("&Copy", result.stdout)
+        self.assertNotIn("section placeholder", result.stdout)
         self.assertNotIn("Software", result.stdout)
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)

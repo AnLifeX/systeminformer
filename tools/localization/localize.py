@@ -30,6 +30,7 @@ ESCAPE_PATTERN = re.compile(
 SOURCE_SUFFIXES = {".c", ".cc", ".cpp", ".cxx", ".h", ".hpp", ".rc"}
 DEFAULT_AUDIT_PATHS = ("SystemInformer", "plugins", "phlib")
 INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
+    "<section placeholder>",
     "ACPI",
     "ANSI",
     "ASLR",
