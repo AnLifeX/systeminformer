@@ -111,7 +111,18 @@ UI_CALL_PATTERNS = (
     ),
     (
         "task-dialog-text",
-        re.compile(r"\b(?:pszMainInstruction|pszContent|pszButtonText)\s*="),
+        re.compile(
+            r"\bpsz(?:WindowTitle|MainInstruction|Content|ButtonText|"
+            r"VerificationText|ExpandedInformation|ExpandedControlText|"
+            r"CollapsedControlText|Footer)\s*="
+        ),
+    ),
+    (
+        "task-dialog-button",
+        re.compile(
+            r"(?:\bTASKDIALOG_BUTTON\s+[A-Za-z_]\w*\s*\[[^\]]*\]\s*="
+            r"|\(TASKDIALOG_BUTTON\)\s*\{)"
+        ),
     ),
     (
         "page",

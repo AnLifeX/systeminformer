@@ -9573,6 +9573,217 @@
           "translation": "网络设备"
         }
       ]
+    },
+    {
+      "id": "hidden-phlib-task-dialog-text",
+      "path": "phlib/util.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "dont-show-again", "source": "Don't show this message again", "translation": "不再显示此消息" }
+      ]
+    },
+    {
+      "id": "extendedservices-protection-confirmation",
+      "path": "plugins/ExtendedServices/other.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "warning", "source": "Setting service protection will prevent the service from being controlled, modified, or deleted.", "translation": "设置服务保护后，将无法控制、修改或删除该服务。" },
+        { "id": "continue", "source": "Do you want to continue?", "translation": "是否继续？" }
+      ]
+    },
+    {
+      "id": "networktools-geolite-dialog-pages",
+      "path": "plugins/NetworkTools/pages.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "restart", "source": "Restart", "translation": "重新启动" },
+        { "id": "download", "source": "Download", "translation": "下载" },
+        { "id": "title", "source": "Network Tools - GeoLite Updater", "translation": "网络工具 - GeoLite 更新程序", "expected": 5 },
+        { "id": "download-question", "source": "Download the latest GeoLite database?", "translation": "下载最新的 GeoLite 数据库吗？" },
+        { "id": "download-description", "source": "This product includes GeoLite2 data created by MaxMind, available from <a href=\\\"https://www.maxmind.com\\\">https://www.maxmind.com</a>\\r\\n\\r\\nSelect download to continue.", "translation": "本产品包含由 MaxMind 创建的 GeoLite2 数据，可从 <a href=\\\"https://www.maxmind.com\\\">https://www.maxmind.com</a> 获取。\\r\\n\\r\\n请选择“下载”继续。" },
+        { "id": "downloading", "source": "Downloading", "translation": "正在下载" },
+        { "id": "download-progress", "source": "Downloaded: ~ of ~ (~%%)\\r\\nSpeed: ~/s", "translation": "已下载：~ / ~（~%%）\\r\\n速度：~/s" },
+        { "id": "updated", "source": "The GeoLite database has been updated.", "translation": "GeoLite 数据库已更新。" },
+        { "id": "restart-required", "source": "Please restart System Informer for the changes to take effect...", "translation": "请重新启动 System Informer 以使更改生效..." },
+        { "id": "download-error", "source": "Error downloading GeoLite database.", "translation": "下载 GeoLite 数据库时出错。" },
+        { "id": "access-denied", "source": "[%lu] Access denied (invalid license key)", "translation": "[%lu] 访问被拒绝（许可证密钥无效）" },
+        { "id": "retry", "source": "Click Retry to download the update again.", "translation": "单击“重试”再次下载更新。" },
+        { "id": "unable-download", "source": "Unable to download GeoLite update.", "translation": "无法下载 GeoLite 更新。" },
+        { "id": "invalid-settings", "source": "Please check the Options > Network Tools > GeoLite ID or Key are configured before downloading geoLite updates.", "translation": "下载 GeoLite 更新前，请检查“选项 > 网络工具”中的 GeoLite ID 或密钥是否已配置。" }
+      ]
+    },
+    {
+      "id": "networktools-geolite-bootstrap-dialog",
+      "path": "plugins/NetworkTools/update.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "initializing", "source": "Initializing...", "translation": "正在初始化..." },
+        { "id": "title", "source": "Network Tools - GeoLite Updater", "translation": "网络工具 - GeoLite 更新程序" },
+        { "id": "unable-download", "source": "Unable to download GeoLite database updates.", "translation": "无法下载 GeoLite 数据库更新。" },
+        { "id": "missing-credentials", "source": "A license key and account number are required to download GeoLite database updates and either the key or number are not configured.\\n\\n", "translation": "下载 GeoLite 数据库更新需要许可证密钥和账户编号，但其中至少一项尚未配置。\\n\\n" },
+        { "id": "key-help", "source": "GeoLite license keys and accounts are free. If you're unsure how to create keys then please review the documentation here: <a href=\\\"https://support.maxmind.com/hc/en-us/articles/4407111582235-Generate-a-License-Key\\\">Generate-a-License-Key</a>\\n\\n", "translation": "GeoLite 许可证密钥和账户均可免费获取。如不确定如何创建密钥，请参阅此处的文档：<a href=\\\"https://support.maxmind.com/hc/en-us/articles/4407111582235-Generate-a-License-Key\\\">生成许可证密钥</a>\\n\\n" },
+        { "id": "configuration-help", "source": "Once you've created the key you can copy/paste the text into the Options window > NetworkTools settings and System Informer can start downloading GeoLite database updates.\\n\\n", "translation": "创建密钥后，可将其复制并粘贴到“选项 > 网络工具”设置中，System Informer 随后即可下载 GeoLite 数据库更新。\\n\\n" },
+        { "id": "maxmind-thanks", "source": "Special thanks to MaxMind (<a href=\\\"https://www.maxmind.com\\\">https://www.maxmind.com</a>) for continuing free GeoLite services <3", "translation": "特别感谢 MaxMind（<a href=\\\"https://www.maxmind.com\\\">https://www.maxmind.com</a>）持续提供免费的 GeoLite 服务 <3" }
+      ]
+    },
+    {
+      "id": "onlinechecks-upload-start-dialog",
+      "path": "plugins/OnlineChecks/page1.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "uploading", "source": "Uploading %s...", "translation": "正在上传 %s...", "expected": 2 }
+      ]
+    },
+    {
+      "id": "onlinechecks-analysis-dialog",
+      "path": "plugins/OnlineChecks/page2.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "view-last", "source": "View last analysis\\nView the last or outdated analysis page", "translation": "查看上次分析\\n查看上次或已过期的分析页面" },
+        { "id": "upload-file", "source": "Upload file\\nUpload fresh sample for updated analysis", "translation": "上传文件\\n上传新样本以获取最新分析" },
+        { "id": "last-analyzed", "source": "%s was last analyzed %s", "translation": "%s 上次分析于 %s" },
+        { "id": "detections", "source": "Detections:", "translation": "检测结果：", "expected": 2 },
+        { "id": "first-analyzed", "source": "First analyzed:", "translation": "首次分析：" },
+        { "id": "last-analyzed-label", "source": "Last analyzed:", "translation": "上次分析：", "expected": 2 },
+        { "id": "upload-size", "source": "Upload size:", "translation": "上传大小：", "expected": 2 },
+        { "id": "analysis-choice", "source": "You can take a look at the last analysis or upload it again now.", "translation": "可以查看上次分析，也可以立即重新上传。", "expected": 2 }
+      ]
+    },
+    {
+      "id": "onlinechecks-upload-progress-dialog",
+      "path": "plugins/OnlineChecks/page3.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "uploading", "source": "Uploading %s...", "translation": "正在上传 %s...", "expected": 2 },
+        { "id": "progress", "source": "Uploaded: ~ of ~ (0%)\\r\\nSpeed: ~ KB/s", "translation": "已上传：~ / ~（0%）\\r\\n速度：~ KB/s" },
+        { "id": "rescanning", "source": "Rescanning %s...", "translation": "正在重新扫描 %s...", "expected": 2 },
+        { "id": "locating", "source": "Locating analysis for %s...", "translation": "正在查找 %s 的分析结果...", "expected": 2 }
+      ]
+    },
+    {
+      "id": "onlinechecks-upload-error-dialog",
+      "path": "plugins/OnlineChecks/page4.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "uploading", "source": "Uploading %s...", "translation": "正在上传 %s..." },
+        { "id": "error", "source": "Error uploading %s...", "translation": "上传 %s 时出错..." }
+      ]
+    },
+    {
+      "id": "onlinechecks-bootstrap-dialog",
+      "path": "plugins/OnlineChecks/upload.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "initializing", "source": "Initializing...", "translation": "正在初始化..." }
+      ]
+    },
+    {
+      "id": "updater-bootstrap-dialog",
+      "path": "plugins/Updater/updater.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "initializing", "source": "Initializing...", "translation": "正在初始化...", "expected": 2 }
+      ]
+    },
+    {
+      "id": "usernotes-hidden-task-dialog-buttons",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "realtime", "source": "Realtime", "translation": "实时", "expected": 2 },
+        { "id": "high", "source": "High", "translation": "高", "expected": 3 },
+        { "id": "above-normal", "source": "Above normal", "translation": "高于正常", "expected": 2 },
+        { "id": "normal", "source": "Normal", "translation": "正常", "expected": 4 },
+        { "id": "below-normal", "source": "Below normal", "translation": "低于正常", "expected": 3 },
+        { "id": "idle", "source": "Idle", "translation": "空闲", "expected": 2 },
+        { "id": "save", "source": "Save", "translation": "保存", "expected": 4 },
+        { "id": "cancel", "source": "Cancel", "translation": "取消", "expected": 4 },
+        { "id": "low", "source": "Low", "translation": "低", "expected": 2 },
+        { "id": "very-low", "source": "Very low", "translation": "很低", "expected": 2 },
+        { "id": "medium", "source": "Medium", "translation": "中等" },
+        { "id": "graphics-title", "source": "D3DKMT scheduling priority", "translation": "D3DKMT 调度优先级" }
+      ]
+    },
+    {
+      "id": "system-actions-hidden-task-dialogs",
+      "path": "SystemInformer/actions.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "continue", "source": "Continue", "translation": "继续操作", "expected": 2 },
+        { "id": "elevation-required", "source": "You will need to provide administrator permission. ", "translation": "需要提供管理员权限。 ", "expected": 2 },
+        { "id": "elevation-help", "source": "Click Continue to complete this operation.", "translation": "单击“继续”完成此操作。", "expected": 2 },
+        { "id": "windbg", "source": "\\U0001FA9F WinDbg\\nGraphical debugger for both user-mode and kernel-mode debugging.", "translation": "\\U0001FA9F WinDbg\\n用于用户模式和内核模式调试的图形调试器。" },
+        { "id": "windbg-preview", "source": "\\U0001FA9F WinDbg (Preview)\\nModern graphical debugger for both user-mode and kernel-mode debugging.", "translation": "\\U0001FA9F WinDbg（预览版）\\n用于用户模式和内核模式调试的现代图形调试器。" },
+        { "id": "cdb", "source": "\\U0001F4FA CDB\\nCommand-line debugger for user-mode applications.", "translation": "\\U0001F4FA CDB\\n用于用户模式应用程序的命令行调试器。" },
+        { "id": "kd", "source": "\\U0001F4FA KD\\nKernel debugger for low-level system debugging.", "translation": "\\U0001F4FA KD\\n用于底层系统调试的内核调试器。" },
+        { "id": "ntsd", "source": "\\U0001F4FA NTSD\\nLegacy command-line debugger similar to CDB.", "translation": "\\U0001F4FA NTSD\\n与 CDB 类似的旧式命令行调试器。" },
+        { "id": "system-default-format", "source": "\\U00002699 (System Default)\\n%s", "translation": "\\U00002699（系统默认）\\n%s" },
+        { "id": "system-default-empty", "source": "\\U00002699 System Default\\nNo debugger configured in AeDebug registry key.", "translation": "\\U00002699 系统默认\\nAeDebug 注册表项中未配置调试器。" },
+        { "id": "select-debugger", "source": "Select a system debugger to use for this process:", "translation": "选择用于此进程的系统调试器：" },
+        { "id": "debugger-help", "source": "You can choose from the installed debugging tools below.", "translation": "可以从下面已安装的调试工具中选择。" },
+        { "id": "system-managed", "source": "System managed", "translation": "由系统管理" },
+        { "id": "allow-moderation", "source": "Allow activity moderation throttling", "translation": "允许活动调节限制" },
+        { "id": "disable-moderation", "source": "Disable activity moderation throttling", "translation": "禁用活动调节限制" },
+        { "id": "save", "source": "Save", "translation": "保存" },
+        { "id": "select-moderation", "source": "Select the process activity moderation throttling state.", "translation": "选择进程活动调节限制状态。" },
+        { "id": "moderation-retention", "source": "System-managed activity moderation settings are automatically removed by Windows when the executable is deleted or was last executed more than 7 days ago.\\r\\n\\r\\n", "translation": "删除可执行文件或其上次运行已超过 7 天时，Windows 会自动移除由系统管理的活动调节设置。\\r\\n\\r\\n" },
+        { "id": "moderation-details", "source": "Image: %s\\r\\nUpdated: %s", "translation": "映像：%s\\r\\n更新时间：%s" },
+        { "id": "relative-time", "source": "%s ago (%s)", "translation": "%s前（%s）" },
+        { "id": "not-available", "source": "N/A", "translation": "不适用" },
+        { "id": "attempting", "source": "Attempting to ", "translation": "正在尝试：" },
+        { "id": "initializing", "source": "Initializing...", "translation": "正在初始化..." },
+        { "id": "retry", "source": "Retry", "translation": "重试" },
+        { "id": "close", "source": "Close", "translation": "关闭窗口" }
+      ]
+    },
+    {
+      "id": "system-crash-task-dialog",
+      "path": "SystemInformer/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "full", "source": "Full\\nA complete dump of the process, rarely needed most of the time.", "translation": "完整\\n进程的完整转储，大多数情况下很少需要。" },
+        { "id": "normal", "source": "Normal\\nFor most purposes, this dump file is the most useful.", "translation": "正常\\n适用于大多数用途，这是最实用的转储文件。" },
+        { "id": "minimal", "source": "Minimal\\nA very limited dump with limited data.", "translation": "最小\\n仅包含有限数据的精简转储。" },
+        { "id": "restart", "source": "Restart\\nRestart the application.", "translation": "重新启动\\n重新启动应用程序。" },
+        { "id": "ignore", "source": "Ignore", "translation": "忽略" },
+        { "id": "exit", "source": "Exit", "translation": "退出" },
+        { "id": "crashed", "source": "System Informer has crashed :(", "translation": "System Informer 已崩溃 :(", "expected": 2 }
+      ]
+    },
+    {
+      "id": "live-kernel-dump-task-dialog",
+      "path": "SystemInformer/kdump.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "created", "source": "Live kernel dump has been created.", "translation": "实时内核转储已创建。" },
+        { "id": "processing", "source": "Processing live kernel dump...", "translation": "正在处理实时内核转储..." }
+      ]
+    },
+    {
+      "id": "kernel-support-task-dialogs",
+      "path": "SystemInformer/ksisup.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "driver-initializing", "source": "Initializing System Informer kernel driver...", "translation": "正在初始化 System Informer 内核驱动程序..." },
+        { "id": "elapsed", "source": "0 ms...", "translation": "0 毫秒..." },
+        { "id": "review-pending", "source": "Platform support pending review.", "translation": "平台支持正在审核中。" },
+        { "id": "branch-review-prefix", "source": "Your kernel version is pending review on the development branch. ", "translation": "开发分支正在审核对此内核版本的支持。 " },
+        { "id": "next-build", "source": "Your kernel will be supported in the next build!", "translation": "下一个版本将支持此内核！" },
+        { "id": "unsupported", "source": "Kernel version not supported", "translation": "不支持此内核版本", "expected": 2 },
+        { "id": "not-yet-supported", "source": "This kernel version is not yet supported. ", "translation": "尚不支持此内核版本。 ", "expected": 2 },
+        { "id": "branch-review", "source": "Your kernel version is pending review on the development branch.", "translation": "开发分支正在审核对此内核版本的支持。" },
+        { "id": "canary-prefix", "source": "For the latest kernel support switch to the Canary update channel ", "translation": "如需最新的内核支持，请切换到 Canary 更新通道 " },
+        { "id": "canary-path", "source": "(Help > Check for updates > Canary > Check).", "translation": "（帮助 > 检查更新 > Canary > 检查）。" },
+        { "id": "checking", "source": "Checking for pending platform update...", "translation": "正在检查待处理的平台更新...", "expected": 2 }
+      ]
+    },
+    {
+      "id": "memory-string-search-task-dialog",
+      "path": "SystemInformer/memsrch.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "searching", "source": "Searching memory strings...", "translation": "正在搜索内存字符串..." }
+      ]
     }
   ]
 }
