@@ -7403,6 +7403,18 @@
         { "id": "duplicate-privilege", "source": "The selected privilege has already been added.", "translation": "所选权限已添加。" },
         { "id": "change-error", "source": "Unable to change service information.", "translation": "无法更改服务信息。" }
       ]
+    },
+    {
+      "id": "service-recovery-runtime-audit",
+      "path": "plugins/ExtendedServices/recovery.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "query-error", "source": "Unable to query service recovery information.", "translation": "无法查询服务恢复信息。", "expected": 2 },
+        { "id": "extra-actions-1", "source": "The service has %lu failure actions configured, but this program only supports editing 3. ", "translation": "此服务配置了 %lu 个失败操作，但本程序仅支持编辑 3 个。" },
+        { "id": "extra-actions-2", "source": "If you save the recovery information using this program, the additional failure actions will be lost.", "translation": "如果使用本程序保存恢复信息，额外的失败操作将会丢失。" },
+        { "id": "unknown-error", "source": "Unknown error.", "translation": "未知错误。" },
+        { "id": "change-error", "source": "Unable to change service recovery information.", "translation": "无法更改服务恢复信息。" }
+      ]
     }
   ]
 }
