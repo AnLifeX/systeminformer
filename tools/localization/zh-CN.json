@@ -6670,6 +6670,37 @@
         { "id": "explorer-missing", "source": "Make sure the Explorer executable file is present.", "translation": "请确认文件资源管理器的可执行文件存在。" },
         { "id": "locate-file-error", "source": "Unable to locate the file.", "translation": "无法找到文件。", "expected": 2 }
       ]
+    },
+    {
+      "id": "native-object-properties-runtime-audit",
+      "path": "SystemInformer/ntobjprp.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "unknown", "source": "Unknown", "translation": "未知", "expected": 6 },
+        { "id": "notification", "source": "Notification", "translation": "通知" },
+        { "id": "synchronization", "source": "Synchronization", "translation": "同步" },
+        { "id": "true", "source": "True", "translation": "是", "expected": 3 },
+        { "id": "false", "source": "False", "translation": "否", "expected": 3 },
+        { "id": "event-error", "source": "Unable to open the event", "translation": "无法打开事件" },
+        { "id": "event-pair-error", "source": "Unable to open the event pair", "translation": "无法打开事件对" },
+        { "id": "semaphore-error", "source": "Unable to open the semaphore", "translation": "无法打开信号量" },
+        { "id": "timer-error", "source": "Unable to open the timer", "translation": "无法打开计时器" },
+        { "id": "driver-required", "source": "Viewing active mappings requires a connection to the kernel driver.", "translation": "查看活动映射需要连接内核驱动程序。" },
+        { "id": "session", "source": "Session", "translation": "会话" },
+        { "id": "system", "source": "System", "translation": "系统" },
+        { "id": "process-missing", "source": "The process does not exist.", "translation": "进程不存在。" },
+        { "id": "view", "source": "View", "translation": "视图" },
+        { "id": "start", "source": "Start", "translation": "起始地址" },
+        { "id": "end", "source": "End", "translation": "结束地址" },
+        { "id": "size", "source": "Size", "translation": "大小" },
+        { "id": "go-process", "source": "&Go to process", "translation": "转到进程(&G)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)", "expected": 2 },
+        { "id": "none", "source": "None", "translation": "无", "expected": 2 },
+        { "id": "ago", "source": "%s ago (%s)", "translation": "%s 前（%s）" },
+        { "id": "not-tdi", "source": "N/A (transport is not TDI)", "translation": "不适用（传输不是 TDI）" },
+        { "id": "unlimited", "source": "Unlimited", "translation": "无限制", "expected": 4 },
+        { "id": "not-connected", "source": "N/A (not connected)", "translation": "不适用（未连接）" }
+      ]
     }
   ]
 }
