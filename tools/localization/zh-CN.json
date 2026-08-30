@@ -6081,6 +6081,25 @@
         { "id": "remove-object-id-error", "source": "Unable to remove the object identifier.", "translation": "无法移除对象标识符。" },
         { "id": "locate-security-id-error", "source": "Unable to locate files with the SecurityId.", "translation": "无法定位具有指定安全 ID 的文件。" }
       ]
+    },
+    {
+      "id": "application-startup-runtime-audit",
+      "path": "SystemInformer/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "warning", "source": "Warning.", "translation": "警告。" },
+        { "id": "wow64-warning-prefix", "source": "You are attempting to run the 32-bit version of System Informer on 64-bit Windows. ", "translation": "正在 64 位 Windows 上运行 32 位版本的 System Informer。" },
+        { "id": "wow64-warning-middle", "source": "Most features will not work correctly.\\n\\n", "translation": "大多数功能将无法正常工作。\\n\\n" },
+        { "id": "wow64-warning-suffix", "source": "Please run the 64-bit version of System Informer instead.", "translation": "请改用 64 位版本的 System Informer。" },
+        { "id": "crash", "source": "System Informer has crashed :(\\r\\n\\r\\n%s", "translation": "System Informer 已崩溃 :(\\r\\n\\r\\n%s" },
+        { "id": "minidump", "source": "Do you want to create a minidump on the Desktop?", "translation": "是否在桌面上创建小型转储？" },
+        { "id": "desktop-policy", "source": "Unable to initialize desktop policy.", "translation": "无法初始化桌面策略。" },
+        { "id": "termination-policy", "source": "Unable to configure termination policy.", "translation": "无法配置终止策略。" },
+        { "id": "corrupt-settings", "source": "System Informer's settings file is corrupt. Do you want to reset it?", "translation": "System Informer 的设置文件已损坏。是否将其重置？" },
+        { "id": "settings-no", "source": "If you select No, the settings system will not function properly.", "translation": "如果选择“否”，设置系统将无法正常工作。" },
+        { "id": "settings-load", "source": "Unable to load the settings file.", "translation": "无法加载设置文件。" },
+        { "id": "command-line-options", "source": "Command line options:", "translation": "命令行选项：" }
+      ]
     }
   ]
 }

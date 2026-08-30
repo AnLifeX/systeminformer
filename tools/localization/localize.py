@@ -426,6 +426,8 @@ def is_probably_user_text(value: str) -> bool:
         return False
     if stripped.startswith(("http://", "https://")):
         return False
+    if re.match(r"^-[A-Za-z][A-Za-z0-9_-]*(?:\s|\\n|$)", stripped):
+        return False
 
     return True
 
