@@ -6885,6 +6885,16 @@
       "items": [
         { "id": "text", "source": "Text", "translation": "文本" }
       ]
+    },
+    {
+      "id": "memory-protection-runtime-audit",
+      "path": "SystemInformer/memprot.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "possible-values", "source": "Possible values:\\r\\n", "translation": "可选值：\\r\\n" },
+        { "id": "modifiers", "source": "Modifiers:\\r\\n", "translation": "修饰符：\\r\\n" },
+        { "id": "change-error", "source": "Unable to change memory protection", "translation": "无法更改内存保护属性" }
+      ]
     }
   ]
 }

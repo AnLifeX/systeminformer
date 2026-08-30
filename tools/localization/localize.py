@@ -426,6 +426,10 @@ def is_probably_user_text(value: str) -> bool:
         return False
     if re.fullmatch(r"CPU \d+", stripped):
         return False
+    if re.fullmatch(r"0x[0-9A-Fa-f]+\s+-\s+[A-Z][A-Z0-9_]+(?:\\r\\n)?", stripped):
+        return False
+    if re.fullmatch(r"(?:\\[abfnrtv\\'\"?])+", stripped):
+        return False
     if stripped in {"%s", "%ls", "%u", "%lu", "%d", "%I64u", "%I64x"}:
         return False
     if stripped.startswith(("http://", "https://")):
