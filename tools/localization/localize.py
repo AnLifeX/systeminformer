@@ -30,6 +30,7 @@ ESCAPE_PATTERN = re.compile(
 SOURCE_SUFFIXES = {".c", ".cc", ".cpp", ".cxx", ".h", ".hpp", ".rc"}
 DEFAULT_AUDIT_PATHS = ("SystemInformer", "plugins", "phlib")
 INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
+    "ACPI",
     "ANSI",
     "ASLR",
     "Alt",
@@ -37,10 +38,14 @@ INTENTIONALLY_UNTRANSLATED_UI_TEXT = {
     "CPU",
     "Ctrl",
     "DPI",
+    "FPS",
+    "GPU",
     "I/O",
     "NTVDM",
+    "NPU",
     "PID",
     "Shift",
+    "SMBIOS",
     "Static",
     "System Informer",
     "TID",

@@ -5890,6 +5890,24 @@
         { "id": "none", "source": "None", "translation": "无" },
         { "id": "shared-key", "source": "Shared state key:", "translation": "共享状态注册表项：" }
       ]
+    },
+    {
+      "id": "extendedtools-resource-audit-followup",
+      "path": "plugins/ExtendedTools/ExtendedTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "gpu", "source": "GPU:", "translation": "GPU：" },
+        { "id": "npu", "source": "NPU:", "translation": "NPU：" },
+        { "id": "dedicated-memory", "source": "Dedicated memory:", "translation": "专用内存：", "expected": 2 },
+        { "id": "shared-memory", "source": "Shared memory:", "translation": "共享内存：", "expected": 2 },
+        { "id": "power-usage", "source": "Power usage:", "translation": "功耗：", "expected": 2 },
+        { "id": "temperature", "source": "Temperature:", "translation": "温度：", "expected": 2 },
+        { "id": "fan-rpm", "source": "Fan RPM:", "translation": "风扇转速：", "expected": 2 },
+        { "id": "reread", "source": "Re-read", "translation": "重新读取", "expected": 2 },
+        { "id": "save", "source": "Save...", "translation": "保存...", "expected": 2 },
+        { "id": "refresh", "source": "Refresh (F5)", "translation": "刷新 (F5)", "expected": 2 },
+        { "id": "acpi-tables", "source": "ACPI Tables", "translation": "ACPI 表" }
+      ]
     }
   ]
 }
