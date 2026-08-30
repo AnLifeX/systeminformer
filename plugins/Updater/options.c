@@ -208,6 +208,18 @@ typedef struct _PH_UPDATER_COMMIT_ENTRY
     UINT64 CommitMessageCommentCount;
 } PH_UPDATER_COMMIT_ENTRY, *PPH_UPDATER_COMMIT_ENTRY;
 
+VOID PhpUpdaterFreeCommitEntry(
+    _In_ PPH_UPDATER_COMMIT_ENTRY Entry
+    )
+{
+    PhClearReference(&Entry->CommitHashString);
+    PhClearReference(&Entry->CommitUrlString);
+    PhClearReference(&Entry->CommitMessageString);
+    PhClearReference(&Entry->CommitAuthorString);
+    PhClearReference(&Entry->CommitDateString);
+    PhFree(Entry);
+}
+
 /**
  * \brief Trims whitespace from a string.
  * \param String The string to trim.
@@ -260,38 +272,22 @@ BOOLEAN PhpUpdaterExtractCoAuthorName(
 }
 
 /**
- * \brief Queries the commit history from GitHub.
+ * \brief Parses the release commit history from updater metadata.
+ * \param JsonString The updater metadata returned by the version check.
  * \return A list of PH_UPDATER_COMMIT_ENTRY structures.
  */
 PPH_LIST PhpUpdaterQueryCommitHistory(
-    VOID
+    _In_ PPH_BYTES JsonString
     )
 {
     NTSTATUS status;
     PPH_LIST results = NULL;
-    PPH_BYTES jsonString = NULL;
-    PPH_HTTP_CONTEXT httpContext = NULL;
     PVOID jsonRootObject = NULL;
     PVOID jsonObject;
     ULONG i;
     ULONG arrayLength;
 
-    if (!NT_SUCCESS(status = PhHttpInitialize(&httpContext)))
-        goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpConnect(httpContext, L"github.com", PH_HTTP_DEFAULT_HTTPS_PORT)))
-        goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpBeginRequest(httpContext, NULL, L"/AnLifeX/systeminformer/releases/latest/download/systeminformer-update.json", PH_HTTP_FLAG_SECURE)))
-        goto CleanupExit;
-    PhHttpSetFeature(httpContext, PH_HTTP_FEATURE_KEEP_ALIVE, FALSE);
-    if (!NT_SUCCESS(status = PhHttpSendRequest(httpContext, PH_HTTP_NO_ADDITIONAL_HEADERS, 0, PH_HTTP_NO_REQUEST_DATA, 0, 0)))
-        goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpReceiveResponse(httpContext)))
-        goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpQueryResponseStatus(httpContext)))
-        goto CleanupExit;
-    if (!NT_SUCCESS(status = PhHttpDownloadString(httpContext, FALSE, &jsonString)))
-        goto CleanupExit;
-    if (!NT_SUCCESS(status = PhCreateJsonParserEx(&jsonRootObject, jsonString, FALSE)))
+    if (!NT_SUCCESS(status = PhCreateJsonParserEx(&jsonRootObject, JsonString, FALSE)))
         goto CleanupExit;
     if (!(jsonObject = PhGetJsonObject(jsonRootObject, "changelog")))
         goto CleanupExit;
@@ -338,15 +334,16 @@ PPH_LIST PhpUpdaterQueryCommitHistory(
             //    entry->CommitAuthorString = PhGetJsonValueAsString(jsonAuthorObject, "login");
             //}
 
-            if (!(
-                PhIsNullOrEmptyString(entry->CommitHashString) &&
-                PhIsNullOrEmptyString(entry->CommitUrlString) &&
-                PhIsNullOrEmptyString(entry->CommitMessageString) &&
-                PhIsNullOrEmptyString(entry->CommitAuthorString) &&
+            if (
+                PhIsNullOrEmptyString(entry->CommitHashString) ||
+                PhIsNullOrEmptyString(entry->CommitUrlString) ||
+                PhIsNullOrEmptyString(entry->CommitMessageString) ||
+                PhIsNullOrEmptyString(entry->CommitAuthorString) ||
                 PhIsNullOrEmptyString(entry->CommitDateString)
-                ))
+                )
             {
-
+                PhpUpdaterFreeCommitEntry(entry);
+                continue;
             }
 
             if (!PhIsNullOrEmptyString(entry->CommitMessageString))
@@ -392,18 +389,8 @@ PPH_LIST PhpUpdaterQueryCommitHistory(
     }
 
 CleanupExit:
-
-    if (httpContext)
-    {
-        PhHttpDestroy(httpContext);
-    }
-
     if (jsonRootObject)
-    {
         PhFreeJsonObject(jsonRootObject);
-    }
-
-    PhClearReference(&jsonString);
 
     return results;
 }
@@ -497,25 +484,6 @@ PPH_STRING PhpUpdaterCommitStringToTime(
 }
 
 /**
- * \brief Thread routine for querying commit history.
- * \param ThreadParameter The window handle.
- * \return STATUS_SUCCESS.
- */
-_Function_class_(USER_THREAD_START_ROUTINE)
-NTSTATUS NTAPI PhpUpdaterQueryCommitHistoryThread(
-    _In_ PVOID ThreadParameter
-    )
-{
-    HWND windowHandle = (HWND)ThreadParameter;
-    PPH_LIST commentHistoryList;
-
-    commentHistoryList = PhpUpdaterQueryCommitHistory();
-    PostMessage(windowHandle, WM_UPDATER_COMMITS, 0, (LPARAM)commentHistoryList);
-
-    return STATUS_SUCCESS;
-}
-
-/**
  * \brief Frees resources used by list view entries.
  * \param Context The commit history context.
  */
@@ -530,20 +498,7 @@ VOID PhpUpdaterFreeListViewEntries(
         PPH_UPDATER_COMMIT_ENTRY entry;
 
         if (PhGetListViewItemParam(Context->ListViewHandle, index, &entry))
-        {
-            if (entry->CommitHashString)
-                PhDereferenceObject(entry->CommitHashString);
-            if (entry->CommitUrlString)
-                PhDereferenceObject(entry->CommitUrlString);
-            if (entry->CommitMessageString)
-                PhDereferenceObject(entry->CommitMessageString);
-            if (entry->CommitAuthorString)
-                PhDereferenceObject(entry->CommitAuthorString);
-            if (entry->CommitDateString)
-                PhDereferenceObject(entry->CommitDateString);
-
-            PhFree(entry);
-        }
+            PhpUpdaterFreeCommitEntry(entry);
     }
 }
 
@@ -608,7 +563,8 @@ INT_PTR CALLBACK TextDlgProc(
             {
                 PPH_UPDATER_CONTEXT updater = ((PPH_UPDATER_CONTEXT)lParam);
                 context->CurrentCommitHash = PhGetBuildCommit();
-                if (updater) context->LatestCommitHash = PhReferenceObject(updater->CommitHash);
+                if (updater && updater->CommitHash)
+                    context->LatestCommitHash = PhReferenceObject(updater->CommitHash);
 
                 if (
                     context->CurrentCommitHash &&
@@ -629,10 +585,19 @@ INT_PTR CALLBACK TextDlgProc(
                     PhDereferenceObject(context->LatestCommitHash);
                     context->LatestCommitHash = NULL;
                 }
-            }
 
-            //PhSetWindowText(GetDlgItem(WindowHandle, IDC_TEXT), PhGetString(context->BuildMessage));
-            PhCreateThread2(PhpUpdaterQueryCommitHistoryThread, WindowHandle);
+                if (updater && updater->UpdateData)
+                {
+                    PPH_LIST commitHistoryList;
+
+                    commitHistoryList = PhpUpdaterQueryCommitHistory(updater->UpdateData);
+                    PostMessage(WindowHandle, WM_UPDATER_COMMITS, 0, (LPARAM)commitHistoryList);
+                }
+                else
+                {
+                    PostMessage(WindowHandle, WM_UPDATER_COMMITS, 0, 0);
+                }
+            }
 
             PhInitializeWindowTheme(WindowHandle, !!PhGetIntegerSetting(SETTING_ENABLE_THEME_SUPPORT));
         }

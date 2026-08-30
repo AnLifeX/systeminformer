@@ -15,6 +15,9 @@ param(
     [ValidatePattern('^[0-9a-fA-F]{40}$')]
     [string]$Commit,
 
+    [ValidatePattern('^$|^[0-9a-fA-F]{40}$')]
+    [string]$PreviousCommit = '',
+
     [Parameter(Mandatory)]
     [ValidatePattern('^https://')]
     [string]$SetupUrl,
@@ -22,8 +25,8 @@ param(
     [ValidatePattern('^https://')]
     [string]$RepositoryUrl = 'https://github.com/AnLifeX/systeminformer',
 
-    [ValidateRange(1, 100)]
-    [int]$ChangelogCount = 30,
+    [ValidateScript({ Test-Path -LiteralPath $_ -PathType Container })]
+    [string]$RepositoryRoot = (Join-Path (Join-Path $PSScriptRoot '..') '..'),
 
     [Parameter(Mandatory, ParameterSetName = 'Base64Key')]
     [string]$PrivateKeyBase64,
@@ -91,12 +94,48 @@ $updated = [DateTime]::UtcNow.Date.ToString(
     [System.Globalization.CultureInfo]::InvariantCulture
 )
 
-$repositoryRoot = (Resolve-Path -LiteralPath (Join-Path (Join-Path $PSScriptRoot '..') '..')).Path
+$repositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
+$commit = $Commit.ToLowerInvariant()
+$previousCommit = $PreviousCommit.ToLowerInvariant()
+
+& git -C $repositoryRoot cat-file -e "$commit^{commit}"
+if ($LASTEXITCODE -ne 0) {
+    throw "Release commit $commit does not exist in $repositoryRoot."
+}
+
+if ($previousCommit) {
+    if ($previousCommit -eq $commit) {
+        throw 'The previous release commit and current release commit must be different.'
+    }
+
+    & git -C $repositoryRoot cat-file -e "$previousCommit^{commit}"
+    if ($LASTEXITCODE -ne 0) {
+        throw "Previous release commit $previousCommit does not exist in $repositoryRoot."
+    }
+
+    & git -C $repositoryRoot merge-base --is-ancestor $previousCommit $commit
+    if ($LASTEXITCODE -ne 0) {
+        throw "Previous release commit $previousCommit is not an ancestor of $commit."
+    }
+
+    $changelogRevision = "$previousCommit..$commit"
+}
+else {
+    # There is no earlier localized release boundary. Keep the first release finite
+    # and anchored to its exact release commit rather than importing upstream history.
+    $changelogRevision = $commit
+}
+
 $logLines = @(
-    & git -C $repositoryRoot log --first-parent -n $ChangelogCount '--format=%H%x09%aI%x09%an%x09%s' $Commit
+    if ($previousCommit) {
+        & git -C $repositoryRoot log '--format=%H%x09%aI%x09%an%x09%s' $changelogRevision
+    }
+    else {
+        & git -C $repositoryRoot log -n 1 '--format=%H%x09%aI%x09%an%x09%s' $changelogRevision
+    }
 )
 if ($LASTEXITCODE -ne 0) {
-    throw "Unable to read the Git changelog for commit $Commit."
+    throw "Unable to read the Git changelog for revision $changelogRevision."
 }
 
 $changelog = @(
@@ -129,14 +168,15 @@ $changelog = @(
     }
 )
 
-if ($changelog.Count -eq 0 -or $changelog[0].sha -ne $Commit.ToLowerInvariant()) {
-    throw "The changelog does not start at release commit $Commit."
+if ($changelog.Count -eq 0 -or $changelog[0].sha -ne $commit) {
+    throw "The changelog does not start at release commit $commit."
 }
 
 $metadata = [ordered]@{
     version      = $Version
     updated      = $updated
-    commit       = $Commit.ToLowerInvariant()
+    commit       = $commit
+    previous_commit = $previousCommit
     setup_length = $setupBytes.LongLength
     setup_hash   = [System.Convert]::ToHexString($hash)
     setup_sig    = [System.Convert]::ToHexString($signature)

@@ -163,6 +163,7 @@ jobs:
 
     - name: Validate monotonic updater version and release destination
       if: env.PUBLISH_RELEASE == 'true'
+      id: previous_release
       shell: pwsh
       env:
         GH_TOKEN: ${{ github.token }}
@@ -182,6 +183,7 @@ jobs:
         $latestReleaseJson = gh release view --repo $env:GITHUB_REPOSITORY --json tagName,assets 2>$null
         if ($LASTEXITCODE -ne 0) {
           Write-Host 'No previous release exists; treating this as the first release.'
+          'commit=' | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
           return
         }
         $latestRelease = $latestReleaseJson | ConvertFrom-Json
@@ -196,6 +198,22 @@ jobs:
           throw "Unable to download updater metadata from latest release $($latestRelease.tagName)."
         }
         $latest = Get-Content -Raw -LiteralPath (Join-Path $metadataDirectory 'systeminformer-update.json') | ConvertFrom-Json
+        $previousCommit = ([string]$latest.commit).ToLowerInvariant()
+        if ($previousCommit -notmatch '^[0-9a-f]{40}$') {
+          throw "Latest release $($latestRelease.tagName) has an invalid commit in its updater metadata."
+        }
+        if ($previousCommit -eq $env:GITHUB_SHA) {
+          throw "Latest release $($latestRelease.tagName) already targets $previousCommit; a new release requires a new commit."
+        }
+        git cat-file -e "$previousCommit^{commit}"
+        if ($LASTEXITCODE -ne 0) {
+          throw "Previous release commit $previousCommit is not available in the checkout."
+        }
+        git merge-base --is-ancestor $previousCommit $env:GITHUB_SHA
+        if ($LASTEXITCODE -ne 0) {
+          throw "Previous release commit $previousCommit is not an ancestor of $env:GITHUB_SHA."
+        }
+        "commit=$previousCommit" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 
         $currentParts = @($env:RELEASE_VERSION.Split('.') | ForEach-Object { [uint64]$_ })
         $latestParts = @(([string]$latest.version).Split('.') | ForEach-Object { [uint64]$_ })
@@ -257,6 +275,7 @@ jobs:
       shell: pwsh
       env:
         UPDATE_SIGNING_PRIVATE_KEY_B64: ${{ secrets.UPDATE_SIGNING_PRIVATE_KEY_B64 }}
+        PREVIOUS_RELEASE_COMMIT: ${{ steps.previous_release.outputs.commit }}
       run: |
         if ([string]::IsNullOrWhiteSpace($env:UPDATE_SIGNING_PRIVATE_KEY_B64)) {
           throw 'The UPDATE_SIGNING_PRIVATE_KEY_B64 repository secret is required for releases.'
@@ -270,6 +289,9 @@ jobs:
           Commit = '${{ github.sha }}'
           SetupUrl = "https://github.com/AnLifeX/systeminformer/releases/download/$escapedTag/systeminformer-build-release-setup.exe"
           PrivateKeyBase64 = $env:UPDATE_SIGNING_PRIVATE_KEY_B64
+        }
+        if (-not [string]::IsNullOrWhiteSpace($env:PREVIOUS_RELEASE_COMMIT)) {
+          $metadataArgs.PreviousCommit = $env:PREVIOUS_RELEASE_COMMIT
         }
         ./tools/localization/New-UpdateMetadata.ps1 @metadataArgs
 
@@ -299,6 +321,7 @@ jobs:
         GH_TOKEN: ${{ github.token }}
         RELEASE_TAG: ${{ steps.release.outputs.tag }}
         RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        PREVIOUS_RELEASE_COMMIT: ${{ steps.previous_release.outputs.commit }}
       run: |
         $expectedFiles = @(
           'build/output/systeminformer-build-release-setup.exe'
@@ -342,22 +365,40 @@ jobs:
         $setupLength = (Get-Item -LiteralPath $setupPath).Length
         $setupHash = (Get-FileHash -LiteralPath $setupPath -Algorithm SHA256).Hash
         $expectedUrl = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$([Uri]::EscapeDataString($env:RELEASE_TAG))/systeminformer-build-release-setup.exe"
-        $changelogDate = $metadata.changelog[0].commit.author.date
-        $changelogDateIsUtc = if ($changelogDate -is [DateTime]) {
-          $changelogDate.Kind -eq [DateTimeKind]::Utc
+        if ([string]::IsNullOrWhiteSpace($env:PREVIOUS_RELEASE_COMMIT)) {
+          $expectedChangelogShas = @($env:GITHUB_SHA)
         }
         else {
-          [string]$changelogDate -match '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$'
+          $expectedChangelogShas = @(git log --format=%H "$env:PREVIOUS_RELEASE_COMMIT..$env:GITHUB_SHA")
         }
+        $actualChangelogShas = @($metadata.changelog | ForEach-Object { [string]$_.sha })
+        $changelogMatches = $actualChangelogShas.Count -eq $expectedChangelogShas.Count
+        if ($changelogMatches) {
+          for ($index = 0; $index -lt $expectedChangelogShas.Count; $index++) {
+            if ($actualChangelogShas[$index] -ne $expectedChangelogShas[$index]) {
+              $changelogMatches = $false
+              break
+            }
+          }
+        }
+        $changelogDatesAreUtc = @($metadata.changelog | Where-Object {
+          $date = $_.commit.author.date
+          if ($date -is [DateTime]) {
+            $date.Kind -ne [DateTimeKind]::Utc
+          }
+          else {
+            [string]$date -notmatch '^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$'
+          }
+        }).Count -eq 0
         if ($metadata.version -ne $env:RELEASE_VERSION -or
             $metadata.commit -ne $env:GITHUB_SHA -or
+            [string]$metadata.previous_commit -ne [string]$env:PREVIOUS_RELEASE_COMMIT -or
             $metadata.setup_url -ne $expectedUrl -or
             $metadata.setup_length -ne $setupLength -or
             $metadata.setup_hash -ne $setupHash -or
             $metadata.setup_sig.Length -ne 128 -or
-            $metadata.changelog.Count -lt 1 -or
-            $metadata.changelog[0].sha -ne $env:GITHUB_SHA -or
-            -not $changelogDateIsUtc) {
+            -not $changelogMatches -or
+            -not $changelogDatesAreUtc) {
           throw 'Updater metadata does not match the validated release payload.'
         }
 

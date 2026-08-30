@@ -68,6 +68,8 @@ VOID UpdateContextDeleteProcedure(
         PhDereferenceObject(context->SetupFileHash);
     if (context->SetupFileSignature)
         PhDereferenceObject(context->SetupFileSignature);
+    if (context->UpdateData)
+        PhDereferenceObject(context->UpdateData);
 }
 
 /**
@@ -673,6 +675,9 @@ BOOLEAN QueryUpdateData(
         PhSetStringSetting2(SETTING_NAME_UPDATE_DATA, &jsonStringHex->sr);
         PhDereferenceObject(jsonStringHex);
     }
+
+    PhMoveReference(&Context->UpdateData, jsonString);
+    jsonString = NULL;
 
 CleanupExit:
 
@@ -1536,6 +1541,9 @@ VOID ShowStartupUpdateDialog(
             context->CurrentVersion = MAKE_VERSION_ULONGLONG(majorVersion, minorVersion, buildVersion, revisionVersion);
 #endif
             PhFreeJsonObject(jsonObject);
+
+            PhMoveReference(&context->UpdateData, jsonString);
+            jsonString = NULL;
         }
     }
 

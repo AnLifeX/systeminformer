@@ -129,6 +129,7 @@ typedef struct _PH_UPDATER_CONTEXT
     PPH_STRING SetupFileHash;
     PPH_STRING SetupFileSignature;
     PPH_STRING CommitHash;
+    PPH_BYTES UpdateData;
     PH_RELEASE_CHANNEL Channel;
     BOOLEAN SwitchingChannel;
     UPDATER_CRYPTO_BACKEND CryptoBackend;
