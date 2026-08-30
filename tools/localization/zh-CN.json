@@ -6573,6 +6573,32 @@
       "items": [
         { "id": "type", "source": "Type", "translation": "类型" }
       ]
+    },
+    {
+      "id": "network-tools-resource-audit",
+      "path": "plugins/NetworkTools/NetworkTools.rc",
+      "context": "\"{text}\"",
+      "items": [
+        { "id": "dialog", "source": "Dialog", "translation": "对话框", "expected": 2 },
+        { "id": "pinging", "source": "Pinging X with X bytes of data:", "translation": "正在 Ping X，数据大小为 X 字节：" },
+        { "id": "statistics", "source": "Ping statistics", "translation": "Ping 统计信息" },
+        { "id": "average", "source": "Average: 0.00 ms", "translation": "平均值：0.00 ms" },
+        { "id": "sent", "source": "Pings sent: 0", "translation": "已发送：0" },
+        { "id": "bad-replies", "source": "Bad replies: 0", "translation": "异常回复：0" },
+        { "id": "minimum", "source": "Minimum: 0.00 ms", "translation": "最小值：0.00 ms" },
+        { "id": "lost", "source": "Pings lost: 0 (0%)", "translation": "已丢失：0（0%）" },
+        { "id": "anonymous", "source": "Anon replies: 0", "translation": "匿名回复：0" },
+        { "id": "maximum", "source": "Maximum: 0.00 ms", "translation": "最大值：0.00 ms" },
+        { "id": "deviation", "source": "Deviation: 0.00 ms", "translation": "标准差：0.00 ms" },
+        { "id": "tracing", "source": "Tracing route to xyz...", "translation": "正在跟踪到 xyz 的路由..." },
+        { "id": "close", "source": "Close", "translation": "关闭" },
+        { "id": "refresh", "source": "Refresh", "translation": "刷新" },
+        { "id": "license-title", "source": "Update MaxMind License Key", "translation": "更新 MaxMind 许可证密钥" },
+        { "id": "save", "source": "Save", "translation": "保存" },
+        { "id": "cancel", "source": "Cancel", "translation": "取消" },
+        { "id": "paste-key", "source": "Paste the license key below:", "translation": "在下方粘贴许可证密钥：" },
+        { "id": "help-link", "source": "Checkout <a href=\"\"https://support.maxmind.com/hc/en-us/articles/4407111582235-Generate-a-License-Key\"\">How-to-generate-a-license-key</a>", "translation": "查看<a href=\"\"https://support.maxmind.com/hc/en-us/articles/4407111582235-Generate-a-License-Key\"\">许可证密钥生成方法</a>" }
+      ]
     }
   ]
 }
