@@ -7025,6 +7025,29 @@
         { "id": "scroll-right", "source": "Scroll Right", "translation": "向右滚动" },
         { "id": "scroll-down", "source": "Scroll Down", "translation": "向下滚动" }
       ]
+    },
+    {
+      "id": "user-notes-options-runtime-audit",
+      "path": "plugins/UserNotes/options.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "file", "source": "File", "translation": "文件" },
+        { "id": "service", "source": "Service", "translation": "服务" },
+        { "id": "command-line", "source": "Commandline", "translation": "命令行" },
+        { "id": "true", "source": "True", "translation": "是", "expected": 2 },
+        { "id": "type", "source": "Type", "translation": "类型" },
+        { "id": "name", "source": "Name", "translation": "名称" },
+        { "id": "comment", "source": "Comment", "translation": "备注" },
+        { "id": "priority", "source": "Priority", "translation": "优先级" },
+        { "id": "io-priority", "source": "IO priority", "translation": "I/O 优先级" },
+        { "id": "back-color", "source": "BackColor", "translation": "背景色" },
+        { "id": "collapse", "source": "Collapse", "translation": "折叠" },
+        { "id": "affinity", "source": "Affinity", "translation": "处理器相关性" },
+        { "id": "page-priority", "source": "Page priority", "translation": "页面优先级" },
+        { "id": "efficiency", "source": "Efficiency", "translation": "效率模式" },
+        { "id": "delete", "source": "&Delete", "translation": "删除(&D)" },
+        { "id": "copy", "source": "&Copy", "translation": "复制(&C)" }
+      ]
     }
   ]
 }
