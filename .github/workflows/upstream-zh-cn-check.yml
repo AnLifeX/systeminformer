@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: 'Run the check even when the upstream commit was already checked'
+        description: 'Run the check even when the upstream commit and version tag were already checked'
         required: false
         default: false
         type: boolean
@@ -34,35 +34,44 @@ jobs:
         run: |
           set -euo pipefail
           git remote add official https://github.com/winsiderss/systeminformer.git
-          git fetch --no-tags official master
+          git fetch --no-tags official \
+            '+refs/heads/master:refs/remotes/official/master' \
+            '+refs/tags/v*:refs/tags/upstream/v*'
           git fetch --no-tags origin automation/upstream-check:refs/remotes/origin/automation/upstream-check || true
 
-      - name: Detect unchecked upstream commit
+      - name: Resolve upstream release version
+        id: version
+        run: python tools/localization/resolve_upstream_version.py --target official/master --github-output "$GITHUB_OUTPUT"
+
+      - name: Detect unchecked upstream state
         id: detect
         shell: bash
         env:
           FORCE_CHECK: ${{ inputs.force || false }}
+          UPSTREAM_VERSION_TAG: ${{ steps.version.outputs.upstream_version_tag }}
         run: |
           set -euo pipefail
           upstream_sha="$(git rev-parse official/master)"
           changed=true
 
-          if [ "$FORCE_CHECK" != "true" ]; then
-            if git merge-base --is-ancestor "$upstream_sha" origin/zh-CN; then
-              changed=false
-            elif git show-ref --verify --quiet refs/remotes/origin/automation/upstream-check && \
-                 git merge-base --is-ancestor "$upstream_sha" origin/automation/upstream-check; then
+          if [ "$FORCE_CHECK" != "true" ] && \
+             git show-ref --verify --quiet refs/remotes/origin/automation/upstream-check; then
+            state="$(git show origin/automation/upstream-check:.github/upstream-zh-cn-state.json 2>/dev/null || true)"
+            if [ -n "$state" ] && \
+               [ "$(jq -r '.upstream_sha // empty' <<<"$state")" = "$upstream_sha" ] && \
+               [ "$(jq -r '.upstream_version_tag // empty' <<<"$state")" = "$UPSTREAM_VERSION_TAG" ]; then
               changed=false
             fi
           fi
 
           echo "upstream_sha=$upstream_sha" >> "$GITHUB_OUTPUT"
+          echo "upstream_version_tag=$UPSTREAM_VERSION_TAG" >> "$GITHUB_OUTPUT"
           echo "changed=$changed" >> "$GITHUB_OUTPUT"
 
           if [ "$changed" = "false" ]; then
-            echo "Upstream master $upstream_sha has already been checked; stopping before localization checks."
+            echo "Upstream master $upstream_sha ($UPSTREAM_VERSION_TAG) has already been checked; stopping before localization checks."
           else
-            echo "Unchecked upstream master detected: $upstream_sha"
+            echo "Unchecked upstream state detected: $upstream_sha ($UPSTREAM_VERSION_TAG)"
           fi
 
       - name: Merge upstream into fixed check branch
@@ -95,7 +104,15 @@ jobs:
       - name: Record successful upstream check
         if: steps.detect.outputs.changed == 'true'
         shell: bash
+        env:
+          UPSTREAM_SHA: ${{ steps.detect.outputs.upstream_sha }}
+          UPSTREAM_VERSION_TAG: ${{ steps.detect.outputs.upstream_version_tag }}
         run: |
           set -euo pipefail
           git restore --source=HEAD --staged --worktree -- .
+          mkdir -p .github
+          printf '{\n  "upstream_sha": "%s",\n  "upstream_version_tag": "%s"\n}\n' \
+            "$UPSTREAM_SHA" "$UPSTREAM_VERSION_TAG" > .github/upstream-zh-cn-state.json
+          git add .github/upstream-zh-cn-state.json
+          git commit --allow-empty -m "ci: record checked upstream $UPSTREAM_VERSION_TAG"
           git push --force-with-lease origin HEAD:automation/upstream-check

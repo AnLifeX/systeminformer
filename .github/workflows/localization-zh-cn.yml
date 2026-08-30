@@ -3,43 +3,59 @@ name: 'zh-CN build'
 on:
   push:
     branches: ['zh-CN']
-    tags: ['**']
+  workflow_dispatch:
 
 concurrency:
-  group: zh-cn-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: zh-cn-release-state
+  cancel-in-progress: false
 
 jobs:
-  build:
-    if: >-
-      github.ref_type == 'tag' ||
-      contains(github.event.head_commit.message, '[build]')
+  check:
     permissions:
-      contents: write
-    runs-on: windows-2025-vs2026
-    env:
-      # CustomBuildTool defaults to 0.0 outside the upstream release service.
-      # Keep these aligned with the major/minor version used by upstream master.
-      BUILD_MAJORVERSION: '4'
-      BUILD_MINORVERSION: '0'
-
+      contents: read
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
 
-    - name: Verify Python
-      shell: pwsh
-      run: python --version
-
     - name: Test localization tool
-      shell: pwsh
       run: python -m unittest discover -s tools/localization/tests -v
 
-    - name: Check upstream source contexts
-      shell: pwsh
+    - name: Check upstream source contexts and visible text coverage
       run: |
         python tools/localization/localize.py check --state source
         python tools/localization/localize.py audit
+
+    - name: Apply and verify Simplified Chinese localization
+      run: |
+        python tools/localization/localize.py apply
+        python tools/localization/localize.py check --state translated
+        git diff --check
+
+  build:
+    needs: check
+    if: >-
+      needs.check.result == 'success' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/zh-CN') ||
+       (github.event_name == 'push' && contains(github.event.head_commit.message, '[build]')))
+    permissions:
+      contents: write
+    runs-on: windows-2025-vs2026
+    env:
+      PUBLISH_RELEASE: ${{ github.event_name == 'workflow_dispatch' }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
+      with:
+        fetch-depth: 0
+
+    - name: Resolve upstream release version
+      shell: pwsh
+      run: |
+        git remote add official https://github.com/winsiderss/systeminformer.git
+        git fetch --no-tags official "+refs/tags/v*:refs/tags/upstream/v*"
+        python tools/localization/resolve_upstream_version.py --target HEAD --github-env "$env:GITHUB_ENV"
 
     - name: Apply Simplified Chinese localization
       shell: pwsh
@@ -88,7 +104,7 @@ jobs:
       run: build\build_init.cmd
 
     - name: Build x64 portable package
-      if: github.ref_type != 'tag'
+      if: env.PUBLISH_RELEASE != 'true'
       shell: pwsh
       working-directory: ${{ github.workspace }}
       run: |
@@ -98,19 +114,19 @@ jobs:
           throw "Portable build failed with exit code $LASTEXITCODE."
         }
 
-    - name: Build tagged x64 release
-      if: github.ref_type == 'tag'
+    - name: Build x64 release
+      if: env.PUBLISH_RELEASE == 'true'
       shell: pwsh
       working-directory: ${{ github.workspace }}
       run: |
         $buildTool = Join-Path $env:GITHUB_WORKSPACE "tools/CustomBuildTool/bin/Release/$env:PROCESSOR_ARCHITECTURE/CustomBuildTool.exe"
         & $buildTool -release --x64-only
         if ($LASTEXITCODE -ne 0) {
-          throw "Tagged x64 release build failed with exit code $LASTEXITCODE."
+          throw "x64 release build failed with exit code $LASTEXITCODE."
         }
 
     - name: Prepare x64 portable artifact
-      if: github.ref_type != 'tag'
+      if: env.PUBLISH_RELEASE != 'true'
       shell: pwsh
       run: |
         $portableArchive = Join-Path $env:GITHUB_WORKSPACE 'build/output/systeminformer-build-win64-bin.zip'
@@ -119,7 +135,7 @@ jobs:
         Expand-Archive -LiteralPath $portableArchive -DestinationPath $portableDirectory -Force
 
     - name: Upload portable test package
-      if: github.ref_type != 'tag'
+      if: env.PUBLISH_RELEASE != 'true'
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # 7.0.1
       with:
         name: systeminformer-zh-CN-win64-portable-${{ github.sha }}
@@ -127,8 +143,8 @@ jobs:
         if-no-files-found: error
         retention-days: 1
 
-    - name: Prepare tagged release
-      if: github.ref_type == 'tag'
+    - name: Prepare release identity
+      if: env.PUBLISH_RELEASE == 'true'
       id: release
       shell: pwsh
       run: |
@@ -139,10 +155,64 @@ jobs:
           throw "Unable to determine the four-part version from '$fileVersion'."
         }
 
-        "version=$($versionMatch.Value)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+        $version = $versionMatch.Value
+        $releaseTag = "zh-cn-v$version"
+
+        "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+        "tag=$releaseTag" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+    - name: Validate monotonic updater version and release destination
+      if: env.PUBLISH_RELEASE == 'true'
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+        RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        RELEASE_VERSION: ${{ steps.release.outputs.version }}
+      run: |
+        gh release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY *> $null
+        if ($LASTEXITCODE -eq 0) {
+          throw "Release $env:RELEASE_TAG already exists; refusing to overwrite it."
+        }
+
+        $existingTag = git ls-remote --tags origin "refs/tags/$env:RELEASE_TAG"
+        if ($existingTag) {
+          throw "Tag $env:RELEASE_TAG already exists; refusing to reuse it."
+        }
+
+        $latestReleaseJson = gh release view --repo $env:GITHUB_REPOSITORY --json tagName,assets 2>$null
+        if ($LASTEXITCODE -ne 0) {
+          Write-Host 'No previous release exists; treating this as the first release.'
+          return
+        }
+        $latestRelease = $latestReleaseJson | ConvertFrom-Json
+        if ('systeminformer-update.json' -notin @($latestRelease.assets.name)) {
+          throw "Latest release $($latestRelease.tagName) is missing systeminformer-update.json."
+        }
+
+        $metadataDirectory = Join-Path $env:RUNNER_TEMP 'latest-update-metadata'
+        New-Item -ItemType Directory -Path $metadataDirectory -Force | Out-Null
+        gh release download $latestRelease.tagName --repo $env:GITHUB_REPOSITORY --pattern 'systeminformer-update.json' --dir $metadataDirectory
+        if ($LASTEXITCODE -ne 0) {
+          throw "Unable to download updater metadata from latest release $($latestRelease.tagName)."
+        }
+        $latest = Get-Content -Raw -LiteralPath (Join-Path $metadataDirectory 'systeminformer-update.json') | ConvertFrom-Json
+
+        $currentParts = @($env:RELEASE_VERSION.Split('.') | ForEach-Object { [uint64]$_ })
+        $latestParts = @(([string]$latest.version).Split('.') | ForEach-Object { [uint64]$_ })
+        if ($currentParts.Count -ne 4 -or $latestParts.Count -ne 4) {
+          throw "Expected four-part updater versions, got current=$env:RELEASE_VERSION latest=$($latest.version)."
+        }
+
+        for ($index = 0; $index -lt 4; $index++) {
+          if ($currentParts[$index] -gt $latestParts[$index]) { return }
+          if ($currentParts[$index] -lt $latestParts[$index]) {
+            throw "Updater version $env:RELEASE_VERSION is older than latest $($latest.version)."
+          }
+        }
+        throw "Updater version $env:RELEASE_VERSION is not newer than latest $($latest.version)."
 
     - name: Authenticode-sign installer when a certificate is configured
-      if: github.ref_type == 'tag'
+      if: env.PUBLISH_RELEASE == 'true'
       shell: pwsh
       env:
         WINDOWS_CODESIGN_CERTIFICATE_B64: ${{ secrets.WINDOWS_CODESIGN_CERTIFICATE_B64 }}
@@ -169,7 +239,7 @@ jobs:
         }
 
     - name: Create package checksums
-      if: github.ref_type == 'tag'
+      if: env.PUBLISH_RELEASE == 'true'
       shell: pwsh
       run: |
         $files = @(
@@ -183,16 +253,16 @@ jobs:
         $lines | Out-File -FilePath 'build/output/systeminformer-zh-CN-SHA256SUMS.txt' -Encoding ascii
 
     - name: Create signed updater metadata
-      if: github.ref_type == 'tag'
+      if: env.PUBLISH_RELEASE == 'true'
       shell: pwsh
       env:
         UPDATE_SIGNING_PRIVATE_KEY_B64: ${{ secrets.UPDATE_SIGNING_PRIVATE_KEY_B64 }}
       run: |
         if ([string]::IsNullOrWhiteSpace($env:UPDATE_SIGNING_PRIVATE_KEY_B64)) {
-          throw 'The UPDATE_SIGNING_PRIVATE_KEY_B64 repository secret is required for tagged releases.'
+          throw 'The UPDATE_SIGNING_PRIVATE_KEY_B64 repository secret is required for releases.'
         }
 
-        $escapedTag = [Uri]::EscapeDataString('${{ github.ref_name }}')
+        $escapedTag = [Uri]::EscapeDataString('${{ steps.release.outputs.tag }}')
         $metadataArgs = @{
           SetupPath = 'build/output/systeminformer-build-release-setup.exe'
           OutputPath = 'build/output/systeminformer-update.json'
@@ -203,11 +273,13 @@ jobs:
         }
         ./tools/localization/New-UpdateMetadata.ps1 @metadataArgs
 
-    - name: Publish GitHub release
-      if: github.ref_type == 'tag'
+    - name: Upload assets to draft release
+      if: env.PUBLISH_RELEASE == 'true'
       shell: pwsh
       env:
         GH_TOKEN: ${{ github.token }}
+        RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        RELEASE_VERSION: ${{ steps.release.outputs.version }}
       run: |
         $assets = @(
           'build/output/systeminformer-build-release-setup.exe'
@@ -215,4 +287,105 @@ jobs:
           'build/output/systeminformer-zh-CN-SHA256SUMS.txt'
           'build/output/systeminformer-update.json'
         )
-        gh release create '${{ github.ref_name }}' --repo '${{ github.repository }}' --verify-tag --title "System Informer ${{ steps.release.outputs.version }} 简体中文版" --generate-notes @assets
+        gh release create $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --draft --title "System Informer $env:RELEASE_VERSION 简体中文版" --generate-notes @assets
+        if ($LASTEXITCODE -ne 0) {
+          throw "Unable to create draft release $env:RELEASE_TAG."
+        }
+
+    - name: Validate draft release assets and updater metadata
+      if: env.PUBLISH_RELEASE == 'true'
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+        RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        RELEASE_VERSION: ${{ steps.release.outputs.version }}
+      run: |
+        $expectedFiles = @(
+          'build/output/systeminformer-build-release-setup.exe'
+          'build/output/systeminformer-build-win64-bin.zip'
+          'build/output/systeminformer-zh-CN-SHA256SUMS.txt'
+          'build/output/systeminformer-update.json'
+        )
+        $release = gh release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --json isDraft,assets,tagName,targetCommitish | ConvertFrom-Json
+        if (-not $release.isDraft) {
+          throw "Release $env:RELEASE_TAG became public before validation."
+        }
+        if ($release.targetCommitish -ne $env:GITHUB_SHA) {
+          throw "Draft $env:RELEASE_TAG targets $($release.targetCommitish), not $env:GITHUB_SHA."
+        }
+
+        $expectedNames = @($expectedFiles | ForEach-Object { [IO.Path]::GetFileName($_) } | Sort-Object)
+        $actualNames = @($release.assets.name | Sort-Object)
+        if (Compare-Object $expectedNames $actualNames) {
+          throw "Draft release asset set does not match the expected four files."
+        }
+
+        $downloadDirectory = Join-Path $env:RUNNER_TEMP "release-$env:RELEASE_TAG"
+        New-Item -ItemType Directory -Path $downloadDirectory -Force | Out-Null
+        gh release download $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --dir $downloadDirectory
+        if ($LASTEXITCODE -ne 0) {
+          throw "Unable to download draft release assets for validation."
+        }
+
+        foreach ($file in $expectedFiles) {
+          $name = [IO.Path]::GetFileName($file)
+          $downloadedFile = Join-Path $downloadDirectory $name
+          $expectedHash = (Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash
+          $downloadedHash = (Get-FileHash -LiteralPath $downloadedFile -Algorithm SHA256).Hash
+          if ($downloadedHash -ne $expectedHash) {
+            throw "Downloaded draft asset hash mismatch for $name."
+          }
+        }
+
+        $metadata = Get-Content -Raw -LiteralPath 'build/output/systeminformer-update.json' | ConvertFrom-Json
+        $setupPath = 'build/output/systeminformer-build-release-setup.exe'
+        $setupLength = (Get-Item -LiteralPath $setupPath).Length
+        $setupHash = (Get-FileHash -LiteralPath $setupPath -Algorithm SHA256).Hash
+        $expectedUrl = "https://github.com/$env:GITHUB_REPOSITORY/releases/download/$([Uri]::EscapeDataString($env:RELEASE_TAG))/systeminformer-build-release-setup.exe"
+        if ($metadata.version -ne $env:RELEASE_VERSION -or
+            $metadata.commit -ne $env:GITHUB_SHA -or
+            $metadata.setup_url -ne $expectedUrl -or
+            $metadata.setup_length -ne $setupLength -or
+            $metadata.setup_hash -ne $setupHash -or
+            $metadata.setup_sig.Length -ne 128) {
+          throw 'Updater metadata does not match the validated release payload.'
+        }
+
+    - name: Publish validated GitHub release
+      if: env.PUBLISH_RELEASE == 'true'
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+        RELEASE_TAG: ${{ steps.release.outputs.tag }}
+      run: |
+        gh release edit $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --draft=false --latest
+        if ($LASTEXITCODE -ne 0) {
+          throw "Unable to publish validated release $env:RELEASE_TAG."
+        }
+
+    - name: Remove incomplete draft release
+      if: failure() && env.PUBLISH_RELEASE == 'true' && steps.release.outputs.tag != ''
+      shell: pwsh
+      env:
+        GH_TOKEN: ${{ github.token }}
+        RELEASE_TAG: ${{ steps.release.outputs.tag }}
+      run: |
+        $releaseJson = gh release view $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --json isDraft,targetCommitish 2>$null
+        if ($LASTEXITCODE -ne 0) {
+          Write-Host "No draft release exists for $env:RELEASE_TAG."
+          return
+        }
+
+        $release = $releaseJson | ConvertFrom-Json
+        if (-not $release.isDraft) {
+          Write-Warning "Release $env:RELEASE_TAG is public; refusing automatic cleanup."
+          return
+        }
+        if ($release.targetCommitish -ne $env:GITHUB_SHA) {
+          throw "Draft $env:RELEASE_TAG targets $($release.targetCommitish), not this workflow commit; refusing cleanup."
+        }
+
+        gh release delete $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --cleanup-tag --yes
+        if ($LASTEXITCODE -ne 0) {
+          throw "Unable to remove incomplete draft release $env:RELEASE_TAG."
+        }

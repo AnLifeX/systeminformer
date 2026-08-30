@@ -22,14 +22,14 @@
 - 维护分支：`zh-CN`；`master` 用于跟随官方上游。
 - 当前已覆盖主窗口、常用菜单和对话框、进程/服务/网络列，以及部分内置插件。
 - 汉化仍未覆盖全部深层页面，后续会根据实测逐步补充。
-- `[build]` 测试构建只提供便携 ZIP；Tag 发布同时提供便携包和安装程序。未配置代码签名证书时，Windows SmartScreen 可能提示未知发布者。
+- `[build]` 测试构建只提供便携 ZIP；手动运行发布工作流时同时提供便携包和安装程序。未配置代码签名证书时，Windows SmartScreen 可能提示未知发布者。
 - GitHub Actions Artifact 只保留 1 天，避免占用免费账户存储空间。
 
 ## 下载和安全测试
 
 在仓库的 [Actions 页面](https://github.com/AnLifeX/systeminformer/actions/workflows/localization-zh-cn.yml)
 打开最近一次成功的 `zh-CN build`，下载页面底部的 portable Artifact。它只包含便携 ZIP，
-用于安装前隔离测试；正式安装程序只在 Tag 对应的 GitHub Release 中发布。
+用于安装前隔离测试；正式安装程序只在 GitHub Release 中发布。
 
 首次仅检查界面时，建议先退出其他 System Informer 实例，然后在解压目录运行：
 
@@ -47,10 +47,10 @@
 
 ## 构建触发规则
 
-普通提交到 `zh-CN` 不再执行完整编译。只有以下情况会构建并上传 Artifact：
+每次提交到 `zh-CN` 都会先在 Ubuntu runner 上运行汉化单元测试、上下文检查、可见文本审计和翻译后检查，不启动 Windows 编译，也不上传 Artifact。只有以下情况会继续构建：
 
 1. 提交信息包含区分大小写的 `[build]`：只构建便携 ZIP，并上传保留 1 天的 Artifact；
-2. 向 GitHub 推送一个指向 `zh-CN` 提交的 Tag：构建便携包、安装程序、校验和与更新元数据，直接创建 GitHub Release，不上传 Artifact。
+2. 在 Actions 中手动运行 `zh-CN build`：检查通过后构建便携包、安装程序、校验和与更新元数据；先创建草稿 Release 并校验资产和更新元数据，全部通过后才公开发布，不上传 Artifact。
 
 示例：
 
@@ -59,22 +59,17 @@ git commit -m "feat: update translations [build]"
 git push origin zh-CN
 ```
 
-或者使用 Tag：
+发布时不需要手工创建 Tag。工作流会读取安装程序的实际四段版本号，并自动创建同名 Tag，
+例如 `zh-cn-v4.0.26242.1512`。工作流还会拒绝覆盖既有 Release，或发布一个不高于当前
+更新版本的安装包，因此汉化自身有改动而上游没有新版本时，也可以安全地再次手动运行发布流程。
 
-```powershell
-git tag zh-cn-v0.1.0
-git push origin zh-cn-v0.1.0
-```
-
-由于 GitHub Actions 不能在 `on.push` 中按提交信息过滤，普通 `zh-CN` 推送可能留下一个
-`skipped` 工作流记录，但不会分配 Windows runner、不会编译，也不会上传 Artifact。
-
-每天会检查一次官方 `winsiderss/systeminformer` 的 `master`。仅当上游出现尚未检查的新提交时，
+每天会检查一次官方 `winsiderss/systeminformer` 的 `master`。仅当上游出现尚未检查的新提交，
+或官方最新可达版本 Tag 发生变化时，
 才在固定的 `automation/upstream-check` 分支上临时合并并运行汉化规则、静态审计和单元测试；
 该流程不编译、不上传 Artifact，也不会自动合并到 `zh-CN`、创建 Tag 或发布 Release。
 检查失败会保留完整 Actions 日志，并在下一次定时任务中重新尝试，不会改变正式汉化分支。
 安装包发布、自有更新源和签名密钥的配置见
-`[tools/localization/RELEASE.md](tools/localization/RELEASE.md)`。
+[`tools/localization/RELEASE.md`](tools/localization/RELEASE.md)。
 
 ## 汉化实现
 

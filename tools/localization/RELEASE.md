@@ -1,6 +1,6 @@
 # 简体中文版发布说明
 
-本分支面向自用 x64 Windows：普通 `[build]` 构建只产生一个保留 1 天的 x64 便携版 Actions Artifact，Artifact 内直接是程序文件，不再套一层 ZIP；推送 tag 时不会上传 Artifact，而是直接创建 GitHub Release。x64 成品仍包含运行 WOW64 功能所必需的 `x86` 辅助目录，这不等于发布独立的 i386 版本。Release 包含：
+本分支面向自用 x64 Windows：普通 `[build]` 构建只产生一个保留 1 天的 x64 便携版 Actions Artifact，Artifact 内直接是程序文件，不再套一层 ZIP；手动运行发布工作流时不会上传 Artifact，而是创建 GitHub Release。x64 成品仍包含运行 WOW64 功能所必需的 `x86` 辅助目录，这不等于发布独立的 i386 版本。Release 包含：
 
 - `systeminformer-build-release-setup.exe`：安装程序
 - `systeminformer-build-win64-bin.zip`：供用户下载的 x64 便携版
@@ -10,9 +10,11 @@
 构建过程仍会在 runner 内生成 `systeminformer-build-bin.zip`，将其嵌入安装程序后不再作为
 Release 资产公开；普通安装和更新都不需要用户单独下载该内部载荷。
 
-上游 `CustomBuildTool` 在非官方构建环境中默认使用 `0.0` 作为主次版本。发布工作流通过
-`BUILD_MAJORVERSION` 和 `BUILD_MINORVERSION` 显式跟随当前上游 `master` 的 `4.0`；上游切换
-主版本或次版本时，应在同步汉化规则的同一个提交中更新这两个值。
+上游 `CustomBuildTool` 在非官方构建环境中默认使用 `0.0` 作为主次版本。工作流会拉取官方
+版本 Tag，从当前提交可达的最高版本自动解析 `BUILD_MAJORVERSION` 和 `BUILD_MINORVERSION`，
+因此上游从 4.0 切换到新的主版本或次版本后不需要手改 CI。后两段继续使用本次构建的
+UTC 日期和时间生成；这既保留上游的主次版本，又保证只有汉化发生变化时也能产生一个更高、
+可供已安装版本识别的更新版本。
 
 安装版通过内置更新器下载并验证新的安装程序。便携版只提示新版本并打开 Release 页面，更新时应手动下载新的 ZIP 后覆盖。
 
@@ -36,7 +38,7 @@ $keyBase64 | gh secret set UPDATE_SIGNING_PRIVATE_KEY_B64 --repo AnLifeX/systemi
 $keyBase64 = $null
 ```
 
-对应公钥已经嵌入 `plugins/Updater/verify.c`。工作流会先验证所需 Secret，再生成 `systeminformer-update.json`；缺少私钥时 tag 构建会失败，不会发布无法验证的更新。
+对应公钥已经嵌入 `plugins/Updater/verify.c`。工作流会先验证所需 Secret，再生成 `systeminformer-update.json`；缺少私钥时发布构建会失败，不会发布无法验证的更新。
 
 ## 可选：配置 Windows 代码签名证书
 
@@ -49,12 +51,22 @@ $keyBase64 = $null
 
 ## 发布
 
-确认工作区已提交、推送且构建成功后，为要发布的提交创建并推送 tag：
+确认改动已提交并推送到 `zh-CN`，且分支上的轻量检查成功后：
 
-```powershell
-git tag -a zh-cn-v0.1.0 -m "System Informer 简体中文版 0.1.0"
-git push origin zh-cn-v0.1.0
-```
+1. 打开仓库 Actions 中的 `zh-CN build`；
+2. 选择 `Run workflow`，分支使用 `zh-CN`；
+3. 工作流再次执行完整汉化检查，成功后才启动 Windows 发布构建。
 
-`zh-cn-v0.1.0` 是汉化发行版本；程序用于更新比较的四段版本号会从实际构建结果中自动读取。
-tag 工作流会重新构建汉化版本、可选地执行 Authenticode 签名、重新计算校验和、生成更新器签名元数据，最后创建 GitHub Release。不要在审核完成前推送发布 tag。
+不需要手工创建 Tag。工作流从安装程序读取实际四段版本号，并创建例如
+`zh-cn-v4.0.26242.1512` 的 Tag。旧的 `zh-cn-v0.1.x` 仅是历史汉化发行序号，不影响已安装
+程序使用四段版本号比较更新。
+
+发布过程会拒绝覆盖既有 Release，并将本次四段版本与当前 `latest` 的更新元数据逐段比较；
+只有严格更新的版本才会继续。随后它会可选执行 Authenticode 签名、重新计算校验和、生成
+更新器签名元数据，将四个文件先上传到草稿 Release，重新下载并核对文件集合、SHA-256、版本、
+提交、下载地址、长度、哈希和更新器签名长度，全部通过后才把草稿公开。任何一步失败都不会
+把未验证的 Release 暴露给更新器；本次运行创建的未公开草稿会被清理，修复问题后重新运行即可。
+
+因此汉化文本、规则或测试有改动时不必等待上游发布新版本：提交并推送改动，等轻量检查通过，
+再手动运行一次 `zh-CN build` 即可向已安装版本发布更新。每日上游检查仍只做检查，不会替你
+自动发布。
