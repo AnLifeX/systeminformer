@@ -7344,6 +7344,18 @@
         { "id": "settings-error", "source": "Unable to change affinity settings.", "translation": "无法更改处理器相关性设置。" },
         { "id": "selection-required", "source": "You must select at least one CPU.", "translation": "必须至少选择一个 CPU。" }
       ]
+    },
+    {
+      "id": "thread-wait-analysis-runtime-audit",
+      "path": "SystemInformer/anawait.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "open-process-error", "source": "Unable to open the process.", "translation": "无法打开进程。", "expected": 2 },
+        { "id": "open-thread-error", "source": "Unable to open the thread.", "translation": "无法打开线程。", "expected": 2 },
+        { "id": "analyze-error", "source": "Unable to analyze the thread.", "translation": "无法分析线程。" },
+        { "id": "not-waiting", "source": "The thread does not appear to be waiting.", "translation": "该线程似乎未处于等待状态。" },
+        { "id": "wait-state-error", "source": "Unable to determine whether the thread is waiting.", "translation": "无法确定线程是否处于等待状态。" }
+      ]
     }
   ]
 }
