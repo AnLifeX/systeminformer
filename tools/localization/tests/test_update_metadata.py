@@ -12,6 +12,27 @@ SCRIPT = ROOT / "tools" / "localization" / "New-UpdateMetadata.ps1"
 POWERSHELL = shutil.which("pwsh")
 OPENSSL = shutil.which("openssl")
 GIT = shutil.which("git")
+ANSI_ESCAPE_PATTERN = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
+
+
+def normalize_powershell_error(error):
+    """Return PowerShell error output without terminal-only formatting."""
+    error = ANSI_ESCAPE_PATTERN.sub("", error)
+    error = re.sub(r"\r?\n\s*[|│]\s*", " ", error)
+    return " ".join(error.split())
+
+
+class PowerShellErrorNormalizationTests(unittest.TestCase):
+    def test_joins_wrapped_error_details_from_noninteractive_runners(self):
+        rendered_error = (
+            "\x1b[31;1mPrevious release commit abc is not\x1b[0m\n"
+            "\x1b[36;1m     | \x1b[31;1man ancestor of def.\x1b[0m\n"
+        )
+
+        self.assertIn(
+            "Previous release commit abc is not an ancestor of def.",
+            normalize_powershell_error(rendered_error),
+        )
 
 
 @unittest.skipUnless(
@@ -219,7 +240,10 @@ class UpdateMetadataTests(unittest.TestCase):
                 temporary_path, repository, current, current, check=False
             )
             self.assertNotEqual(same_result.returncode, 0)
-            self.assertIn("must be different", same_result.stderr)
+            self.assertIn(
+                "must be different",
+                normalize_powershell_error(same_result.stderr),
+            )
 
             self.git(repository, "switch", "--orphan", "unrelated")
             self.git(repository, "commit", "--allow-empty", "-m", "unrelated release")
@@ -232,7 +256,10 @@ class UpdateMetadataTests(unittest.TestCase):
                 temporary_path, repository, current, unrelated, check=False
             )
             self.assertNotEqual(unrelated_result.returncode, 0)
-            self.assertIn("is not an ancestor", unrelated_result.stderr)
+            self.assertIn(
+                "is not an ancestor",
+                normalize_powershell_error(unrelated_result.stderr),
+            )
 
 
 if __name__ == "__main__":
