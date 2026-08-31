@@ -45,6 +45,45 @@
 确认基本界面正常后，可以按需去掉 `-noplugins` 测试插件。不要直接用 CI 便携版覆盖正式安装目录。
 便携版检测到新版本时只会打开本仓库的 Release 页面，需要手动下载并覆盖 ZIP；安装版才会下载、验证并启动更新安装程序。
 
+## 任务管理器快捷键与管理员启动
+
+本分支保留上游的 Shift 逃生机制，不修改相关源码。将 System Informer 设为默认任务管理器后，
+不同入口的行为如下：
+
+- 自定义快捷键：启动或激活 System Informer；
+- `Ctrl+Shift+Esc`：由于启动时 Shift 处于按下状态，会打开原生 Windows 任务管理器；
+- 任务栏右键菜单中的“任务管理器”：正常打开 System Informer；按住 Shift 再点击时打开原生任务管理器。
+
+如果希望默认以管理员权限使用 System Informer，建议在程序选项中启用“启动时请求管理员权限（实验性）”，
+并为 System Informer 单独创建一个不含 Shift 的 Windows 快捷键，例如 `Ctrl+Alt+I`。
+“快捷键”不是 System Informer 内的设置，也不是 `SystemInformer.exe` 的属性，而是开始菜单中
+Windows 快捷方式（`.lnk`）的属性。安装版的快捷方式通常位于：
+
+```text
+C:\ProgramData\Microsoft\Windows\Start Menu\Programs\System Informer.lnk
+```
+
+安装程序创建的桌面快捷方式通常位于 `C:\Users\Public\Desktop\System Informer.lnk`。
+它和开始菜单快捷方式是两个独立文件，只是都指向同一个 `SystemInformer.exe`；修改其中一个的
+快捷键、启动方式或工作目录不会同步到另一个。设置开始菜单快捷方式的快捷键后即可在系统中使用，
+不需要再给桌面快捷方式设置相同的快捷键。
+
+设置步骤如下：
+
+1. 在开始菜单中搜索 **System Informer**，右键选择“打开文件所在的位置”；
+2. 右键其中的 System Informer 快捷方式，选择“属性”；
+3. 在“快捷方式”选项卡的“快捷键”栏中按 `I`，Windows 会将其设置为 `Ctrl+Alt+I`；
+4. 点击“应用”或“确定”。
+
+如果“打开文件所在的位置”进入的是 `C:\Program Files\SystemInformer`，当前选中的是
+`SystemInformer.exe` 程序本体，不是开始菜单快捷方式，因此不会显示“快捷方式”选项卡和
+“快捷键”栏。不要再从桌面快捷方式选择“打开文件所在的位置”，因为该操作也会跳到 EXE 目录；
+应直接修改开始菜单打开的 `.lnk` 文件属性。
+
+建议同时启用“只允许运行一个实例”，这样按自定义快捷键时会激活已有窗口，不会重复启动多个实例。
+不要在 EXE 的“兼容性”页强制勾选“以管理员身份运行此程序”；该兼容性设置可能影响默认任务管理器替换，
+应使用 System Informer 自带的管理员启动选项。
+
 ## 构建触发规则
 
 每次提交到 `zh-CN` 都会先在 Ubuntu runner 上运行汉化单元测试、上下文检查、可见文本审计和翻译后检查，不启动 Windows 编译，也不上传 Artifact。只有以下情况会继续构建：
