@@ -75,8 +75,12 @@ jobs:
           if ($LASTEXITCODE -ne 0) {
             throw "Release refused: HEAD does not contain the latest official upstream tag $latestTag."
           }
-          if ($env:UPSTREAM_VERSION_TAG -ne $latestTag) {
-            throw "Release refused: resolved upstream tag $env:UPSTREAM_VERSION_TAG does not match latest official tag $latestTag."
+          $resolvedTagLine = Get-Content -LiteralPath $env:GITHUB_ENV |
+            Where-Object { $_ -like 'UPSTREAM_VERSION_TAG=*' } |
+            Select-Object -Last 1
+          $resolvedTag = $resolvedTagLine -replace '^UPSTREAM_VERSION_TAG=', ''
+          if ($resolvedTag -ne $latestTag) {
+            throw "Release refused: resolved upstream tag $resolvedTag does not match latest official tag $latestTag."
           }
         }
 
