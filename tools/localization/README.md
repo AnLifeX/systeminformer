@@ -103,14 +103,17 @@ python -m unittest discover -s tools/localization/tests -v
 
 不要翻译 API 名称、命令行开关、文件路径、注册表名称、协议字段、持久化设置键或其他机器可读字符串。
 
-## CI 构建条件
+## CI 构建与发布条件
 
 完整 Windows Release 构建只在以下情况运行：
 
-- `zh-CN` 分支提交信息包含 `[build]`；
-- 推送一个指向 `zh-CN` 提交的 Tag。
+- 手动运行 `zh-CN build`；
+- 上游正式 Tag 通过自动汉化检查后，由机器人推送带 `[release]` 标记的同步提交。
 
-普通提交可能显示为 `skipped`，但不会占用 Windows runner 或上传 Artifact。`[build]` 只构建 x64 主程序及其必需的 x86/WOW64 辅助组件，并将 `Release64` 的内容直接作为单个 Artifact 上传；不会生成 ARM64 或独立 i386 成品。Artifact 保留期为 1 天。
+普通提交可能显示为 `skipped`，但不会占用 Windows runner 或上传 Artifact。提交信息包含 `[build]` 时只构建
+x64 主程序及其必需的 x86/WOW64 辅助组件，并将 `Release64` 的内容直接作为单个 Artifact 上传；不会生成
+ARM64 或独立 i386 成品。Artifact 保留期为 1 天。
 
-目前未实现自动同步上游、自动检查上游、自动创建 Tag 或自动修复漂移规则。上游同步完成后应先人工运行
-`check --state source` 并完成适配，再决定是否触发构建。
+上游检查工作流每天读取官方 `master` 和正式版本 Tag。普通提交只做兼容性检查；新正式 Tag 只有在完整汉化
+检查通过后才会自动合并到 `zh-CN`，并触发正式构建和 Release。任何汉化规则漂移都会阻止合并和发布。
+手动发布汉化改动时不需要手工创建 Tag，直接在 Actions 中运行 `zh-CN build` 即可。

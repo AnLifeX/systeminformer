@@ -11,6 +11,9 @@ param(
     [ValidatePattern('^\d+\.\d+\.\d+\.\d+$')]
     [string]$Version,
 
+    [ValidatePattern('^$|^v\d+(?:\.\d+)+$')]
+    [string]$UpstreamTag = '',
+
     [Parameter(Mandatory)]
     [ValidatePattern('^[0-9a-fA-F]{40}$')]
     [string]$Commit,
@@ -97,6 +100,7 @@ $updated = [DateTime]::UtcNow.Date.ToString(
 $repositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $commit = $Commit.ToLowerInvariant()
 $previousCommit = $PreviousCommit.ToLowerInvariant()
+$upstreamTag = $UpstreamTag.Trim()
 
 & git -C $repositoryRoot cat-file -e "$commit^{commit}"
 if ($LASTEXITCODE -ne 0) {
@@ -182,6 +186,9 @@ $metadata = [ordered]@{
     setup_sig    = [System.Convert]::ToHexString($signature)
     setup_url    = $SetupUrl
     changelog    = $changelog
+}
+if ($upstreamTag) {
+    $metadata.upstream_tag = $upstreamTag
 }
 
 $outputFullPath = [System.IO.Path]::GetFullPath($OutputPath)

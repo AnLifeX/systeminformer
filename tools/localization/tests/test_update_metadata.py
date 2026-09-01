@@ -98,7 +98,13 @@ class UpdateMetadataTests(unittest.TestCase):
         return setup_path, output_path, key_path
 
     def run_metadata_script(
-        self, directory, repository, commit, previous_commit=None, check=True
+        self,
+        directory,
+        repository,
+        commit,
+        previous_commit=None,
+        upstream_tag=None,
+        check=True,
     ):
         setup_path, output_path, key_path = self.create_signing_inputs(directory)
         command = [
@@ -125,6 +131,8 @@ class UpdateMetadataTests(unittest.TestCase):
         ]
         if previous_commit is not None:
             command.extend(["-PreviousCommit", previous_commit])
+        if upstream_tag is not None:
+            command.extend(["-UpstreamTag", upstream_tag])
 
         result = subprocess.run(
             command,
@@ -194,6 +202,21 @@ class UpdateMetadataTests(unittest.TestCase):
             self.assertEqual(
                 [entry["sha"] for entry in metadata["changelog"]], [current]
             )
+
+    def test_metadata_records_upstream_release_tag(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            repository, _, current = self.create_repository(temporary_path)
+
+            _, output_path = self.run_metadata_script(
+                temporary_path,
+                repository,
+                current,
+                upstream_tag="v4.0.26242.1646",
+            )
+            metadata = json.loads(output_path.read_text(encoding="utf-8"))
+
+            self.assertEqual(metadata["upstream_tag"], "v4.0.26242.1646")
 
     def test_metadata_includes_commits_from_merged_branches(self):
         with tempfile.TemporaryDirectory() as temporary:

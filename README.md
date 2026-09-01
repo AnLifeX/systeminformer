@@ -19,7 +19,7 @@
 
 ## 当前状态
 
-- 维护分支：`zh-CN`；`master` 用于跟随官方上游。
+- 唯一维护和发布分支：`zh-CN`；官方上游通过 CI 直接从 `winsiderss/systeminformer` 获取。
 - 当前已覆盖主窗口、常用菜单和对话框、进程/服务/网络列，以及部分内置插件。
 - 汉化仍未覆盖全部深层页面，后续会根据实测逐步补充。
 - `[build]` 测试构建只提供便携 ZIP；手动运行发布工作流时同时提供便携包和安装程序。未配置代码签名证书时，Windows SmartScreen 可能提示未知发布者。
@@ -45,17 +45,26 @@
 确认基本界面正常后，可以按需去掉 `-noplugins` 测试插件。不要直接用 CI 便携版覆盖正式安装目录。
 便携版检测到新版本时只会打开本仓库的 Release 页面，需要手动下载并覆盖 ZIP；安装版才会下载、验证并启动更新安装程序。
 
-## 任务管理器快捷键与管理员启动
+## 同时启用管理员启动和默认任务管理器替换时的快捷键
 
-本分支保留上游的 Shift 逃生机制，不修改相关源码。将 System Informer 设为默认任务管理器后，
-不同入口的行为如下：
+本节所说的 Shift 逃生现象只会在 System Informer 同时启用“启动时请求管理员权限（实验性）”并
+替换默认任务管理器后出现。不同设置下，`Ctrl+Shift+Esc` 的实际行为如下：
 
-- 自定义快捷键：启动或激活 System Informer；
-- `Ctrl+Shift+Esc`：由于启动时 Shift 处于按下状态，会打开原生 Windows 任务管理器；
+| 设置状态 | `Ctrl+Shift+Esc` 的行为 |
+| --- | --- |
+| 未替换默认任务管理器 | 打开原生 Windows 任务管理器 |
+| 已替换，但未启用管理员启动 | 打开 System Informer |
+| 已替换，并启用管理员启动 | 触发 Shift 逃生机制，打开原生 Windows 任务管理器 |
+
+因此，普通安装不会出现“替换后又被切回原生任务管理器”的情况；只替换默认任务管理器也仍可使用
+`Ctrl+Shift+Esc` 打开 System Informer。只有同时启用上述两项设置后，不同入口才会表现为：
+
+- 不含 Shift 的自定义快捷键：以管理员权限启动或激活 System Informer；
+- `Ctrl+Shift+Esc`：打开原生 Windows 任务管理器；
 - 任务栏右键菜单中的“任务管理器”：正常打开 System Informer；按住 Shift 再点击时打开原生任务管理器。
 
-如果希望默认以管理员权限使用 System Informer，建议在程序选项中启用“启动时请求管理员权限（实验性）”，
-并为 System Informer 单独创建一个不含 Shift 的 Windows 快捷键，例如 `Ctrl+Alt+I`。
+为了避开 `Ctrl+Shift+Esc` 与 Shift 逃生机制的冲突，建议为 System Informer 单独创建一个不含 Shift 的
+Windows 快捷键，例如 `Ctrl+Alt+I`。
 “快捷键”不是 System Informer 内的设置，也不是 `SystemInformer.exe` 的属性，而是开始菜单中
 Windows 快捷方式（`.lnk`）的属性。安装版的快捷方式通常位于：
 
@@ -84,12 +93,13 @@ C:\ProgramData\Microsoft\Windows\Start Menu\Programs\System Informer.lnk
 不要在 EXE 的“兼容性”页强制勾选“以管理员身份运行此程序”；该兼容性设置可能影响默认任务管理器替换，
 应使用 System Informer 自带的管理员启动选项。
 
-## 构建触发规则
+## 构建与发布触发规则
 
-每次提交到 `zh-CN` 都会先在 Ubuntu runner 上运行汉化单元测试、上下文检查、可见文本审计和翻译后检查，不启动 Windows 编译，也不上传 Artifact。只有以下情况会继续构建：
+每次提交到 `zh-CN` 都会先在 Ubuntu runner 上运行汉化单元测试、上下文检查、可见文本审计和翻译后检查。普通提交不启动 Windows 编译，也不上传 Artifact。以下情况会继续构建：
 
 1. 提交信息包含区分大小写的 `[build]`：只构建便携 ZIP，并上传保留 1 天的 Artifact；
-2. 在 Actions 中手动运行 `zh-CN build`：检查通过后构建便携包、安装程序、校验和与更新元数据；先创建草稿 Release 并校验资产和更新元数据，全部通过后才公开发布，不上传 Artifact。
+2. 在 Actions 中手动运行 `zh-CN build`：用于发布你自己的汉化改动；
+3. 上游出现新的正式版本 Tag 且同步检查通过：自动将上游 Tag 合并到 `zh-CN`，再自动构建并发布。
 
 示例：
 
@@ -98,15 +108,15 @@ git commit -m "feat: update translations [build]"
 git push origin zh-CN
 ```
 
-发布时不需要手工创建 Tag。工作流会读取安装程序的实际四段版本号，并自动创建同名 Tag，
-例如 `zh-cn-v4.0.26242.1512`。工作流还会拒绝覆盖既有 Release，或发布一个不高于当前
-更新版本的安装包，因此汉化自身有改动而上游没有新版本时，也可以安全地再次手动运行发布流程。
+`[build]` 只用于测试便携包，不会发布正式版本。发布你自己的汉化改动时，在 Actions 中手动运行
+`zh-CN build`；不需要手工填写 Tag，工作流会读取安装程序的实际四段版本号并自动创建同名 Tag，
+例如 `zh-cn-v4.0.26242.1512`。工作流还会拒绝从未包含最新官方 Tag 的旧 `zh-CN` 提交发布。
 
-每天会检查一次官方 `winsiderss/systeminformer` 的 `master`。仅当上游出现尚未检查的新提交，
-或官方最新可达版本 Tag 发生变化时，
-才在固定的 `automation/upstream-check` 分支上临时合并并运行汉化规则、静态审计和单元测试；
-该流程不编译、不上传 Artifact，也不会自动合并到 `zh-CN`、创建 Tag 或发布 Release。
-检查失败会保留完整 Actions 日志，并在下一次定时任务中重新尝试，不会改变正式汉化分支。
+每天会检查一次官方 `winsiderss/systeminformer` 的 `master`。普通上游提交只进入兼容性检查，
+不会发布；当官方最新正式 Tag 发生变化时，工作流会从当前 `zh-CN` 创建候选合并，运行完整汉化检查。
+检查通过后才会自动合并到 `zh-CN`，并由 `zh-CN build` 自动创建 Tag 和发布 Release；检查失败则不修改
+正式分支，也不会发布，下一次任务会继续重试。`automation/upstream-check` 只保存检查状态，不能作为发布来源。
+仓库不再维护本地 `master` 分支，发布和汉化始终以 `zh-CN` 为准。
 安装包发布、自有更新源和签名密钥的配置见
 [`tools/localization/RELEASE.md`](tools/localization/RELEASE.md)。
 

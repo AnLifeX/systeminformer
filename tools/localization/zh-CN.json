@@ -1646,7 +1646,7 @@
     {
       "id": "extendedtools-options-section",
       "path": "plugins/ExtendedTools/main.c",
-      "context": "L\"{text}\"",
+      "context": "L\"{text}\",",
       "items": [
         { "id": "title", "source": "ExtendedTools", "translation": "扩展工具" }
       ]
@@ -1654,7 +1654,7 @@
     {
       "id": "networktools-options-section",
       "path": "plugins/NetworkTools/main.c",
-      "context": "L\"{text}\"",
+      "context": "L\"{text}\",",
       "items": [
         { "id": "title", "source": "NetworkTools", "translation": "网络工具" }
       ]
@@ -1662,7 +1662,7 @@
     {
       "id": "onlinechecks-options-section",
       "path": "plugins/OnlineChecks/main.c",
-      "context": "L\"{text}\"",
+      "context": "L\"{text}\",",
       "items": [
         { "id": "title", "source": "OnlineChecks", "translation": "在线检查" }
       ]
@@ -1686,7 +1686,7 @@
     {
       "id": "usernotes-options-section",
       "path": "plugins/UserNotes/main.c",
-      "context": "L\"{text}\"",
+      "context": "L\"{text}\",",
       "items": [
         { "id": "title", "source": "UserNotes", "translation": "用户备注" }
       ]
@@ -2219,7 +2219,8 @@
       "context": "L\"{text}\"",
       "items": [
         { "id": "check", "source": "Check for &updates", "translation": "检查更新(&U)" },
-        { "id": "display-name", "source": "Update Checker", "translation": "更新检查器" }
+        { "id": "display-name", "source": "Update Checker", "translation": "更新检查器" },
+        { "id": "description", "source": "Plugin for checking new System Informer releases via the Help menu.", "translation": "用于通过“帮助”菜单检查 System Informer 新版本的插件。" }
       ]
     },
     {
@@ -6564,6 +6565,107 @@
         { "id": "wait-completion-packet", "source": "WaitCompletionPacket", "translation": "等待完成数据包" },
         { "id": "window-station", "source": "WindowStation", "translation": "窗口站" },
         { "id": "wmi-guid", "source": "WmiGuid", "translation": "WMI GUID" }
+      ]
+    },
+    {
+      "id": "dotnet-tools-plugin-information",
+      "path": "plugins/DotNetTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "display-name", "source": ".NET Tools", "translation": ".NET 工具" },
+        { "id": "description", "source": "Adds .NET performance counters, assembly information, thread stack support, and more.", "translation": "添加 .NET 性能计数器、程序集信息、线程堆栈支持等功能。" }
+      ]
+    },
+    {
+      "id": "extended-notifications-plugin-information",
+      "path": "plugins/ExtendedNotifications/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "display-name", "source": "Extended Notifications", "translation": "扩展通知" },
+        { "id": "description", "source": "Filters notifications.", "translation": "提供通知筛选功能。" }
+      ]
+    },
+    {
+      "id": "extended-services-plugin-information",
+      "path": "plugins/ExtendedServices/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "display-name", "source": "Extended Services", "translation": "扩展服务" },
+        { "id": "description", "source": "Extends service management capabilities.", "translation": "扩展服务管理功能。" }
+      ]
+    },
+    {
+      "id": "extended-tools-plugin-information",
+      "path": "plugins/ExtendedTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "description", "source": "Extended functionality for Windows 7 and above, including ETW, GPU, Disk and Firewall monitoring tabs.", "translation": "为 Windows 7 及更高版本提供扩展功能，包括 ETW、GPU、磁盘和防火墙监控选项卡。" }
+      ]
+    },
+    {
+      "id": "extended-tools-plugin-display-name",
+      "path": "plugins/ExtendedTools/main.c",
+      "context": "info->DisplayName = L\"{text}\";",
+      "items": [
+        { "id": "display-name", "source": "Extended Tools", "translation": "扩展工具" }
+      ]
+    },
+    {
+      "id": "network-tools-plugin-information",
+      "path": "plugins/NetworkTools/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "description", "source": "Provides ping, traceroute and whois for network connections.", "translation": "提供用于网络连接的 Ping、路由跟踪和 WHOIS 查询功能。" }
+      ]
+    },
+    {
+      "id": "network-tools-plugin-display-name",
+      "path": "plugins/NetworkTools/main.c",
+      "context": "info->DisplayName = L\"{text}\";",
+      "items": [
+        { "id": "display-name", "source": "Network Tools", "translation": "网络工具" }
+      ]
+    },
+    {
+      "id": "online-checks-plugin-information",
+      "path": "plugins/OnlineChecks/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "description", "source": "Allows files to be checked with online services.", "translation": "允许使用在线服务检查文件。" }
+      ]
+    },
+    {
+      "id": "online-checks-plugin-display-name",
+      "path": "plugins/OnlineChecks/main.c",
+      "context": "info->DisplayName = L\"{text}\";",
+      "items": [
+        { "id": "display-name", "source": "Online Checks", "translation": "在线检查" }
+      ]
+    },
+    {
+      "id": "user-notes-plugin-information",
+      "path": "plugins/UserNotes/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "description-prefix", "source": "Allows the user to add comments for processes and services,", "translation": "允许为进程和服务添加备注，" },
+        { "id": "description-suffix", "source": " save process priority and affinity, highlight individual processes and show processes collapsed by default.", "translation": "保存进程优先级和亲和性、突出显示特定进程，并默认折叠进程树。" }
+      ]
+    },
+    {
+      "id": "user-notes-plugin-display-name",
+      "path": "plugins/UserNotes/main.c",
+      "context": "info->DisplayName = L\"{text}\";",
+      "items": [
+        { "id": "display-name", "source": "User Notes", "translation": "用户备注" }
+      ]
+    },
+    {
+      "id": "window-explorer-plugin-information",
+      "path": "plugins/WindowExplorer/main.c",
+      "context": "L\"{text}\"",
+      "items": [
+        { "id": "display-name", "source": "Window Explorer", "translation": "窗口浏览器" },
+        { "id": "description", "source": "View and manipulate windows.", "translation": "查看和操作窗口。" }
       ]
     },
     {

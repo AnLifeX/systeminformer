@@ -37,18 +37,21 @@ jobs:
     if: >-
       needs.check.result == 'success' &&
       ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/zh-CN') ||
-       (github.event_name == 'push' && contains(github.event.head_commit.message, '[build]')))
+       (github.event_name == 'push' &&
+        (contains(github.event.head_commit.message, '[build]') ||
+         contains(github.event.head_commit.message, '[release]'))))
     permissions:
       contents: write
     runs-on: windows-2025-vs2026
     env:
-      PUBLISH_RELEASE: ${{ github.event_name == 'workflow_dispatch' }}
+      PUBLISH_RELEASE: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[release]')) }}
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
       with:
         fetch-depth: 0
+        ref: ${{ github.sha }}
 
     - name: Resolve upstream release version
       shell: pwsh
@@ -56,6 +59,34 @@ jobs:
         git remote add official https://github.com/winsiderss/systeminformer.git
         git fetch --no-tags official "+refs/tags/v*:refs/tags/upstream/v*"
         python tools/localization/resolve_upstream_version.py --target HEAD --github-env "$env:GITHUB_ENV"
+
+        $latestTag = git for-each-ref --sort=-version:refname --format='%(refname:strip=3)' 'refs/tags/upstream/v*' |
+          Select-Object -First 1
+        if ([string]::IsNullOrWhiteSpace($latestTag)) {
+          throw 'Unable to determine the latest official upstream release tag.'
+        }
+        $latestTagCommit = (git rev-list -n 1 "refs/tags/upstream/$latestTag").Trim()
+        if ($latestTagCommit -notmatch '^[0-9a-fA-F]{40}$') {
+          throw "Unable to resolve upstream tag $latestTag to a commit."
+        }
+
+        if ($env:PUBLISH_RELEASE -eq 'true') {
+          git merge-base --is-ancestor $latestTagCommit HEAD
+          if ($LASTEXITCODE -ne 0) {
+            throw "Release refused: HEAD does not contain the latest official upstream tag $latestTag."
+          }
+          if ($env:UPSTREAM_VERSION_TAG -ne $latestTag) {
+            throw "Release refused: resolved upstream tag $env:UPSTREAM_VERSION_TAG does not match latest official tag $latestTag."
+          }
+        }
+
+        "UPSTREAM_RELEASE_TAG=$latestTag" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+        $headMessage = git log -1 --format=%B
+        $automaticTag = [regex]::Match($headMessage, '\[upstream-release:(v\d+(?:\.\d+)+)\]')
+        if ($automaticTag.Success -and $automaticTag.Groups[1].Value -ne $latestTag) {
+          throw "Automatic release commit targets $($automaticTag.Groups[1].Value), not latest official tag $latestTag."
+        }
 
     - name: Apply Simplified Chinese localization
       shell: pwsh
@@ -287,6 +318,7 @@ jobs:
           OutputPath = 'build/output/systeminformer-update.json'
           Version = '${{ steps.release.outputs.version }}'
           Commit = '${{ github.sha }}'
+          UpstreamTag = $env:UPSTREAM_RELEASE_TAG
           SetupUrl = "https://github.com/AnLifeX/systeminformer/releases/download/$escapedTag/systeminformer-build-release-setup.exe"
           PrivateKeyBase64 = $env:UPDATE_SIGNING_PRIVATE_KEY_B64
         }
@@ -302,6 +334,7 @@ jobs:
         GH_TOKEN: ${{ github.token }}
         RELEASE_TAG: ${{ steps.release.outputs.tag }}
         RELEASE_VERSION: ${{ steps.release.outputs.version }}
+        UPSTREAM_RELEASE_TAG: ${{ env.UPSTREAM_RELEASE_TAG }}
       run: |
         $assets = @(
           'build/output/systeminformer-build-release-setup.exe'
@@ -309,7 +342,8 @@ jobs:
           'build/output/systeminformer-zh-CN-SHA256SUMS.txt'
           'build/output/systeminformer-update.json'
         )
-        gh release create $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --draft --title "System Informer $env:RELEASE_VERSION 简体中文版" --generate-notes @assets
+        $releaseTitle = "System Informer $env:RELEASE_VERSION 简体中文版（上游 $env:UPSTREAM_RELEASE_TAG）"
+        gh release create $env:RELEASE_TAG --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --draft --title $releaseTitle --generate-notes @assets
         if ($LASTEXITCODE -ne 0) {
           throw "Unable to create draft release $env:RELEASE_TAG."
         }
@@ -322,6 +356,7 @@ jobs:
         RELEASE_TAG: ${{ steps.release.outputs.tag }}
         RELEASE_VERSION: ${{ steps.release.outputs.version }}
         PREVIOUS_RELEASE_COMMIT: ${{ steps.previous_release.outputs.commit }}
+        UPSTREAM_RELEASE_TAG: ${{ env.UPSTREAM_RELEASE_TAG }}
       run: |
         $expectedFiles = @(
           'build/output/systeminformer-build-release-setup.exe'
@@ -397,6 +432,7 @@ jobs:
             $metadata.setup_length -ne $setupLength -or
             $metadata.setup_hash -ne $setupHash -or
             $metadata.setup_sig.Length -ne 128 -or
+            [string]$metadata.upstream_tag -ne $env:UPSTREAM_RELEASE_TAG -or
             -not $changelogMatches -or
             -not $changelogDatesAreUtc) {
           throw 'Updater metadata does not match the validated release payload.'
@@ -413,6 +449,41 @@ jobs:
         if ($LASTEXITCODE -ne 0) {
           throw "Unable to publish validated release $env:RELEASE_TAG."
         }
+
+    - name: Record released upstream state
+      if: success() && env.PUBLISH_RELEASE == 'true'
+      shell: pwsh
+      env:
+        UPSTREAM_RELEASE_TAG: ${{ env.UPSTREAM_RELEASE_TAG }}
+      run: |
+        git restore --source=HEAD --staged --worktree -- .
+        git fetch --no-tags origin automation/upstream-check:refs/remotes/origin/automation/upstream-check
+        git switch --force-create automation/upstream-check origin/automation/upstream-check
+
+        $statePath = '.github/upstream-zh-cn-state.json'
+        if (Test-Path -LiteralPath $statePath) {
+          $state = Get-Content -Raw -LiteralPath $statePath | ConvertFrom-Json
+        }
+        else {
+          $state = [pscustomobject]@{}
+        }
+
+        $upstreamCommit = (git rev-list -n 1 "refs/tags/upstream/$env:UPSTREAM_RELEASE_TAG").Trim()
+        if ($upstreamCommit -notmatch '^[0-9a-fA-F]{40}$') {
+          throw "Unable to resolve released upstream tag $env:UPSTREAM_RELEASE_TAG."
+        }
+
+        $state | Add-Member -NotePropertyName released_upstream_tag -NotePropertyValue $env:UPSTREAM_RELEASE_TAG -Force
+        $state | Add-Member -NotePropertyName released_upstream_sha -NotePropertyValue $upstreamCommit -Force
+        $state | Add-Member -NotePropertyName released_zh_cn_commit -NotePropertyValue $env:GITHUB_SHA -Force
+        New-Item -ItemType Directory -Path (Split-Path -Parent $statePath) -Force | Out-Null
+        $state | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $statePath -Encoding utf8
+
+        git config user.name 'github-actions[bot]'
+        git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add $statePath
+        git commit --allow-empty -m "ci: record released upstream $env:UPSTREAM_RELEASE_TAG"
+        git push --force-with-lease origin HEAD:automation/upstream-check
 
     - name: Remove incomplete draft release
       if: failure() && env.PUBLISH_RELEASE == 'true' && steps.release.outputs.tag != ''

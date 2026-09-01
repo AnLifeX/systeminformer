@@ -1,4 +1,4 @@
-name: 'zh-CN upstream check'
+name: 'zh-CN upstream check and release'
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: 'Run the check even when the upstream commit and version tag were already checked'
+        description: 'Run the compatibility check even when the upstream commit was already checked'
         required: false
         default: false
         type: boolean
@@ -20,8 +20,14 @@ permissions:
   contents: write
 
 jobs:
-  check:
+  detect:
     runs-on: ubuntu-latest
+    outputs:
+      check_needed: ${{ steps.detect.outputs.check_needed }}
+      release_needed: ${{ steps.detect.outputs.release_needed }}
+      latest_tag: ${{ steps.detect.outputs.latest_tag }}
+      latest_tag_sha: ${{ steps.detect.outputs.latest_tag_sha }}
+      upstream_sha: ${{ steps.detect.outputs.upstream_sha }}
     steps:
       - name: Checkout zh-CN with history
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
@@ -29,7 +35,7 @@ jobs:
           ref: zh-CN
           fetch-depth: 0
 
-      - name: Fetch official upstream and previous check branch
+      - name: Fetch official upstream and release state
         shell: bash
         run: |
           set -euo pipefail
@@ -39,80 +45,148 @@ jobs:
             '+refs/tags/v*:refs/tags/upstream/v*'
           git fetch --no-tags origin automation/upstream-check:refs/remotes/origin/automation/upstream-check || true
 
-      - name: Resolve upstream release version
-        id: version
-        run: python tools/localization/resolve_upstream_version.py --target official/master --github-output "$GITHUB_OUTPUT"
-
-      - name: Detect unchecked upstream state
+      - name: Detect upstream commits and release tags
         id: detect
         shell: bash
         env:
           FORCE_CHECK: ${{ inputs.force || false }}
-          UPSTREAM_VERSION_TAG: ${{ steps.version.outputs.upstream_version_tag }}
         run: |
           set -euo pipefail
           upstream_sha="$(git rev-parse official/master)"
-          changed=true
+          latest_tag="$(git for-each-ref --sort=-version:refname --format='%(refname:strip=3)' 'refs/tags/upstream/v*' | head -n 1)"
+          if [[ ! "$latest_tag" =~ ^v[0-9]+(\.[0-9]+)+$ ]]; then
+            echo "Unable to determine the latest official upstream release tag." >&2
+            exit 1
+          fi
+          latest_tag_sha="$(git rev-list -n 1 "refs/tags/upstream/$latest_tag")"
 
-          if [ "$FORCE_CHECK" != "true" ] && \
-             git show-ref --verify --quiet refs/remotes/origin/automation/upstream-check; then
-            state="$(git show origin/automation/upstream-check:.github/upstream-zh-cn-state.json 2>/dev/null || true)"
-            if [ -n "$state" ] && \
-               [ "$(jq -r '.upstream_sha // empty' <<<"$state")" = "$upstream_sha" ] && \
-               [ "$(jq -r '.upstream_version_tag // empty' <<<"$state")" = "$UPSTREAM_VERSION_TAG" ]; then
-              changed=false
-            fi
+          state='{}'
+          if git show-ref --verify --quiet refs/remotes/origin/automation/upstream-check; then
+            state="$(git show origin/automation/upstream-check:.github/upstream-zh-cn-state.json 2>/dev/null || printf '{}')"
           fi
 
+          checked_sha="$(jq -r '.checked_master_sha // .upstream_sha // empty' <<<"$state")"
+          released_tag="$(jq -r '.released_upstream_tag // .upstream_version_tag // empty' <<<"$state")"
+          released_sha="$(jq -r '.released_upstream_sha // empty' <<<"$state")"
+
+          master_changed=false
+          release_needed=false
+          if [[ "$upstream_sha" != "$checked_sha" || "$FORCE_CHECK" == 'true' ]]; then
+            master_changed=true
+          fi
+          if [[ "$latest_tag" != "$released_tag" || ( -n "$released_sha" && "$latest_tag_sha" != "$released_sha" ) ]]; then
+            release_needed=true
+          fi
+
+          check_needed=false
+          if [[ "$master_changed" == 'true' || "$release_needed" == 'true' ]]; then
+            check_needed=true
+          fi
+
+          echo "check_needed=$check_needed" >> "$GITHUB_OUTPUT"
+          echo "release_needed=$release_needed" >> "$GITHUB_OUTPUT"
+          echo "latest_tag=$latest_tag" >> "$GITHUB_OUTPUT"
+          echo "latest_tag_sha=$latest_tag_sha" >> "$GITHUB_OUTPUT"
           echo "upstream_sha=$upstream_sha" >> "$GITHUB_OUTPUT"
-          echo "upstream_version_tag=$UPSTREAM_VERSION_TAG" >> "$GITHUB_OUTPUT"
-          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "official master: $upstream_sha"
+          echo "latest official tag: $latest_tag ($latest_tag_sha)"
+          echo "checked master: ${checked_sha:-<none>}"
+          echo "released tag: ${released_tag:-<none>} (${released_sha:-<none>})"
+          echo "compatibility check needed: $check_needed"
+          echo "automatic release needed: $release_needed"
 
-          if [ "$changed" = "false" ]; then
-            echo "Upstream master $upstream_sha ($UPSTREAM_VERSION_TAG) has already been checked; stopping before localization checks."
-          else
-            echo "Unchecked upstream state detected: $upstream_sha ($UPSTREAM_VERSION_TAG)"
-          fi
+  check:
+    needs: detect
+    if: needs.detect.outputs.check_needed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout zh-CN with history
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # 6.0.3
+        with:
+          ref: zh-CN
+          fetch-depth: 0
 
-      - name: Merge upstream into fixed check branch
-        if: steps.detect.outputs.changed == 'true'
+      - name: Fetch official upstream
         shell: bash
         run: |
           set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git remote add official https://github.com/winsiderss/systeminformer.git
+          git fetch --no-tags official \
+            '+refs/heads/master:refs/remotes/official/master' \
+            '+refs/tags/v*:refs/tags/upstream/v*'
+          git fetch --no-tags origin automation/upstream-check:refs/remotes/origin/automation/upstream-check || true
+
+      - name: Create upstream candidate
+        shell: bash
+        env:
+          RELEASE_NEEDED: ${{ needs.detect.outputs.release_needed }}
+          LATEST_TAG: ${{ needs.detect.outputs.latest_tag }}
+        run: |
+          set -euo pipefail
           git switch --force-create automation/upstream-check origin/zh-CN
-          git merge --no-ff --no-edit official/master
+          if [[ "$RELEASE_NEEDED" == 'true' ]]; then
+            git merge --no-ff --no-edit "refs/tags/upstream/$LATEST_TAG"
+          else
+            git merge --no-ff --no-edit official/master
+          fi
 
       - name: Test localization tool
-        if: steps.detect.outputs.changed == 'true'
         run: python -m unittest discover -s tools/localization/tests -v
 
       - name: Check upstream source contexts and visible text coverage
-        if: steps.detect.outputs.changed == 'true'
         run: |
           python tools/localization/localize.py check --state source
           python tools/localization/localize.py audit
 
       - name: Apply and verify Simplified Chinese localization
-        if: steps.detect.outputs.changed == 'true'
         run: |
           python tools/localization/localize.py apply
           python tools/localization/localize.py check --state translated
           git diff --check
 
-      - name: Record successful upstream check
-        if: steps.detect.outputs.changed == 'true'
+      - name: Publish checked upstream candidate for automatic release
+        if: needs.detect.outputs.release_needed == 'true'
         shell: bash
         env:
-          UPSTREAM_SHA: ${{ steps.detect.outputs.upstream_sha }}
-          UPSTREAM_VERSION_TAG: ${{ steps.detect.outputs.upstream_version_tag }}
+          LATEST_TAG: ${{ needs.detect.outputs.latest_tag }}
         run: |
           set -euo pipefail
           git restore --source=HEAD --staged --worktree -- .
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit --allow-empty -m "ci: sync official upstream $LATEST_TAG [upstream-release:$LATEST_TAG] [release]"
+          git push --force-with-lease origin HEAD:zh-CN
+
+      - name: Record successful compatibility check
+        if: needs.detect.outputs.release_needed != 'true'
+        shell: bash
+        env:
+          UPSTREAM_SHA: ${{ needs.detect.outputs.upstream_sha }}
+          LATEST_TAG: ${{ needs.detect.outputs.latest_tag }}
+          LATEST_TAG_SHA: ${{ needs.detect.outputs.latest_tag_sha }}
+        run: |
+          set -euo pipefail
+          git restore --source=HEAD --staged --worktree -- .
+          git switch --force-create automation/upstream-check origin/automation/upstream-check
           mkdir -p .github
-          printf '{\n  "upstream_sha": "%s",\n  "upstream_version_tag": "%s"\n}\n' \
-            "$UPSTREAM_SHA" "$UPSTREAM_VERSION_TAG" > .github/upstream-zh-cn-state.json
+          state='{}'
+          if [[ -f .github/upstream-zh-cn-state.json ]]; then
+            state="$(cat .github/upstream-zh-cn-state.json)"
+          fi
+          jq \
+            --arg master_sha "$UPSTREAM_SHA" \
+            --arg tag "$LATEST_TAG" \
+            --arg tag_sha "$LATEST_TAG_SHA" \
+            '.checked_master_sha = $master_sha |
+             .checked_upstream_tag = $tag |
+             .checked_upstream_sha = $tag_sha |
+             .upstream_sha = $master_sha |
+             .upstream_version_tag = $tag |
+             if (.released_upstream_tag // "") == "" then
+               .released_upstream_tag = $tag | .released_upstream_sha = $tag_sha
+             else . end' <<<"$state" > .github/upstream-zh-cn-state.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add .github/upstream-zh-cn-state.json
-          git commit --allow-empty -m "ci: record checked upstream $UPSTREAM_VERSION_TAG"
+          git commit --allow-empty -m "ci: record checked upstream $LATEST_TAG"
           git push --force-with-lease origin HEAD:automation/upstream-check

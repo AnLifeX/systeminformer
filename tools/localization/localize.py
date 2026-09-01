@@ -147,6 +147,10 @@ UI_CALL_PATTERNS = (
             r"\b(?:PhMwpCreateInternalPage|optionsEntry->CreateSection)\s*\("
         ),
     ),
+    (
+        "plugin-information",
+        re.compile(r"\binfo->(?:DisplayName|Description)\s*="),
+    ),
 )
 
 

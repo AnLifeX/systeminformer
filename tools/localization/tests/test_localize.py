@@ -233,6 +233,8 @@ class LocalizationCliTests(unittest.TestCase):
                     'PhSetDialogItemText(hwndDlg, IDC_INFINITY, L"\\u221E");',
                     'PhSetDialogItemText(hwndDlg, IDC_DOMAIN, L"<a href=\\\"https://example.com/\\\">example.com</a>");',
                     'PhSetDialogItemText(hwndDlg, IDC_CREDIT, L"<a href=\\\"https://example.com/user\\\">user</a> - Example Name\\n");',
+                    'info->DisplayName = L"Demo Plugin";',
+                    'info->Description = L"Adds demo features.";',
                     'SetupSetProgressText(context, L"Installing files...", NULL);',
                     'SetupSetWizardButtonText(parent, IDNEXT, L"Continue");',
                     'UpdateSetDialogStatusText(context, L"Connecting to update server...");',
@@ -298,6 +300,8 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertIn("Download", result.stdout)
         self.assertIn("Retry", result.stdout)
         self.assertIn("NetworkTools", result.stdout)
+        self.assertIn("Demo Plugin", result.stdout)
+        self.assertIn("Adds demo features.", result.stdout)
         self.assertIn("Installing files...", result.stdout)
         self.assertIn("Continue", result.stdout)
         self.assertIn("Connecting to update server...", result.stdout)
@@ -324,7 +328,7 @@ class LocalizationCliTests(unittest.TestCase):
         self.assertNotIn("Commented-out error", result.stdout)
         self.assertNotIn("Disabled error", result.stdout)
         self.assertNotIn("[PUSHBUTTON] Close", result.stdout)
-        self.assertIn("uncovered=18", result.stdout)
+        self.assertIn("uncovered=20", result.stdout)
 
 
 if __name__ == "__main__":
