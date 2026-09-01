@@ -1,4 +1,7 @@
 {
   "upstream_sha": "70a359e85f3077993988294194fd50591b7c011e",
-  "upstream_version_tag": "v4.0.26241.138"
+  "upstream_version_tag": "v4.0.26241.138",
+  "released_upstream_tag": "v4.0.26241.138",
+  "released_upstream_sha": "99a0d28e091878967a804ac9ea2fe22f2c1fdadb",
+  "released_zh_cn_commit": "d647e3e41ea018c0678782aee79a588c1b63036e"
 }
