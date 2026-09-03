@@ -1,7 +1,10 @@
 {
-  "upstream_sha": "70a359e85f3077993988294194fd50591b7c011e",
+  "upstream_sha": "eea3b085cdf3b5c9090e6f4102f6117b7d7934ff",
   "upstream_version_tag": "v4.0.26241.138",
   "released_upstream_tag": "v4.0.26241.138",
   "released_upstream_sha": "99a0d28e091878967a804ac9ea2fe22f2c1fdadb",
-  "released_zh_cn_commit": "d647e3e41ea018c0678782aee79a588c1b63036e"
+  "released_zh_cn_commit": "d647e3e41ea018c0678782aee79a588c1b63036e",
+  "checked_master_sha": "eea3b085cdf3b5c9090e6f4102f6117b7d7934ff",
+  "checked_upstream_tag": "v4.0.26241.138",
+  "checked_upstream_sha": "99a0d28e091878967a804ac9ea2fe22f2c1fdadb"
 }
