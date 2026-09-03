@@ -123,6 +123,8 @@ jobs:
           LATEST_TAG: ${{ needs.detect.outputs.latest_tag }}
         run: |
           set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git switch --force-create automation/upstream-check origin/zh-CN
           if [[ "$RELEASE_NEEDED" == 'true' ]]; then
             git merge --no-ff --no-edit "refs/tags/upstream/$LATEST_TAG"
